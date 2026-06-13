@@ -1035,6 +1035,9 @@
     .section-head{margin-bottom:36px}
     .section-head h2{font-size:clamp(36px,7vw,56px)}
     .grid{grid-template-columns:1fr}
+    .filter-bar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:12px;scrollbar-width:none}
+    .filter-bar::-webkit-scrollbar{display:none}
+    .chip{flex-shrink:0}
     .service-grid{grid-template-columns:1fr 1fr}
     .process-steps{grid-template-columns:1fr}
     .process-step{border-right:none;border-bottom:1px solid var(--line)}
@@ -1069,6 +1072,12 @@
     .cookie-btns{width:100%}
     .cookie-accept,.cookie-decline{flex:1;text-align:center}
     .map-frame iframe{height:160px}
+    .filter-bar{gap:6px;margin-bottom:28px;padding-bottom:18px}
+    .chip{padding:8px 14px;font-size:11px}
+    .card-body{padding:18px}
+    .card h3{font-size:24px}
+    .card-specs{gap:12px;font-size:12px}
+    .card-price strong{font-size:20px}
   }
 </style>
 </head>
@@ -1188,19 +1197,19 @@
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2244252006-2000-chevrolet-express-explorer-64000mls-ongelofelijk" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
           <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/76/76a741e1-f535-48c1-bdb5-3ad6f01ab2e6?rule=ecg_mp_eps$_1200" alt="2000 Chevrolet Express Explorer Conversion Camper te koop bij The Big Three Garage Nunspeet">
-          <span class="card-status">VOORRAAD</span>
+          <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
           <div class="card-meta">2000 · CHEVROLET</div>
           <h3>EXPRESS EXPLORER CAMPER</h3>
           <div class="card-specs">
-            <span>V8 AUTOMAAT</span>
+            <span data-i18n="spec.v8auto">V8 AUTOMAAT</span>
             <span>64.000 KM</span>
-            <span>LPG · LEER</span>
+            <span data-i18n="spec.lpglth">LPG · LEER</span>
           </div>
           <div class="card-price">
             <strong>€ 34.995</strong>
-            <small>Marktplaats ›</small>
+            <small data-i18n="card.mp">Marktplaats ›</small>
           </div>
         </div>
       </a>
@@ -1209,7 +1218,7 @@
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2355521825-1997-gmc-savana-camper-perfect-onderhouden-super-lage-mls" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
           <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/deb38bb4-d2d3-4415-92aa-19f19f51832b?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana Explorer Camper te koop bij The Big Three Garage Nunspeet">
-          <span class="card-status">VOORRAAD</span>
+          <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
           <div class="card-meta">1997 · GMC</div>
@@ -1217,11 +1226,11 @@
           <div class="card-specs">
             <span>V8 LPG</span>
             <span>74.354 KM</span>
-            <span>LEER · APK NIEUW</span>
+            <span data-i18n="spec.lthmot">LEER · APK NIEUW</span>
           </div>
           <div class="card-price">
             <strong>€ 33.995</strong>
-            <small>Marktplaats ›</small>
+            <small data-i18n="card.mp">Marktplaats ›</small>
           </div>
         </div>
       </a>
@@ -1230,19 +1239,19 @@
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2409227167-2005-chevrolet-express-camper-uniek-77mls" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
           <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5f25e4f6-ab4a-4c9c-a3b9-c5d6c2102f29?rule=ecg_mp_eps$_1200" alt="2005 Chevrolet Express Explorer Camper 20 inch velgen te koop The Big Three Nunspeet">
-          <span class="card-status">VOORRAAD</span>
+          <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
           <div class="card-meta">2005 · CHEVROLET</div>
           <h3>EXPRESS EXPLORER CAMPER</h3>
           <div class="card-specs">
-            <span>V8 AUTOMAAT</span>
+            <span data-i18n="spec.v8auto">V8 AUTOMAAT</span>
             <span>77.000 KM</span>
-            <span>20" VELGEN</span>
+            <span data-i18n="spec.wheels">20" VELGEN</span>
           </div>
           <div class="card-price">
             <strong>€ 28.995</strong>
-            <small>Marktplaats ›</small>
+            <small data-i18n="card.mp">Marktplaats ›</small>
           </div>
         </div>
       </a>
@@ -1251,7 +1260,7 @@
       <a href="https://www.marktplaats.nl/v/auto-s/bestelauto-s/m2315160371-dodge-b1500-1999-camper-lpg-hefdak" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
           <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/21/2189f5e2-22a1-40d7-8ebe-f2a35fd2f9c6?rule=ecg_mp_eps$_1200" alt="1999 Dodge B1500 Camper LPG hefbalkdak te koop bij The Big Three Garage Nunspeet">
-          <span class="card-status">VOORRAAD</span>
+          <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
           <div class="card-meta">1999 · DODGE</div>
@@ -1259,11 +1268,11 @@
           <div class="card-specs">
             <span>V8 LPG</span>
             <span>158.000 KM</span>
-            <span>HEFBALKDAK</span>
+            <span data-i18n="spec.liftdak">HEFBALKDAK</span>
           </div>
           <div class="card-price">
             <strong>€ 22.995</strong>
-            <small>Marktplaats ›</small>
+            <small data-i18n="card.mp">Marktplaats ›</small>
           </div>
         </div>
       </a>
@@ -1272,19 +1281,19 @@
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2253522766-1997-gmc-savana-the-american-road-camper-lpg-77k-mls" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
           <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/c0/c0e5a8db-7971-40e7-9c75-0de6ca8f73f0?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana The American Road Camper LPG te koop bij The Big Three Garage Nunspeet">
-          <span class="card-status">VOORRAAD</span>
+          <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
           <div class="card-meta">1997 · GMC</div>
           <h3>SAVANA AMERICAN ROAD</h3>
           <div class="card-specs">
-            <span>V8 AUTOMAAT</span>
+            <span data-i18n="spec.v8auto">V8 AUTOMAAT</span>
             <span>77.000 KM</span>
-            <span>ROESTVRIJ</span>
+            <span data-i18n="spec.rust">ROESTVRIJ</span>
           </div>
           <div class="card-price">
             <strong>€ 21.995</strong>
-            <small>Marktplaats ›</small>
+            <small data-i18n="card.mp">Marktplaats ›</small>
           </div>
         </div>
       </a>
@@ -1293,19 +1302,19 @@
       <a href="https://www.marktplaats.nl/v/auto-s/ford-usa/m2257652880-1988-ford-econoline-e150-camper-florida-car-explorer" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
           <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/b8/b83d346e-082e-4f24-873a-3f0d5885cb2b?rule=ecg_mp_eps$_1200" alt="1988 Ford Econoline E150 Explorer Camper Florida auto te koop bij The Big Three Garage Nunspeet">
-          <span class="card-status">VOORRAAD</span>
+          <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
           <div class="card-meta">1988 · FORD</div>
           <h3>ECONOLINE E150 EXPLORER</h3>
           <div class="card-specs">
-            <span>8-CIL AUTOMAAT</span>
-            <span>FLORIDA AUTO</span>
-            <span>ROESTVRIJ · LEER</span>
+            <span data-i18n="spec.cyl8auto">8-CIL AUTOMAAT</span>
+            <span data-i18n="spec.florida">FLORIDA AUTO</span>
+            <span data-i18n="spec.rustlth">ROESTVRIJ · LEER</span>
           </div>
           <div class="card-price">
             <strong>€ 11.995</strong>
-            <small>Marktplaats ›</small>
+            <small data-i18n="card.mp">Marktplaats ›</small>
           </div>
         </div>
       </a>
@@ -1590,8 +1599,11 @@
       "inv.eyebrow":"Te koop · in de showroom",
       "inv.title":"VOORRAAD<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Campers, pickups en classics. Handgekozen, doorgelicht en klaar voor de weg. Elke auto met meerdere foto's en op aanvraag een walk-around video.",
-      "filter.all":"Alles","filter.campers":"Campers","filter.classics":"Klassiekers","filter.modern":"Modern","filter.video":"Met video",
-      "card.cta":"Bekijk ›","card.gallery":"Galerij ›",
+      "filter.all":"Alles","filter.campers":"Campers","filter.classics":"Klassiekers","filter.modern":"Modern",
+      "card.cta":"Bekijk ›","card.gallery":"Galerij ›","card.status":"VOORRAAD","card.mp":"Marktplaats ›",
+      "spec.v8auto":"V8 AUTOMAAT","spec.lpglth":"LPG · LEER","spec.lthmot":"LEER · APK NIEUW",
+      "spec.wheels":'20" VELGEN',"spec.liftdak":"HEFBALKDAK","spec.rust":"ROESTVRIJ",
+      "spec.cyl8auto":"8-CIL AUTOMAAT","spec.florida":"FLORIDA AUTO","spec.rustlth":"ROESTVRIJ · LEER",
       "srv.eyebrow":"Wat we doen","srv.title":"DE <em>WERKPLAATS</em>",
       "srv.sub":"Vier dingen waar we goed in zijn. Bel of loop binnen, dan kijken we samen wat jouw auto nodig heeft.",
       "srv.1.title":"ONDERHOUD & APK","srv.1.for":"Voor: rijdende klanten","srv.1.body":"Reguliere service, APK keuring en kleine reparaties. Voor je Amerikaan, camper of klassieker. Originele en aftermarket onderdelen.",
@@ -1633,8 +1645,11 @@
       "inv.eyebrow":"For sale · in the showroom",
       "inv.title":"INVENTORY<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Campers, pickups and classics. Hand-picked, vetted and ready for the road. Each vehicle with multiple photos and a walk-around video on request.",
-      "filter.all":"All","filter.campers":"Campers","filter.classics":"Classics","filter.modern":"Modern","filter.video":"With video",
-      "card.cta":"View ›","card.gallery":"Gallery ›",
+      "filter.all":"All","filter.campers":"Campers","filter.classics":"Classics","filter.modern":"Modern",
+      "card.cta":"View ›","card.gallery":"Gallery ›","card.status":"IN STOCK","card.mp":"Marktplaats ›",
+      "spec.v8auto":"V8 AUTOMATIC","spec.lpglth":"LPG · LEATHER","spec.lthmot":"LEATHER · MOT NEW",
+      "spec.wheels":'20" WHEELS',"spec.liftdak":"LIFT ROOF","spec.rust":"RUST FREE",
+      "spec.cyl8auto":"8-CYL AUTOMATIC","spec.florida":"FLORIDA CAR","spec.rustlth":"RUST FREE · LEATHER",
       "srv.eyebrow":"What we do","srv.title":"THE <em>WORKSHOP</em>",
       "srv.sub":"Four things we do well. Call or drop by, and we'll figure out together what your car needs.",
       "srv.1.title":"SERVICE & MOT","srv.1.for":"For: regular drivers","srv.1.body":"Regular service, MOT inspection and minor repairs. For your American, camper or classic. Original and aftermarket parts.",
@@ -1676,8 +1691,11 @@
       "inv.eyebrow":"Zum Verkauf · im Showroom",
       "inv.title":"FAHRZEUGE<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Camper, Pickups und Klassiker. Handverlesen, geprüft und bereit für die Straße. Jedes Fahrzeug mit mehreren Fotos und auf Anfrage ein Walk-around-Video.",
-      "filter.all":"Alle","filter.campers":"Camper","filter.classics":"Klassiker","filter.modern":"Modern","filter.video":"Mit Video",
-      "card.cta":"Ansehen ›","card.gallery":"Galerie ›",
+      "filter.all":"Alle","filter.campers":"Camper","filter.classics":"Klassiker","filter.modern":"Modern",
+      "card.cta":"Ansehen ›","card.gallery":"Galerie ›","card.status":"VORRÄTIG","card.mp":"Marktplaats ›",
+      "spec.v8auto":"V8 AUTOMATIK","spec.lpglth":"LPG · LEDER","spec.lthmot":"LEDER · HU NEU",
+      "spec.wheels":'20" FELGEN',"spec.liftdak":"HUBDACH","spec.rust":"ROSTFREI",
+      "spec.cyl8auto":"8-ZYL AUTOMATIK","spec.florida":"FLORIDA AUTO","spec.rustlth":"ROSTFREI · LEDER",
       "srv.eyebrow":"Was wir tun","srv.title":"DIE <em>WERKSTATT</em>",
       "srv.sub":"Vier Dinge, die wir gut können. Rufen Sie an oder kommen Sie vorbei — wir schauen gemeinsam, was Ihr Fahrzeug braucht.",
       "srv.1.title":"WARTUNG & TÜV","srv.1.for":"Für: Fahrer im Alltag","srv.1.body":"Reguläre Wartung, TÜV-Inspektion und kleine Reparaturen. Für Ihren Amerikaner, Camper oder Klassiker. Original- und Aftermarket-Teile.",
