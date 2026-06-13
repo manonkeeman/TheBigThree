@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1978 GMC Motorhome 26ft · The Big Three Garage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e18;
+    --bg-2:#101626;
+    --panel:#161e2f;
+    --line:#26304a;
+    --ink:#f5efe6;
+    --ink-dim:#9aa3b8;
+    --rust:#c8102e;
+    --rust-deep:#8e0a1f;
+    --navy:#1e3a8a;
+    --navy-light:#2952b3;
+    --chrome:#d9d2c4;
+    --gold:#e6b545;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Barlow',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(200,16,46,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 60%, rgba(30,58,138,0.10) 0%, transparent 50%);
+  }
+  body::before{
+    content:"";position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    opacity:0.05;pointer-events:none;z-index:1000;mix-blend-mode:overlay;
+  }
+
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(10,9,8,0.95);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1400px;margin:0 auto;
+    padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .logo{
+    font-family:'Bebas Neue';font-size:26px;letter-spacing:0.08em;line-height:1;
+    display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;
+  }
+  .logo-mark{
+    width:38px;height:38px;border:2px solid var(--rust);
+    background:var(--navy);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;color:#fff;transform:rotate(-3deg);
+  }
+  .logo-text{display:flex;flex-direction:column;line-height:0.95}
+  .logo-text small{
+    font-size:9px;letter-spacing:0.4em;color:var(--ink-dim);
+    font-family:'Barlow Condensed';margin-top:3px;
+  }
+  .nav-links{
+    display:flex;gap:32px;list-style:none;
+    font-family:'Barlow Condensed';font-size:14px;
+    letter-spacing:0.2em;text-transform:uppercase;font-weight:500;
+  }
+  .nav-links a{color:var(--ink);text-decoration:none;transition:color 0.2s}
+  .nav-links a:hover{color:var(--rust)}
+  .lang{display:flex;gap:4px;border:1px solid var(--line);padding:4px;
+    font-family:'Barlow Condensed';font-size:12px;letter-spacing:0.15em}
+  .lang button{
+    background:none;border:none;color:var(--ink-dim);
+    padding:5px 10px;cursor:pointer;font-family:inherit;
+    font-size:inherit;letter-spacing:inherit;text-transform:uppercase;
+  }
+  .lang button.active{background:var(--rust);color:#fff}
+
+  /* BREADCRUMB */
+  .crumb{
+    max-width:1400px;margin:0 auto;
+    padding:24px 32px 0;
+    font-family:'Barlow Condensed';
+    font-size:12px;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+  .crumb a{color:var(--ink-dim);text-decoration:none;transition:color 0.2s}
+  .crumb a:hover{color:var(--rust)}
+  .crumb span{margin:0 10px;color:var(--rust)}
+
+  /* DETAIL HEADER */
+  .detail-head{
+    max-width:1400px;margin:0 auto;
+    padding:24px 32px 40px;
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:40px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);
+  }
+  .detail-meta{
+    font-family:'Special Elite';font-size:13px;
+    color:var(--rust);letter-spacing:0.3em;
+    text-transform:uppercase;margin-bottom:14px;
+  }
+  .detail-head h1{
+    font-family:'Bebas Neue';
+    font-size:clamp(48px,7vw,96px);
+    line-height:0.92;letter-spacing:0.01em;
+  }
+  .detail-head h1 em{color:var(--rust);font-style:italic}
+  .detail-head-right{
+    text-align:right;
+    display:flex;flex-direction:column;align-items:flex-end;gap:12px;
+  }
+  .price-tag{
+    font-family:'Bebas Neue';font-size:54px;
+    color:var(--ink);line-height:1;letter-spacing:0.04em;
+  }
+  .status-pill{
+    display:inline-block;
+    background:var(--bg);color:var(--gold);
+    border:1px solid var(--gold);
+    padding:8px 16px;
+    font-family:'Barlow Condensed';font-size:12px;
+    letter-spacing:0.3em;text-transform:uppercase;
+  }
+
+  /* GALLERY */
+  .gallery-section{
+    max-width:1400px;margin:0 auto;
+    padding:48px 32px;
+  }
+  .gallery{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .main-photo{
+    aspect-ratio:16/10;
+    background:var(--panel);
+    border:1px solid var(--line);
+    overflow:hidden;
+    position:relative;
+  }
+  .main-photo img{
+    width:100%;height:100%;object-fit:cover;
+    filter:saturate(0.85) contrast(1.05);
+    transition:opacity 0.3s;
+  }
+  .main-photo-counter{
+    position:absolute;bottom:16px;right:16px;
+    background:rgba(0,0,0,0.7);
+    backdrop-filter:blur(6px);
+    color:var(--ink);
+    padding:8px 14px;
+    font-family:'Barlow Condensed';font-size:12px;
+    letter-spacing:0.25em;text-transform:uppercase;
+    z-index:2;
+  }
+  .thumbs{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:10px;
+  }
+  .thumb{
+    aspect-ratio:4/3;
+    background:var(--panel);
+    border:1px solid var(--line);
+    overflow:hidden;
+    cursor:pointer;
+    transition:all 0.2s;
+    opacity:0.55;
+  }
+  .thumb img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85)}
+  .thumb:hover, .thumb.active{
+    opacity:1;
+    border-color:var(--rust);
+  }
+
+  /* INFO GRID */
+  .info-grid{
+    max-width:1400px;margin:0 auto;
+    padding:48px 32px 80px;
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:60px;
+  }
+  .info-main h2{
+    font-family:'Bebas Neue';
+    font-size:42px;letter-spacing:0.04em;
+    margin-bottom:24px;
+    line-height:1;
+  }
+  .info-main h2 em{color:var(--rust);font-style:italic}
+  .info-main p{
+    color:var(--ink-dim);
+    line-height:1.75;
+    margin-bottom:18px;
+    font-size:16px;font-weight:300;
+  }
+  .info-main p strong{color:var(--ink)}
+  .features{
+    margin:32px 0;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:0;
+    border:1px solid var(--line);
+  }
+  .feature{
+    padding:18px 20px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:12px;
+    font-family:'Barlow Condensed';
+    font-size:14px;letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+  .feature::before{
+    content:"●";color:var(--rust);font-size:10px;
+  }
+  .feature:nth-child(2n){border-right:none}
+
+  /* SPECS SIDEBAR */
+  .specs{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:32px;
+    position:sticky;top:100px;
+    align-self:start;
+  }
+  .specs h3{
+    font-family:'Bebas Neue';
+    font-size:24px;letter-spacing:0.06em;
+    margin-bottom:24px;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+  .spec-row{
+    display:flex;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-family:'Barlow Condensed';
+    font-size:14px;
+  }
+  .spec-row:last-of-type{border-bottom:none}
+  .spec-label{
+    color:var(--ink-dim);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .spec-val{
+    color:var(--ink);
+    font-weight:500;
+    text-align:right;
+  }
+  .specs .btn{
+    width:100%;justify-content:center;margin-top:24px;
+  }
+  .btn{
+    font-family:'Barlow Condensed';font-size:15px;
+    letter-spacing:0.25em;text-transform:uppercase;font-weight:600;
+    padding:18px 36px;border:none;cursor:pointer;
+    text-decoration:none;display:inline-flex;align-items:center;gap:12px;
+    transition:all 0.25s;
+  }
+  .btn-primary{background:var(--rust);color:#fff;border:2px solid var(--rust)}
+  .btn-primary:hover{background:var(--rust-deep);border-color:var(--rust-deep)}
+  .btn-ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--bg)}
+  .btn::after{content:"›";font-size:22px;line-height:0.7}
+
+  /* VIDEO */
+  .video-section{
+    background:var(--bg-2);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:80px 32px;
+  }
+  .video-inner{max-width:1100px;margin:0 auto}
+  .eyebrow{
+    font-family:'Special Elite';color:var(--rust);
+    font-size:13px;letter-spacing:0.3em;text-transform:uppercase;
+    margin-bottom:16px;display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::before{content:"";width:36px;height:1px;background:var(--rust)}
+  .video-section h2{
+    font-family:'Bebas Neue';
+    font-size:clamp(36px,5vw,64px);
+    line-height:0.92;margin-bottom:32px;
+  }
+  .video-section h2 em{color:var(--rust);font-style:italic}
+  .video-frame{
+    aspect-ratio:16/9;
+    border:1px solid var(--line);
+    background:#000;
+    overflow:hidden;
+    position:relative;
+  }
+  .video-frame iframe{
+    width:100%;height:100%;border:none;
+  }
+
+  /* RELATED */
+  .related{
+    max-width:1400px;margin:0 auto;
+    padding:80px 32px;
+  }
+  .related-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:40px;flex-wrap:wrap;gap:20px;
+  }
+  .related-head h2{
+    font-family:'Bebas Neue';
+    font-size:48px;letter-spacing:0.04em;
+  }
+  .related-head h2 em{color:var(--rust);font-style:italic}
+  .related-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+  }
+  .rel-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    overflow:hidden;
+    text-decoration:none;color:inherit;
+    transition:all 0.3s;
+  }
+  .rel-card:hover{border-color:var(--rust);transform:translateY(-3px)}
+  .rel-card-img{aspect-ratio:4/3;overflow:hidden}
+  .rel-card-img img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85)}
+  .rel-card-body{padding:18px}
+  .rel-card-meta{
+    font-family:'Special Elite';font-size:10px;
+    color:var(--rust);letter-spacing:0.25em;
+    text-transform:uppercase;margin-bottom:6px;
+  }
+  .rel-card h3{
+    font-family:'Bebas Neue';font-size:22px;
+    letter-spacing:0.04em;line-height:1;margin-bottom:8px;
+  }
+  .rel-card-price{
+    font-family:'Barlow Condensed';font-size:14px;
+    color:var(--ink-dim);letter-spacing:0.1em;
+  }
+
+  /* FOOTER */
+  footer{
+    background:#000;
+    border-top:1px solid var(--line);
+    padding:40px 32px;
+    text-align:center;
+    font-family:'Barlow Condensed';
+    font-size:12px;letter-spacing:0.2em;
+    text-transform:uppercase;color:var(--ink-dim);
+  }
+  footer a{color:var(--rust);text-decoration:none}
+
+  @media(max-width:900px){
+    .info-grid{grid-template-columns:1fr;gap:32px;padding:32px 24px 60px}
+    .specs{position:static}
+    .thumbs{grid-template-columns:repeat(4,1fr)}
+    .nav-links{display:none}
+    .features{grid-template-columns:1fr}
+    .feature{border-right:none}
+    .detail-head{padding:24px 24px 32px}
+    .detail-head-right{align-items:flex-start;text-align:left}
+    .gallery-section{padding:32px 24px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">B3</div>
+      <div class="logo-text">
+        THE BIG THREE
+        <small>GARAGE · NUNSPEET</small>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#voorraad">Voorraad</a></li>
+      <li><a href="index.html#werkplaats">Werkplaats</a></li>
+      <li><a href="index.html#verhaal">Ons verhaal</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="lang">
+      <button class="active">NL</button>
+      <button>EN</button>
+      <button>DE</button>
+    </div>
+  </div>
+</nav>
+
+<div class="crumb">
+  <a href="index.html">Home</a><span>›</span>
+  <a href="index.html#voorraad">Voorraad</a><span>›</span>
+  GMC Motorhome 26ft
+</div>
+
+<div class="detail-head">
+  <div>
+    <div class="detail-meta">1978 · GMC · KENTEKEN NL</div>
+    <h1>GMC<br>MOTORHOME <em>26FT</em></h1>
+  </div>
+  <div class="detail-head-right">
+    <span class="status-pill">VOORRAAD · 12 FOTO'S · VIDEO</span>
+    <div class="price-tag">€ 49.500</div>
+  </div>
+</div>
+
+<div class="gallery-section">
+  <div class="gallery">
+    <div class="main-photo">
+      <img id="mainImg" src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=1600&q=85" alt="GMC Motorhome">
+      <span class="main-photo-counter"><span id="counter">1</span> / 6</span>
+    </div>
+    <div class="thumbs">
+      <div class="thumb active" data-src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=400&q=70" alt="">
+      </div>
+      <div class="thumb" data-src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=400&q=70" alt="">
+      </div>
+      <div class="thumb" data-src="https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?w=400&q=70" alt="">
+      </div>
+      <div class="thumb" data-src="https://images.unsplash.com/photo-1605893477799-b99e3b8b29b6?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1605893477799-b99e3b8b29b6?w=400&q=70" alt="">
+      </div>
+      <div class="thumb" data-src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=400&q=70" alt="">
+      </div>
+      <div class="thumb" data-src="https://images.unsplash.com/photo-1597007066704-67bf2068d5b2?w=1600&q=85">
+        <img src="https://images.unsplash.com/photo-1597007066704-67bf2068d5b2?w=400&q=70" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="info-grid">
+  <div class="info-main">
+    <div class="eyebrow">Beschrijving</div>
+    <h2>EEN <em>STUKJE</em><br>AMERIKA OP WIELEN</h2>
+    <p>Deze 1978 GMC Motorhome 26ft is een echte rijdende showcase. <strong>Origineel front-wheel drive,</strong> 455 cubic inch V8 die nog steeds zingt zoals hij in Detroit bedoeld was. Onlangs gerevideerd door David in eigen werkplaats: nieuwe radiateur, vernieuwde remmen rondom, koppeling nagekeken.</p>
+    <p>Interieur is compleet en in oorspronkelijke staat behouden, met respect voor het originele jaren '70 design. Werkende keuken, koelkast op gas/elektra, douche, toilet en slaapruimte voor vier. <strong>Klaar voor een zomer richting de Alpen of de Italiaanse kust.</strong></p>
+    <p>Wordt geleverd met geldig NL kenteken, recente APK, complete documentatie en een walk-around video op YouTube. Geen verrassingen achteraf, alles zwart op wit.</p>
+
+    <div class="features">
+      <div class="feature">FRONT-WHEEL DRIVE</div>
+      <div class="feature">455 V8 OLDSMOBILE</div>
+      <div class="feature">AUTOMAAT TH425</div>
+      <div class="feature">NL KENTEKEN</div>
+      <div class="feature">RECENTE APK</div>
+      <div class="feature">SLAAPT VIER PERSONEN</div>
+      <div class="feature">KEUKEN COMPLEET</div>
+      <div class="feature">DOUCHE & TOILET</div>
+    </div>
+
+    <p style="margin-top:32px"><strong>Wil je hem zien rijden?</strong> Bel David op +31 (0)6 XX XX XX XX of plan een afspraak via het contactformulier. Een proefrit is altijd mogelijk, neem gerust een eigen monteur mee als je dat wilt.</p>
+  </div>
+
+  <aside class="specs">
+    <h3>SPECIFICATIES</h3>
+    <div class="spec-row"><span class="spec-label">Bouwjaar</span><span class="spec-val">1978</span></div>
+    <div class="spec-row"><span class="spec-label">Merk</span><span class="spec-val">GMC</span></div>
+    <div class="spec-row"><span class="spec-label">Model</span><span class="spec-val">Motorhome 26ft</span></div>
+    <div class="spec-row"><span class="spec-label">Motor</span><span class="spec-val">455 V8</span></div>
+    <div class="spec-row"><span class="spec-label">Vermogen</span><span class="spec-val">230 PK</span></div>
+    <div class="spec-row"><span class="spec-label">Versnelling</span><span class="spec-val">Automaat</span></div>
+    <div class="spec-row"><span class="spec-label">Brandstof</span><span class="spec-val">Benzine</span></div>
+    <div class="spec-row"><span class="spec-label">Km-stand</span><span class="spec-val">92.000 km</span></div>
+    <div class="spec-row"><span class="spec-label">Kleur</span><span class="spec-val">Beige / Bruin</span></div>
+    <div class="spec-row"><span class="spec-label">Kenteken</span><span class="spec-val">NL</span></div>
+    <div class="spec-row"><span class="spec-label">APK</span><span class="spec-val">10-2026</span></div>
+    <a href="index.html#contact" class="btn btn-primary">Plan bezichtiging</a>
+    <a href="tel:+31600000000" class="btn btn-ghost" style="margin-top:10px">Bel direct</a>
+  </aside>
+</div>
+
+<section class="video-section">
+  <div class="video-inner">
+    <div class="eyebrow">Walk-around video</div>
+    <h2>ZIE HEM <em>RIJDEN</em>.</h2>
+    <div class="video-frame">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="related">
+  <div class="related-head">
+    <h2>OOK <em>INTERESSANT</em></h2>
+    <a href="index.html#voorraad" class="btn btn-ghost">Hele voorraad</a>
+  </div>
+  <div class="related-grid">
+    <a href="auto-detail.html" class="rel-card">
+      <div class="rel-card-img"><img src="https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?w=600&q=80" alt=""></div>
+      <div class="rel-card-body">
+        <div class="rel-card-meta">1969 · CHEVROLET</div>
+        <h3>CHEVY G20 VAN</h3>
+        <div class="rel-card-price">Op aanvraag</div>
+      </div>
+    </a>
+    <a href="auto-detail.html" class="rel-card">
+      <div class="rel-card-img"><img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=600&q=80" alt=""></div>
+      <div class="rel-card-body">
+        <div class="rel-card-meta">1974 · DODGE</div>
+        <h3>DODGE TRADESMAN</h3>
+        <div class="rel-card-price">€ 28.900</div>
+      </div>
+    </a>
+    <a href="auto-detail.html" class="rel-card">
+      <div class="rel-card-img"><img src="https://images.unsplash.com/photo-1605893477799-b99e3b8b29b6?w=600&q=80" alt=""></div>
+      <div class="rel-card-body">
+        <div class="rel-card-meta">1985 · FORD</div>
+        <h3>FORD F-250 4X4</h3>
+        <div class="rel-card-price">Verkocht</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  © THE BIG THREE GARAGE · NUNSPEET · CONCEPT MANON KEEMAN
+</footer>
+
+<script>
+  const mainImg = document.getElementById('mainImg');
+  const counter = document.getElementById('counter');
+  document.querySelectorAll('.thumb').forEach((t,i)=>{
+    t.addEventListener('click',()=>{
+      document.querySelectorAll('.thumb').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      mainImg.style.opacity = '0';
+      setTimeout(()=>{
+        mainImg.src = t.dataset.src;
+        mainImg.style.opacity = '1';
+        counter.textContent = i+1;
+      }, 150);
+    });
+  });
+</script>
+
+</body>
+</html>

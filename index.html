@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Big Three Garage · Nunspeet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e18;
+    --bg-2:#101626;
+    --panel:#161e2f;
+    --line:#26304a;
+    --ink:#f5efe6;
+    --ink-dim:#9aa3b8;
+    --rust:#c8102e;
+    --rust-deep:#8e0a1f;
+    --navy:#1e3a8a;
+    --navy-light:#2952b3;
+    --chrome:#d9d2c4;
+    --gold:#e6b545;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Barlow',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(200,16,46,0.10) 0%, transparent 40%),
+      radial-gradient(circle at 80% 60%, rgba(30,58,138,0.12) 0%, transparent 50%);
+  }
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    opacity:0.06;
+    pointer-events:none;
+    z-index:1000;
+    mix-blend-mode:overlay;
+  }
+
+  .topstrip{
+    background:#000;
+    color:var(--ink-dim);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:11px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    padding:8px 0;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .ticker{
+    display:inline-block;
+    animation:scroll 40s linear infinite;
+  }
+  .ticker span{margin:0 30px;color:var(--chrome)}
+  .ticker .dot{color:var(--rust)}
+  @keyframes scroll{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(-50%)}
+  }
+
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(10,9,8,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1400px;
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .logo{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:26px;
+    letter-spacing:0.08em;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color:inherit;
+  }
+  .logo-mark{
+    width:38px;height:38px;
+    border:2px solid var(--rust);
+    background:var(--navy);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;
+    color:#fff;
+    font-family:'Bebas Neue';
+    transform:rotate(-3deg);
+  }
+  .logo-text{display:flex;flex-direction:column;line-height:0.95}
+  .logo-text small{
+    font-size:9px;
+    letter-spacing:0.4em;
+    color:var(--ink-dim);
+    font-family:'Barlow Condensed';
+    margin-top:3px;
+  }
+  .nav-links{
+    display:flex;
+    gap:32px;
+    list-style:none;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:14px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .nav-links a{
+    color:var(--ink);
+    text-decoration:none;
+    transition:color 0.2s;
+    position:relative;
+  }
+  .nav-links a:hover{color:var(--rust)}
+  .nav-links a:hover::after{
+    content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--rust);
+  }
+  .lang{
+    display:flex;
+    gap:4px;
+    border:1px solid var(--line);
+    padding:4px;
+    font-family:'Barlow Condensed';
+    font-size:12px;
+    letter-spacing:0.15em;
+  }
+  .lang button{
+    background:none;border:none;color:var(--ink-dim);
+    padding:5px 10px;cursor:pointer;
+    font-family:inherit;font-size:inherit;letter-spacing:inherit;
+    text-transform:uppercase;
+    transition:all 0.2s;
+  }
+  .lang button.active{background:var(--rust);color:#fff}
+  .lang button:hover:not(.active){color:var(--ink)}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    min-height:88vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(115deg, rgba(10,9,8,0.92) 0%, rgba(10,9,8,0.55) 50%, rgba(10,9,8,0.85) 100%),
+      url('https://images.unsplash.com/photo-1597007066704-67bf2068d5b2?w=1600&q=80');
+    background-size:cover;
+    background-position:center;
+  }
+  .hero-content{
+    position:relative;z-index:2;
+    max-width:1400px;
+    margin:0 auto;
+    padding:80px 32px;
+    width:100%;
+  }
+  .hero-tag{
+    font-family:'Special Elite',monospace;
+    color:var(--rust);
+    font-size:14px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    margin-bottom:24px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .hero-tag::before{
+    content:"";width:50px;height:1px;background:var(--rust);
+  }
+  .hero h1{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(56px, 9vw, 140px);
+    line-height:0.88;
+    letter-spacing:0.01em;
+    margin-bottom:30px;
+    max-width:900px;
+  }
+  .hero h1 .accent{
+    color:var(--rust);
+    font-style:italic;
+    display:inline-block;
+    transform:skewX(-8deg);
+  }
+  .hero h1 .stamp{
+    display:inline-block;
+    border:3px solid var(--ink);
+    padding:0 14px;
+    transform:rotate(-2deg);
+    margin:0 4px;
+  }
+  .hero-sub{
+    font-family:'Barlow',sans-serif;
+    font-size:18px;
+    line-height:1.6;
+    max-width:540px;
+    color:var(--ink-dim);
+    margin-bottom:40px;
+    font-weight:300;
+  }
+  .hero-sub strong{color:var(--ink);font-weight:500}
+  .hero-cta{
+    display:flex;gap:16px;flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'Barlow Condensed';
+    font-size:15px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    font-weight:600;
+    padding:18px 36px;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    transition:all 0.25s;
+    position:relative;
+  }
+  .btn-primary{
+    background:var(--rust);
+    color:#fff;
+    border:2px solid var(--rust);
+  }
+  .btn-primary:hover{
+    background:var(--rust-deep);
+    border-color:var(--rust-deep);
+    transform:translate(-2px,-2px);
+    box-shadow:6px 6px 0 var(--ink);
+  }
+  .btn-ghost{
+    background:transparent;
+    color:var(--ink);
+    border:2px solid var(--ink);
+  }
+  .btn-ghost:hover{
+    background:var(--ink);
+    color:var(--bg);
+  }
+  .btn::after{content:"›";font-size:22px;line-height:0.7}
+
+  .hero-stats{
+    position:absolute;
+    bottom:0;left:0;right:0;
+    background:var(--bg-2);
+    border-top:1px solid var(--line);
+    z-index:3;
+  }
+  .stats-inner{
+    max-width:1400px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+  }
+  .stat{
+    padding:28px 32px;
+    border-right:1px solid var(--line);
+  }
+  .stat:last-child{border-right:none}
+  .stat-num{
+    font-family:'Bebas Neue';
+    font-size:42px;
+    color:var(--rust);
+    line-height:1;
+  }
+  .stat-label{
+    font-family:'Barlow Condensed';
+    font-size:11px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin-top:8px;
+  }
+
+  section{padding:120px 32px;position:relative}
+  .container{max-width:1400px;margin:0 auto}
+  .section-head{
+    margin-bottom:60px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+  .eyebrow{
+    font-family:'Special Elite',monospace;
+    color:var(--rust);
+    font-size:13px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    margin-bottom:20px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::before{
+    content:"";width:36px;height:1px;background:var(--rust);
+  }
+  .section-head h2{
+    font-family:'Bebas Neue';
+    font-size:clamp(44px,6vw,82px);
+    line-height:0.92;
+    letter-spacing:0.01em;
+    max-width:780px;
+  }
+  .section-head h2 em{color:var(--rust);font-style:italic}
+  .section-head p{
+    font-size:16px;
+    color:var(--ink-dim);
+    max-width:420px;
+    line-height:1.6;
+    font-weight:300;
+  }
+
+  .inventory{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .filter-bar{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:40px;
+    padding-bottom:24px;
+    border-bottom:1px solid var(--line);
+  }
+  .chip{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--ink-dim);
+    padding:10px 20px;
+    font-family:'Barlow Condensed';
+    font-size:12px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all 0.2s;
+  }
+  .chip:hover{border-color:var(--ink);color:var(--ink)}
+  .chip.active{background:var(--rust);border-color:var(--rust);color:#fff}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:24px;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    overflow:hidden;
+    transition:all 0.3s;
+    cursor:pointer;
+    position:relative;
+    text-decoration:none;
+    color:inherit;
+    display:block;
+  }
+  .card:hover{
+    border-color:var(--rust);
+    transform:translateY(-4px);
+  }
+  .card-img{
+    aspect-ratio:4/3;
+    position:relative;
+    overflow:hidden;
+    background:#16130f;
+  }
+  .card-img img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform 0.5s;
+    filter:saturate(0.85) contrast(1.05);
+  }
+  .card:hover .card-img img{transform:scale(1.06)}
+  .card-photos{
+    position:absolute;top:14px;left:14px;
+    background:rgba(0,0,0,0.75);
+    backdrop-filter:blur(4px);
+    color:var(--ink);
+    padding:6px 12px;
+    font-family:'Barlow Condensed';
+    font-size:11px;
+    letter-spacing:0.2em;
+    z-index:2;
+    display:flex;align-items:center;gap:6px;
+  }
+  .card-video{
+    position:absolute;top:14px;right:14px;
+    background:var(--rust);
+    color:#fff;
+    padding:6px 12px;
+    font-family:'Barlow Condensed';
+    font-size:11px;
+    letter-spacing:0.2em;
+    z-index:2;
+    display:flex;align-items:center;gap:6px;
+  }
+  .card-status{
+    position:absolute;bottom:14px;right:14px;
+    background:var(--bg);
+    color:var(--gold);
+    padding:6px 14px;
+    font-family:'Barlow Condensed';
+    font-size:11px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    border:1px solid var(--gold);
+    z-index:2;
+  }
+  .card-status.sold{color:var(--rust);border-color:var(--rust)}
+  .card-body{padding:26px}
+  .card-meta{
+    font-family:'Special Elite';
+    font-size:11px;
+    color:var(--rust);
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .card h3{
+    font-family:'Bebas Neue';
+    font-size:28px;
+    letter-spacing:0.04em;
+    line-height:1;
+    margin-bottom:16px;
+  }
+  .card-specs{
+    display:flex;
+    gap:18px;
+    font-family:'Barlow Condensed';
+    font-size:13px;
+    color:var(--ink-dim);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+    flex-wrap:wrap;
+  }
+  .card-price{
+    margin-top:18px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .card-price strong{
+    font-family:'Bebas Neue';
+    font-size:24px;
+    letter-spacing:0.05em;
+    color:var(--ink);
+  }
+  .card-price small{
+    font-family:'Barlow Condensed';
+    font-size:11px;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+
+  .services{position:relative}
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:0;
+    border:1px solid var(--line);
+    position:relative;z-index:1;
+  }
+  .service{
+    padding:48px 36px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    transition:all 0.3s;
+    cursor:pointer;
+    background:var(--bg);
+  }
+  .service:hover{
+    background:var(--panel);
+  }
+  .service-num{
+    font-family:'Special Elite';
+    color:var(--rust);
+    font-size:13px;
+    letter-spacing:0.25em;
+    margin-bottom:24px;
+  }
+  .service-icon{
+    width:56px;height:56px;
+    margin-bottom:28px;
+    color:var(--navy-light);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .service-icon svg{width:100%;height:100%;stroke-width:1.5}
+  .service h3{
+    font-family:'Bebas Neue';
+    font-size:30px;
+    letter-spacing:0.04em;
+    line-height:1;
+    margin-bottom:10px;
+  }
+  .service-for{
+    font-family:'Special Elite';
+    font-size:11px;
+    color:var(--gold);
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .service p{
+    color:var(--ink-dim);
+    line-height:1.65;
+    font-size:15px;
+    font-weight:300;
+  }
+
+  /* HOE WERKT HET */
+  .process{
+    margin-top:80px;
+    position:relative;z-index:1;
+  }
+  .process-head{
+    text-align:center;
+    margin-bottom:48px;
+  }
+  .process-head .eyebrow{
+    justify-content:center;
+  }
+  .process-head .eyebrow::before{display:none}
+  .process-head h3{
+    font-family:'Bebas Neue';
+    font-size:clamp(36px,4.5vw,56px);
+    line-height:0.95;
+    letter-spacing:0.02em;
+  }
+  .process-head h3 em{color:var(--rust);font-style:italic}
+  .process-steps{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:0;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .process-step{
+    padding:32px 24px;
+    border-right:1px solid var(--line);
+    position:relative;
+    text-align:center;
+  }
+  .process-step:last-child{border-right:none}
+  .process-step::after{
+    content:"›";
+    position:absolute;
+    right:-12px;top:50%;
+    transform:translateY(-50%);
+    font-size:24px;
+    color:var(--rust);
+    background:var(--bg);
+    padding:0 4px;
+    z-index:2;
+    line-height:1;
+  }
+  .process-step:last-child::after{display:none}
+  .step-num{
+    font-family:'Bebas Neue';
+    font-size:38px;
+    color:var(--rust);
+    line-height:1;
+    margin-bottom:14px;
+    letter-spacing:0.05em;
+  }
+  .process-step:nth-child(2n) .step-num{color:var(--navy-light)}
+  .step-title{
+    font-family:'Barlow Condensed';
+    font-size:14px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--ink);
+    margin-bottom:8px;
+    font-weight:600;
+  }
+  .step-desc{
+    font-family:'Barlow';
+    font-size:13px;
+    color:var(--ink-dim);
+    line-height:1.5;
+    font-weight:300;
+  }
+  @media(max-width:900px){
+    .process-steps{grid-template-columns:1fr}
+    .process-step{border-right:none;border-bottom:1px solid var(--line)}
+    .process-step:last-child{border-bottom:none}
+    .process-step::after{
+      content:"↓";
+      right:50%;top:auto;bottom:-12px;
+      transform:translateX(50%);
+    }
+  }
+
+  .story{
+    background:var(--bg-2);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .story-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+  }
+  .story-img{
+    aspect-ratio:4/5;
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .story-img img{
+    width:100%;height:100%;object-fit:cover;
+    filter:saturate(0.8) contrast(1.05);
+  }
+  .story-img::before{
+    content:"EST. ' XX";
+    position:absolute;
+    top:24px;left:24px;
+    font-family:'Special Elite';
+    font-size:12px;
+    color:var(--rust);
+    letter-spacing:0.3em;
+    z-index:2;
+    background:rgba(0,0,0,0.6);
+    padding:6px 12px;
+  }
+  .story-img::after{
+    content:"";
+    position:absolute;
+    bottom:-12px;right:-12px;
+    width:100%;height:100%;
+    border:1px solid var(--rust);
+    z-index:-1;
+  }
+  .story-content h2{
+    font-family:'Bebas Neue';
+    font-size:clamp(40px,5vw,72px);
+    line-height:0.92;
+    margin-bottom:30px;
+  }
+  .story-content h2 em{color:var(--rust);font-style:italic}
+  .story-content p{
+    color:var(--ink-dim);
+    line-height:1.75;
+    margin-bottom:20px;
+    font-size:16px;
+    font-weight:300;
+  }
+  .story-content p strong{color:var(--ink);font-weight:500}
+  .story-quote{
+    border-left:3px solid var(--rust);
+    padding:14px 0 14px 24px;
+    margin:32px 0;
+    font-family:'Special Elite';
+    font-size:18px;
+    color:var(--chrome);
+    font-style:italic;
+    line-height:1.5;
+  }
+
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:0;
+    border:1px solid var(--line);
+  }
+  .contact-info{
+    padding:60px 50px;
+    background:var(--panel);
+    border-right:1px solid var(--line);
+  }
+  .contact-info h2{
+    font-family:'Bebas Neue';
+    font-size:64px;
+    line-height:0.92;
+    margin-bottom:28px;
+  }
+  .contact-info h2 em{color:var(--rust);font-style:italic}
+  .contact-info p{
+    color:var(--ink-dim);
+    line-height:1.7;
+    margin-bottom:36px;
+    max-width:420px;
+  }
+  .contact-block{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+    padding:20px 0;
+    border-top:1px solid var(--line);
+  }
+  .contact-block:last-child{border-bottom:1px solid var(--line)}
+  .contact-block-label{
+    font-family:'Special Elite';
+    font-size:11px;
+    color:var(--rust);
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    min-width:80px;
+    padding-top:4px;
+  }
+  .contact-block-value{
+    font-family:'Barlow Condensed';
+    font-size:18px;
+    letter-spacing:0.05em;
+    color:var(--ink);
+  }
+  .contact-form{
+    padding:60px 50px;
+    background:var(--bg);
+  }
+  .form-row{margin-bottom:22px}
+  .form-row label{
+    display:block;
+    font-family:'Barlow Condensed';
+    font-size:11px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin-bottom:8px;
+  }
+  .form-row input, .form-row textarea, .form-row select{
+    width:100%;
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    color:var(--ink);
+    padding:14px 16px;
+    font-family:'Barlow';
+    font-size:15px;
+    transition:border 0.2s;
+  }
+  .form-row input:focus, .form-row textarea:focus, .form-row select:focus{
+    outline:none;
+    border-color:var(--rust);
+  }
+  .form-row textarea{resize:vertical;min-height:110px}
+
+  footer{
+    background:#000;
+    border-top:1px solid var(--line);
+    padding:60px 32px 32px;
+  }
+  .footer-inner{
+    max-width:1400px;margin:0 auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:60px;
+    margin-bottom:50px;
+  }
+  .footer-brand .logo{margin-bottom:20px}
+  .footer-brand p{
+    color:var(--ink-dim);
+    font-size:14px;
+    line-height:1.7;
+    max-width:340px;
+  }
+  .footer-col h4{
+    font-family:'Bebas Neue';
+    font-size:18px;
+    letter-spacing:0.1em;
+    margin-bottom:20px;
+    color:var(--rust);
+  }
+  .footer-col a, .footer-col span{
+    display:block;
+    color:var(--ink-dim);
+    text-decoration:none;
+    padding:6px 0;
+    font-size:14px;
+    transition:color 0.2s;
+    font-family:'Barlow Condensed';
+    letter-spacing:0.05em;
+  }
+  .footer-col a:hover{color:var(--rust)}
+  .footer-bottom{
+    border-top:1px solid var(--line);
+    padding-top:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    font-family:'Barlow Condensed';
+    font-size:12px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+
+  @media(max-width:900px){
+    .hero-content{padding:60px 24px 200px}
+    .stats-inner{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(2){border-right:none}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line)}
+    .story-grid{grid-template-columns:1fr;gap:48px}
+    .contact-grid{grid-template-columns:1fr}
+    .contact-info{border-right:none;border-bottom:1px solid var(--line)}
+    .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+    .nav-links{display:none}
+    section{padding:80px 24px}
+  }
+  @media(max-width:600px){
+    .footer-inner{grid-template-columns:1fr}
+    .nav-inner{padding:14px 20px}
+    .logo{font-size:20px}
+    .logo-mark{width:32px;height:32px;font-size:16px}
+  }
+</style>
+</head>
+<body>
+
+<div class="topstrip">
+  <div class="ticker">
+    <span>★ NUNSPEET, NL</span><span class="dot">●</span>
+    <span>AMERICAN VEHICLES SPECIALIST</span><span class="dot">●</span>
+    <span>SALES · SERVICE · RESTORATION</span><span class="dot">●</span>
+    <span>★ NUNSPEET, NL</span><span class="dot">●</span>
+    <span>AMERICAN VEHICLES SPECIALIST</span><span class="dot">●</span>
+    <span>SALES · SERVICE · RESTORATION</span><span class="dot">●</span>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <div class="logo-mark">B3</div>
+      <div class="logo-text">
+        THE BIG THREE
+        <small>GARAGE · NUNSPEET</small>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#voorraad" data-i18n="nav.inventory">Voorraad</a></li>
+      <li><a href="#werkplaats" data-i18n="nav.services">Werkplaats</a></li>
+      <li><a href="#verhaal" data-i18n="nav.story">Ons verhaal</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="lang">
+      <button class="active" data-lang="nl">NL</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="de">DE</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag" data-i18n="hero.tag">★ AMERICAN IRON · NUNSPEET ★</div>
+    <h1 data-i18n="hero.title">
+      BUILT IN <span class="stamp">AMERICA</span><br>
+      <span class="accent">SERVICED</span> IN<br>
+      NUNSPEET
+    </h1>
+    <p class="hero-sub" data-i18n="hero.sub">
+      Verkoop, onderhoud en restauratie van Amerikaanse campers, pickups en classics. <strong>Vakmanschap van een man die jaren in de States heeft geleefd.</strong>
+    </p>
+    <div class="hero-cta">
+      <a href="#voorraad" class="btn btn-primary" data-i18n="hero.cta1">Bekijk voorraad</a>
+      <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta2">Maak afspraak</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="stat-num">20+</div>
+        <div class="stat-label" data-i18n="stat.years">Jaar ervaring</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">350+</div>
+        <div class="stat-label" data-i18n="stat.builds">Projecten</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label" data-i18n="stat.brands">Big Three Brands</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">USA</div>
+        <div class="stat-label" data-i18n="stat.lived">Daar geleefd</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="inventory" id="voorraad">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="inv.eyebrow">Te koop · in de showroom</div>
+        <h2 data-i18n="inv.title">VOORRAAD<br><em>AMERICAN STEEL</em></h2>
+      </div>
+      <p data-i18n="inv.sub">Campers, pickups en classics. Handgekozen, doorgelicht en klaar voor de weg. Elke auto met meerdere foto's en op aanvraag een walk-around video.</p>
+    </div>
+
+    <div class="filter-bar">
+      <button class="chip active" data-i18n="filter.all">Alles</button>
+      <button class="chip" data-i18n="filter.campers">Campers</button>
+      <button class="chip" data-i18n="filter.pickups">Pickups</button>
+      <button class="chip" data-i18n="filter.classics">Classics</button>
+      <button class="chip" data-i18n="filter.muscle">Muscle Cars</button>
+      <button class="chip" data-i18n="filter.video">Met video</button>
+    </div>
+
+    <div class="grid">
+      <a href="auto-detail.html" class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=800&q=80" alt="GMC Motorhome">
+          <span class="card-photos">12 FOTO'S</span>
+          <span class="card-video">▶ YOUTUBE</span>
+          <span class="card-status">VOORRAAD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">1978 · GMC</div>
+          <h3>GMC MOTORHOME 26FT</h3>
+          <div class="card-specs">
+            <span>455 V8</span>
+            <span>AUTOMAAT</span>
+            <span>92.000 KM</span>
+          </div>
+          <div class="card-price">
+            <strong>€ 49.500</strong>
+            <small data-i18n="card.cta">Bekijk ›</small>
+          </div>
+        </div>
+      </a>
+
+      <a href="auto-detail.html" class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?w=800&q=80" alt="Chevy Van">
+          <span class="card-photos">18 FOTO'S</span>
+          <span class="card-video">▶ YOUTUBE</span>
+          <span class="card-status">NIEUW BINNEN</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">1969 · CHEVROLET</div>
+          <h3>CHEVY G20 VAN</h3>
+          <div class="card-specs">
+            <span>350 SMALL BLOCK</span>
+            <span>HANDGESCHAKELD</span>
+            <span>RESTAURATIE</span>
+          </div>
+          <div class="card-price">
+            <strong>OP AANVRAAG</strong>
+            <small data-i18n="card.cta">Bekijk ›</small>
+          </div>
+        </div>
+      </a>
+
+      <a href="auto-detail.html" class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1605893477799-b99e3b8b29b6?w=800&q=80" alt="Ford pickup">
+          <span class="card-photos">9 FOTO'S</span>
+          <span class="card-status sold">VERKOCHT</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">1985 · FORD</div>
+          <h3>FORD F-250 4X4</h3>
+          <div class="card-specs">
+            <span>460 V8</span>
+            <span>AUTOMAAT</span>
+            <span>RUW & EERLIJK</span>
+          </div>
+          <div class="card-price">
+            <strong>VERKOCHT</strong>
+            <small data-i18n="card.cta">Galerij ›</small>
+          </div>
+        </div>
+      </a>
+
+      <a href="auto-detail.html" class="card">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=800&q=80" alt="Dodge camper van">
+          <span class="card-photos">22 FOTO'S</span>
+          <span class="card-video">▶ YOUTUBE</span>
+          <span class="card-status">VOORRAAD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">1974 · DODGE</div>
+          <h3>DODGE TRADESMAN</h3>
+          <div class="card-specs">
+            <span>318 V8</span>
+            <span>CAMPER</span>
+            <span>NL KENTEKEN</span>
+          </div>
+          <div class="card-price">
+            <strong>€ 28.900</strong>
+            <small data-i18n="card.cta">Bekijk ›</small>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="werkplaats">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="srv.eyebrow">Wat we doen</div>
+        <h2 data-i18n="srv.title">DE <em>WERKPLAATS</em></h2>
+      </div>
+      <p data-i18n="srv.sub">Vier dingen waar we goed in zijn. Bel of loop binnen, dan kijken we samen wat jouw auto nodig heeft.</p>
+    </div>
+
+    <div class="service-grid">
+      <div class="service">
+        <div class="service-num">/ 01</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </div>
+        <h3 data-i18n="srv.1.title">ONDERHOUD & APK</h3>
+        <div class="service-for" data-i18n="srv.1.for">Voor: rijdende klanten</div>
+        <p data-i18n="srv.1.body">Reguliere service, APK keuring en kleine reparaties. Voor je Amerikaan, camper of klassieker. Originele en aftermarket onderdelen.</p>
+      </div>
+      <div class="service">
+        <div class="service-num">/ 02</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+          </svg>
+        </div>
+        <h3 data-i18n="srv.2.title">RESTAURATIE</h3>
+        <div class="service-for" data-i18n="srv.2.for">Voor: lange-termijn projecten</div>
+        <p data-i18n="srv.2.body">Volledig of gedeeltelijk. Plaatwerk, mechaniek, interieur. Alles onder één dak. Elk project gedocumenteerd in foto's en uren.</p>
+      </div>
+      <div class="service">
+        <div class="service-num">/ 03</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 3h15v13H1z"/>
+            <path d="M16 8h4l3 3v5h-7z"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <h3 data-i18n="srv.3.title">IMPORT & KEURING</h3>
+        <div class="service-for" data-i18n="srv.3.for">Voor: kopers uit de VS</div>
+        <p data-i18n="srv.3.body">Auto rechtstreeks uit Amerika halen? Wij regelen het hele traject: NL-kenteken, BPM, RDW-keuring en transport tot de werkplaats.</p>
+      </div>
+      <div class="service">
+        <div class="service-num">/ 04</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 8h14v8H2z"/>
+            <path d="M16 10h4l2 2v4h-6z"/>
+            <path d="M2 8V6h14v2"/>
+            <circle cx="6" cy="17" r="2"/>
+            <circle cx="18" cy="17" r="2"/>
+          </svg>
+        </div>
+        <h3 data-i18n="srv.4.title">CAMPER SPECIALIST</h3>
+        <div class="service-for" data-i18n="srv.4.for">Voor: camper-eigenaren</div>
+        <p data-i18n="srv.4.body">Class A, Class C, RV's en vintage motorhomes. Mechaniek, gas, elektra, water. We kennen het hele systeem en bouwen ook custom.</p>
+      </div>
+    </div>
+
+    <div class="process">
+      <div class="process-head">
+        <div class="eyebrow" data-i18n="proc.eyebrow">Hoe werkt het</div>
+        <h3 data-i18n="proc.title">VAN BINNENRIJDEN<br>TOT <em>OPHALEN</em></h3>
+      </div>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title" data-i18n="proc.1.t">BEL OF LOOP BINNEN</div>
+          <div class="step-desc" data-i18n="proc.1.d">Vertel ons wat er aan de hand is. Geen verplichtingen, geen kosten.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title" data-i18n="proc.2.t">DIAGNOSE</div>
+          <div class="step-desc" data-i18n="proc.2.d">We bekijken de auto en geven eerlijk aan wat hij nodig heeft.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title" data-i18n="proc.3.t">OFFERTE</div>
+          <div class="step-desc" data-i18n="proc.3.d">Schriftelijke prijs, vooraf. Geen verrassingen achteraf.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title" data-i18n="proc.4.t">WERK</div>
+          <div class="step-desc" data-i18n="proc.4.d">We pakken het aan. Foto's en updates onderweg als je dat wilt.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">05</div>
+          <div class="step-title" data-i18n="proc.5.t">OPHALEN</div>
+          <div class="step-desc" data-i18n="proc.5.d">Klaar. We laten zien wat er gedaan is en geven je de sleutels.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="verhaal">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-img">
+        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=800&q=80" alt="Amerikaanse highway">
+      </div>
+      <div class="story-content">
+        <div class="eyebrow" data-i18n="story.eyebrow">Sinds dag één</div>
+        <h2 data-i18n="story.title">VAN AMERIKA<br>NAAR <em>NUNSPEET.</em></h2>
+        <p data-i18n="story.p1">David Broeksma woonde jaren in de Verenigde Staten. Hij sleutelde daar aan auto's die hier alleen in films te zien zijn, en leerde de techniek van mensen die er hun hele leven mee bezig waren. <strong>Dat verhaal nam hij mee terug naar Nunspeet.</strong></p>
+        <p data-i18n="story.p2">The Big Three Garage is geen showroom met witte vloeren. Het is een echte werkplaats met een mancave-kantine, een flipperkast, en de overtuiging dat een Amerikaan behandeld moet worden als een Amerikaan. <strong>Geen Europese trucjes, geen halve oplossingen.</strong> Doen wat het ding nodig heeft, en het netjes afmaken.</p>
+        <div class="story-quote" data-i18n="story.quote">"Ik heb daar geleerd hoe je een V8 hoort te horen lopen. Dat geluid neem je niet zomaar mee terug. Dat moet je onderhouden."</div>
+        <a href="#contact" class="btn btn-ghost" data-i18n="story.cta">Kom langs in Nunspeet</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="ctc.eyebrow">Stuur een bericht · bel · loop binnen</div>
+        <h2 data-i18n="ctc.title">LET'S <em>TALK</em><br>SHOP</h2>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2 data-i18n="ctc.h">VIND <em>ONS</em></h2>
+        <p data-i18n="ctc.p">De koffie staat klaar. Geen afspraak nodig, gewoon binnenlopen mag ook.</p>
+
+        <div class="contact-block">
+          <span class="contact-block-label" data-i18n="ctc.adr">Adres</span>
+          <span class="contact-block-value">[Straat + nummer]<br>8071 XX Nunspeet</span>
+        </div>
+        <div class="contact-block">
+          <span class="contact-block-label" data-i18n="ctc.tel">Telefoon</span>
+          <span class="contact-block-value">+31 (0)6 XX XX XX XX</span>
+        </div>
+        <div class="contact-block">
+          <span class="contact-block-label">Email</span>
+          <span class="contact-block-value">info@bigthreegarage.nl</span>
+        </div>
+        <div class="contact-block">
+          <span class="contact-block-label" data-i18n="ctc.hrs">Open</span>
+          <span class="contact-block-value" data-i18n="ctc.hrsval">Ma–Vr 08:30 – 17:30<br>Za op afspraak</span>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-row">
+          <label data-i18n="form.name">Naam</label>
+          <input type="text" placeholder="Jouw naam">
+        </div>
+        <div class="form-row">
+          <label>Email</label>
+          <input type="email" placeholder="je@email.nl">
+        </div>
+        <div class="form-row">
+          <label data-i18n="form.subject">Onderwerp</label>
+          <select>
+            <option data-i18n="form.opt1">Vraag over voorraad</option>
+            <option data-i18n="form.opt2">Onderhoud / werkplaats</option>
+            <option data-i18n="form.opt3">Restauratie project</option>
+            <option data-i18n="form.opt4">Import vanuit VS</option>
+            <option data-i18n="form.opt5">Anders</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label data-i18n="form.msg">Bericht</label>
+          <textarea placeholder="Vertel ons wat je zoekt..."></textarea>
+        </div>
+        <button class="btn btn-primary" data-i18n="form.send">Verstuur bericht</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-mark">B3</div>
+        <div class="logo-text">
+          THE BIG THREE
+          <small>GARAGE · NUNSPEET</small>
+        </div>
+      </div>
+      <p data-i18n="ftr.about">American iron specialist sinds dag één. Verkoop, onderhoud, restauratie en import. Uit liefde voor het ambacht en de gloed van een goeie V8.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="ftr.h1">Bezoek</h4>
+      <span>Nunspeet, NL</span>
+      <span>+31 (0)6 XXXX</span>
+      <span>info@bigthreegarage.nl</span>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="ftr.h2">Menu</h4>
+      <a href="#voorraad" data-i18n="nav.inventory">Voorraad</a>
+      <a href="#werkplaats" data-i18n="nav.services">Werkplaats</a>
+      <a href="#verhaal" data-i18n="nav.story">Verhaal</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="ftr.h3">Volg</h4>
+      <span>Instagram</span>
+      <span>YouTube</span>
+      <span>Facebook</span>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© THE BIG THREE GARAGE · NUNSPEET</span>
+    <span data-i18n="ftr.by">Concept · Manon Keeman</span>
+  </div>
+</footer>
+
+<script>
+  const translations = {
+    nl: {
+      "nav.inventory":"Voorraad","nav.services":"Werkplaats","nav.story":"Ons verhaal","nav.contact":"Contact",
+      "hero.tag":"★ AMERICAN IRON · NUNSPEET ★",
+      "hero.title":'BUILT IN <span class="stamp">AMERICA</span><br><span class="accent">SERVICED</span> IN<br>NUNSPEET',
+      "hero.sub":"Verkoop, onderhoud en restauratie van Amerikaanse campers, pickups en classics. <strong>Vakmanschap van een man die jaren in de States heeft geleefd.</strong>",
+      "hero.cta1":"Bekijk voorraad","hero.cta2":"Maak afspraak",
+      "stat.years":"Jaar ervaring","stat.builds":"Projecten","stat.brands":"Big Three Brands","stat.lived":"Daar geleefd",
+      "inv.eyebrow":"Te koop · in de showroom",
+      "inv.title":"VOORRAAD<br><em>AMERICAN STEEL</em>",
+      "inv.sub":"Campers, pickups en classics. Handgekozen, doorgelicht en klaar voor de weg. Elke auto met meerdere foto's en op aanvraag een walk-around video.",
+      "filter.all":"Alles","filter.campers":"Campers","filter.pickups":"Pickups","filter.classics":"Classics","filter.muscle":"Muscle Cars","filter.video":"Met video",
+      "card.cta":"Bekijk ›",
+      "srv.eyebrow":"Wat we doen","srv.title":"DE <em>WERKPLAATS</em>",
+      "srv.sub":"Vier dingen waar we goed in zijn. Bel of loop binnen, dan kijken we samen wat jouw auto nodig heeft.",
+      "srv.1.title":"ONDERHOUD & APK","srv.1.for":"Voor: rijdende klanten","srv.1.body":"Reguliere service, APK keuring en kleine reparaties. Voor je Amerikaan, camper of klassieker. Originele en aftermarket onderdelen.",
+      "srv.2.title":"RESTAURATIE","srv.2.for":"Voor: lange-termijn projecten","srv.2.body":"Volledig of gedeeltelijk. Plaatwerk, mechaniek, interieur. Alles onder één dak. Elk project gedocumenteerd in foto's en uren.",
+      "srv.3.title":"IMPORT & KEURING","srv.3.for":"Voor: kopers uit de VS","srv.3.body":"Auto rechtstreeks uit Amerika halen? Wij regelen het hele traject: NL-kenteken, BPM, RDW-keuring en transport tot de werkplaats.",
+      "srv.4.title":"CAMPER SPECIALIST","srv.4.for":"Voor: camper-eigenaren","srv.4.body":"Class A, Class C, RV's en vintage motorhomes. Mechaniek, gas, elektra, water. We kennen het hele systeem en bouwen ook custom.",
+      "proc.eyebrow":"Hoe werkt het","proc.title":"VAN BINNENRIJDEN<br>TOT <em>OPHALEN</em>",
+      "proc.1.t":"BEL OF LOOP BINNEN","proc.1.d":"Vertel ons wat er aan de hand is. Geen verplichtingen, geen kosten.",
+      "proc.2.t":"DIAGNOSE","proc.2.d":"We bekijken de auto en geven eerlijk aan wat hij nodig heeft.",
+      "proc.3.t":"OFFERTE","proc.3.d":"Schriftelijke prijs, vooraf. Geen verrassingen achteraf.",
+      "proc.4.t":"WERK","proc.4.d":"We pakken het aan. Foto's en updates onderweg als je dat wilt.",
+      "proc.5.t":"OPHALEN","proc.5.d":"Klaar. We laten zien wat er gedaan is en geven je de sleutels.",
+      "story.eyebrow":"Sinds dag één","story.title":"VAN AMERIKA<br>NAAR <em>NUNSPEET.</em>",
+      "story.p1":"David Broeksma woonde jaren in de Verenigde Staten. Hij sleutelde daar aan auto's die hier alleen in films te zien zijn, en leerde de techniek van mensen die er hun hele leven mee bezig waren. <strong>Dat verhaal nam hij mee terug naar Nunspeet.</strong>",
+      "story.p2":"The Big Three Garage is geen showroom met witte vloeren. Het is een echte werkplaats met een mancave-kantine, een flipperkast, en de overtuiging dat een Amerikaan behandeld moet worden als een Amerikaan. <strong>Geen Europese trucjes, geen halve oplossingen.</strong> Doen wat het ding nodig heeft, en het netjes afmaken.",
+      "story.quote":"\"Ik heb daar geleerd hoe je een V8 hoort te horen lopen. Dat geluid neem je niet zomaar mee terug. Dat moet je onderhouden.\"",
+      "story.cta":"Kom langs in Nunspeet",
+      "ctc.eyebrow":"Stuur een bericht · bel · loop binnen","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"VIND <em>ONS</em>",
+      "ctc.p":"De koffie staat klaar. Geen afspraak nodig, gewoon binnenlopen mag ook.",
+      "ctc.adr":"Adres","ctc.tel":"Telefoon","ctc.hrs":"Open","ctc.hrsval":"Ma–Vr 08:30 – 17:30<br>Za op afspraak",
+      "form.name":"Naam","form.subject":"Onderwerp","form.msg":"Bericht","form.send":"Verstuur bericht",
+      "form.opt1":"Vraag over voorraad","form.opt2":"Onderhoud / werkplaats","form.opt3":"Restauratie project","form.opt4":"Import vanuit VS","form.opt5":"Anders",
+      "ftr.about":"American iron specialist sinds dag één. Verkoop, onderhoud, restauratie en import. Uit liefde voor het ambacht en de gloed van een goeie V8.",
+      "ftr.h1":"Bezoek","ftr.h2":"Menu","ftr.h3":"Volg","ftr.by":"Concept · Manon Keeman"
+    },
+    en: {
+      "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact",
+      "hero.tag":"★ AMERICAN IRON · NUNSPEET ★",
+      "hero.title":'BUILT IN <span class="stamp">AMERICA</span><br><span class="accent">SERVICED</span> IN<br>NUNSPEET',
+      "hero.sub":"Sales, service and restoration of American campers, pickups and classics. <strong>Craftsmanship from a man who lived in the States for years.</strong>",
+      "hero.cta1":"View inventory","hero.cta2":"Book a visit",
+      "stat.years":"Years of experience","stat.builds":"Projects","stat.brands":"Big Three Brands","stat.lived":"Lived there",
+      "inv.eyebrow":"For sale · in the showroom",
+      "inv.title":"INVENTORY<br><em>AMERICAN STEEL</em>",
+      "inv.sub":"Campers, pickups and classics. Hand-picked, vetted and ready for the road. Each vehicle with multiple photos and a walk-around video on request.",
+      "filter.all":"All","filter.campers":"Campers","filter.pickups":"Pickups","filter.classics":"Classics","filter.muscle":"Muscle Cars","filter.video":"With video",
+      "card.cta":"View ›",
+      "srv.eyebrow":"What we do","srv.title":"THE <em>WORKSHOP</em>",
+      "srv.sub":"Four things we do well. Call or drop by, and we'll figure out together what your car needs.",
+      "srv.1.title":"SERVICE & MOT","srv.1.for":"For: regular drivers","srv.1.body":"Regular service, MOT inspection and minor repairs. For your American, camper or classic. Original and aftermarket parts.",
+      "srv.2.title":"RESTORATION","srv.2.for":"For: long-term projects","srv.2.body":"Full or partial. Bodywork, mechanics, interior. All under one roof. Every project documented in photos and hours.",
+      "srv.3.title":"IMPORT & REGISTRATION","srv.3.for":"For: buyers from the US","srv.3.body":"Want a car straight from America? We handle the whole process: Dutch registration, taxes, RDW inspection and transport to the workshop.",
+      "srv.4.title":"CAMPER SPECIALIST","srv.4.for":"For: camper owners","srv.4.body":"Class A, Class C, RVs and vintage motorhomes. Mechanics, gas, electrics, water. We know the whole system and we build custom too.",
+      "proc.eyebrow":"How it works","proc.title":"FROM DRIVING IN<br>TO <em>PICKING UP</em>",
+      "proc.1.t":"CALL OR DROP IN","proc.1.d":"Tell us what's going on. No obligations, no costs.",
+      "proc.2.t":"DIAGNOSIS","proc.2.d":"We inspect the car and give an honest take on what it needs.",
+      "proc.3.t":"QUOTE","proc.3.d":"Written price, up front. No surprises afterwards.",
+      "proc.4.t":"WORK","proc.4.d":"We get to it. Photos and updates along the way if you want.",
+      "proc.5.t":"PICK UP","proc.5.d":"Done. We show you what we did and hand over the keys.",
+      "story.eyebrow":"Since day one","story.title":"FROM AMERICA<br>TO <em>NUNSPEET.</em>",
+      "story.p1":"David Broeksma lived in the United States for years. He worked on cars there that you only see in movies over here, and learned the trade from people who had spent their whole life with it. <strong>He brought that story back to Nunspeet.</strong>",
+      "story.p2":"The Big Three Garage isn't a showroom with white floors. It's a real workshop with a mancave kitchen, a pinball machine, and the belief that an American should be treated like an American. <strong>No European tricks, no half solutions.</strong> Do what the thing needs, and finish it properly.",
+      "story.quote":"\"I learned over there how a V8 is supposed to sound. You don't just bring that sound back. You have to maintain it.\"",
+      "story.cta":"Drop by in Nunspeet",
+      "ctc.eyebrow":"Send a message · call · drop in","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"FIND <em>US</em>",
+      "ctc.p":"The coffee is ready. No appointment needed, walking in works too.",
+      "ctc.adr":"Address","ctc.tel":"Phone","ctc.hrs":"Open","ctc.hrsval":"Mon–Fri 08:30 – 17:30<br>Sat by appointment",
+      "form.name":"Name","form.subject":"Subject","form.msg":"Message","form.send":"Send message",
+      "form.opt1":"Question about inventory","form.opt2":"Service / workshop","form.opt3":"Restoration project","form.opt4":"Import from US","form.opt5":"Other",
+      "ftr.about":"American iron specialist since day one. Sales, service, restoration and import. For the love of the craft and the glow of a good V8.",
+      "ftr.h1":"Visit","ftr.h2":"Menu","ftr.h3":"Follow","ftr.by":"Concept · Manon Keeman"
+    },
+    de: {
+      "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt",
+      "hero.tag":"★ AMERICAN IRON · NUNSPEET ★",
+      "hero.title":'GEBAUT IN <span class="stamp">AMERIKA</span><br><span class="accent">GEPFLEGT</span> IN<br>NUNSPEET',
+      "hero.sub":"Verkauf, Wartung und Restauration amerikanischer Camper, Pickups und Klassiker. <strong>Handwerk von einem Mann, der jahrelang in den USA lebte.</strong>",
+      "hero.cta1":"Fahrzeuge ansehen","hero.cta2":"Termin vereinbaren",
+      "stat.years":"Jahre Erfahrung","stat.builds":"Projekte","stat.brands":"Big Three Marken","stat.lived":"Dort gelebt",
+      "inv.eyebrow":"Zum Verkauf · im Showroom",
+      "inv.title":"FAHRZEUGE<br><em>AMERICAN STEEL</em>",
+      "inv.sub":"Camper, Pickups und Klassiker. Handverlesen, geprüft und bereit für die Straße. Jedes Fahrzeug mit mehreren Fotos und auf Anfrage ein Walk-around-Video.",
+      "filter.all":"Alle","filter.campers":"Camper","filter.pickups":"Pickups","filter.classics":"Klassiker","filter.muscle":"Muscle Cars","filter.video":"Mit Video",
+      "card.cta":"Ansehen ›",
+      "srv.eyebrow":"Was wir tun","srv.title":"DIE <em>WERKSTATT</em>",
+      "srv.sub":"Vier Dinge, die wir gut können. Rufen Sie an oder kommen Sie vorbei, dann schauen wir gemeinsam, was Ihr Auto braucht.",
+      "srv.1.title":"WARTUNG & TÜV","srv.1.for":"Für: Fahrer im Alltag","srv.1.body":"Reguläre Wartung, Inspektion und kleine Reparaturen. Für Ihren Amerikaner, Camper oder Klassiker. Mit Original- und Aftermarket-Teilen.",
+      "srv.2.title":"RESTAURATION","srv.2.for":"Für: Langzeitprojekte","srv.2.body":"Komplett oder teilweise. Karosserie, Mechanik, Interieur. Alles unter einem Dach. Jedes Projekt mit Fotos und Stunden dokumentiert.",
+      "srv.3.title":"IMPORT & ZULASSUNG","srv.3.for":"Für: Käufer aus den USA","srv.3.body":"Auto direkt aus Amerika? Wir kümmern uns um den ganzen Prozess: NL-Zulassung, Steuern, RDW-Prüfung und Transport bis zur Werkstatt.",
+      "srv.4.title":"CAMPER-SPEZIALIST","srv.4.for":"Für: Camper-Besitzer","srv.4.body":"Class A, Class C, RVs und Vintage-Motorhomes. Mechanik, Gas, Elektrik, Wasser. Wir kennen das ganze System und bauen auch custom.",
+      "proc.eyebrow":"So läuft's","proc.title":"VOM REINFAHREN<br>BIS <em>ABHOLEN</em>",
+      "proc.1.t":"ANRUFEN ODER VORBEIKOMMEN","proc.1.d":"Erzählen Sie uns, was los ist. Ohne Verpflichtung, ohne Kosten.",
+      "proc.2.t":"DIAGNOSE","proc.2.d":"Wir schauen das Auto an und sagen ehrlich, was es braucht.",
+      "proc.3.t":"ANGEBOT","proc.3.d":"Schriftlicher Preis, im Voraus. Keine Überraschungen hinterher.",
+      "proc.4.t":"ARBEIT","proc.4.d":"Wir legen los. Fotos und Updates unterwegs, wenn Sie wollen.",
+      "proc.5.t":"ABHOLEN","proc.5.d":"Fertig. Wir zeigen, was gemacht wurde, und geben die Schlüssel zurück.",
+      "story.eyebrow":"Seit Tag eins","story.title":"AUS AMERIKA<br>NACH <em>NUNSPEET.</em>",
+      "story.p1":"David Broeksma lebte jahrelang in den Vereinigten Staaten. Er schraubte dort an Autos, die man hier nur aus Filmen kennt, und lernte das Handwerk von Leuten, die ihr ganzes Leben damit verbracht haben. <strong>Diese Geschichte hat er mit nach Nunspeet zurückgebracht.</strong>",
+      "story.p2":"The Big Three Garage ist kein Showroom mit weißen Böden. Es ist eine echte Werkstatt mit einer Mancave-Küche, einem Flipper, und der Überzeugung, dass ein Amerikaner wie ein Amerikaner behandelt werden muss. <strong>Keine europäischen Tricks, keine halben Sachen.</strong> Tun, was nötig ist, und es ordentlich zu Ende bringen.",
+      "story.quote":"\"Ich habe drüben gelernt, wie ein V8 klingen muss. Diesen Sound bringt man nicht einfach so mit zurück. Den muss man pflegen.\"",
+      "story.cta":"Komm vorbei in Nunspeet",
+      "ctc.eyebrow":"Nachricht senden · anrufen · vorbeikommen","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"FIND <em>UNS</em>",
+      "ctc.p":"Der Kaffee steht bereit. Kein Termin nötig, einfach reinkommen geht auch.",
+      "ctc.adr":"Adresse","ctc.tel":"Telefon","ctc.hrs":"Geöffnet","ctc.hrsval":"Mo–Fr 08:30 – 17:30<br>Sa nach Vereinbarung",
+      "form.name":"Name","form.subject":"Betreff","form.msg":"Nachricht","form.send":"Nachricht senden",
+      "form.opt1":"Frage zum Bestand","form.opt2":"Wartung / Werkstatt","form.opt3":"Restaurationsprojekt","form.opt4":"Import aus USA","form.opt5":"Sonstiges",
+      "ftr.about":"American Iron Spezialist seit Tag eins. Verkauf, Wartung, Restauration und Import. Aus Liebe zum Handwerk und dem Glühen eines guten V8.",
+      "ftr.h1":"Besuch","ftr.h2":"Menü","ftr.h3":"Folgen","ftr.by":"Konzept · Manon Keeman"
+    }
+  };
+
+  document.querySelectorAll('.lang button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.lang button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const lang = btn.dataset.lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.dataset.i18n;
+        if(translations[lang] && translations[lang][key]){
+          el.innerHTML = translations[lang][key];
+        }
+      });
+    });
+  });
+
+  document.querySelectorAll('.chip').forEach(c=>{
+    c.addEventListener('click',(e)=>{
+      e.preventDefault();
+      document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+      c.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

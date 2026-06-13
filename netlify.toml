@@ -1,0 +1,7 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/voorraad/*"
+  to = "/auto-detail.html"
+  status = 200
