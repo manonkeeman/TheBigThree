@@ -772,9 +772,13 @@
     display:flex;align-items:center;gap:12px;
     margin-top:-16px;margin-bottom:32px;
   }
-  .story-quote-avatar{
+  .story-quote-avatar-wrap{
     width:72px;height:72px;border-radius:50%;
-    object-fit:cover;border:2px solid var(--rust);flex-shrink:0;
+    border:2px solid var(--rust);flex-shrink:0;overflow:hidden;
+  }
+  .story-quote-avatar{
+    width:100%;height:100%;
+    object-fit:cover;transform:scale(1.35);transform-origin:center 30%;
   }
   .story-quote-attr span{
     font-family:'Barlow Condensed',sans-serif;
@@ -1813,7 +1817,9 @@
         <p data-i18n="story.p2">The Big Three Garage is geen showroom met witte vloeren. Het is een echte werkplaats met een mancave-kantine, een flipperkast, en de overtuiging dat een Amerikaan behandeld moet worden als een Amerikaan. <strong>Geen Europese trucjes, geen halve oplossingen.</strong> Doen wat het ding nodig heeft, en het netjes afmaken.</p>
         <div class="story-quote" data-i18n="story.quote">"Ik heb daar geleerd hoe je een V8 hoort te horen lopen. Dat geluid neem je niet zomaar mee terug. Dat moet je onderhouden."</div>
         <div class="story-quote-attr">
-          <img src="assets/david-broeksma.png" alt="David Broeksma – The Big Three Garage" class="story-quote-avatar">
+          <div class="story-quote-avatar-wrap">
+            <img src="assets/david-broeksma.png" alt="David Broeksma – The Big Three Garage" class="story-quote-avatar">
+          </div>
           <span data-i18n="story.attr">David Broeksma · Eigenaar</span>
         </div>
         <a href="#contact" class="btn btn-ghost" data-i18n="story.cta">Kom langs in Nunspeet</a>
