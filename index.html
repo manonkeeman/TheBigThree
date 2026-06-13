@@ -701,46 +701,39 @@
     gap:80px;
     align-items:start;
   }
-  .story-vid-col{
-    border:1px solid var(--line);
-    overflow:hidden;
-    position:sticky;
-    top:100px;
-  }
-  .story-vid-col .video-wrap{
-    border:none;
-    margin:0;
-  }
-  .story-img{
-    aspect-ratio:4/5;
-    position:relative;
-    overflow:hidden;
+  .story-vid-col{position:sticky;top:100px}
+  .story-vid-thumb{
+    position:relative;overflow:hidden;
+    aspect-ratio:16/9;cursor:pointer;
     border:1px solid var(--line);
   }
-  .story-img img{
+  .story-vid-thumb img{
     width:100%;height:100%;object-fit:cover;
-    filter:saturate(0.8) contrast(1.05);
+    filter:saturate(0.75) contrast(1.1);
+    transition:transform 0.6s ease;
   }
-  .story-img::before{
-    content:"THE BIG THREE";
-    position:absolute;
-    top:24px;left:24px;
-    font-family:'Special Elite';
-    font-size:12px;
-    color:var(--rust);
-    letter-spacing:0.3em;
-    z-index:2;
-    background:rgba(0,0,0,0.6);
-    padding:6px 12px;
+  .story-vid-thumb:hover img{transform:scale(1.04)}
+  .story-vid-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(115deg,rgba(10,9,8,0.80) 0%,rgba(10,9,8,0.20) 50%,rgba(10,9,8,0.68) 100%);
   }
-  .story-img::after{
-    content:"";
-    position:absolute;
-    bottom:-12px;right:-12px;
-    width:100%;height:100%;
-    border:1px solid var(--rust);
-    z-index:-1;
+  .story-play-btn{
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:76px;height:76px;border-radius:50%;
+    background:rgba(200,16,46,0.88);
+    border:2px solid rgba(255,255,255,0.25);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:all 0.25s;z-index:3;
   }
+  .story-play-btn:hover{background:var(--rust);transform:translate(-50%,-50%) scale(1.12);border-color:rgba(255,255,255,0.55)}
+  .story-play-btn svg{width:30px;height:30px;fill:#fff;stroke:none;margin-left:5px}
+  .story-vid-label{position:absolute;bottom:24px;left:24px;z-index:3}
+  .story-vid-label .eyebrow{margin-bottom:6px}
+  .story-vid-label h3{font-family:'Bebas Neue';font-size:clamp(22px,3vw,38px);line-height:0.95;color:var(--ink)}
+  .story-vid-label h3 em{color:var(--rust);font-style:italic}
+  .story-vid-embed{aspect-ratio:16/9;border:1px solid var(--line)}
+  .story-vid-embed iframe{width:100%;height:100%;border:none;display:block}
   .story-content h2{
     font-family:'Bebas Neue';
     font-size:clamp(40px,5vw,72px);
@@ -1015,16 +1008,11 @@
   .map-route-btn:hover{background:var(--rust-deep)}
   .map-route-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;flex-shrink:0}
   .map-frame{position:relative}
-  .map-frame::after{
-    content:"";
-    position:absolute;inset:0;
-    background:linear-gradient(
-      115deg,
-      rgba(10,9,8,0.82) 0%,
-      rgba(10,9,8,0.22) 50%,
-      rgba(10,9,8,0.70) 100%
-    );
-    pointer-events:none;
+  .map-overlay{
+    position:absolute;inset:0;z-index:1;
+    background:linear-gradient(115deg,rgba(10,9,8,0.92) 0%,rgba(10,9,8,0.45) 50%,rgba(10,9,8,0.88) 100%);
+    cursor:pointer;
+    transition:opacity 0.45s ease;
   }
   .map-frame iframe{width:100%;height:270px;border:none;display:block}
 
@@ -1768,8 +1756,25 @@
   <div class="container">
     <div class="story-grid">
       <div class="story-vid-col">
-        <div class="story-img">
-          <img src="assets/david-broeksma.png" alt="David Broeksma – eigenaar The Big Three Garage Nunspeet">
+        <div class="story-vid-thumb" id="vidThumb">
+          <img src="https://img.youtube.com/vi/1nr1ZBFLPYQ/maxresdefault.jpg" alt="The Big Three Garage Nunspeet">
+          <div class="story-vid-overlay"></div>
+          <button class="story-play-btn" aria-label="Video afspelen"
+            onclick="this.closest('#vidThumb').hidden=true;document.getElementById('vidEmbed').hidden=false">
+            <svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+          </button>
+          <div class="story-vid-label">
+            <div class="eyebrow" data-i18n="video.eyebrow">Bekijk de garage</div>
+            <h3 data-i18n="video.title">ZO ZIET HET<br><em>ERUIT.</em></h3>
+          </div>
+        </div>
+        <div class="story-vid-embed" id="vidEmbed" hidden>
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/1nr1ZBFLPYQ?autoplay=1"
+            title="The Big Three Garage Nunspeet"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
       <div class="story-content">
@@ -1828,6 +1833,7 @@
               title="The Big Three Garage Nunspeet"
               allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
+            <div class="map-overlay" onclick="this.style.opacity='0';this.style.pointerEvents='none'"></div>
           </div>
         </div>
       </div>
