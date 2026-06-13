@@ -490,6 +490,9 @@
     z-index:2;
   }
   .card-status.sold{color:var(--rust);border-color:var(--rust)}
+  .card-status.reserved{color:var(--ink-dim);border-color:var(--ink-dim)}
+  .card-status.service{color:var(--navy);border-color:var(--navy)}
+  .card-status.part{color:var(--gold);border-color:var(--gold)}
   .card-body{padding:26px}
   .card-meta{
     font-family:'Special Elite';
@@ -1189,14 +1192,18 @@
       <button class="chip" data-filter="camper" data-i18n="filter.campers">Campers</button>
       <button class="chip" data-filter="classic" data-i18n="filter.classics">Klassiekers</button>
       <button class="chip" data-filter="modern" data-i18n="filter.modern">Modern</button>
+      <button class="chip" data-filter="pickup" data-i18n="filter.pickups">Pickups</button>
+      <button class="chip" data-filter="onderdeel" data-i18n="filter.parts">Onderdelen</button>
     </div>
 
     <div class="grid" id="voorraadGrid">
 
+      <!-- ── BESCHIKBAAR ───────────────────────────────────── -->
+
       <!-- 2000 Chevrolet Express Explorer · €34.995 -->
-      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2244252006-2000-chevrolet-express-explorer-64000mls-ongelofelijk" target="_blank" rel="noopener" class="card" data-cat="camper modern">
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2244252006-2000-chevrolet-express-explorer-64000mls-ongelofelijk" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/76/76a741e1-f535-48c1-bdb5-3ad6f01ab2e6?rule=ecg_mp_eps$_1200" alt="2000 Chevrolet Express Explorer Conversion Camper te koop bij The Big Three Garage Nunspeet">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/76/76a741e1-f535-48c1-bdb5-3ad6f01ab2e6?rule=ecg_mp_eps$_1200" alt="2000 Chevrolet Express Explorer Camper te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1207,17 +1214,14 @@
             <span>64.000 KM</span>
             <span data-i18n="spec.lpglth">LPG · LEER</span>
           </div>
-          <div class="card-price">
-            <strong>€ 34.995</strong>
-            <small data-i18n="card.mp">Marktplaats ›</small>
-          </div>
+          <div class="card-price"><strong>€ 34.995</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
         </div>
       </a>
 
-      <!-- 1997 GMC Savana Camper · €33.995 -->
+      <!-- 1997 GMC Savana perfect · €33.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2355521825-1997-gmc-savana-camper-perfect-onderhouden-super-lage-mls" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/deb38bb4-d2d3-4415-92aa-19f19f51832b?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana Explorer Camper te koop bij The Big Three Garage Nunspeet">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/deb38bb4-d2d3-4415-92aa-19f19f51832b?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana Explorer Camper te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1228,17 +1232,14 @@
             <span>74.354 KM</span>
             <span data-i18n="spec.lthmot">LEER · APK NIEUW</span>
           </div>
-          <div class="card-price">
-            <strong>€ 33.995</strong>
-            <small data-i18n="card.mp">Marktplaats ›</small>
-          </div>
+          <div class="card-price"><strong>€ 33.995</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
         </div>
       </a>
 
       <!-- 2005 Chevrolet Express · €28.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2409227167-2005-chevrolet-express-camper-uniek-77mls" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5f25e4f6-ab4a-4c9c-a3b9-c5d6c2102f29?rule=ecg_mp_eps$_1200" alt="2005 Chevrolet Express Explorer Camper 20 inch velgen te koop The Big Three Nunspeet">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5f25e4f6-ab4a-4c9c-a3b9-c5d6c2102f29?rule=ecg_mp_eps$_1200" alt="2005 Chevrolet Express Explorer Camper te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1249,17 +1250,32 @@
             <span>77.000 KM</span>
             <span data-i18n="spec.wheels">20" VELGEN</span>
           </div>
-          <div class="card-price">
-            <strong>€ 28.995</strong>
-            <small data-i18n="card.mp">Marktplaats ›</small>
+          <div class="card-price"><strong>€ 28.995</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 2011 Fiat Ducato Bus Camper · €25.995 -->
+      <a href="https://www.marktplaats.nl/v/caravans-en-kamperen/campers/m2402784211-fiat-ducato-1047557" target="_blank" rel="noopener" class="card" data-cat="camper modern">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5a/5a29f1c9-191e-4f87-8628-4223c86602f9?rule=ecg_mp_eps$_1200" alt="2011 Fiat Ducato Bus Camper automaat te koop The Big Three Nunspeet">
+          <span class="card-status" data-i18n="card.status">VOORRAAD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2011 · FIAT</div>
+          <h3>DUCATO BUS CAMPER</h3>
+          <div class="card-specs">
+            <span>3.0L DIESEL</span>
+            <span>105.468 KM</span>
+            <span data-i18n="spec.auto">AUTOMAAT</span>
           </div>
+          <div class="card-price"><strong>€ 25.995</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
         </div>
       </a>
 
       <!-- 1999 Dodge B1500 · €22.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/bestelauto-s/m2315160371-dodge-b1500-1999-camper-lpg-hefdak" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/21/2189f5e2-22a1-40d7-8ebe-f2a35fd2f9c6?rule=ecg_mp_eps$_1200" alt="1999 Dodge B1500 Camper LPG hefbalkdak te koop bij The Big Three Garage Nunspeet">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/21/2189f5e2-22a1-40d7-8ebe-f2a35fd2f9c6?rule=ecg_mp_eps$_1200" alt="1999 Dodge B1500 Camper LPG Hefdak te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1270,17 +1286,14 @@
             <span>158.000 KM</span>
             <span data-i18n="spec.liftdak">HEFBALKDAK</span>
           </div>
-          <div class="card-price">
-            <strong>€ 22.995</strong>
-            <small data-i18n="card.mp">Marktplaats ›</small>
-          </div>
+          <div class="card-price"><strong>€ 22.995</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
         </div>
       </a>
 
       <!-- 1997 GMC Savana American Road · €21.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2253522766-1997-gmc-savana-the-american-road-camper-lpg-77k-mls" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/c0/c0e5a8db-7971-40e7-9c75-0de6ca8f73f0?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana The American Road Camper LPG te koop bij The Big Three Garage Nunspeet">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/c0/c0e5a8db-7971-40e7-9c75-0de6ca8f73f0?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana American Road Camper LPG te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1291,17 +1304,14 @@
             <span>77.000 KM</span>
             <span data-i18n="spec.rust">ROESTVRIJ</span>
           </div>
-          <div class="card-price">
-            <strong>€ 21.995</strong>
-            <small data-i18n="card.mp">Marktplaats ›</small>
-          </div>
+          <div class="card-price"><strong>€ 21.995</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
         </div>
       </a>
 
       <!-- 1988 Ford Econoline E150 · €11.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/ford-usa/m2257652880-1988-ford-econoline-e150-camper-florida-car-explorer" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/b8/b83d346e-082e-4f24-873a-3f0d5885cb2b?rule=ecg_mp_eps$_1200" alt="1988 Ford Econoline E150 Explorer Camper Florida auto te koop bij The Big Three Garage Nunspeet">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/b8/b83d346e-082e-4f24-873a-3f0d5885cb2b?rule=ecg_mp_eps$_1200" alt="1988 Ford Econoline E150 Explorer Camper Florida car te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1312,10 +1322,355 @@
             <span data-i18n="spec.florida">FLORIDA AUTO</span>
             <span data-i18n="spec.rustlth">ROESTVRIJ · LEER</span>
           </div>
-          <div class="card-price">
-            <strong>€ 11.995</strong>
-            <small data-i18n="card.mp">Marktplaats ›</small>
+          <div class="card-price"><strong>€ 11.995</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- ── GERESERVEERD ─────────────────────────────────── -->
+
+      <!-- 2017 GMC Savana 2500 Cargo · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2371653362-2017-gmc-savana-2500-v8-long-wheeler-cargo-low-mls" target="_blank" rel="noopener" class="card" data-cat="pickup">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/3bd56020-3306-4c75-9b56-660740a890b5?rule=ecg_mp_eps$_1200" alt="2017 GMC Savana 2500 V8 Long Wheeler Cargo te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2017 · GMC</div>
+          <h3>SAVANA 2500 CARGO</h3>
+          <div class="card-specs">
+            <span>4.8L V8 LPG</span>
+            <span>99.233 KM</span>
+            <span>LONG WB</span>
           </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 2015 Volkswagen Transporter 4MOTION · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/bestelauto-s/m2386506063-volkswagen-transporter-c-2-0d-132kw-4motion-2015" target="_blank" rel="noopener" class="card" data-cat="pickup">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/715b68ff-69f6-4dfd-ace6-fbcc355b6d62?rule=ecg_mp_eps$_1200" alt="2015 Volkswagen Transporter C 2.0D 132KW 4MOTION te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2015 · VOLKSWAGEN</div>
+          <h3>TRANSPORTER 4MOTION</h3>
+          <div class="card-specs">
+            <span>2.0D 132KW</span>
+            <span>409.500 KM</span>
+            <span data-i18n="spec.auto">AUTOMAAT</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 2012 Chevrolet Express LWB Explorer · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2378928544-2012-chevrolet-express-long-wheel-base-explorer-conversion" target="_blank" rel="noopener" class="card" data-cat="camper modern">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/e56cd8c4-fb7d-4466-84df-9aff11406e37?rule=ecg_mp_eps$_1200" alt="2012 Chevrolet Express Long Wheel Base Explorer Conversion te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2012 · CHEVROLET</div>
+          <h3>EXPRESS EXPLORER LWB</h3>
+          <div class="card-specs">
+            <span>6.0L V8</span>
+            <span>117.486 KM</span>
+            <span>LONG WB</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 2011 GMC Savana Camper · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2371649252-2011-gmc-savana-camper-kenteken-nieuwe-import-103mls" target="_blank" rel="noopener" class="card" data-cat="camper modern">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/34ea26a1-003d-4c5a-a008-a176779e7c2a?rule=ecg_mp_eps$_1200" alt="2011 GMC Savana Camper nieuwe import te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2011 · GMC</div>
+          <h3>SAVANA EXPLORER CAMPER</h3>
+          <div class="card-specs">
+            <span>5.3L FLEXFUEL</span>
+            <span>103.901 KM</span>
+            <span>AWD</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 2009 GMC Savana Explorer Low Top · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2365600199-2009-gmc-savana-explorer-low-top-camper-120k-mls-bom-vol" target="_blank" rel="noopener" class="card" data-cat="camper modern">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/66/66ca0ebf-3173-4574-bdff-c43e7889bee9?rule=ecg_mp_eps$_1200" alt="2009 GMC Savana Explorer Low Top Camper te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2009 · GMC</div>
+          <h3>SAVANA LOW TOP CAMPER</h3>
+          <div class="card-specs">
+            <span>5.3L V8</span>
+            <span>120.029 KM</span>
+            <span data-i18n="spec.lth20">LEER · 20"</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 2008 Chevrolet Express Explorer Nieuwe Import · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2381896753-2008-chevrolet-express-explorer-camper-nieuwe-import" target="_blank" rel="noopener" class="card" data-cat="camper modern">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/6c8e673d-f5fa-4841-9b57-4d75fd65eb4d?rule=ecg_mp_eps$_1200" alt="2008 Chevrolet Express Explorer Camper Nieuwe Import te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2008 · CHEVROLET</div>
+          <h3>EXPRESS EXPLORER CAMPER</h3>
+          <div class="card-specs">
+            <span>5.3L V8</span>
+            <span>148.121 KM</span>
+            <span data-i18n="spec.newimport">NIEUWE IMPORT</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 2008 Chevrolet Express LPG LOADED · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2308661605-2008-chevrolet-express-explorer-camper-lpg-125mls-loaded" target="_blank" rel="noopener" class="card" data-cat="camper modern">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/98/985d50f8-dee3-46b8-85dc-5750c6c6db4f?rule=ecg_mp_eps$_1200" alt="2008 Chevrolet Express Explorer Camper LPG 125mls Loaded te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2008 · CHEVROLET</div>
+          <h3>EXPRESS CAMPER LOADED</h3>
+          <div class="card-specs">
+            <span>5.3L LPG</span>
+            <span>125.000 KM</span>
+            <span data-i18n="spec.loaded">VOL OPTIES</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 2008 GMC Savana LPG Blue · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2381088765-2008-gmc-savana-camper-lpg-subliem-onderhouden-blue" target="_blank" rel="noopener" class="card" data-cat="camper modern">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5e2e74a1-cedc-49ac-84ee-95fa32f26c52?rule=ecg_mp_eps$_1200" alt="2008 GMC Savana Camper LPG Subliem Onderhouden Blue te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2008 · GMC</div>
+          <h3>SAVANA CAMPER LPG</h3>
+          <div class="card-specs">
+            <span>5.3L LPG</span>
+            <span>162.345 KM</span>
+            <span data-i18n="spec.leather">LEER</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 2007 Chevrolet Express Cargo 2500 · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2374477720-2007-chevrolet-express-cargo-2500-lpg-heavy-duty" target="_blank" rel="noopener" class="card" data-cat="pickup">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/0e4fa67d-8c4d-48e8-bf65-9db49230db7e?rule=ecg_mp_eps$_1200" alt="2007 Chevrolet Express Cargo 2500 LPG Heavy Duty te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2007 · CHEVROLET</div>
+          <h3>EXPRESS CARGO 2500</h3>
+          <div class="card-specs">
+            <span>6.0L V8 LPG</span>
+            <span>177.570 KM</span>
+            <span>HEAVY DUTY</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 2003 Chevrolet Express Explorer · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2355528657-2003-chevrolet-express-explorer-camper-super-lage-mls" target="_blank" rel="noopener" class="card" data-cat="camper modern">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/c6/c62d3881-e315-46fd-ae4f-89bfe4a4eedc?rule=ecg_mp_eps$_1200" alt="2003 Chevrolet Express Explorer Camper Super Lage KM te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2003 · CHEVROLET</div>
+          <h3>EXPRESS EXPLORER CAMPER</h3>
+          <div class="card-specs">
+            <span>5.3L V8 LPG</span>
+            <span>67.000 MLS</span>
+            <span data-i18n="spec.lowkm">LAGE KM</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 1997 GMC Savana LPG GEEN APK · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2407663355-1997-gmc-savana-camper-lpg-geen-apk" target="_blank" rel="noopener" class="card" data-cat="camper classic">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/9adfc929-6d50-451b-b0b2-8012b0fbbe4c?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana Camper LPG Geen APK te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">1997 · GMC</div>
+          <h3>SAVANA CAMPER LPG</h3>
+          <div class="card-specs">
+            <span>5.7L V8</span>
+            <span>211.865 KM</span>
+            <span>LPG</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- 1995 Chevrolet Starcraft GT Final Edition · gereserveerd -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2322481851-1995-chevy-van-starcraft-gt-final-edition-camper-lpg-top" target="_blank" rel="noopener" class="card" data-cat="camper classic">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/3b/3b9e6804-872f-4992-a42e-d16384e0cda9?rule=ecg_mp_eps$_1200" alt="1995 Chevrolet Starcraft GT Final Edition Camper LPG te koop The Big Three Nunspeet">
+          <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">1995 · CHEVROLET</div>
+          <h3>STARCRAFT GT CAMPER</h3>
+          <div class="card-specs">
+            <span>5.7L V8</span>
+            <span>79.945 KM</span>
+            <span>LPG</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.ask">Op aanvraag</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- ── ONDERDELEN ───────────────────────────────────── -->
+
+      <!-- Motor & Automaat Chevy Express 03+ -->
+      <a href="https://www.marktplaats.nl/v/auto-onderdelen/motor-en-toebehoren/m2378094172-03-up-chevrolet-express-6-0-5-3-4-8-motor-en-automaat" target="_blank" rel="noopener" class="card" data-cat="onderdeel">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/a28fd77c-11cf-4b52-8cce-2801ac5eed80?rule=ecg_mp_eps$_1200" alt="Chevrolet Express V8 Motor en Automaat 2003 en nieuwer The Big Three Nunspeet">
+          <span class="card-status part" data-i18n="card.part">ONDERDEEL</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">CHEVROLET · 2003+</div>
+          <h3>EXPRESS V8 MOTOR &amp; AUTOMAAT</h3>
+          <div class="card-specs">
+            <span>6.0L / 5.3L / 4.8L</span>
+            <span>CHEVY EXPRESS</span>
+            <span>NIEUW &amp; REVISIE</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.mp">Zie Marktplaats</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- Dodge SRT-10 OEM Velgen · €1.500 -->
+      <a href="https://www.marktplaats.nl/v/auto-onderdelen/banden-en-velgen/m2392233959-dodge-srt-10-oem-velgen-originele-set" target="_blank" rel="noopener" class="card" data-cat="onderdeel">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/8279e76f-f728-4396-8440-a027d1bf64b1?rule=ecg_mp_eps$_1200" alt="Dodge SRT-10 OEM Velgen 22 inch originele set The Big Three Nunspeet">
+          <span class="card-status part" data-i18n="card.part">ONDERDEEL</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">DODGE · VELGEN</div>
+          <h3>SRT-10 OEM VELGEN 22"</h3>
+          <div class="card-specs">
+            <span>22 INCH</span>
+            <span data-i18n="spec.set4">SET VAN 4</span>
+            <span>ORIGINEEL OEM</span>
+          </div>
+          <div class="card-price"><strong>€ 1.500</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- Chevrolet Express Voorbumper Hoes · €425 -->
+      <a href="https://www.marktplaats.nl/v/auto-onderdelen/carrosserie-en-plaatwerk/m2381202847-chevrolet-express-voor-bumper-hoes" target="_blank" rel="noopener" class="card" data-cat="onderdeel">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/a969013a-564d-4660-9075-bb1553e956a4?rule=ecg_mp_eps$_1200" alt="Chevrolet Express voorbumper hoes 1996-2024 ook GMC Savana The Big Three Nunspeet">
+          <span class="card-status part" data-i18n="card.part">ONDERDEEL</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">CHEVY &amp; GMC · 1996–2024</div>
+          <h3>EXPRESS VOORBUMPER HOES</h3>
+          <div class="card-specs">
+            <span>CHEVY EXPRESS</span>
+            <span>GMC SAVANA</span>
+            <span>1996 – 2024</span>
+          </div>
+          <div class="card-price"><strong>€ 425</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- LED Hoek Lampjes 1996-2002 · bieden -->
+      <a href="https://www.marktplaats.nl/v/auto-onderdelen/verlichting/m2399338729-chevrolet-express-van-achterlicht-1996-2002" target="_blank" rel="noopener" class="card" data-cat="onderdeel">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/65769082-016a-44a8-ba63-e762f6242e01?rule=ecg_mp_eps$_1200" alt="Chevrolet Express LED Lampjes 1996-2002 The Big Three Nunspeet">
+          <span class="card-status part" data-i18n="card.part">ONDERDEEL</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">CHEVROLET · 1996–2002</div>
+          <h3>EXPRESS LED LAMPJES</h3>
+          <div class="card-specs">
+            <span>1996 – 2002</span>
+            <span>LED</span>
+            <span>OEM LOOK</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.bid">Bieden</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- ── SERVICE ──────────────────────────────────────── -->
+
+      <!-- Service: Onderhoud & APK -->
+      <a href="https://www.marktplaats.nl/v/diensten-en-vakmensen/auto-en-motor-monteurs-en-garages/m2112812405-onderhoud-apk-reparatie-amerikaanse-auto-s-campers" target="_blank" rel="noopener" class="card" data-cat="service">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/301437db-093e-4640-ae71-ff3390a2f233?rule=ecg_mp_eps$_1200" alt="Onderhoud APK Reparatie Amerikaanse autos The Big Three Nunspeet">
+          <span class="card-status service" data-i18n="card.service">SERVICE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">THE BIG THREE · NUNSPEET</div>
+          <h3 data-i18n="srv.1.title">ONDERHOUD &amp; APK</h3>
+          <div class="card-specs">
+            <span>CHEVY · FORD · DODGE</span>
+            <span>NUNSPEET</span>
+            <span>APK · REPARATIE</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.mp">Zie Marktplaats</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- Service: Reparatie & APK -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2125325195-reparatie-apk-en-onderhoud-amerikaanse-auto-s" target="_blank" rel="noopener" class="card" data-cat="service">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/07/0712f64f-5c3c-4850-8fb5-da08870bb31a?rule=ecg_mp_eps$_1200" alt="Reparatie APK Onderhoud Amerikaanse autos The Big Three Nunspeet">
+          <span class="card-status service" data-i18n="card.service">SERVICE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">THE BIG THREE · NUNSPEET</div>
+          <h3>REPARATIE &amp; SERVICE</h3>
+          <div class="card-specs">
+            <span>IMPORT SPECIALIST</span>
+            <span>NUNSPEET</span>
+            <span>APK · ONDERHOUD</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.mp">Zie Marktplaats</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
+        </div>
+      </a>
+
+      <!-- Service: The Big 3 Werkplaats -->
+      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2252814723-the-big-3-apk-reparatie-en-onderhoud-amerikaanse-auto-s" target="_blank" rel="noopener" class="card" data-cat="service">
+        <div class="card-img">
+          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/f3dd2df0-39d9-44c1-b5d5-925e1f4a91b1?rule=ecg_mp_eps$_1200" alt="The Big Three Werkplaats Service APK Reparatie Nunspeet">
+          <span class="card-status service" data-i18n="card.service">SERVICE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">THE BIG THREE · NUNSPEET</div>
+          <h3>WERKPLAATS SERVICE</h3>
+          <div class="card-specs">
+            <span>IMPORT · RESTAURATIE</span>
+            <span>NUNSPEET</span>
+            <span>APK · REPARATIE</span>
+          </div>
+          <div class="card-price"><strong data-i18n="card.price.mp">Zie Marktplaats</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
         </div>
       </a>
 
@@ -1599,11 +1954,13 @@
       "inv.eyebrow":"Te koop · in de showroom",
       "inv.title":"VOORRAAD<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Campers, pickups en classics. Handgekozen, doorgelicht en klaar voor de weg. Elke auto met meerdere foto's en op aanvraag een walk-around video.",
-      "filter.all":"Alles","filter.campers":"Campers","filter.classics":"Klassiekers","filter.modern":"Modern",
-      "card.cta":"Bekijk ›","card.gallery":"Galerij ›","card.status":"VOORRAAD","card.mp":"Marktplaats ›",
+      "filter.all":"Alles","filter.campers":"Campers","filter.classics":"Klassiekers","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Onderdelen",
+      "card.cta":"Bekijk ›","card.gallery":"Galerij ›","card.status":"VOORRAAD","card.reserved":"GERESERVEERD","card.service":"SERVICE","card.part":"ONDERDEEL","card.mp":"Marktplaats ›",
+      "card.price.ask":"Op aanvraag","card.price.mp":"Zie Marktplaats","card.price.bid":"Bieden",
       "spec.v8auto":"V8 AUTOMAAT","spec.lpglth":"LPG · LEER","spec.lthmot":"LEER · APK NIEUW",
       "spec.wheels":'20" VELGEN',"spec.liftdak":"HEFBALKDAK","spec.rust":"ROESTVRIJ",
       "spec.cyl8auto":"8-CIL AUTOMAAT","spec.florida":"FLORIDA AUTO","spec.rustlth":"ROESTVRIJ · LEER",
+      "spec.auto":"AUTOMAAT","spec.leather":"LEER","spec.loaded":"VOL OPTIES","spec.newimport":"NIEUWE IMPORT","spec.lth20":'LEER · 20"',"spec.lowkm":"LAGE KM","spec.set4":"SET VAN 4",
       "srv.eyebrow":"Wat we doen","srv.title":"DE <em>WERKPLAATS</em>",
       "srv.sub":"Vier dingen waar we goed in zijn. Bel of loop binnen, dan kijken we samen wat jouw auto nodig heeft.",
       "srv.1.title":"ONDERHOUD & APK","srv.1.for":"Voor: rijdende klanten","srv.1.body":"Reguliere service, APK keuring en kleine reparaties. Voor je Amerikaan, camper of klassieker. Originele en aftermarket onderdelen.",
@@ -1645,11 +2002,13 @@
       "inv.eyebrow":"For sale · in the showroom",
       "inv.title":"INVENTORY<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Campers, pickups and classics. Hand-picked, vetted and ready for the road. Each vehicle with multiple photos and a walk-around video on request.",
-      "filter.all":"All","filter.campers":"Campers","filter.classics":"Classics","filter.modern":"Modern",
-      "card.cta":"View ›","card.gallery":"Gallery ›","card.status":"IN STOCK","card.mp":"Marktplaats ›",
+      "filter.all":"All","filter.campers":"Campers","filter.classics":"Classics","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Parts",
+      "card.cta":"View ›","card.gallery":"Gallery ›","card.status":"IN STOCK","card.reserved":"RESERVED","card.service":"SERVICE","card.part":"PART","card.mp":"Marktplaats ›",
+      "card.price.ask":"On request","card.price.mp":"See listing","card.price.bid":"Make offer",
       "spec.v8auto":"V8 AUTOMATIC","spec.lpglth":"LPG · LEATHER","spec.lthmot":"LEATHER · MOT NEW",
       "spec.wheels":'20" WHEELS',"spec.liftdak":"LIFT ROOF","spec.rust":"RUST FREE",
       "spec.cyl8auto":"8-CYL AUTOMATIC","spec.florida":"FLORIDA CAR","spec.rustlth":"RUST FREE · LEATHER",
+      "spec.auto":"AUTOMATIC","spec.leather":"LEATHER","spec.loaded":"FULLY LOADED","spec.newimport":"NEW IMPORT","spec.lth20":'LEATHER · 20"',"spec.lowkm":"LOW KM","spec.set4":"SET OF 4",
       "srv.eyebrow":"What we do","srv.title":"THE <em>WORKSHOP</em>",
       "srv.sub":"Four things we do well. Call or drop by, and we'll figure out together what your car needs.",
       "srv.1.title":"SERVICE & MOT","srv.1.for":"For: regular drivers","srv.1.body":"Regular service, MOT inspection and minor repairs. For your American, camper or classic. Original and aftermarket parts.",
@@ -1691,11 +2050,13 @@
       "inv.eyebrow":"Zum Verkauf · im Showroom",
       "inv.title":"FAHRZEUGE<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Camper, Pickups und Klassiker. Handverlesen, geprüft und bereit für die Straße. Jedes Fahrzeug mit mehreren Fotos und auf Anfrage ein Walk-around-Video.",
-      "filter.all":"Alle","filter.campers":"Camper","filter.classics":"Klassiker","filter.modern":"Modern",
-      "card.cta":"Ansehen ›","card.gallery":"Galerie ›","card.status":"VORRÄTIG","card.mp":"Marktplaats ›",
+      "filter.all":"Alle","filter.campers":"Camper","filter.classics":"Klassiker","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Ersatzteile",
+      "card.cta":"Ansehen ›","card.gallery":"Galerie ›","card.status":"VORRÄTIG","card.reserved":"RESERVIERT","card.service":"SERVICE","card.part":"ERSATZTEIL","card.mp":"Marktplaats ›",
+      "card.price.ask":"Auf Anfrage","card.price.mp":"Zur Anzeige","card.price.bid":"Bieten",
       "spec.v8auto":"V8 AUTOMATIK","spec.lpglth":"LPG · LEDER","spec.lthmot":"LEDER · HU NEU",
       "spec.wheels":'20" FELGEN',"spec.liftdak":"HUBDACH","spec.rust":"ROSTFREI",
       "spec.cyl8auto":"8-ZYL AUTOMATIK","spec.florida":"FLORIDA AUTO","spec.rustlth":"ROSTFREI · LEDER",
+      "spec.auto":"AUTOMATIK","spec.leather":"LEDER","spec.loaded":"VOLL AUSGESTATTET","spec.newimport":"NEUER IMPORT","spec.lth20":'LEDER · 20"',"spec.lowkm":"WENIG KM","spec.set4":"4er SET",
       "srv.eyebrow":"Was wir tun","srv.title":"DIE <em>WERKSTATT</em>",
       "srv.sub":"Vier Dinge, die wir gut können. Rufen Sie an oder kommen Sie vorbei — wir schauen gemeinsam, was Ihr Fahrzeug braucht.",
       "srv.1.title":"WARTUNG & TÜV","srv.1.for":"Für: Fahrer im Alltag","srv.1.body":"Reguläre Wartung, TÜV-Inspektion und kleine Reparaturen. Für Ihren Amerikaner, Camper oder Klassiker. Original- und Aftermarket-Teile.",
