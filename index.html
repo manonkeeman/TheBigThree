@@ -872,26 +872,23 @@
   }
   .form-row textarea{resize:vertical;min-height:110px}
 
-  /* ─── BOOKING ─── */
-  .booking{border-top:1px solid var(--line)}
-  .booking .section-head{margin-bottom:40px}
-  .booking-form{max-width:760px}
-  .bf-row{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
-  .booking-form input[type="date"]{color-scheme:dark;cursor:pointer}
-  .booking-form .btn{margin-top:8px}
+  /* ─── APPOINTMENT ─── */
+  .contact-appt h2{font-family:'Bebas Neue';font-size:52px;line-height:0.92;margin-bottom:18px}
+  .contact-appt h2 em{color:var(--rust);font-style:italic}
+  .contact-appt > p{color:var(--ink-dim);line-height:1.7;margin-bottom:28px}
+  .contact-appt input[type="date"]{color-scheme:dark;cursor:pointer}
   .booking-note{
-    margin-top:24px;
+    margin-top:20px;
     font-family:'Barlow Condensed';
     font-size:11px;
     letter-spacing:0.2em;
     text-transform:uppercase;
     color:var(--ink-dim);
   }
-  .booking-thanks{max-width:520px;padding:56px 0}
-  .booking-thanks-icon{font-size:44px;color:var(--gold);margin-bottom:16px;font-family:'Barlow Condensed';font-weight:700}
-  .booking-thanks-title{font-family:'Barlow Condensed';font-size:28px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+  .booking-thanks{padding:36px 0}
+  .booking-thanks-icon{font-size:40px;color:var(--gold);margin-bottom:12px;font-family:'Barlow Condensed';font-weight:700}
+  .booking-thanks-title{font-family:'Barlow Condensed';font-size:24px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
   .booking-thanks-msg{color:var(--ink-dim);font-size:15px;line-height:1.6}
-  @media(max-width:600px){.bf-row{grid-template-columns:1fr}}
 
   footer{
     background:#000;
@@ -1851,100 +1848,62 @@
         </div>
       </div>
 
-      <div class="contact-form">
-        <div class="form-row">
-          <label data-i18n="form.name">Naam</label>
-          <input type="text" placeholder="Jouw naam" data-i18n-ph="form.ph.name">
+      <div class="contact-form contact-appt" id="afspraak">
+        <h2 data-i18n="book.title">MAAK EEN<br><em>AFSPRAAK</em></h2>
+        <p data-i18n="book.sub">Stuur een aanvraag, David bevestigt per e-mail — bellen hoeft niet.</p>
+        <form class="booking-form" name="afspraak" method="POST" data-netlify="true" id="booking-form" novalidate>
+          <input type="hidden" name="form-name" value="afspraak">
+          <div class="form-row">
+            <label for="bf-naam" data-i18n="book.f.name">Naam</label>
+            <input type="text" id="bf-naam" name="naam" required>
+          </div>
+          <div class="form-row">
+            <label for="bf-email" data-i18n="book.f.email">E-mail</label>
+            <input type="email" id="bf-email" name="email" required>
+          </div>
+          <div class="form-row">
+            <label for="bf-tel" data-i18n="book.f.phone">Telefoon (optioneel)</label>
+            <input type="tel" id="bf-tel" name="telefoon">
+          </div>
+          <div class="form-row">
+            <label for="bf-type" data-i18n="book.f.type">Soort afspraak</label>
+            <select id="bf-type" name="soort">
+              <option data-i18n="book.o.t1">Onderhoud / APK</option>
+              <option data-i18n="book.o.t2">Restauratie</option>
+              <option data-i18n="book.o.t3">Import vanuit VS</option>
+              <option data-i18n="book.o.t4">Voorraad bekijken</option>
+              <option data-i18n="book.o.t5">Anders</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="bf-datum" data-i18n="book.f.date">Gewenste datum</label>
+            <input type="date" id="bf-datum" name="datum" required>
+          </div>
+          <div class="form-row">
+            <label for="bf-tijd" data-i18n="book.f.time">Voorkeur tijdstip</label>
+            <select id="bf-tijd" name="tijdstip">
+              <option data-i18n="book.o.tm1">Ochtend (08:30 – 12:00)</option>
+              <option data-i18n="book.o.tm2">Middag (12:00 – 17:30)</option>
+              <option data-i18n="book.o.tm3">Geen voorkeur</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="bf-msg" data-i18n="book.f.msg">Bericht (optioneel)</label>
+            <textarea id="bf-msg" name="bericht" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" data-i18n="book.f.send">Afspraak aanvragen</button>
+        </form>
+        <div class="booking-thanks" id="booking-thanks" hidden>
+          <div class="booking-thanks-icon">✓</div>
+          <p class="booking-thanks-title" data-i18n="book.ok.title">Aanvraag verzonden!</p>
+          <p class="booking-thanks-msg" data-i18n="book.ok.msg">David neemt zo snel mogelijk contact op ter bevestiging.</p>
         </div>
-        <div class="form-row">
-          <label>Email</label>
-          <input type="email" placeholder="je@email.nl" data-i18n-ph="form.ph.email">
-        </div>
-        <div class="form-row">
-          <label data-i18n="form.subject">Onderwerp</label>
-          <select>
-            <option data-i18n="form.opt1">Vraag over voorraad</option>
-            <option data-i18n="form.opt2">Onderhoud / werkplaats</option>
-            <option data-i18n="form.opt3">Restauratie project</option>
-            <option data-i18n="form.opt4">Import vanuit VS</option>
-            <option data-i18n="form.opt5">Anders</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label data-i18n="form.msg">Bericht</label>
-          <textarea placeholder="Vertel ons wat je zoekt..." data-i18n-ph="form.ph.msg"></textarea>
-        </div>
-        <button class="btn btn-primary" data-i18n="form.send">Verstuur bericht</button>
+        <p class="booking-note" data-i18n="book.note">Bevestiging per e-mail · Geen account nodig</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="booking" id="afspraak">
-  <div class="container">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow" data-i18n="book.eyebrow">Online inplannen</div>
-        <h2 data-i18n="book.title">MAAK EEN<br><em>AFSPRAAK</em></h2>
-      </div>
-      <p data-i18n="book.sub">Stuur een aanvraag, David bevestigt per e-mail — bellen hoeft niet.</p>
-    </div>
-    <form class="booking-form" name="afspraak" method="POST" data-netlify="true" id="booking-form" novalidate>
-      <input type="hidden" name="form-name" value="afspraak">
-      <div class="bf-row">
-        <div class="form-row">
-          <label for="bf-naam" data-i18n="book.f.name">Naam</label>
-          <input type="text" id="bf-naam" name="naam" required>
-        </div>
-        <div class="form-row">
-          <label for="bf-email" data-i18n="book.f.email">E-mail</label>
-          <input type="email" id="bf-email" name="email" required>
-        </div>
-      </div>
-      <div class="bf-row">
-        <div class="form-row">
-          <label for="bf-tel" data-i18n="book.f.phone">Telefoon (optioneel)</label>
-          <input type="tel" id="bf-tel" name="telefoon">
-        </div>
-        <div class="form-row">
-          <label for="bf-type" data-i18n="book.f.type">Soort afspraak</label>
-          <select id="bf-type" name="soort">
-            <option data-i18n="book.o.t1">Onderhoud / APK</option>
-            <option data-i18n="book.o.t2">Restauratie</option>
-            <option data-i18n="book.o.t3">Import vanuit VS</option>
-            <option data-i18n="book.o.t4">Voorraad bekijken</option>
-            <option data-i18n="book.o.t5">Anders</option>
-          </select>
-        </div>
-      </div>
-      <div class="bf-row">
-        <div class="form-row">
-          <label for="bf-datum" data-i18n="book.f.date">Gewenste datum</label>
-          <input type="date" id="bf-datum" name="datum" required>
-        </div>
-        <div class="form-row">
-          <label for="bf-tijd" data-i18n="book.f.time">Voorkeur tijdstip</label>
-          <select id="bf-tijd" name="tijdstip">
-            <option data-i18n="book.o.tm1">Ochtend (08:30 – 12:00)</option>
-            <option data-i18n="book.o.tm2">Middag (12:00 – 17:30)</option>
-            <option data-i18n="book.o.tm3">Geen voorkeur</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <label for="bf-msg" data-i18n="book.f.msg">Bericht (optioneel)</label>
-        <textarea id="bf-msg" name="bericht" rows="4"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" data-i18n="book.f.send">Afspraak aanvragen</button>
-    </form>
-    <div class="booking-thanks" id="booking-thanks" hidden>
-      <div class="booking-thanks-icon">✓</div>
-      <p class="booking-thanks-title" data-i18n="book.ok.title">Aanvraag verzonden!</p>
-      <p class="booking-thanks-msg" data-i18n="book.ok.msg">David neemt zo snel mogelijk contact op ter bevestiging.</p>
-    </div>
-    <p class="booking-note" data-i18n="book.note">Bevestiging per e-mail · Geen account nodig</p>
-  </div>
-</section>
 
 <footer>
   <div class="footer-inner">
