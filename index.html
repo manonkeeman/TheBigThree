@@ -663,16 +663,6 @@
     line-height:1.5;
     font-weight:300;
   }
-  @media(max-width:900px){
-    .process-steps{grid-template-columns:1fr}
-    .process-step{border-right:none;border-bottom:1px solid var(--line)}
-    .process-step:last-child{border-bottom:none}
-    .process-step::after{
-      content:"↓";
-      right:50%;top:auto;bottom:-12px;
-      transform:translateX(50%);
-    }
-  }
 
   .story{
     background:var(--bg-2);
@@ -892,23 +882,183 @@
     color:var(--ink-dim);
   }
 
-  @media(max-width:900px){
-    .hero-content{padding:60px 24px 200px}
+
+  /* ─── HAMBURGER ─── */
+  .menu-toggle{
+    display:none;background:none;border:1px solid var(--line);
+    cursor:pointer;padding:10px;flex-shrink:0;
+    width:44px;height:44px;
+    flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  }
+  .menu-toggle span{
+    display:block;width:20px;height:1.5px;
+    background:var(--ink);border-radius:1px;
+    transition:all 0.3s;transform-origin:center;
+  }
+  .menu-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .menu-toggle.open span:nth-child(2){opacity:0}
+  .menu-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+  /* ─── MOBILE NAV ─── */
+  .nav-mobile{
+    position:fixed;inset:0;z-index:99;
+    background:rgba(10,9,8,0.98);backdrop-filter:blur(20px);
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:0;
+    opacity:0;pointer-events:none;
+    transition:opacity 0.3s;
+  }
+  .nav-mobile.open{opacity:1;pointer-events:all}
+  .nav-mobile-links{list-style:none;text-align:center;width:100%}
+  .nav-mobile-links a{
+    display:block;font-family:'Bebas Neue';font-size:clamp(30px,7vw,46px);
+    letter-spacing:0.06em;color:var(--ink);text-decoration:none;
+    padding:14px 40px;border-bottom:1px solid var(--line);
+    transition:color 0.2s;
+  }
+  .nav-mobile-links li:last-child a{border-bottom:none}
+  .nav-mobile-links a:hover,.nav-mobile-links a:active{color:var(--rust)}
+  .nav-mobile .lang{margin-top:28px}
+
+  /* ─── WHATSAPP FAB ─── */
+  .wa-fab{
+    position:fixed;bottom:88px;right:20px;
+    width:54px;height:54px;border-radius:50%;
+    background:#25d366;
+    display:none;align-items:center;justify-content:center;
+    box-shadow:0 4px 18px rgba(37,211,102,0.45);
+    z-index:79;text-decoration:none;
+    transition:transform 0.2s,box-shadow 0.2s;
+  }
+  .wa-fab:hover{transform:scale(1.1);box-shadow:0 6px 26px rgba(37,211,102,0.6)}
+  .wa-fab svg{width:28px;height:28px;fill:#fff}
+  .cookie-gone .wa-fab,.cookie-gone.wa-fab{bottom:20px}
+
+  /* ─── GOOGLE MAPS ─── */
+  .map-block{
+    margin-top:28px;border:1px solid var(--line);
+    background:var(--panel);overflow:hidden;
+  }
+  .map-plate{
+    padding:24px 28px;
+    display:flex;flex-direction:column;align-items:flex-start;gap:14px;
+  }
+  .map-plate-icon{width:38px;height:38px;color:var(--rust)}
+  .map-plate-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .map-plate-btns{display:flex;gap:10px;flex-wrap:wrap}
+  .map-route-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Barlow Condensed';font-size:12px;
+    letter-spacing:0.2em;text-transform:uppercase;font-weight:600;
+    color:#fff;text-decoration:none;background:var(--rust);
+    padding:10px 16px;transition:background 0.2s;white-space:nowrap;
+  }
+  .map-route-btn:hover{background:var(--rust-deep)}
+  .map-route-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;flex-shrink:0}
+  .map-load-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Barlow Condensed';font-size:12px;
+    letter-spacing:0.2em;text-transform:uppercase;font-weight:600;
+    color:var(--ink-dim);background:transparent;
+    border:1px solid var(--line);padding:10px 16px;
+    cursor:pointer;transition:all 0.2s;white-space:nowrap;
+  }
+  .map-load-btn:hover{color:var(--ink);border-color:var(--ink-dim)}
+  .map-load-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0}
+  .map-frame{display:none;border-top:1px solid var(--line)}
+  .map-frame iframe{width:100%;height:200px;border:none;display:block}
+  .map-note{
+    font-family:'Barlow Condensed';font-size:11px;
+    letter-spacing:0.15em;color:var(--ink-dim);
+    text-transform:uppercase;
+  }
+
+  /* ─── COOKIE BANNER ─── */
+  .cookie-bar{
+    position:fixed;bottom:0;left:0;right:0;
+    background:rgba(16,22,38,0.97);border-top:1px solid var(--line);
+    backdrop-filter:blur(14px);z-index:150;
+    padding:16px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;
+  }
+  .cookie-bar.hidden{display:none}
+  .cookie-text{
+    font-family:'Barlow';font-size:13px;
+    color:var(--ink-dim);font-weight:300;
+    max-width:700px;flex:1;line-height:1.6;
+  }
+  .cookie-text a{color:var(--rust);text-decoration:none}
+  .cookie-text a:hover{text-decoration:underline}
+  .cookie-btns{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;align-items:center}
+  .cookie-accept{
+    font-family:'Barlow Condensed';font-size:11px;letter-spacing:0.2em;
+    text-transform:uppercase;font-weight:600;
+    padding:10px 18px;border:none;cursor:pointer;
+    background:var(--rust);color:#fff;white-space:nowrap;transition:background 0.2s;
+  }
+  .cookie-accept:hover{background:var(--rust-deep)}
+  .cookie-decline{
+    font-family:'Barlow Condensed';font-size:11px;letter-spacing:0.2em;
+    text-transform:uppercase;font-weight:600;
+    padding:10px 18px;border:1px solid var(--line);cursor:pointer;
+    background:transparent;color:var(--ink-dim);white-space:nowrap;transition:all 0.2s;
+  }
+  .cookie-decline:hover{color:var(--ink);border-color:var(--ink-dim)}
+
+  /* ─── RESPONSIVE 1024px (tablet) ─── */
+  @media(max-width:1024px){
+    .nav-links{display:none}
+    .menu-toggle{display:flex}
+    .wa-fab{display:flex}
+    .grid{grid-template-columns:repeat(2,1fr)}
+  }
+  /* ─── RESPONSIVE 768px ─── */
+  @media(max-width:768px){
+    .hero-content{padding:56px 20px 180px}
+    .hero h1{font-size:clamp(44px,9vw,76px)}
+    .hero-sub{font-size:16px;max-width:100%}
     .stats-inner{grid-template-columns:repeat(2,1fr)}
     .stat:nth-child(2){border-right:none}
     .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line)}
-    .story-grid{grid-template-columns:1fr;gap:48px}
-    .contact-grid{grid-template-columns:1fr}
-    .contact-info{border-right:none;border-bottom:1px solid var(--line)}
+    section{padding:64px 20px}
+    .section-head{margin-bottom:36px}
+    .section-head h2{font-size:clamp(36px,7vw,56px)}
+    .grid{grid-template-columns:1fr}
+    .service-grid{grid-template-columns:1fr 1fr}
+    .process-steps{grid-template-columns:1fr}
+    .process-step{border-right:none;border-bottom:1px solid var(--line)}
+    .process-step:last-child{border-bottom:none}
+    .process-step::after{content:"↓";right:50%;top:auto;bottom:-12px;transform:translateX(50%)}
+    .story-grid{grid-template-columns:1fr;gap:40px}
+    .story-img{aspect-ratio:3/2}
+    .contact-grid{grid-template-columns:1fr;gap:48px}
+    .contact-info{border-right:none}
     .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
-    .nav-links{display:none}
-    section{padding:80px 24px}
+    .footer-bottom{flex-direction:column;gap:8px;align-items:flex-start}
+    .cookie-bar{padding:14px 20px}
+    .map-frame iframe{height:180px}
   }
-  @media(max-width:600px){
+  /* ─── RESPONSIVE 480px ─── */
+  @media(max-width:480px){
+    .nav-inner{padding:12px 16px}
+    .logo-img{height:40px}
+    .topstrip{display:none}
+    .hero-content{padding:40px 16px 150px}
+    .hero h1{font-size:clamp(38px,10vw,62px)}
+    .stat{padding:18px 14px}
+    .stat-num{font-size:32px}
+    section{padding:48px 16px}
+    .section-head h2{font-size:clamp(32px,8vw,48px)}
+    .service-grid{grid-template-columns:1fr}
+    .service{padding:32px 22px}
+    .story-video{margin-top:40px}
     .footer-inner{grid-template-columns:1fr}
-    .nav-inner{padding:14px 20px}
-    .logo{font-size:20px}
-    .logo-mark{width:32px;height:32px;font-size:16px}
+    .footer-logo-img{height:60px}
+    .cookie-bar{padding:12px 16px;gap:10px}
+    .cookie-btns{width:100%}
+    .cookie-accept,.cookie-decline{flex:1;text-align:center}
+    .map-frame iframe{height:160px}
   }
 </style>
 </head>
@@ -940,6 +1090,9 @@
       <li><a href="#verhaal" data-i18n="nav.story">Ons verhaal</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMobile">
+      <span></span><span></span><span></span>
+    </button>
     <div class="lang">
       <button class="active" data-lang="nl">NL</button>
       <button data-lang="en">EN</button>
@@ -947,6 +1100,21 @@
     </div>
   </div>
 </nav>
+
+<div class="nav-mobile" id="navMobile" role="dialog" aria-hidden="true" aria-label="Navigatie">
+  <ul class="nav-mobile-links">
+    <li><a href="#voorraad" data-i18n="nav.inventory">Voorraad</a></li>
+    <li><a href="#werkplaats" data-i18n="nav.services">Werkplaats</a></li>
+    <li><a href="#verhaal" data-i18n="nav.story">Ons verhaal</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    <li><a href="privacy.html" data-i18n="ftr.privacy">Privacyverklaring</a></li>
+  </ul>
+  <div class="lang" style="margin-top:28px">
+    <button data-lang="nl">NL</button>
+    <button data-lang="en">EN</button>
+    <button data-lang="de">DE</button>
+  </div>
+</div>
 
 <section class="hero">
   <div class="hero-bg"></div>
@@ -1218,7 +1386,7 @@
       <h3 data-i18n="video.title">ZO ZIET HET ERUIT<br><em>BIJ ONS.</em></h3>
       <div class="video-wrap">
         <iframe
-          src="https://www.youtube.com/embed/1nr1ZBFLPYQ"
+          src="https://www.youtube-nocookie.com/embed/1nr1ZBFLPYQ"
           title="The Big Three Garage Nunspeet"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
@@ -1255,8 +1423,30 @@
           <span class="contact-block-value">info@bigthreegarage.nl</span>
         </div>
         <div class="contact-block">
-          <span class="contact-block-label" data-i18n="ctc.hrs">Open</span>
+          <span class="contact-block-label" data-i18n="ctc.hrs">Openingstijden</span>
           <span class="contact-block-value" data-i18n="ctc.hrsval">Ma–Vr 08:30 – 17:30<br>Za op afspraak</span>
+        </div>
+
+        <div class="map-block">
+          <div class="map-plate">
+            <div class="map-plate-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="map-plate-btns">
+              <a href="https://www.google.com/maps/dir/?api=1&destination=Hullerweg+115,+8071+NP+Nunspeet,+Nederland" target="_blank" rel="noopener" class="map-route-btn">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                <span data-i18n="map.route">Route plannen</span>
+              </a>
+              <button class="map-load-btn" id="mapLoadBtn">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span data-i18n="map.load">Toon kaart</span>
+              </button>
+            </div>
+            <span class="map-note" data-i18n="map.note">Google Maps laadt alleen na klikken · minimale cookies</span>
+          </div>
+          <div class="map-frame" id="mapFrame">
+            <iframe title="The Big Three Garage Nunspeet" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
         </div>
       </div>
 
@@ -1313,6 +1503,7 @@
       <a href="#werkplaats" data-i18n="nav.services">Werkplaats</a>
       <a href="#verhaal" data-i18n="nav.story">Verhaal</a>
       <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <a href="privacy.html" data-i18n="ftr.privacy">Privacyverklaring</a>
     </div>
     <div class="footer-col">
       <h4 data-i18n="ftr.h3">Volg</h4>
@@ -1326,6 +1517,22 @@
     <span>Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a></span>
   </div>
 </footer>
+
+<!-- WhatsApp FAB -->
+<a href="https://wa.me/31612122146" class="wa-fab" target="_blank" rel="noopener" aria-label="WhatsApp" id="waFab">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.534 5.854L0 24l6.306-1.513A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.877 9.877 0 0 1-5.034-1.377l-.36-.214-3.742.897.934-3.638-.235-.374A9.836 9.836 0 0 1 2.118 12C2.118 6.533 6.533 2.118 12 2.118S21.882 6.533 21.882 12 17.467 21.882 12 21.882z"/></svg>
+</a>
+
+<!-- Cookie Banner -->
+<div class="cookie-bar" id="cookieBar">
+  <p class="cookie-text" id="cookieText" data-i18n="cookie.text">
+    Wij gebruiken functionele cookies en cookies van externe diensten (YouTube, Google Maps). Zie onze <a href="privacy.html" data-i18n-cookie-link>privacyverklaring</a>.
+  </p>
+  <div class="cookie-btns">
+    <button class="cookie-accept" id="cookieAccept" data-i18n="cookie.accept">Accepteer alles</button>
+    <button class="cookie-decline" id="cookieDecline" data-i18n="cookie.decline">Alleen noodzakelijk</button>
+  </div>
+</div>
 
 <script>
   const translations = {
@@ -1366,7 +1573,11 @@
       "form.opt1":"Vraag over voorraad","form.opt2":"Onderhoud / werkplaats","form.opt3":"Restauratie project","form.opt4":"Import vanuit VS","form.opt5":"Anders",
       "form.ph.name":"Jouw naam","form.ph.email":"je@email.nl","form.ph.msg":"Vertel ons wat je zoekt...",
       "ftr.about":"American iron specialist sinds dag één. Verkoop, onderhoud, restauratie en import. Uit liefde voor het ambacht en de gloed van een goeie V8.",
-      "ftr.h1":"Bezoek","ftr.h2":"Menu","ftr.h3":"Volg ons","ftr.by":"Webdevelopment door ManonIT"
+      "ftr.h1":"Bezoek","ftr.h2":"Menu","ftr.h3":"Volg ons","ftr.by":"Webdevelopment door ManonIT",
+      "ftr.privacy":"Privacyverklaring",
+      "map.route":"Route plannen","map.load":"Toon kaart","map.note":"Google Maps laadt alleen na klikken · minimale cookies",
+      "cookie.text":"Wij gebruiken functionele cookies en cookies van externe diensten (YouTube, Google Maps). Zie onze <a href=\"privacy.html\">privacyverklaring</a>.",
+      "cookie.accept":"Accepteer alles","cookie.decline":"Alleen noodzakelijk"
     },
     en: {
       "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact",
@@ -1405,7 +1616,11 @@
       "form.opt1":"Question about inventory","form.opt2":"Service / workshop","form.opt3":"Restoration project","form.opt4":"Import from US","form.opt5":"Other",
       "form.ph.name":"Your name","form.ph.email":"your@email.com","form.ph.msg":"Tell us what you're looking for...",
       "ftr.about":"American iron specialist since day one. Sales, service, restoration and import. For the love of the craft and the sound of a good V8.",
-      "ftr.h1":"Visit","ftr.h2":"Menu","ftr.h3":"Follow us","ftr.by":"Webdevelopment by ManonIT"
+      "ftr.h1":"Visit","ftr.h2":"Menu","ftr.h3":"Follow us","ftr.by":"Webdevelopment by ManonIT",
+      "ftr.privacy":"Privacy policy",
+      "map.route":"Get directions","map.load":"Show map","map.note":"Google Maps loads on click · minimal cookies",
+      "cookie.text":"We use functional cookies and cookies from third-party services (YouTube, Google Maps). See our <a href=\"privacy.html\">privacy policy</a>.",
+      "cookie.accept":"Accept all","cookie.decline":"Necessary only"
     },
     de: {
       "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt",
@@ -1444,7 +1659,11 @@
       "form.opt1":"Frage zum Fahrzeugbestand","form.opt2":"Wartung / Werkstatt","form.opt3":"Restaurationsprojekt","form.opt4":"Import aus den USA","form.opt5":"Sonstiges",
       "form.ph.name":"Ihr Name","form.ph.email":"ihre@email.de","form.ph.msg":"Was suchen Sie? Erzählen Sie uns...",
       "ftr.about":"American-Iron-Spezialist seit Tag eins. Verkauf, Wartung, Restauration und Import. Aus Liebe zum Handwerk und dem Klang eines guten V8.",
-      "ftr.h1":"Besuch","ftr.h2":"Menü","ftr.h3":"Folgen Sie uns","ftr.by":"Webentwicklung von ManonIT"
+      "ftr.h1":"Besuch","ftr.h2":"Menü","ftr.h3":"Folgen Sie uns","ftr.by":"Webentwicklung von ManonIT",
+      "ftr.privacy":"Datenschutzerklärung",
+      "map.route":"Route planen","map.load":"Karte anzeigen","map.note":"Google Maps lädt erst nach Klick · minimale Cookies",
+      "cookie.text":"Wir verwenden funktionale Cookies und Cookies von Drittanbietern (YouTube, Google Maps). Siehe unsere <a href=\"privacy.html\">Datenschutzerklärung</a>.",
+      "cookie.accept":"Alle akzeptieren","cookie.decline":"Nur notwendige"
     }
   };
 
@@ -1458,15 +1677,20 @@
       const key = el.dataset.i18nPh;
       if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
     });
+    // sync all lang buttons
+    document.querySelectorAll('.lang button').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    localStorage.setItem('btg_lang', lang);
   }
 
   document.querySelectorAll('.lang button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.lang button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      applyLang(btn.dataset.lang);
-    });
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
   });
+
+  // restore saved language
+  const savedLang = localStorage.getItem('btg_lang');
+  if (savedLang && translations[savedLang]) applyLang(savedLang);
 
   document.querySelectorAll('.chip').forEach(c => {
     c.addEventListener('click', e => {
@@ -1474,6 +1698,60 @@
       document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
       c.classList.add('active');
     });
+  });
+
+  // ─── HAMBURGER MENU ───
+  const menuToggle = document.getElementById('menuToggle');
+  const navMobile = document.getElementById('navMobile');
+  function closeMenu() {
+    menuToggle.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded','false');
+    navMobile.classList.remove('open');
+    navMobile.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+  menuToggle.addEventListener('click', () => {
+    const isOpen = navMobile.classList.toggle('open');
+    menuToggle.classList.toggle('open', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    navMobile.setAttribute('aria-hidden', String(!isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+  // ─── GOOGLE MAPS (load on click) ───
+  const mapLoadBtn = document.getElementById('mapLoadBtn');
+  const mapFrame = document.getElementById('mapFrame');
+  if (mapLoadBtn && mapFrame) {
+    mapLoadBtn.addEventListener('click', () => {
+      const iframe = mapFrame.querySelector('iframe');
+      if (iframe && !iframe.src) {
+        iframe.src = 'https://maps.google.com/maps?q=Hullerweg+115,+8071+NP+Nunspeet&output=embed&hl=nl';
+      }
+      mapFrame.style.display = 'block';
+      mapLoadBtn.style.display = 'none';
+    });
+  }
+
+  // ─── COOKIE BANNER ───
+  const cookieBar = document.getElementById('cookieBar');
+  const waFab = document.getElementById('waFab');
+  function dismissCookie() {
+    cookieBar.classList.add('hidden');
+    // move wa-fab up since banner is gone
+    if (waFab) waFab.style.bottom = '20px';
+  }
+  if (localStorage.getItem('btg_cookie')) {
+    dismissCookie();
+  }
+  document.getElementById('cookieAccept').addEventListener('click', () => {
+    localStorage.setItem('btg_cookie','accepted');
+    dismissCookie();
+  });
+  document.getElementById('cookieDecline').addEventListener('click', () => {
+    localStorage.setItem('btg_cookie','declined');
+    dismissCookie();
   });
 </script>
 
