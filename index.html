@@ -7,6 +7,10 @@
 <meta name="description" content="The Big Three Garage in Nunspeet: specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, restauratie en import uit de VS. Bel +31 6 12122146.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://thebigthreenunspeet.netlify.app/">
+<link rel="alternate" hreflang="nl" href="https://thebigthreenunspeet.netlify.app/">
+<link rel="alternate" hreflang="en" href="https://thebigthreenunspeet.netlify.app/?lang=en">
+<link rel="alternate" hreflang="de" href="https://thebigthreenunspeet.netlify.app/?lang=de">
+<link rel="alternate" hreflang="x-default" href="https://thebigthreenunspeet.netlify.app/">
 <link rel="icon" type="image/png" href="assets/logo.png">
 
 <!-- Open Graph -->
@@ -14,6 +18,8 @@
 <meta property="og:url" content="https://thebigthreenunspeet.netlify.app/">
 <meta property="og:title" content="The Big Three Garage · Amerikaanse voertuigen specialist Nunspeet">
 <meta property="og:description" content="Specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, restauratie en import uit de VS. Gevestigd in Nunspeet.">
+<meta property="og:image" content="https://thebigthreenunspeet.netlify.app/assets/hero-a.jpg">
+<meta property="og:image:width" content="1200">
 <meta property="og:locale" content="nl_NL">
 <meta property="og:site_name" content="The Big Three Garage">
 
@@ -21,12 +27,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Big Three Garage · Amerikaanse voertuigen Nunspeet">
 <meta name="twitter:description" content="Specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, restauratie en import uit de VS.">
+<meta name="twitter:image" content="https://thebigthreenunspeet.netlify.app/assets/hero-a.jpg">
 
 <!-- Structured data: LocalBusiness -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "AutoRepair",
+  "@type": ["AutoRepair", "AutoDealer"],
   "name": "The Big Three Garage",
   "description": "Specialist in Amerikaanse voertuigen: verkoop, onderhoud, restauratie en import van campers, pickups en classics.",
   "url": "https://thebigthreenunspeet.netlify.app",
@@ -35,6 +42,7 @@
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Hullerweg 115",
+    "postalCode": "8071 NP",
     "addressLocality": "Nunspeet",
     "addressCountry": "NL"
   },
@@ -59,6 +67,7 @@
   ]
 }
 </script>
+<link rel="preload" as="image" href="assets/hero-a.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -759,6 +768,19 @@
     font-style:italic;
     line-height:1.5;
   }
+  .story-quote-attr{
+    display:flex;align-items:center;gap:12px;
+    margin-top:-16px;margin-bottom:32px;
+  }
+  .story-quote-avatar{
+    width:44px;height:44px;border-radius:50%;
+    object-fit:cover;border:2px solid var(--rust);flex-shrink:0;
+  }
+  .story-quote-attr span{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:13px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--ink-dim);
+  }
   .story-video{
     margin-top:64px;
     border-top:1px solid var(--line);
@@ -1013,6 +1035,14 @@
     background:linear-gradient(115deg,rgba(10,9,8,0.92) 0%,rgba(10,9,8,0.45) 50%,rgba(10,9,8,0.88) 100%);
     cursor:pointer;
     transition:opacity 0.45s ease;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .map-overlay-hint{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:13px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--ink-dim);border:1px solid rgba(245,239,230,0.25);
+    padding:8px 16px;border-radius:2px;pointer-events:none;
+    background:rgba(10,9,8,0.5);
   }
   .map-frame iframe{width:100%;height:270px;border:none;display:block}
 
@@ -1162,7 +1192,7 @@
     <li><a href="privacy.html" data-i18n="ftr.privacy">Privacyverklaring</a></li>
   </ul>
   <div class="lang" style="margin-top:28px">
-    <button data-lang="nl">NL</button>
+    <button class="active" data-lang="nl">NL</button>
     <button data-lang="en">EN</button>
     <button data-lang="de">DE</button>
   </div>
@@ -1233,7 +1263,7 @@
       <!-- 2000 Chevrolet Express Explorer · €34.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2244252006-2000-chevrolet-express-explorer-64000mls-ongelofelijk" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/76/76a741e1-f535-48c1-bdb5-3ad6f01ab2e6?rule=ecg_mp_eps$_1200" alt="2000 Chevrolet Express Explorer Camper te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/76/76a741e1-f535-48c1-bdb5-3ad6f01ab2e6?rule=ecg_mp_eps$_1200" alt="2000 Chevrolet Express Explorer Camper te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1251,7 +1281,7 @@
       <!-- 1997 GMC Savana perfect · €33.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2355521825-1997-gmc-savana-camper-perfect-onderhouden-super-lage-mls" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/deb38bb4-d2d3-4415-92aa-19f19f51832b?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana Explorer Camper te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/deb38bb4-d2d3-4415-92aa-19f19f51832b?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana Explorer Camper te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1269,7 +1299,7 @@
       <!-- 2005 Chevrolet Express · €28.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2409227167-2005-chevrolet-express-camper-uniek-77mls" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5f25e4f6-ab4a-4c9c-a3b9-c5d6c2102f29?rule=ecg_mp_eps$_1200" alt="2005 Chevrolet Express Explorer Camper te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5f25e4f6-ab4a-4c9c-a3b9-c5d6c2102f29?rule=ecg_mp_eps$_1200" alt="2005 Chevrolet Express Explorer Camper te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1287,7 +1317,7 @@
       <!-- 2011 Fiat Ducato Bus Camper · €25.995 -->
       <a href="https://www.marktplaats.nl/v/caravans-en-kamperen/campers/m2402784211-fiat-ducato-1047557" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5a/5a29f1c9-191e-4f87-8628-4223c86602f9?rule=ecg_mp_eps$_1200" alt="2011 Fiat Ducato Bus Camper automaat te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5a/5a29f1c9-191e-4f87-8628-4223c86602f9?rule=ecg_mp_eps$_1200" alt="2011 Fiat Ducato Bus Camper automaat te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1305,7 +1335,7 @@
       <!-- 1999 Dodge B1500 · €22.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/bestelauto-s/m2315160371-dodge-b1500-1999-camper-lpg-hefdak" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/21/2189f5e2-22a1-40d7-8ebe-f2a35fd2f9c6?rule=ecg_mp_eps$_1200" alt="1999 Dodge B1500 Camper LPG Hefdak te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/21/2189f5e2-22a1-40d7-8ebe-f2a35fd2f9c6?rule=ecg_mp_eps$_1200" alt="1999 Dodge B1500 Camper LPG Hefdak te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1323,7 +1353,7 @@
       <!-- 1997 GMC Savana American Road · €21.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2253522766-1997-gmc-savana-the-american-road-camper-lpg-77k-mls" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/c0/c0e5a8db-7971-40e7-9c75-0de6ca8f73f0?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana American Road Camper LPG te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/c0/c0e5a8db-7971-40e7-9c75-0de6ca8f73f0?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana American Road Camper LPG te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1341,7 +1371,7 @@
       <!-- 1988 Ford Econoline E150 · €11.995 -->
       <a href="https://www.marktplaats.nl/v/auto-s/ford-usa/m2257652880-1988-ford-econoline-e150-camper-florida-car-explorer" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/b8/b83d346e-082e-4f24-873a-3f0d5885cb2b?rule=ecg_mp_eps$_1200" alt="1988 Ford Econoline E150 Explorer Camper Florida car te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/b8/b83d346e-082e-4f24-873a-3f0d5885cb2b?rule=ecg_mp_eps$_1200" alt="1988 Ford Econoline E150 Explorer Camper Florida car te koop The Big Three Nunspeet">
           <span class="card-status" data-i18n="card.status">VOORRAAD</span>
         </div>
         <div class="card-body">
@@ -1361,7 +1391,7 @@
       <!-- 2017 GMC Savana 2500 Cargo · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2371653362-2017-gmc-savana-2500-v8-long-wheeler-cargo-low-mls" target="_blank" rel="noopener" class="card" data-cat="pickup">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/3bd56020-3306-4c75-9b56-660740a890b5?rule=ecg_mp_eps$_1200" alt="2017 GMC Savana 2500 V8 Long Wheeler Cargo te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/3bd56020-3306-4c75-9b56-660740a890b5?rule=ecg_mp_eps$_1200" alt="2017 GMC Savana 2500 V8 Long Wheeler Cargo te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1379,7 +1409,7 @@
       <!-- 2015 Volkswagen Transporter 4MOTION · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/bestelauto-s/m2386506063-volkswagen-transporter-c-2-0d-132kw-4motion-2015" target="_blank" rel="noopener" class="card" data-cat="pickup">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/715b68ff-69f6-4dfd-ace6-fbcc355b6d62?rule=ecg_mp_eps$_1200" alt="2015 Volkswagen Transporter C 2.0D 132KW 4MOTION te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/715b68ff-69f6-4dfd-ace6-fbcc355b6d62?rule=ecg_mp_eps$_1200" alt="2015 Volkswagen Transporter C 2.0D 132KW 4MOTION te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1397,7 +1427,7 @@
       <!-- 2012 Chevrolet Express LWB Explorer · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2378928544-2012-chevrolet-express-long-wheel-base-explorer-conversion" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/e56cd8c4-fb7d-4466-84df-9aff11406e37?rule=ecg_mp_eps$_1200" alt="2012 Chevrolet Express Long Wheel Base Explorer Conversion te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/e56cd8c4-fb7d-4466-84df-9aff11406e37?rule=ecg_mp_eps$_1200" alt="2012 Chevrolet Express Long Wheel Base Explorer Conversion te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1415,7 +1445,7 @@
       <!-- 2011 GMC Savana Camper · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2371649252-2011-gmc-savana-camper-kenteken-nieuwe-import-103mls" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/34ea26a1-003d-4c5a-a008-a176779e7c2a?rule=ecg_mp_eps$_1200" alt="2011 GMC Savana Camper nieuwe import te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/34ea26a1-003d-4c5a-a008-a176779e7c2a?rule=ecg_mp_eps$_1200" alt="2011 GMC Savana Camper nieuwe import te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1433,7 +1463,7 @@
       <!-- 2009 GMC Savana Explorer Low Top · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2365600199-2009-gmc-savana-explorer-low-top-camper-120k-mls-bom-vol" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/66/66ca0ebf-3173-4574-bdff-c43e7889bee9?rule=ecg_mp_eps$_1200" alt="2009 GMC Savana Explorer Low Top Camper te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/66/66ca0ebf-3173-4574-bdff-c43e7889bee9?rule=ecg_mp_eps$_1200" alt="2009 GMC Savana Explorer Low Top Camper te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1451,7 +1481,7 @@
       <!-- 2008 Chevrolet Express Explorer Nieuwe Import · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2381896753-2008-chevrolet-express-explorer-camper-nieuwe-import" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/6c8e673d-f5fa-4841-9b57-4d75fd65eb4d?rule=ecg_mp_eps$_1200" alt="2008 Chevrolet Express Explorer Camper Nieuwe Import te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/6c8e673d-f5fa-4841-9b57-4d75fd65eb4d?rule=ecg_mp_eps$_1200" alt="2008 Chevrolet Express Explorer Camper Nieuwe Import te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1469,7 +1499,7 @@
       <!-- 2008 Chevrolet Express LPG LOADED · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2308661605-2008-chevrolet-express-explorer-camper-lpg-125mls-loaded" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/98/985d50f8-dee3-46b8-85dc-5750c6c6db4f?rule=ecg_mp_eps$_1200" alt="2008 Chevrolet Express Explorer Camper LPG 125mls Loaded te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/98/985d50f8-dee3-46b8-85dc-5750c6c6db4f?rule=ecg_mp_eps$_1200" alt="2008 Chevrolet Express Explorer Camper LPG 125mls Loaded te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1487,7 +1517,7 @@
       <!-- 2008 GMC Savana LPG Blue · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2381088765-2008-gmc-savana-camper-lpg-subliem-onderhouden-blue" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5e2e74a1-cedc-49ac-84ee-95fa32f26c52?rule=ecg_mp_eps$_1200" alt="2008 GMC Savana Camper LPG Subliem Onderhouden Blue te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5e2e74a1-cedc-49ac-84ee-95fa32f26c52?rule=ecg_mp_eps$_1200" alt="2008 GMC Savana Camper LPG Subliem Onderhouden Blue te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1505,7 +1535,7 @@
       <!-- 2007 Chevrolet Express Cargo 2500 · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2374477720-2007-chevrolet-express-cargo-2500-lpg-heavy-duty" target="_blank" rel="noopener" class="card" data-cat="pickup">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/0e4fa67d-8c4d-48e8-bf65-9db49230db7e?rule=ecg_mp_eps$_1200" alt="2007 Chevrolet Express Cargo 2500 LPG Heavy Duty te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/0e4fa67d-8c4d-48e8-bf65-9db49230db7e?rule=ecg_mp_eps$_1200" alt="2007 Chevrolet Express Cargo 2500 LPG Heavy Duty te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1523,7 +1553,7 @@
       <!-- 2003 Chevrolet Express Explorer · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2355528657-2003-chevrolet-express-explorer-camper-super-lage-mls" target="_blank" rel="noopener" class="card" data-cat="camper modern">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/c6/c62d3881-e315-46fd-ae4f-89bfe4a4eedc?rule=ecg_mp_eps$_1200" alt="2003 Chevrolet Express Explorer Camper Super Lage KM te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/c6/c62d3881-e315-46fd-ae4f-89bfe4a4eedc?rule=ecg_mp_eps$_1200" alt="2003 Chevrolet Express Explorer Camper Super Lage KM te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1541,7 +1571,7 @@
       <!-- 1997 GMC Savana LPG GEEN APK · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2407663355-1997-gmc-savana-camper-lpg-geen-apk" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/9adfc929-6d50-451b-b0b2-8012b0fbbe4c?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana Camper LPG Geen APK te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/9adfc929-6d50-451b-b0b2-8012b0fbbe4c?rule=ecg_mp_eps$_1200" alt="1997 GMC Savana Camper LPG Geen APK te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1559,7 +1589,7 @@
       <!-- 1995 Chevrolet Starcraft GT Final Edition · gereserveerd -->
       <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2322481851-1995-chevy-van-starcraft-gt-final-edition-camper-lpg-top" target="_blank" rel="noopener" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/3b/3b9e6804-872f-4992-a42e-d16384e0cda9?rule=ecg_mp_eps$_1200" alt="1995 Chevrolet Starcraft GT Final Edition Camper LPG te koop The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/3b/3b9e6804-872f-4992-a42e-d16384e0cda9?rule=ecg_mp_eps$_1200" alt="1995 Chevrolet Starcraft GT Final Edition Camper LPG te koop The Big Three Nunspeet">
           <span class="card-status reserved" data-i18n="card.reserved">GERESERVEERD</span>
         </div>
         <div class="card-body">
@@ -1579,7 +1609,7 @@
       <!-- Motor & Automaat Chevy Express 03+ -->
       <a href="https://www.marktplaats.nl/v/auto-onderdelen/motor-en-toebehoren/m2378094172-03-up-chevrolet-express-6-0-5-3-4-8-motor-en-automaat" target="_blank" rel="noopener" class="card" data-cat="onderdeel">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/a28fd77c-11cf-4b52-8cce-2801ac5eed80?rule=ecg_mp_eps$_1200" alt="Chevrolet Express V8 Motor en Automaat 2003 en nieuwer The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/a28fd77c-11cf-4b52-8cce-2801ac5eed80?rule=ecg_mp_eps$_1200" alt="Chevrolet Express V8 Motor en Automaat 2003 en nieuwer The Big Three Nunspeet">
           <span class="card-status part" data-i18n="card.part">ONDERDEEL</span>
         </div>
         <div class="card-body">
@@ -1597,7 +1627,7 @@
       <!-- Dodge SRT-10 OEM Velgen · €1.500 -->
       <a href="https://www.marktplaats.nl/v/auto-onderdelen/banden-en-velgen/m2392233959-dodge-srt-10-oem-velgen-originele-set" target="_blank" rel="noopener" class="card" data-cat="onderdeel">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/8279e76f-f728-4396-8440-a027d1bf64b1?rule=ecg_mp_eps$_1200" alt="Dodge SRT-10 OEM Velgen 22 inch originele set The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/8279e76f-f728-4396-8440-a027d1bf64b1?rule=ecg_mp_eps$_1200" alt="Dodge SRT-10 OEM Velgen 22 inch originele set The Big Three Nunspeet">
           <span class="card-status part" data-i18n="card.part">ONDERDEEL</span>
         </div>
         <div class="card-body">
@@ -1615,7 +1645,7 @@
       <!-- Chevrolet Express Voorbumper Hoes · €425 -->
       <a href="https://www.marktplaats.nl/v/auto-onderdelen/carrosserie-en-plaatwerk/m2381202847-chevrolet-express-voor-bumper-hoes" target="_blank" rel="noopener" class="card" data-cat="onderdeel">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/a969013a-564d-4660-9075-bb1553e956a4?rule=ecg_mp_eps$_1200" alt="Chevrolet Express voorbumper hoes 1996-2024 ook GMC Savana The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/a969013a-564d-4660-9075-bb1553e956a4?rule=ecg_mp_eps$_1200" alt="Chevrolet Express voorbumper hoes 1996-2024 ook GMC Savana The Big Three Nunspeet">
           <span class="card-status part" data-i18n="card.part">ONDERDEEL</span>
         </div>
         <div class="card-body">
@@ -1633,7 +1663,7 @@
       <!-- LED Hoek Lampjes 1996-2002 · bieden -->
       <a href="https://www.marktplaats.nl/v/auto-onderdelen/verlichting/m2399338729-chevrolet-express-van-achterlicht-1996-2002" target="_blank" rel="noopener" class="card" data-cat="onderdeel">
         <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/65769082-016a-44a8-ba63-e762f6242e01?rule=ecg_mp_eps$_1200" alt="Chevrolet Express LED Lampjes 1996-2002 The Big Three Nunspeet">
+          <img loading="lazy" src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/65769082-016a-44a8-ba63-e762f6242e01?rule=ecg_mp_eps$_1200" alt="Chevrolet Express LED Lampjes 1996-2002 The Big Three Nunspeet">
           <span class="card-status part" data-i18n="card.part">ONDERDEEL</span>
         </div>
         <div class="card-body">
@@ -1757,10 +1787,9 @@
     <div class="story-grid">
       <div class="story-vid-col">
         <div class="story-vid-thumb" id="vidThumb">
-          <img src="https://img.youtube.com/vi/1nr1ZBFLPYQ/maxresdefault.jpg" alt="The Big Three Garage Nunspeet">
+          <img id="ytThumbImg" src="" data-src="https://img.youtube.com/vi/1nr1ZBFLPYQ/maxresdefault.jpg" alt="The Big Three Garage Nunspeet">
           <div class="story-vid-overlay"></div>
-          <button class="story-play-btn" aria-label="Video afspelen"
-            onclick="this.closest('#vidThumb').hidden=true;var e=document.getElementById('vidEmbed');e.hidden=false;e.querySelector('iframe').src='https://www.youtube-nocookie.com/embed/1nr1ZBFLPYQ?autoplay=1'">
+          <button class="story-play-btn" aria-label="Video afspelen" id="vidPlayBtn">
             <svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
           </button>
           <div class="story-vid-label">
@@ -1783,6 +1812,10 @@
         <p data-i18n="story.p1">David Broeksma woonde jaren in de Verenigde Staten. Hij sleutelde daar aan auto's die hier alleen in films te zien zijn, en leerde de techniek van mensen die er hun hele leven mee bezig waren. <strong>Dat verhaal nam hij mee terug naar Nunspeet.</strong></p>
         <p data-i18n="story.p2">The Big Three Garage is geen showroom met witte vloeren. Het is een echte werkplaats met een mancave-kantine, een flipperkast, en de overtuiging dat een Amerikaan behandeld moet worden als een Amerikaan. <strong>Geen Europese trucjes, geen halve oplossingen.</strong> Doen wat het ding nodig heeft, en het netjes afmaken.</p>
         <div class="story-quote" data-i18n="story.quote">"Ik heb daar geleerd hoe je een V8 hoort te horen lopen. Dat geluid neem je niet zomaar mee terug. Dat moet je onderhouden."</div>
+        <div class="story-quote-attr">
+          <img src="assets/david-broeksma.png" alt="David Broeksma – The Big Three Garage" class="story-quote-avatar">
+          <span data-i18n="story.attr">David Broeksma · Eigenaar</span>
+        </div>
         <a href="#contact" class="btn btn-ghost" data-i18n="story.cta">Kom langs in Nunspeet</a>
       </div>
     </div>
@@ -1813,7 +1846,7 @@
         </div>
         <div class="contact-block">
           <span class="contact-block-label">Email</span>
-          <span class="contact-block-value">info@bigthreegarage.nl</span>
+          <span class="contact-block-value"><a href="mailto:info@bigthreegarage.nl" style="color:inherit;text-decoration:none">info@bigthreegarage.nl</a></span>
         </div>
         <div class="contact-block">
           <span class="contact-block-label" data-i18n="ctc.hrs">Openingstijden</span>
@@ -1829,11 +1862,15 @@
           </div>
           <div class="map-frame">
             <iframe
-              src="https://maps.google.com/maps?q=Hullerweg+115,+8071+NP+Nunspeet&output=embed&hl=nl"
+              id="mapsIframe"
+              src=""
+              data-src="https://maps.google.com/maps?q=Hullerweg+115,+8071+NP+Nunspeet&output=embed&hl=nl"
               title="The Big Three Garage Nunspeet"
               allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
-            <div class="map-overlay" onclick="this.style.opacity='0';this.style.pointerEvents='none'"></div>
+            <div class="map-overlay" id="mapOverlay" role="button" tabindex="0" aria-label="Klik om kaart te openen">
+              <span class="map-overlay-hint" data-i18n="map.hint">Klik om kaart te openen</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1844,15 +1881,15 @@
           <input type="hidden" name="form-name" value="afspraak">
           <div class="form-row">
             <label for="bf-naam" data-i18n="book.f.name">Naam</label>
-            <input type="text" id="bf-naam" name="naam" required>
+            <input type="text" id="bf-naam" name="naam" required autocomplete="name">
           </div>
           <div class="form-row">
             <label for="bf-email" data-i18n="book.f.email">E-mail</label>
-            <input type="email" id="bf-email" name="email" required>
+            <input type="email" id="bf-email" name="email" required autocomplete="email">
           </div>
           <div class="form-row">
             <label for="bf-tel" data-i18n="book.f.phone">Telefoon (optioneel)</label>
-            <input type="tel" id="bf-tel" name="telefoon">
+            <input type="tel" id="bf-tel" name="telefoon" autocomplete="tel">
           </div>
           <div class="form-row">
             <label for="bf-type" data-i18n="book.f.type">Soort afspraak</label>
@@ -1928,13 +1965,13 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© THE BIG THREE GARAGE · NUNSPEET</span>
+    <span>© <span id="ftYear"></span> THE BIG THREE GARAGE · NUNSPEET</span>
     <span data-i18n="ftr.by">Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a></span>
   </div>
 </footer>
 
 <!-- WhatsApp FAB -->
-<a href="https://wa.me/31612122146" class="wa-fab" target="_blank" rel="noopener" aria-label="WhatsApp" id="waFab">
+<a href="https://wa.me/31612122146?text=Hallo%2C%20ik%20heb%20een%20vraag%20over..." class="wa-fab" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp The Big Three Garage" id="waFab">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.534 5.854L0 24l6.306-1.513A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.877 9.877 0 0 1-5.034-1.377l-.36-.214-3.742.897.934-3.638-.235-.374A9.836 9.836 0 0 1 2.118 12C2.118 6.533 6.533 2.118 12 2.118S21.882 6.533 21.882 12 17.467 21.882 12 21.882z"/></svg>
 </a>
 
@@ -1984,7 +2021,7 @@
       "story.p1":"David Broeksma woonde jaren in de Verenigde Staten. Hij sleutelde daar aan auto's die hier alleen in films te zien zijn, en leerde de techniek van mensen die er hun hele leven mee bezig waren. <strong>Dat verhaal nam hij mee terug naar Nunspeet.</strong>",
       "story.p2":"The Big Three Garage is geen showroom met witte vloeren. Het is een echte werkplaats met een mancave-kantine, een flipperkast, en de overtuiging dat een Amerikaan behandeld moet worden als een Amerikaan. <strong>Geen Europese trucjes, geen halve oplossingen.</strong> Doen wat het ding nodig heeft, en het netjes afmaken.",
       "story.quote":"\"Ik heb daar geleerd hoe je een V8 hoort te horen lopen. Dat geluid neem je niet zomaar mee terug. Dat moet je onderhouden.\"",
-      "story.cta":"Kom langs in Nunspeet",
+      "story.attr":"David Broeksma · Eigenaar","story.cta":"Kom langs in Nunspeet",
       "video.eyebrow":"Zie de garage","video.title":"ZO ZIET HET ERUIT<br><em>BIJ ONS.</em>",
       "ctc.eyebrow":"Stuur een bericht · bel · loop binnen","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"VIND <em>ONS</em>",
       "ctc.p":"De koffie staat klaar. Geen afspraak nodig, gewoon binnenlopen mag ook.",
@@ -1995,7 +2032,7 @@
       "ftr.about":"American iron specialist sinds dag één. Verkoop, onderhoud, restauratie en import. Uit liefde voor het ambacht en de gloed van een goeie V8.",
       "ftr.h1":"Bezoek","ftr.h2":"Menu","ftr.h3":"Volg ons","ftr.by":'Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
       "ftr.privacy":"Privacyverklaring",
-      "map.route":"Route plannen","map.load":"Toon kaart","map.note":"Google Maps laadt alleen na klikken · minimale cookies",
+      "map.route":"Route plannen","map.load":"Toon kaart","map.note":"Google Maps laadt alleen na klikken · minimale cookies","map.hint":"Klik om kaart te openen",
       "cookie.text":"Wij gebruiken functionele cookies en cookies van externe diensten (YouTube, Google Maps). Zie onze <a href=\"privacy.html\">privacyverklaring</a>.",
       "cookie.accept":"Accepteer alles","cookie.decline":"Alleen noodzakelijk",
       "book.eyebrow":"Online inplannen","book.title":"MAAK EEN<br><em>AFSPRAAK</em>",
@@ -2042,7 +2079,7 @@
       "story.p1":"David Broeksma lived in the United States for years. He worked on cars there that you only see in movies over here, and learned the trade from people who had spent their whole life with it. <strong>He brought that story back to Nunspeet.</strong>",
       "story.p2":"The Big Three Garage isn't a showroom with white floors. It's a real workshop with a mancave kitchen, a pinball machine, and the belief that an American should be treated like an American. <strong>No European tricks, no half solutions.</strong> Do what the thing needs, and finish it properly.",
       "story.quote":"\"I learned over there how a V8 is supposed to sound. You don't just bring that sound back. You have to maintain it.\"",
-      "story.cta":"Drop by in Nunspeet",
+      "story.attr":"David Broeksma · Owner","story.cta":"Drop by in Nunspeet",
       "video.eyebrow":"See the garage","video.title":"THIS IS WHAT IT<br><em>LOOKS LIKE.</em>",
       "ctc.eyebrow":"Send a message · call · drop in","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"FIND <em>US</em>",
       "ctc.p":"The coffee is ready. No appointment needed, just walk in.",
@@ -2053,7 +2090,7 @@
       "ftr.about":"American iron specialist since day one. Sales, service, restoration and import. For the love of the craft and the sound of a good V8.",
       "ftr.h1":"Visit","ftr.h2":"Menu","ftr.h3":"Follow us","ftr.by":'Webdevelopment by <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
       "ftr.privacy":"Privacy policy",
-      "map.route":"Get directions","map.load":"Show map","map.note":"Google Maps loads on click · minimal cookies",
+      "map.route":"Get directions","map.load":"Show map","map.note":"Google Maps loads on click · minimal cookies","map.hint":"Click to open map",
       "cookie.text":"We use functional cookies and cookies from third-party services (YouTube, Google Maps). See our <a href=\"privacy.html\">privacy policy</a>.",
       "cookie.accept":"Accept all","cookie.decline":"Necessary only",
       "book.eyebrow":"Book online","book.title":"MAKE AN<br><em>APPOINTMENT</em>",
@@ -2100,7 +2137,7 @@
       "story.p1":"David Broeksma lebte jahrelang in den Vereinigten Staaten. Er schraubte dort an Fahrzeugen, die man hier nur aus Filmen kennt, und lernte das Handwerk von Leuten, die ihr ganzes Leben damit verbracht haben. <strong>Diese Geschichte brachte er mit nach Nunspeet.</strong>",
       "story.p2":"The Big Three Garage ist kein Showroom mit weißen Böden. Es ist eine echte Werkstatt mit Mancave-Flair, einem Flipper, und der Überzeugung, dass ein Amerikaner wie ein Amerikaner behandelt werden muss. <strong>Keine europäischen Tricks, keine halben Lösungen.</strong> Tun, was nötig ist — und es ordentlich abschließen.",
       "story.quote":"\"Ich habe drüben gelernt, wie ein V8 klingen muss. Diesen Sound bringt man nicht einfach mit zurück. Den muss man pflegen.\"",
-      "story.cta":"Besuchen Sie uns in Nunspeet",
+      "story.attr":"David Broeksma · Inhaber","story.cta":"Besuchen Sie uns in Nunspeet",
       "video.eyebrow":"Schauen Sie rein","video.title":"SO SIEHT ES<br><em>BEI UNS AUS.</em>",
       "ctc.eyebrow":"Nachricht · Anruf · Vorbeikommen","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"FINDEN SIE <em>UNS</em>",
       "ctc.p":"Der Kaffee steht bereit. Kein Termin nötig — einfach reinkommen.",
@@ -2111,7 +2148,7 @@
       "ftr.about":"American-Iron-Spezialist seit Tag eins. Verkauf, Wartung, Restauration und Import. Aus Liebe zum Handwerk und dem Klang eines guten V8.",
       "ftr.h1":"Besuch","ftr.h2":"Menü","ftr.h3":"Folgen Sie uns","ftr.by":'Webentwicklung von <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
       "ftr.privacy":"Datenschutzerklärung",
-      "map.route":"Route planen","map.load":"Karte anzeigen","map.note":"Google Maps lädt erst nach Klick · minimale Cookies",
+      "map.route":"Route planen","map.load":"Karte anzeigen","map.note":"Google Maps lädt erst nach Klick · minimale Cookies","map.hint":"Klicken um Karte zu öffnen",
       "cookie.text":"Wir verwenden funktionale Cookies und Cookies von Drittanbietern (YouTube, Google Maps). Siehe unsere <a href=\"privacy.html\">Datenschutzerklärung</a>.",
       "cookie.accept":"Alle akzeptieren","cookie.decline":"Nur notwendige",
       "book.eyebrow":"Online buchen","book.title":"TERMIN<br><em>VEREINBAREN</em>",
@@ -2137,11 +2174,14 @@
       const key = el.dataset.i18nPh;
       if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
     });
-    // sync all lang buttons
     document.querySelectorAll('.lang button').forEach(b => {
       b.classList.toggle('active', b.dataset.lang === lang);
     });
     localStorage.setItem('btg_lang', lang);
+    // update URL so hreflang URLs work
+    const url = new URL(window.location);
+    if (lang === 'nl') { url.searchParams.delete('lang'); } else { url.searchParams.set('lang', lang); }
+    window.history.replaceState({}, '', url);
   }
 
   document.querySelectorAll('.lang button').forEach(btn => {
@@ -2167,13 +2207,20 @@
         document.getElementById('booking-thanks').hidden = false;
       }).catch(function() {
         btn.disabled = false;
+        btn.insertAdjacentHTML('afterend','<p style="color:var(--rust);margin-top:10px;font-size:14px">Er ging iets mis. Probeer het opnieuw of bel ons direct.</p>');
       });
     });
   }
 
-  // restore saved language
+  // restore language: URL param takes priority over stored pref
+  const urlLang = new URLSearchParams(window.location.search).get('lang');
   const savedLang = localStorage.getItem('btg_lang');
-  if (savedLang && translations[savedLang]) applyLang(savedLang);
+  const initLang = (urlLang && translations[urlLang]) ? urlLang : (savedLang && translations[savedLang] ? savedLang : null);
+  if (initLang) applyLang(initLang);
+
+  // footer year
+  const ftYear = document.getElementById('ftYear');
+  if (ftYear) ftYear.textContent = new Date().getFullYear();
 
   document.querySelectorAll('.chip[data-filter]').forEach(chip => {
     chip.addEventListener('click', e => {
@@ -2207,23 +2254,71 @@
   navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-// ─── COOKIE BANNER ───
+// ─── THIRD-PARTY LOADING ───
+  function loadThirdParty() {
+    const mapsIframe = document.getElementById('mapsIframe');
+    if (mapsIframe && !mapsIframe.dataset.loaded) {
+      mapsIframe.src = mapsIframe.dataset.src;
+      mapsIframe.dataset.loaded = '1';
+    }
+    const ytThumb = document.getElementById('ytThumbImg');
+    if (ytThumb && !ytThumb.dataset.loaded) {
+      ytThumb.src = ytThumb.dataset.src;
+      ytThumb.dataset.loaded = '1';
+    }
+  }
+
+  // ─── VIDEO PLAY ───
+  const vidPlayBtn = document.getElementById('vidPlayBtn');
+  if (vidPlayBtn) {
+    vidPlayBtn.addEventListener('click', function() {
+      const consent = localStorage.getItem('btg_cookie');
+      if (consent === 'declined') {
+        window.open('https://www.youtube.com/watch?v=1nr1ZBFLPYQ', '_blank', 'noopener');
+      } else {
+        document.getElementById('vidThumb').hidden = true;
+        const embed = document.getElementById('vidEmbed');
+        embed.hidden = false;
+        embed.querySelector('iframe').src = 'https://www.youtube-nocookie.com/embed/1nr1ZBFLPYQ?autoplay=1';
+      }
+    });
+  }
+
+  // ─── MAP OVERLAY ───
+  const mapOverlay = document.getElementById('mapOverlay');
+  if (mapOverlay) {
+    function activateMap() {
+      const consent = localStorage.getItem('btg_cookie');
+      if (consent === 'declined') {
+        window.open('https://www.google.com/maps/search/Hullerweg+115,+8071+NP+Nunspeet', '_blank', 'noopener');
+      } else {
+        loadThirdParty();
+        mapOverlay.style.opacity = '0';
+        mapOverlay.style.pointerEvents = 'none';
+      }
+    }
+    mapOverlay.addEventListener('click', activateMap);
+    mapOverlay.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') activateMap(); });
+  }
+
+  // ─── COOKIE BANNER ───
   const cookieBar = document.getElementById('cookieBar');
   const waFab = document.getElementById('waFab');
   function dismissCookie() {
     cookieBar.classList.add('hidden');
-    // move wa-fab up since banner is gone
     if (waFab) waFab.style.bottom = '20px';
   }
-  if (localStorage.getItem('btg_cookie')) {
-    dismissCookie();
-  }
+  const existingConsent = localStorage.getItem('btg_cookie');
+  if (existingConsent === 'accepted') { loadThirdParty(); dismissCookie(); }
+  else if (existingConsent === 'declined') { dismissCookie(); }
+
   document.getElementById('cookieAccept').addEventListener('click', () => {
-    localStorage.setItem('btg_cookie','accepted');
+    localStorage.setItem('btg_cookie', 'accepted');
+    loadThirdParty();
     dismissCookie();
   });
   document.getElementById('cookieDecline').addEventListener('click', () => {
-    localStorage.setItem('btg_cookie','declined');
+    localStorage.setItem('btg_cookie', 'declined');
     dismissCookie();
   });
 </script>
