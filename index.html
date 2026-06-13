@@ -234,10 +234,25 @@
   .hero-bg::before{
     content:"";
     position:absolute;inset:0;
-    background-image:url('assets/hero-chevy.jpg');
+    background-image:url('assets/hero-a.jpg');
     background-size:cover;
-    background-position:center 45%;
+    background-position:center 40%;
+    transition:background-image 0s;
   }
+  .hero-bg.foto-b::before{background-image:url('assets/hero-b.jpg');background-position:center 35%}
+  /* ── TIJDELIJKE VERGELIJKKNOP ── */
+  .hero-toggle{
+    position:absolute;bottom:32px;right:32px;z-index:10;
+    display:flex;gap:8px;
+  }
+  .hero-toggle button{
+    font-family:'Barlow Condensed';font-size:11px;letter-spacing:0.2em;
+    text-transform:uppercase;font-weight:700;padding:10px 18px;
+    border:1px solid rgba(255,255,255,0.4);background:rgba(10,9,8,0.6);
+    color:#fff;cursor:pointer;transition:all 0.2s;backdrop-filter:blur(6px);
+  }
+  .hero-toggle button.active{background:var(--rust);border-color:var(--rust)}
+  .hero-toggle button:hover:not(.active){background:rgba(255,255,255,0.15)}
   .hero-bg::after{
     content:"";
     position:absolute;inset:0;
@@ -1169,7 +1184,11 @@
 </div>
 
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-toggle">
+    <button id="btnA" class="active" onclick="document.getElementById('heroBg').classList.remove('foto-b');document.getElementById('btnA').classList.add('active');document.getElementById('btnB').classList.remove('active')">A — Brons roofrek</button>
+    <button id="btnB" onclick="document.getElementById('heroBg').classList.add('foto-b');document.getElementById('btnB').classList.add('active');document.getElementById('btnA').classList.remove('active')">B — Zilver blauwe lucht</button>
+  </div>
   <div class="hero-content">
     <div class="hero-tag" data-i18n="hero.tag">★ AMERICAN IRON · NUNSPEET ★</div>
     <h1 data-i18n="hero.title">
