@@ -1760,7 +1760,7 @@
           <img src="https://img.youtube.com/vi/1nr1ZBFLPYQ/maxresdefault.jpg" alt="The Big Three Garage Nunspeet">
           <div class="story-vid-overlay"></div>
           <button class="story-play-btn" aria-label="Video afspelen"
-            onclick="this.closest('#vidThumb').hidden=true;document.getElementById('vidEmbed').hidden=false">
+            onclick="this.closest('#vidThumb').hidden=true;var e=document.getElementById('vidEmbed');e.hidden=false;e.querySelector('iframe').src='https://www.youtube-nocookie.com/embed/1nr1ZBFLPYQ?autoplay=1'">
             <svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
           </button>
           <div class="story-vid-label">
@@ -1770,7 +1770,7 @@
         </div>
         <div class="story-vid-embed" id="vidEmbed" hidden>
           <iframe
-            src="https://www.youtube-nocookie.com/embed/1nr1ZBFLPYQ?autoplay=1"
+            src=""
             title="The Big Three Garage Nunspeet"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
