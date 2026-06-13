@@ -229,11 +229,20 @@
   }
   .hero-bg{
     position:absolute;inset:0;
-    background-image:
-      linear-gradient(115deg, rgba(10,9,8,0.92) 0%, rgba(10,9,8,0.45) 50%, rgba(10,9,8,0.88) 100%),
-      url('https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5f25e4f6-ab4a-4c9c-a3b9-c5d6c2102f29');
+    overflow:hidden;
+  }
+  .hero-bg::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:url('https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5f25e4f6-ab4a-4c9c-a3b9-c5d6c2102f29');
     background-size:cover;
     background-position:center 45%;
+    transform:scaleX(-1);
+  }
+  .hero-bg::after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(115deg, rgba(10,9,8,0.92) 0%, rgba(10,9,8,0.45) 50%, rgba(10,9,8,0.88) 100%);
   }
   .hero-content{
     position:relative;z-index:2;
