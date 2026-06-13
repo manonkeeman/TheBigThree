@@ -230,10 +230,10 @@
   .hero-bg{
     position:absolute;inset:0;
     background-image:
-      linear-gradient(115deg, rgba(10,9,8,0.92) 0%, rgba(10,9,8,0.55) 50%, rgba(10,9,8,0.85) 100%),
-      url('https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/e56cd8c4-fb7d-4466-84df-9aff11406e37');
+      linear-gradient(115deg, rgba(10,9,8,0.92) 0%, rgba(10,9,8,0.45) 50%, rgba(10,9,8,0.88) 100%),
+      url('https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/5f25e4f6-ab4a-4c9c-a3b9-c5d6c2102f29');
     background-size:cover;
-    background-position:center 30%;
+    background-position:center 45%;
   }
   .hero-content{
     position:relative;z-index:2;
@@ -459,15 +459,15 @@
     position:absolute;inset:0;
     background:linear-gradient(
       115deg,
-      rgba(10,9,8,0.45) 0%,
-      rgba(10,9,8,0.05) 45%,
-      rgba(10,9,8,0.35) 100%
+      rgba(10,9,8,0.82) 0%,
+      rgba(10,9,8,0.22) 50%,
+      rgba(10,9,8,0.70) 100%
     );
     pointer-events:none;
     z-index:1;
-    transition:opacity 0.3s;
+    transition:opacity 0.45s ease;
   }
-  .card:hover .card-img::after{opacity:0.6}
+  .card:hover .card-img::after{opacity:0}
   .card-photos{
     position:absolute;top:14px;left:14px;
     background:rgba(0,0,0,0.75);
@@ -784,13 +784,15 @@
     position:absolute;inset:0;
     background:linear-gradient(
       115deg,
-      rgba(10,9,8,0.45) 0%,
-      rgba(10,9,8,0.05) 45%,
-      rgba(10,9,8,0.35) 100%
+      rgba(10,9,8,0.82) 0%,
+      rgba(10,9,8,0.22) 50%,
+      rgba(10,9,8,0.70) 100%
     );
     pointer-events:none;
     z-index:2;
+    transition:opacity 0.45s ease;
   }
+  .video-wrap:hover::before{opacity:0}
   .video-wrap iframe{width:100%;height:100%;border:none;display:block;position:relative;z-index:1;}
 
   .contact-grid{
