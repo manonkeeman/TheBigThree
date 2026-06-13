@@ -1166,101 +1166,150 @@
     </div>
 
     <div class="filter-bar">
-      <button class="chip active" data-i18n="filter.all">Alles</button>
-      <button class="chip" data-i18n="filter.campers">Campers</button>
-      <button class="chip" data-i18n="filter.pickups">Pickups</button>
-      <button class="chip" data-i18n="filter.classics">Classics</button>
-      <button class="chip" data-i18n="filter.muscle">Muscle Cars</button>
-      <button class="chip" data-i18n="filter.video">Met video</button>
+      <button class="chip active" data-filter="all" data-i18n="filter.all">Alles</button>
+      <button class="chip" data-filter="camper" data-i18n="filter.campers">Campers</button>
+      <button class="chip" data-filter="classic" data-i18n="filter.classics">Klassiekers</button>
+      <button class="chip" data-filter="modern" data-i18n="filter.modern">Modern</button>
+      <button class="chip" data-filter="video" data-i18n="filter.video">Met video</button>
     </div>
 
-    <div class="grid">
-      <a href="auto-detail.html" class="card">
+    <div class="grid" id="voorraadGrid">
+
+      <!-- 2000 Chevrolet Express Explorer · €34.995 -->
+      <a href="auto-detail.html" class="card" data-cat="camper modern video">
         <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=800&q=80" alt="1978 GMC Motorhome 26ft te koop bij The Big Three Garage Nunspeet">
+          <img src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=800&q=80" alt="2000 Chevrolet Express Explorer Conversion Camper te koop bij The Big Three Garage Nunspeet">
+          <span class="card-photos">20 FOTO'S</span>
+          <span class="card-video">▶ YOUTUBE</span>
+          <span class="card-status">VOORRAAD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2000 · CHEVROLET</div>
+          <h3>EXPRESS EXPLORER CAMPER</h3>
+          <div class="card-specs">
+            <span>V8 AUTOMAAT</span>
+            <span>64.000 KM</span>
+            <span>LPG · LEER</span>
+          </div>
+          <div class="card-price">
+            <strong>€ 34.995</strong>
+            <small data-i18n="card.cta">Bekijk ›</small>
+          </div>
+        </div>
+      </a>
+
+      <!-- 1997 GMC Savana Explorer · €33.995 -->
+      <a href="auto-detail.html" class="card" data-cat="camper classic">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1597007066704-67bf2068d5b2?w=800&q=80" alt="1997 GMC Savana Explorer Camper te koop bij The Big Three Garage Nunspeet">
+          <span class="card-photos">18 FOTO'S</span>
+          <span class="card-status">VOORRAAD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">1997 · GMC</div>
+          <h3>SAVANA EXPLORER CAMPER</h3>
+          <div class="card-specs">
+            <span>V8 LPG</span>
+            <span>74.354 KM</span>
+            <span>LEER · APK NIEUW</span>
+          </div>
+          <div class="card-price">
+            <strong>€ 33.995</strong>
+            <small data-i18n="card.cta">Bekijk ›</small>
+          </div>
+        </div>
+      </a>
+
+      <!-- 2005 Chevrolet Express · €28.995 -->
+      <a href="auto-detail.html" class="card" data-cat="camper modern video">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?w=800&q=80" alt="2005 Chevrolet Express Explorer Camper 20 inch velgen te koop The Big Three Nunspeet">
+          <span class="card-photos">16 FOTO'S</span>
+          <span class="card-video">▶ YOUTUBE</span>
+          <span class="card-status">VOORRAAD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">2005 · CHEVROLET</div>
+          <h3>EXPRESS EXPLORER CAMPER</h3>
+          <div class="card-specs">
+            <span>V8 AUTOMAAT</span>
+            <span>77.000 KM</span>
+            <span>20" VELGEN</span>
+          </div>
+          <div class="card-price">
+            <strong>€ 28.995</strong>
+            <small data-i18n="card.cta">Bekijk ›</small>
+          </div>
+        </div>
+      </a>
+
+      <!-- 1999 Dodge B1500 · €22.995 -->
+      <a href="auto-detail.html" class="card" data-cat="camper classic">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=800&q=80" alt="1999 Dodge B1500 Camper LPG hefbalkdak te koop bij The Big Three Garage Nunspeet">
+          <span class="card-photos">14 FOTO'S</span>
+          <span class="card-status">VOORRAAD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">1999 · DODGE</div>
+          <h3>B1500 CAMPER LIFT ROOF</h3>
+          <div class="card-specs">
+            <span>V8 LPG</span>
+            <span>158.000 KM</span>
+            <span>HEFBALKDAK</span>
+          </div>
+          <div class="card-price">
+            <strong>€ 22.995</strong>
+            <small data-i18n="card.cta">Bekijk ›</small>
+          </div>
+        </div>
+      </a>
+
+      <!-- 1997 GMC Savana "American Road" · €21.995 -->
+      <a href="auto-detail.html" class="card" data-cat="camper classic video">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=800&q=80" alt="1997 GMC Savana American Road Camper te koop bij The Big Three Garage Nunspeet">
           <span class="card-photos">12 FOTO'S</span>
           <span class="card-video">▶ YOUTUBE</span>
           <span class="card-status">VOORRAAD</span>
         </div>
         <div class="card-body">
-          <div class="card-meta">1978 · GMC</div>
-          <h3>GMC MOTORHOME 26FT</h3>
+          <div class="card-meta">1997 · GMC</div>
+          <h3>SAVANA AMERICAN ROAD</h3>
           <div class="card-specs">
-            <span>455 V8</span>
-            <span>AUTOMAAT</span>
-            <span>92.000 KM</span>
+            <span>V8 AUTOMAAT</span>
+            <span>77.000 KM</span>
+            <span>ROESTVRIJ</span>
           </div>
           <div class="card-price">
-            <strong>€ 49.500</strong>
+            <strong>€ 21.995</strong>
             <small data-i18n="card.cta">Bekijk ›</small>
           </div>
         </div>
       </a>
 
-      <a href="auto-detail.html" class="card">
+      <!-- 1988 Ford Econoline E150 · €11.995 -->
+      <a href="auto-detail.html" class="card" data-cat="camper classic">
         <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?w=800&q=80" alt="1969 Chevrolet G20 Van voor restauratie bij The Big Three Garage">
-          <span class="card-photos">18 FOTO'S</span>
-          <span class="card-video">▶ YOUTUBE</span>
-          <span class="card-status">NIEUW BINNEN</span>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">1969 · CHEVROLET</div>
-          <h3>CHEVY G20 VAN</h3>
-          <div class="card-specs">
-            <span>350 SMALL BLOCK</span>
-            <span>HANDGESCHAKELD</span>
-            <span>RESTAURATIE</span>
-          </div>
-          <div class="card-price">
-            <strong>OP AANVRAAG</strong>
-            <small data-i18n="card.cta">Bekijk ›</small>
-          </div>
-        </div>
-      </a>
-
-      <a href="auto-detail.html" class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1605893477799-b99e3b8b29b6?w=800&q=80" alt="1985 Ford F-250 4x4 pickup - verkocht - The Big Three Garage Nunspeet">
-          <span class="card-photos">9 FOTO'S</span>
-          <span class="card-status sold">VERKOCHT</span>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">1985 · FORD</div>
-          <h3>FORD F-250 4X4</h3>
-          <div class="card-specs">
-            <span>460 V8</span>
-            <span>AUTOMAAT</span>
-            <span>RUW & EERLIJK</span>
-          </div>
-          <div class="card-price">
-            <strong>VERKOCHT</strong>
-            <small data-i18n="card.cta">Galerij ›</small>
-          </div>
-        </div>
-      </a>
-
-      <a href="auto-detail.html" class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=800&q=80" alt="1974 Dodge Tradesman campervan te koop bij The Big Three Garage Nunspeet">
-          <span class="card-photos">22 FOTO'S</span>
-          <span class="card-video">▶ YOUTUBE</span>
+          <img src="https://images.unsplash.com/photo-1605893477799-b99e3b8b29b6?w=800&q=80" alt="1988 Ford Econoline E150 Explorer Camper Florida auto te koop bij The Big Three Garage Nunspeet">
+          <span class="card-photos">10 FOTO'S</span>
           <span class="card-status">VOORRAAD</span>
         </div>
         <div class="card-body">
-          <div class="card-meta">1974 · DODGE</div>
-          <h3>DODGE TRADESMAN</h3>
+          <div class="card-meta">1988 · FORD</div>
+          <h3>ECONOLINE E150 EXPLORER</h3>
           <div class="card-specs">
-            <span>318 V8</span>
-            <span>CAMPER</span>
-            <span>NL KENTEKEN</span>
+            <span>8-CIL AUTOMAAT</span>
+            <span>FLORIDA AUTO</span>
+            <span>ROESTVRIJ · LEER</span>
           </div>
           <div class="card-price">
-            <strong>€ 28.900</strong>
+            <strong>€ 11.995</strong>
             <small data-i18n="card.cta">Bekijk ›</small>
           </div>
         </div>
       </a>
+
     </div>
   </div>
 </section>
@@ -1546,7 +1595,7 @@
       "inv.eyebrow":"Te koop · in de showroom",
       "inv.title":"VOORRAAD<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Campers, pickups en classics. Handgekozen, doorgelicht en klaar voor de weg. Elke auto met meerdere foto's en op aanvraag een walk-around video.",
-      "filter.all":"Alles","filter.campers":"Campers","filter.pickups":"Pickups","filter.classics":"Classics","filter.muscle":"Muscle Cars","filter.video":"Met video",
+      "filter.all":"Alles","filter.campers":"Campers","filter.classics":"Klassiekers","filter.modern":"Modern","filter.video":"Met video",
       "card.cta":"Bekijk ›","card.gallery":"Galerij ›",
       "srv.eyebrow":"Wat we doen","srv.title":"DE <em>WERKPLAATS</em>",
       "srv.sub":"Vier dingen waar we goed in zijn. Bel of loop binnen, dan kijken we samen wat jouw auto nodig heeft.",
@@ -1589,7 +1638,7 @@
       "inv.eyebrow":"For sale · in the showroom",
       "inv.title":"INVENTORY<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Campers, pickups and classics. Hand-picked, vetted and ready for the road. Each vehicle with multiple photos and a walk-around video on request.",
-      "filter.all":"All","filter.campers":"Campers","filter.pickups":"Pickups","filter.classics":"Classics","filter.muscle":"Muscle Cars","filter.video":"With video",
+      "filter.all":"All","filter.campers":"Campers","filter.classics":"Classics","filter.modern":"Modern","filter.video":"With video",
       "card.cta":"View ›","card.gallery":"Gallery ›",
       "srv.eyebrow":"What we do","srv.title":"THE <em>WORKSHOP</em>",
       "srv.sub":"Four things we do well. Call or drop by, and we'll figure out together what your car needs.",
@@ -1632,7 +1681,7 @@
       "inv.eyebrow":"Zum Verkauf · im Showroom",
       "inv.title":"FAHRZEUGE<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Camper, Pickups und Klassiker. Handverlesen, geprüft und bereit für die Straße. Jedes Fahrzeug mit mehreren Fotos und auf Anfrage ein Walk-around-Video.",
-      "filter.all":"Alle","filter.campers":"Camper","filter.pickups":"Pickups","filter.classics":"Klassiker","filter.muscle":"Muscle Cars","filter.video":"Mit Video",
+      "filter.all":"Alle","filter.campers":"Camper","filter.classics":"Klassiker","filter.modern":"Modern","filter.video":"Mit Video",
       "card.cta":"Ansehen ›","card.gallery":"Galerie ›",
       "srv.eyebrow":"Was wir tun","srv.title":"DIE <em>WERKSTATT</em>",
       "srv.sub":"Vier Dinge, die wir gut können. Rufen Sie an oder kommen Sie vorbei — wir schauen gemeinsam, was Ihr Fahrzeug braucht.",
@@ -1692,11 +1741,15 @@
   const savedLang = localStorage.getItem('btg_lang');
   if (savedLang && translations[savedLang]) applyLang(savedLang);
 
-  document.querySelectorAll('.chip').forEach(c => {
-    c.addEventListener('click', e => {
+  document.querySelectorAll('.chip[data-filter]').forEach(chip => {
+    chip.addEventListener('click', e => {
       e.preventDefault();
       document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
-      c.classList.add('active');
+      chip.classList.add('active');
+      const filter = chip.dataset.filter;
+      document.querySelectorAll('#voorraadGrid .card[data-cat]').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.cat.includes(filter)) ? '' : 'none';
+      });
     });
   });
 
