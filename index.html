@@ -873,24 +873,23 @@
   /* ─── BOOKING ─── */
   .booking{border-top:1px solid var(--line)}
   .booking .section-head{margin-bottom:40px}
-  .calendly-wrap{
-    border:1px solid var(--line);
-    overflow:hidden;
-    background:var(--bg);
-  }
-  .calendly-inline-widget{min-width:320px;height:700px}
+  .booking-form{max-width:760px}
+  .bf-row{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+  .booking-form input[type="date"]{color-scheme:dark;cursor:pointer}
+  .booking-form .btn{margin-top:8px}
   .booking-note{
-    margin-top:20px;
+    margin-top:24px;
     font-family:'Barlow Condensed';
-    font-size:12px;
-    letter-spacing:0.15em;
+    font-size:11px;
+    letter-spacing:0.2em;
     text-transform:uppercase;
     color:var(--ink-dim);
-    text-align:center;
   }
-  .booking-note a{color:var(--rust);text-decoration:none}
-  @media(max-width:768px){.calendly-inline-widget{height:800px}}
-  @media(max-width:480px){.calendly-inline-widget{height:900px}}
+  .booking-thanks{max-width:520px;padding:56px 0}
+  .booking-thanks-icon{font-size:44px;color:var(--gold);margin-bottom:16px;font-family:'Barlow Condensed';font-weight:700}
+  .booking-thanks-title{font-family:'Barlow Condensed';font-size:28px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+  .booking-thanks-msg{color:var(--ink-dim);font-size:15px;line-height:1.6}
+  @media(max-width:600px){.bf-row{grid-template-columns:1fr}}
 
   footer{
     background:#000;
@@ -1667,62 +1666,6 @@
         </div>
       </a>
 
-      <!-- ── SERVICE ──────────────────────────────────────── -->
-
-      <!-- Service: Onderhoud & APK -->
-      <a href="https://www.marktplaats.nl/v/diensten-en-vakmensen/auto-en-motor-monteurs-en-garages/m2112812405-onderhoud-apk-reparatie-amerikaanse-auto-s-campers" target="_blank" rel="noopener" class="card" data-cat="service">
-        <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/301437db-093e-4640-ae71-ff3390a2f233?rule=ecg_mp_eps$_1200" alt="Onderhoud APK Reparatie Amerikaanse autos The Big Three Nunspeet">
-          <span class="card-status service" data-i18n="card.service">SERVICE</span>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">THE BIG THREE · NUNSPEET</div>
-          <h3 data-i18n="srv.1.title">ONDERHOUD &amp; APK</h3>
-          <div class="card-specs">
-            <span>CHEVY · FORD · DODGE</span>
-            <span>NUNSPEET</span>
-            <span>APK · REPARATIE</span>
-          </div>
-          <div class="card-price"><strong data-i18n="card.price.mp">Zie Marktplaats</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
-        </div>
-      </a>
-
-      <!-- Service: Reparatie & APK -->
-      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2125325195-reparatie-apk-en-onderhoud-amerikaanse-auto-s" target="_blank" rel="noopener" class="card" data-cat="service">
-        <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/07/0712f64f-5c3c-4850-8fb5-da08870bb31a?rule=ecg_mp_eps$_1200" alt="Reparatie APK Onderhoud Amerikaanse autos The Big Three Nunspeet">
-          <span class="card-status service" data-i18n="card.service">SERVICE</span>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">THE BIG THREE · NUNSPEET</div>
-          <h3>REPARATIE &amp; SERVICE</h3>
-          <div class="card-specs">
-            <span>IMPORT SPECIALIST</span>
-            <span>NUNSPEET</span>
-            <span>APK · ONDERHOUD</span>
-          </div>
-          <div class="card-price"><strong data-i18n="card.price.mp">Zie Marktplaats</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
-        </div>
-      </a>
-
-      <!-- Service: The Big 3 Werkplaats -->
-      <a href="https://www.marktplaats.nl/v/auto-s/chevrolet/m2252814723-the-big-3-apk-reparatie-en-onderhoud-amerikaanse-auto-s" target="_blank" rel="noopener" class="card" data-cat="service">
-        <div class="card-img">
-          <img src="https://images.marktplaats.com/api/v1/hz-mp-pro-listing/images/f3dd2df0-39d9-44c1-b5d5-925e1f4a91b1?rule=ecg_mp_eps$_1200" alt="The Big Three Werkplaats Service APK Reparatie Nunspeet">
-          <span class="card-status service" data-i18n="card.service">SERVICE</span>
-        </div>
-        <div class="card-body">
-          <div class="card-meta">THE BIG THREE · NUNSPEET</div>
-          <h3>WERKPLAATS SERVICE</h3>
-          <div class="card-specs">
-            <span>IMPORT · RESTAURATIE</span>
-            <span>NUNSPEET</span>
-            <span>APK · REPARATIE</span>
-          </div>
-          <div class="card-price"><strong data-i18n="card.price.mp">Zie Marktplaats</strong><small data-i18n="card.mp">Marktplaats ›</small></div>
-        </div>
-      </a>
-
     </div>
   </div>
 </section>
@@ -1942,17 +1885,64 @@
         <div class="eyebrow" data-i18n="book.eyebrow">Online inplannen</div>
         <h2 data-i18n="book.title">MAAK EEN<br><em>AFSPRAAK</em></h2>
       </div>
-      <p data-i18n="book.sub">Kies zelf een datum en tijd. David bevestigt direct via e-mail — bellen hoeft niet.</p>
+      <p data-i18n="book.sub">Stuur een aanvraag, David bevestigt per e-mail — bellen hoeft niet.</p>
     </div>
-    <div class="calendly-wrap">
-      <div class="calendly-inline-widget"
-           data-url="https://calendly.com/thebigthreenunspeet/afspraak?hide_gdpr_banner=1&background_color=0a0e18&text_color=f5efe6&primary_color=c8102e"
-           style="min-width:320px;height:700px;"></div>
+    <form class="booking-form" name="afspraak" method="POST" data-netlify="true" id="booking-form" novalidate>
+      <input type="hidden" name="form-name" value="afspraak">
+      <div class="bf-row">
+        <div class="form-row">
+          <label for="bf-naam" data-i18n="book.f.name">Naam</label>
+          <input type="text" id="bf-naam" name="naam" required>
+        </div>
+        <div class="form-row">
+          <label for="bf-email" data-i18n="book.f.email">E-mail</label>
+          <input type="email" id="bf-email" name="email" required>
+        </div>
+      </div>
+      <div class="bf-row">
+        <div class="form-row">
+          <label for="bf-tel" data-i18n="book.f.phone">Telefoon (optioneel)</label>
+          <input type="tel" id="bf-tel" name="telefoon">
+        </div>
+        <div class="form-row">
+          <label for="bf-type" data-i18n="book.f.type">Soort afspraak</label>
+          <select id="bf-type" name="soort">
+            <option data-i18n="book.o.t1">Onderhoud / APK</option>
+            <option data-i18n="book.o.t2">Restauratie</option>
+            <option data-i18n="book.o.t3">Import vanuit VS</option>
+            <option data-i18n="book.o.t4">Voorraad bekijken</option>
+            <option data-i18n="book.o.t5">Anders</option>
+          </select>
+        </div>
+      </div>
+      <div class="bf-row">
+        <div class="form-row">
+          <label for="bf-datum" data-i18n="book.f.date">Gewenste datum</label>
+          <input type="date" id="bf-datum" name="datum" required>
+        </div>
+        <div class="form-row">
+          <label for="bf-tijd" data-i18n="book.f.time">Voorkeur tijdstip</label>
+          <select id="bf-tijd" name="tijdstip">
+            <option data-i18n="book.o.tm1">Ochtend (08:30 – 12:00)</option>
+            <option data-i18n="book.o.tm2">Middag (12:00 – 17:30)</option>
+            <option data-i18n="book.o.tm3">Geen voorkeur</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="bf-msg" data-i18n="book.f.msg">Bericht (optioneel)</label>
+        <textarea id="bf-msg" name="bericht" rows="4"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" data-i18n="book.f.send">Afspraak aanvragen</button>
+    </form>
+    <div class="booking-thanks" id="booking-thanks" hidden>
+      <div class="booking-thanks-icon">✓</div>
+      <p class="booking-thanks-title" data-i18n="book.ok.title">Aanvraag verzonden!</p>
+      <p class="booking-thanks-msg" data-i18n="book.ok.msg">David neemt zo snel mogelijk contact op ter bevestiging.</p>
     </div>
-    <p class="booking-note" data-i18n="book.note">Powered by <a href="https://calendly.com" target="_blank" rel="noopener">Calendly</a> · Geen account nodig · Bevestiging per e-mail</p>
+    <p class="booking-note" data-i18n="book.note">Bevestiging per e-mail · Geen account nodig</p>
   </div>
 </section>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 <footer>
   <div class="footer-inner">
@@ -2060,8 +2050,15 @@
       "cookie.text":"Wij gebruiken functionele cookies en cookies van externe diensten (YouTube, Google Maps). Zie onze <a href=\"privacy.html\">privacyverklaring</a>.",
       "cookie.accept":"Accepteer alles","cookie.decline":"Alleen noodzakelijk",
       "book.eyebrow":"Online inplannen","book.title":"MAAK EEN<br><em>AFSPRAAK</em>",
-      "book.sub":"Kies zelf een datum en tijd. David bevestigt direct via e-mail — bellen hoeft niet.",
-      "book.note":'Powered by <a href="https://calendly.com" target="_blank" rel="noopener">Calendly</a> · Geen account nodig · Bevestiging per e-mail'
+      "book.sub":"Stuur een aanvraag, David bevestigt per e-mail — bellen hoeft niet.",
+      "book.f.name":"Naam","book.f.email":"E-mail","book.f.phone":"Telefoon (optioneel)",
+      "book.f.type":"Soort afspraak","book.f.date":"Gewenste datum","book.f.time":"Voorkeur tijdstip",
+      "book.f.msg":"Bericht (optioneel)","book.f.send":"Afspraak aanvragen",
+      "book.o.t1":"Onderhoud / APK","book.o.t2":"Restauratie","book.o.t3":"Import vanuit VS",
+      "book.o.t4":"Voorraad bekijken","book.o.t5":"Anders",
+      "book.o.tm1":"Ochtend (08:30 – 12:00)","book.o.tm2":"Middag (12:00 – 17:30)","book.o.tm3":"Geen voorkeur",
+      "book.ok.title":"Aanvraag verzonden!","book.ok.msg":"David neemt zo snel mogelijk contact op ter bevestiging.",
+      "book.note":"Bevestiging per e-mail · Geen account nodig"
     },
     en: {
       "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact",
@@ -2111,8 +2108,15 @@
       "cookie.text":"We use functional cookies and cookies from third-party services (YouTube, Google Maps). See our <a href=\"privacy.html\">privacy policy</a>.",
       "cookie.accept":"Accept all","cookie.decline":"Necessary only",
       "book.eyebrow":"Book online","book.title":"MAKE AN<br><em>APPOINTMENT</em>",
-      "book.sub":"Pick a date and time that suits you. David confirms immediately by email — no need to call.",
-      "book.note":'Powered by <a href="https://calendly.com" target="_blank" rel="noopener">Calendly</a> · No account needed · Confirmation by email'
+      "book.sub":"Send a request, David confirms by email — no need to call.",
+      "book.f.name":"Name","book.f.email":"Email","book.f.phone":"Phone (optional)",
+      "book.f.type":"Type of visit","book.f.date":"Preferred date","book.f.time":"Preferred time",
+      "book.f.msg":"Message (optional)","book.f.send":"Request appointment",
+      "book.o.t1":"Maintenance / MOT","book.o.t2":"Restoration","book.o.t3":"Import from US",
+      "book.o.t4":"View inventory","book.o.t5":"Other",
+      "book.o.tm1":"Morning (08:30 – 12:00)","book.o.tm2":"Afternoon (12:00 – 17:30)","book.o.tm3":"No preference",
+      "book.ok.title":"Request sent!","book.ok.msg":"David will contact you as soon as possible to confirm.",
+      "book.note":"Confirmation by email · No account needed"
     },
     de: {
       "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt",
@@ -2162,8 +2166,15 @@
       "cookie.text":"Wir verwenden funktionale Cookies und Cookies von Drittanbietern (YouTube, Google Maps). Siehe unsere <a href=\"privacy.html\">Datenschutzerklärung</a>.",
       "cookie.accept":"Alle akzeptieren","cookie.decline":"Nur notwendige",
       "book.eyebrow":"Online buchen","book.title":"TERMIN<br><em>VEREINBAREN</em>",
-      "book.sub":"Wählen Sie selbst Datum und Uhrzeit. David bestätigt sofort per E-Mail — kein Anruf nötig.",
-      "book.note":'Powered by <a href="https://calendly.com" target="_blank" rel="noopener">Calendly</a> · Kein Konto erforderlich · Bestätigung per E-Mail'
+      "book.sub":"Anfrage senden, David bestätigt per E-Mail — kein Anruf nötig.",
+      "book.f.name":"Name","book.f.email":"E-Mail","book.f.phone":"Telefon (optional)",
+      "book.f.type":"Art des Termins","book.f.date":"Gewünschtes Datum","book.f.time":"Bevorzugte Zeit",
+      "book.f.msg":"Nachricht (optional)","book.f.send":"Termin anfragen",
+      "book.o.t1":"Wartung / TÜV","book.o.t2":"Restauration","book.o.t3":"Import aus den USA",
+      "book.o.t4":"Fahrzeuge besichtigen","book.o.t5":"Sonstiges",
+      "book.o.tm1":"Morgen (08:30 – 12:00)","book.o.tm2":"Nachmittag (12:00 – 17:30)","book.o.tm3":"Keine Präferenz",
+      "book.ok.title":"Anfrage gesendet!","book.ok.msg":"David meldet sich so schnell wie möglich zur Bestätigung.",
+      "book.note":"Bestätigung per E-Mail · Kein Konto erforderlich"
     }
   };
 
@@ -2187,6 +2198,29 @@
   document.querySelectorAll('.lang button').forEach(btn => {
     btn.addEventListener('click', () => applyLang(btn.dataset.lang));
   });
+
+  // ─── BOOKING FORM ───
+  const bfDatum = document.getElementById('bf-datum');
+  if (bfDatum) bfDatum.min = new Date().toISOString().split('T')[0];
+
+  const bookingForm = document.getElementById('booking-form');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = bookingForm.querySelector('[type="submit"]');
+      btn.disabled = true;
+      fetch('/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams(new FormData(bookingForm)).toString()
+      }).then(function() {
+        bookingForm.hidden = true;
+        document.getElementById('booking-thanks').hidden = false;
+      }).catch(function() {
+        btn.disabled = false;
+      });
+    });
+  }
 
   // restore saved language
   const savedLang = localStorage.getItem('btg_lang');
