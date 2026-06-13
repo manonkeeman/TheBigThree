@@ -1,7 +1,7 @@
 {
-  "name": "bigthree-website",
+  "name": "thebigthree-website",
   "version": "1.0.0",
-  "description": "The Big Three Garage · Nunspeet — statische website",
+  "description": "The Big Three Garage · Nunspeet",
   "scripts": {
     "dev": "npx serve . -p 3000",
     "start": "npx serve . -p 3000"
