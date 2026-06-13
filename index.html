@@ -1004,17 +1004,8 @@
   .cookie-gone .wa-fab,.cookie-gone.wa-fab{bottom:20px}
 
   /* ─── GOOGLE MAPS ─── */
-  .map-block{
-    margin-top:28px;border:1px solid var(--line);
-    background:var(--panel);overflow:hidden;
-  }
-  .map-plate{
-    padding:24px 28px;
-    display:flex;flex-direction:column;align-items:flex-start;gap:14px;
-  }
-  .map-plate-icon{width:38px;height:38px;color:var(--rust)}
-  .map-plate-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-  .map-plate-btns{display:flex;gap:10px;flex-wrap:wrap}
+  .map-block{margin-top:28px;border:1px solid var(--line);background:var(--panel);overflow:hidden}
+  .map-plate{padding:14px 20px;border-bottom:1px solid var(--line)}
   .map-route-btn{
     display:inline-flex;align-items:center;gap:8px;
     font-family:'Barlow Condensed';font-size:12px;
@@ -1024,23 +1015,7 @@
   }
   .map-route-btn:hover{background:var(--rust-deep)}
   .map-route-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;flex-shrink:0}
-  .map-load-btn{
-    display:inline-flex;align-items:center;gap:8px;
-    font-family:'Barlow Condensed';font-size:12px;
-    letter-spacing:0.2em;text-transform:uppercase;font-weight:600;
-    color:var(--ink-dim);background:transparent;
-    border:1px solid var(--line);padding:10px 16px;
-    cursor:pointer;transition:all 0.2s;white-space:nowrap;
-  }
-  .map-load-btn:hover{color:var(--ink);border-color:var(--ink-dim)}
-  .map-load-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;flex-shrink:0}
-  .map-frame{display:none;border-top:1px solid var(--line)}
-  .map-frame iframe{width:100%;height:200px;border:none;display:block}
-  .map-note{
-    font-family:'Barlow Condensed';font-size:11px;
-    letter-spacing:0.15em;color:var(--ink-dim);
-    text-transform:uppercase;
-  }
+  .map-frame iframe{width:100%;height:220px;border:none;display:block}
 
   /* ─── COOKIE BANNER ─── */
   .cookie-bar{
@@ -1836,30 +1811,23 @@
 
         <div class="map-block">
           <div class="map-plate">
-            <div class="map-plate-icon">
-              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div class="map-plate-btns">
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Hullerweg+115,+8071+NP+Nunspeet,+Nederland" target="_blank" rel="noopener" class="map-route-btn">
-                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                <span data-i18n="map.route">Route plannen</span>
-              </a>
-              <button class="map-load-btn" id="mapLoadBtn">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <span data-i18n="map.load">Toon kaart</span>
-              </button>
-            </div>
-            <span class="map-note" data-i18n="map.note">Google Maps laadt alleen na klikken · minimale cookies</span>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Hullerweg+115,+8071+NP+Nunspeet,+Nederland" target="_blank" rel="noopener" class="map-route-btn">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              <span data-i18n="map.route">Route plannen</span>
+            </a>
           </div>
-          <div class="map-frame" id="mapFrame">
-            <iframe title="The Big Three Garage Nunspeet" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="map-frame">
+            <iframe
+              src="https://maps.google.com/maps?q=Hullerweg+115,+8071+NP+Nunspeet&output=embed&hl=nl"
+              title="The Big Three Garage Nunspeet"
+              allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
         </div>
       </div>
 
       <div class="contact-form contact-appt" id="afspraak">
         <h2 data-i18n="book.title">MAAK EEN<br><em>AFSPRAAK</em></h2>
-        <p data-i18n="book.sub">Stuur een aanvraag, David bevestigt per e-mail — bellen hoeft niet.</p>
         <form class="booking-form" name="afspraak" method="POST" data-netlify="true" id="booking-form" novalidate>
           <input type="hidden" name="form-name" value="afspraak">
           <div class="form-row">
@@ -2228,21 +2196,7 @@
   navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-  // ─── GOOGLE MAPS (load on click) ───
-  const mapLoadBtn = document.getElementById('mapLoadBtn');
-  const mapFrame = document.getElementById('mapFrame');
-  if (mapLoadBtn && mapFrame) {
-    mapLoadBtn.addEventListener('click', () => {
-      const iframe = mapFrame.querySelector('iframe');
-      if (iframe && !iframe.src) {
-        iframe.src = 'https://maps.google.com/maps?q=Hullerweg+115,+8071+NP+Nunspeet&output=embed&hl=nl';
-      }
-      mapFrame.style.display = 'block';
-      mapLoadBtn.style.display = 'none';
-    });
-  }
-
-  // ─── COOKIE BANNER ───
+// ─── COOKIE BANNER ───
   const cookieBar = document.getElementById('cookieBar');
   const waFab = document.getElementById('waFab');
   function dismissCookie() {
