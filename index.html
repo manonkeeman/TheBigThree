@@ -870,6 +870,28 @@
   }
   .form-row textarea{resize:vertical;min-height:110px}
 
+  /* ─── BOOKING ─── */
+  .booking{border-top:1px solid var(--line)}
+  .booking .section-head{margin-bottom:40px}
+  .calendly-wrap{
+    border:1px solid var(--line);
+    overflow:hidden;
+    background:var(--bg);
+  }
+  .calendly-inline-widget{min-width:320px;height:700px}
+  .booking-note{
+    margin-top:20px;
+    font-family:'Barlow Condensed';
+    font-size:12px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    text-align:center;
+  }
+  .booking-note a{color:var(--rust);text-decoration:none}
+  @media(max-width:768px){.calendly-inline-widget{height:800px}}
+  @media(max-width:480px){.calendly-inline-widget{height:900px}}
+
   footer{
     background:#000;
     border-top:1px solid var(--line);
@@ -1179,7 +1201,7 @@
     </p>
     <div class="hero-cta">
       <a href="#voorraad" class="btn btn-primary" data-i18n="hero.cta1">Bekijk voorraad</a>
-      <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta2">Maak afspraak</a>
+      <a href="#afspraak" class="btn btn-ghost" data-i18n="hero.cta2">Maak afspraak</a>
     </div>
   </div>
   <div class="hero-stats">
@@ -1913,6 +1935,25 @@
   </div>
 </section>
 
+<section class="booking" id="afspraak">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="book.eyebrow">Online inplannen</div>
+        <h2 data-i18n="book.title">MAAK EEN<br><em>AFSPRAAK</em></h2>
+      </div>
+      <p data-i18n="book.sub">Kies zelf een datum en tijd. David bevestigt direct via e-mail — bellen hoeft niet.</p>
+    </div>
+    <div class="calendly-wrap">
+      <div class="calendly-inline-widget"
+           data-url="https://calendly.com/thebigthreenunspeet/afspraak?hide_gdpr_banner=1&background_color=0a0e18&text_color=f5efe6&primary_color=c8102e"
+           style="min-width:320px;height:700px;"></div>
+    </div>
+    <p class="booking-note" data-i18n="book.note">Powered by <a href="https://calendly.com" target="_blank" rel="noopener">Calendly</a> · Geen account nodig · Bevestiging per e-mail</p>
+  </div>
+</section>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
@@ -1949,7 +1990,7 @@
   </div>
   <div class="footer-bottom">
     <span>© THE BIG THREE GARAGE · NUNSPEET</span>
-    <span>Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a></span>
+    <span data-i18n="ftr.by">Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a></span>
   </div>
 </footer>
 
@@ -2013,11 +2054,14 @@
       "form.opt1":"Vraag over voorraad","form.opt2":"Onderhoud / werkplaats","form.opt3":"Restauratie project","form.opt4":"Import vanuit VS","form.opt5":"Anders",
       "form.ph.name":"Jouw naam","form.ph.email":"je@email.nl","form.ph.msg":"Vertel ons wat je zoekt...",
       "ftr.about":"American iron specialist sinds dag één. Verkoop, onderhoud, restauratie en import. Uit liefde voor het ambacht en de gloed van een goeie V8.",
-      "ftr.h1":"Bezoek","ftr.h2":"Menu","ftr.h3":"Volg ons","ftr.by":"Webdevelopment door ManonIT",
+      "ftr.h1":"Bezoek","ftr.h2":"Menu","ftr.h3":"Volg ons","ftr.by":'Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
       "ftr.privacy":"Privacyverklaring",
       "map.route":"Route plannen","map.load":"Toon kaart","map.note":"Google Maps laadt alleen na klikken · minimale cookies",
       "cookie.text":"Wij gebruiken functionele cookies en cookies van externe diensten (YouTube, Google Maps). Zie onze <a href=\"privacy.html\">privacyverklaring</a>.",
-      "cookie.accept":"Accepteer alles","cookie.decline":"Alleen noodzakelijk"
+      "cookie.accept":"Accepteer alles","cookie.decline":"Alleen noodzakelijk",
+      "book.eyebrow":"Online inplannen","book.title":"MAAK EEN<br><em>AFSPRAAK</em>",
+      "book.sub":"Kies zelf een datum en tijd. David bevestigt direct via e-mail — bellen hoeft niet.",
+      "book.note":'Powered by <a href="https://calendly.com" target="_blank" rel="noopener">Calendly</a> · Geen account nodig · Bevestiging per e-mail'
     },
     en: {
       "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact",
@@ -2061,11 +2105,14 @@
       "form.opt1":"Question about inventory","form.opt2":"Service / workshop","form.opt3":"Restoration project","form.opt4":"Import from US","form.opt5":"Other",
       "form.ph.name":"Your name","form.ph.email":"your@email.com","form.ph.msg":"Tell us what you're looking for...",
       "ftr.about":"American iron specialist since day one. Sales, service, restoration and import. For the love of the craft and the sound of a good V8.",
-      "ftr.h1":"Visit","ftr.h2":"Menu","ftr.h3":"Follow us","ftr.by":"Webdevelopment by ManonIT",
+      "ftr.h1":"Visit","ftr.h2":"Menu","ftr.h3":"Follow us","ftr.by":'Webdevelopment by <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
       "ftr.privacy":"Privacy policy",
       "map.route":"Get directions","map.load":"Show map","map.note":"Google Maps loads on click · minimal cookies",
       "cookie.text":"We use functional cookies and cookies from third-party services (YouTube, Google Maps). See our <a href=\"privacy.html\">privacy policy</a>.",
-      "cookie.accept":"Accept all","cookie.decline":"Necessary only"
+      "cookie.accept":"Accept all","cookie.decline":"Necessary only",
+      "book.eyebrow":"Book online","book.title":"MAKE AN<br><em>APPOINTMENT</em>",
+      "book.sub":"Pick a date and time that suits you. David confirms immediately by email — no need to call.",
+      "book.note":'Powered by <a href="https://calendly.com" target="_blank" rel="noopener">Calendly</a> · No account needed · Confirmation by email'
     },
     de: {
       "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt",
@@ -2109,11 +2156,14 @@
       "form.opt1":"Frage zum Fahrzeugbestand","form.opt2":"Wartung / Werkstatt","form.opt3":"Restaurationsprojekt","form.opt4":"Import aus den USA","form.opt5":"Sonstiges",
       "form.ph.name":"Ihr Name","form.ph.email":"ihre@email.de","form.ph.msg":"Was suchen Sie? Erzählen Sie uns...",
       "ftr.about":"American-Iron-Spezialist seit Tag eins. Verkauf, Wartung, Restauration und Import. Aus Liebe zum Handwerk und dem Klang eines guten V8.",
-      "ftr.h1":"Besuch","ftr.h2":"Menü","ftr.h3":"Folgen Sie uns","ftr.by":"Webentwicklung von ManonIT",
+      "ftr.h1":"Besuch","ftr.h2":"Menü","ftr.h3":"Folgen Sie uns","ftr.by":'Webentwicklung von <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
       "ftr.privacy":"Datenschutzerklärung",
       "map.route":"Route planen","map.load":"Karte anzeigen","map.note":"Google Maps lädt erst nach Klick · minimale Cookies",
       "cookie.text":"Wir verwenden funktionale Cookies und Cookies von Drittanbietern (YouTube, Google Maps). Siehe unsere <a href=\"privacy.html\">Datenschutzerklärung</a>.",
-      "cookie.accept":"Alle akzeptieren","cookie.decline":"Nur notwendige"
+      "cookie.accept":"Alle akzeptieren","cookie.decline":"Nur notwendige",
+      "book.eyebrow":"Online buchen","book.title":"TERMIN<br><em>VEREINBAREN</em>",
+      "book.sub":"Wählen Sie selbst Datum und Uhrzeit. David bestätigt sofort per E-Mail — kein Anruf nötig.",
+      "book.note":'Powered by <a href="https://calendly.com" target="_blank" rel="noopener">Calendly</a> · Kein Konto erforderlich · Bestätigung per E-Mail'
     }
   };
 
