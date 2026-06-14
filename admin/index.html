@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Big Three · Beheer</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d0d0d;--surface:#181818;--surface2:#1f1f1f;
+  --border:#2a2a2a;--rust:#c8102e;--rust-deep:#8e0a1f;
+  --ink:#f5efe6;--muted:#9aa3b8;
+  --green:#22c55e;--amber:#f59e0b;--red:#ef4444;--blue:#60a5fa;
+  --r:6px;
+}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;background:var(--bg);color:var(--ink);line-height:1.5}
+
+/* ── LOGIN ── */
+#screenLogin{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:40px;width:100%;max-width:380px}
+.login-brand{display:flex;align-items:center;gap:14px;margin-bottom:32px}
+.login-brand img{width:48px;height:48px;object-fit:contain}
+.login-brand-text{text-transform:uppercase;letter-spacing:0.15em;font-size:12px;line-height:1.4;color:var(--muted)}
+.login-brand-text strong{display:block;font-size:17px;letter-spacing:0.2em;color:var(--ink)}
+
+/* ── APP SHELL ── */
+#screenApp{display:none;flex-direction:column;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:100;background:#111;border-bottom:1px solid var(--border);height:56px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.topbar-brand{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.topbar-brand img{width:28px;height:28px;object-fit:contain}
+.topbar-right{display:flex;align-items:center;gap:12px}
+#userEmail{font-size:12px;color:var(--muted)}
+
+/* ── MAIN ── */
+.main{flex:1;padding:28px 24px;max-width:1080px;margin:0 auto;width:100%}
+
+/* ── VIEW HEADER ── */
+.view-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.view-header h1{font-size:22px;font-weight:700}
+
+/* ── STATS ── */
+.stats{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:13px;color:var(--muted)}
+.stat span{font-weight:700;margin-right:4px;color:var(--ink)}
+.stat.green span{color:var(--green)}
+.stat.amber span{color:var(--amber)}
+
+/* ── TABLE ── */
+.vtable{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:var(--r);overflow:hidden}
+.vrow{display:grid;grid-template-columns:60px 1fr auto auto;gap:12px;align-items:center;background:var(--surface);padding:12px 14px;transition:background 0.15s}
+.vrow:hover{background:var(--surface2)}
+.vthumb{width:60px;height:44px;object-fit:cover;border-radius:4px;background:var(--border);display:block;flex-shrink:0}
+.vthumb-empty{width:60px;height:44px;border-radius:4px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.vinfo-title{font-weight:600;font-size:14px}
+.vinfo-meta{font-size:12px;color:var(--muted);margin-top:1px}
+.badge{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.b-avail{background:rgba(34,197,94,.15);color:var(--green)}
+.b-res  {background:rgba(245,158,11,.15);color:var(--amber)}
+.b-srv  {background:rgba(96,165,250,.15);color:var(--blue)}
+.b-part {background:rgba(230,181,69,.15);color:#e6b545}
+.row-actions{display:flex;gap:6px}
+
+/* ── EMPTY / LOADING ── */
+.empty{background:var(--surface);border:2px dashed var(--border);border-radius:var(--r);padding:56px 24px;text-align:center;color:var(--muted)}
+.empty strong{display:block;color:var(--ink);margin-top:8px}
+.loading{padding:48px;text-align:center;color:var(--muted);font-size:14px}
+
+/* ── FORM ── */
+.form-back{display:flex;align-items:center;gap:14px;margin-bottom:24px;flex-wrap:wrap}
+.form-back h1{font-size:20px;font-weight:700}
+.vform{display:flex;flex-direction:column;gap:20px;max-width:720px}
+.fsec{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.fsec h2{font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:13px;font-weight:500;color:var(--muted)}
+.field .req{color:var(--rust)}
+.field input,.field select,.field textarea{
+  background:#111;border:1px solid var(--border);border-radius:4px;
+  color:var(--ink);padding:9px 11px;font-size:14px;font-family:inherit;width:100%;outline:none;
+  transition:border-color 0.15s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--rust)}
+.field input::placeholder{color:rgba(154,163,184,0.4)}
+
+/* Checkboxes */
+.checks{display:flex;flex-wrap:wrap;gap:10px;padding:4px 0}
+.chk{display:flex;align-items:center;gap:7px;cursor:pointer;font-size:14px;user-select:none}
+.chk input{width:15px;height:15px;accent-color:var(--rust);cursor:pointer}
+
+/* Image upload */
+.img-area{
+  border:2px dashed var(--border);border-radius:var(--r);cursor:pointer;
+  transition:border-color 0.2s;min-height:160px;
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.img-area:hover,.img-area.drag{border-color:var(--rust)}
+.img-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);padding:32px;text-align:center}
+.img-ph svg{width:36px;height:36px;opacity:0.35}
+.img-ph small{font-size:12px;opacity:0.6}
+.img-preview-wrap{position:relative;width:100%}
+.img-preview{width:100%;height:200px;object-fit:cover;display:block}
+.img-change{
+  position:absolute;inset:0;background:rgba(0,0,0,0.55);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.2s;font-size:13px;font-weight:500;
+}
+.img-preview-wrap:hover .img-change{opacity:1}
+
+/* Form actions */
+.factions{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.15s;white-space:nowrap}
+.btn:disabled{opacity:0.45;cursor:not-allowed}
+.btn-primary{background:var(--rust);color:#fff}
+.btn-primary:hover:not(:disabled){background:var(--rust-deep)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-sm{padding:6px 12px;font-size:12px;font-weight:500}
+.btn-icon{background:transparent;border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;flex-shrink:0}
+.btn-icon:hover{border-color:var(--ink);color:var(--ink)}
+.btn-icon.del:hover{border-color:var(--red);color:var(--red)}
+.btn-icon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn-back{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;display:flex;align-items:center;gap:5px;padding:6px 0}
+.btn-back:hover{color:var(--ink)}
+.btn-danger{background:var(--red);color:#fff;border:none;padding:9px 18px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer}
+.btn-danger:hover{opacity:0.85}
+.btn-danger:disabled{opacity:0.5;cursor:not-allowed}
+
+/* ── MESSAGES ── */
+.msg{padding:11px 14px;border-radius:4px;font-size:13px;margin-top:12px}
+.msg-err{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+.msg-ok {background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#86efac}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:20px;right:20px;z-index:9999;background:#1f2937;border:1px solid var(--border);border-radius:6px;padding:12px 18px;font-size:13px;max-width:320px;box-shadow:0 8px 24px rgba(0,0,0,0.4);animation:tin 0.2s ease}
+.toast.ok{border-color:rgba(34,197,94,.4);color:#86efac}
+.toast.er{border-color:rgba(239,68,68,.4);color:#fca5a5}
+@keyframes tin{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* ── MODAL ── */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:500;display:flex;align-items:center;justify-content:center;padding:24px}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;max-width:380px;width:100%}
+.modal-box h2{font-size:17px;font-weight:700;margin-bottom:6px}
+.modal-box p{color:var(--muted);font-size:13px;margin-bottom:22px}
+.modal-actions{display:flex;gap:10px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .main{padding:20px 14px}
+  .vrow{grid-template-columns:46px 1fr;gap:10px}
+  .vthumb,.vthumb-empty{width:46px;height:34px}
+  .badge,.row-actions{grid-column:2}
+  .topbar{padding:0 14px}
+  #userEmail{display:none}
+  .fgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════ LOGIN ══════════════════════════════ -->
+<div id="screenLogin">
+  <div class="login-box">
+    <div class="login-brand">
+      <img src="../assets/logo.png" alt="The Big Three Garage">
+      <div class="login-brand-text">
+        <strong>THE BIG THREE</strong>
+        Garage · Beheer
+      </div>
+    </div>
+    <form id="loginForm" autocomplete="on" style="display:flex;flex-direction:column;gap:14px">
+      <div class="field">
+        <label for="loginEmail">E-mail</label>
+        <input type="email" id="loginEmail" required autocomplete="email" placeholder="david@bigthreegarage.nl">
+      </div>
+      <div class="field">
+        <label for="loginPw">Wachtwoord</label>
+        <input type="password" id="loginPw" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px">Inloggen</button>
+      <div id="loginErr" class="msg msg-err" style="display:none"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════════════════ APP ════════════════════════════════ -->
+<div id="screenApp">
+
+  <div class="topbar">
+    <div class="topbar-brand">
+      <img src="../assets/logo.png" alt="">
+      <span>The Big Three · Beheer</span>
+    </div>
+    <div class="topbar-right">
+      <span id="userEmail"></span>
+      <button class="btn btn-ghost btn-sm" id="btnLogout">Uitloggen</button>
+    </div>
+  </div>
+
+  <!-- LIST VIEW -->
+  <div class="main" id="viewList">
+    <div class="view-header">
+      <h1>Voorraad</h1>
+      <button class="btn btn-primary" id="btnAdd">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        Voertuig toevoegen
+      </button>
+    </div>
+    <div class="stats">
+      <div class="stat"><span id="cTotal">–</span> totaal</div>
+      <div class="stat green"><span id="cAvail">–</span> beschikbaar</div>
+      <div class="stat amber"><span id="cRes">–</span> gereserveerd</div>
+    </div>
+    <div id="vehicleList"><div class="loading">Voorraad laden…</div></div>
+  </div>
+
+  <!-- FORM VIEW -->
+  <div class="main" id="viewForm" style="display:none">
+    <div class="form-back">
+      <button class="btn-back" id="btnBack">← Terug</button>
+      <h1 id="formTitle">Voertuig toevoegen</h1>
+    </div>
+
+    <form id="vehicleForm" class="vform" novalidate>
+      <input type="hidden" id="vid">
+      <input type="hidden" id="existImg">
+
+      <!-- Foto -->
+      <div class="fsec">
+        <h2>Foto</h2>
+        <div class="img-area" id="imgArea">
+          <input type="file" id="imgFile" accept="image/*" style="display:none">
+          <div id="imgPh" class="img-ph">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Klik of sleep een foto hierheen</span>
+            <small>JPG · PNG · WEBP · max 10 MB</small>
+          </div>
+          <div id="imgPrevWrap" class="img-preview-wrap" style="display:none">
+            <img id="imgPrev" class="img-preview" alt="">
+            <div class="img-change">Foto wijzigen</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Voertuig -->
+      <div class="fsec">
+        <h2>Voertuig</h2>
+        <div class="fgrid" style="margin-bottom:14px">
+          <div class="field" style="grid-column:1/-1">
+            <label for="fTitle">Titel <span class="req">*</span></label>
+            <input type="text" id="fTitle" required placeholder="EXPRESS EXPLORER CAMPER">
+          </div>
+          <div class="field">
+            <label for="fMake">Merk</label>
+            <input type="text" id="fMake" placeholder="CHEVROLET">
+          </div>
+          <div class="field">
+            <label for="fYear">Bouwjaar</label>
+            <input type="number" id="fYear" placeholder="2005" min="1940" max="2035">
+          </div>
+          <div class="field">
+            <label for="fStatus">Status</label>
+            <select id="fStatus">
+              <option value="available">Beschikbaar</option>
+              <option value="reserved">Gereserveerd</option>
+              <option value="service">Service</option>
+              <option value="part">Onderdeel</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Categorie <span style="font-weight:400">(meerdere mogelijk)</span></label>
+          <div class="checks">
+            <label class="chk"><input type="checkbox" name="cat" value="camper"> Camper</label>
+            <label class="chk"><input type="checkbox" name="cat" value="classic"> Klassieker</label>
+            <label class="chk"><input type="checkbox" name="cat" value="modern"> Modern</label>
+            <label class="chk"><input type="checkbox" name="cat" value="pickup"> Pickup</label>
+            <label class="chk"><input type="checkbox" name="cat" value="onderdeel"> Onderdeel</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kenmerken -->
+      <div class="fsec">
+        <h2>Kenmerken <span style="font-weight:400;text-transform:none;letter-spacing:0">(max. 3)</span></h2>
+        <div class="fgrid">
+          <div class="field"><label for="fS1">Kenmerk 1</label><input type="text" id="fS1" placeholder="V8 AUTOMAAT"></div>
+          <div class="field"><label for="fS2">Kenmerk 2</label><input type="text" id="fS2" placeholder="LPG · LEER"></div>
+          <div class="field"><label for="fS3">Kenmerk 3</label><input type="text" id="fS3" placeholder="64.000 KM"></div>
+        </div>
+      </div>
+
+      <!-- Prijs & link -->
+      <div class="fsec">
+        <h2>Prijs &amp; link</h2>
+        <div class="fgrid" style="margin-bottom:14px">
+          <div class="field">
+            <label for="fPriceType">Prijsweergave</label>
+            <select id="fPriceType">
+              <option value="fixed">Vaste prijs (€)</option>
+              <option value="ask">Op aanvraag</option>
+              <option value="bid">Bieden</option>
+            </select>
+          </div>
+          <div class="field" id="fPriceWrap">
+            <label for="fPrice">Bedrag (€)</label>
+            <input type="number" id="fPrice" placeholder="34995" min="0">
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:14px">
+          <label for="fMpUrl">Marktplaats link</label>
+          <input type="url" id="fMpUrl" placeholder="https://www.marktplaats.nl/v/...">
+        </div>
+        <div class="field" style="max-width:160px">
+          <label for="fSort">Volgorde <span style="font-weight:400">(0 = bovenaan)</span></label>
+          <input type="number" id="fSort" value="0" min="0">
+        </div>
+      </div>
+
+      <div class="factions">
+        <button type="submit" class="btn btn-primary" id="btnSave">Opslaan</button>
+        <button type="button" class="btn btn-ghost" id="btnCancel">Annuleren</button>
+      </div>
+      <div id="formMsg" style="display:none"></div>
+    </form>
+  </div>
+
+</div><!-- /screenApp -->
+
+<!-- DELETE MODAL -->
+<div class="modal" id="delModal" style="display:none">
+  <div class="modal-box">
+    <h2>Voertuig verwijderen?</h2>
+    <p id="delModalName">Dit kan niet ongedaan worden gemaakt.</p>
+    <div class="modal-actions">
+      <button class="btn-danger" id="btnDelConfirm">Ja, verwijderen</button>
+      <button class="btn btn-ghost" id="btnDelCancel">Annuleren</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════ CONFIG ══════════════════════════════════════════════
+// Vul hieronder jouw Supabase-gegevens in (zelfde waarden als in index.html)
+const SUPABASE_URL      = 'JOUW_SUPABASE_URL';       // bijv. https://xyzabc.supabase.co
+const SUPABASE_ANON_KEY = 'JOUW_SUPABASE_ANON_KEY';  // begint met eyJ...
+const BUCKET            = 'vehicle-images';
+// ═══════════════════════════════════════════════════════════════════════
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ── helpers ──
+const $  = id => document.getElementById(id);
+const esc = s => s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : '';
+
+function toast(msg, type = 'ok') {
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3200);
+}
+
+function showView(name) {
+  $('viewList').style.display = name === 'list' ? 'block' : 'none';
+  $('viewForm').style.display = name === 'form' ? 'block' : 'none';
+}
+
+// ── AUTH ──
+async function checkAuth() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    $('userEmail').textContent = session.user.email;
+    $('screenLogin').style.display = 'none';
+    $('screenApp').style.display   = 'flex';
+    $('screenApp').style.flexDirection = 'column';
+    loadVehicles();
+  } else {
+    $('screenLogin').style.display = 'flex';
+    $('screenApp').style.display   = 'none';
+  }
+}
+
+$('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = e.target.querySelector('[type=submit]');
+  btn.disabled = true; btn.textContent = 'Inloggen…';
+  $('loginErr').style.display = 'none';
+  const { error } = await sb.auth.signInWithPassword({
+    email: $('loginEmail').value,
+    password: $('loginPw').value,
+  });
+  if (error) {
+    $('loginErr').textContent = 'Onjuist e-mailadres of wachtwoord.';
+    $('loginErr').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Inloggen';
+  } else { checkAuth(); }
+});
+
+$('btnLogout').addEventListener('click', async () => { await sb.auth.signOut(); checkAuth(); });
+
+// ── LOAD VEHICLES ──
+let vehicles = [];
+
+async function loadVehicles() {
+  $('vehicleList').innerHTML = '<div class="loading">Voorraad laden…</div>';
+  const { data, error } = await sb.from('vehicles').select('*')
+    .order('sort_order', {ascending:true}).order('created_at', {ascending:false});
+  if (error) {
+    $('vehicleList').innerHTML = `<div class="loading" style="color:#fca5a5">Laden mislukt: ${esc(error.message)}</div>`;
+    return;
+  }
+  vehicles = data || [];
+  renderList();
+  $('cTotal').textContent = vehicles.length;
+  $('cAvail').textContent = vehicles.filter(v => v.status === 'available').length;
+  $('cRes').textContent   = vehicles.filter(v => v.status === 'reserved').length;
+}
+
+const badgeMap = {
+  available: ['b-avail','Beschikbaar'],
+  reserved:  ['b-res',  'Gereserveerd'],
+  service:   ['b-srv',  'Service'],
+  part:      ['b-part', 'Onderdeel'],
+};
+
+function renderList() {
+  if (!vehicles.length) {
+    $('vehicleList').innerHTML = `<div class="empty"><div style="font-size:36px">🚐</div><strong>Nog geen voertuigen</strong><p style="margin-top:6px;font-size:14px">Klik "Voertuig toevoegen" om te beginnen.</p></div>`;
+    return;
+  }
+  $('vehicleList').innerHTML = `<div class="vtable">${vehicles.map(v => {
+    const [bc, bl] = badgeMap[v.status] || badgeMap.available;
+    const thumb = v.image_url
+      ? `<img class="vthumb" src="${esc(v.image_url)}" alt="" loading="lazy">`
+      : `<div class="vthumb-empty">🚐</div>`;
+    const meta  = [v.year, v.make].filter(Boolean).join(' · ');
+    const price = v.price_type === 'fixed' && v.price
+      ? `€ ${Number(v.price).toLocaleString('nl-NL')}`
+      : v.price_type === 'ask' ? 'Op aanvraag' : 'Bieden';
+    return `<div class="vrow">
+      ${thumb}
+      <div>
+        <div class="vinfo-title">${esc(v.title)}</div>
+        <div class="vinfo-meta">${esc(meta)} · ${esc(price)}</div>
+      </div>
+      <span class="badge ${bc}">${bl}</span>
+      <div class="row-actions">
+        <button class="btn-icon" title="Bewerken" onclick="openEdit('${esc(v.id)}')">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+        </button>
+        <button class="btn-icon del" title="Verwijderen" onclick="openDelete('${esc(v.id)}','${esc(v.title)}')">
+          <svg viewBox="0 0 24 24"><polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2,0,0,1-2,2H8a2,2,0,0,1-2-2L5,6"/><path d="M10,11v6"/><path d="M14,11v6"/><path d="M9,6V4a1,1,0,0,1,1-1h4a1,1,0,0,1,1,1v2"/></svg>
+        </button>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+// ── ADD / EDIT ──
+let selectedFile = null;
+
+function resetForm() {
+  $('vehicleForm').reset();
+  $('vid').value = '';
+  $('existImg').value = '';
+  $('imgPh').style.display = 'flex';
+  $('imgPrevWrap').style.display = 'none';
+  $('formMsg').style.display = 'none';
+  $('fPriceWrap').style.display = 'block';
+  selectedFile = null;
+}
+
+$('btnAdd').addEventListener('click', () => {
+  resetForm();
+  $('formTitle').textContent = 'Voertuig toevoegen';
+  showView('form');
+  window.scrollTo(0,0);
+});
+$('btnBack').addEventListener('click',   () => showView('list'));
+$('btnCancel').addEventListener('click', () => showView('list'));
+
+function openEdit(id) {
+  const v = vehicles.find(x => x.id === id);
+  if (!v) return;
+  resetForm();
+  $('formTitle').textContent = 'Voertuig bewerken';
+  $('vid').value         = v.id;
+  $('fTitle').value      = v.title   || '';
+  $('fMake').value       = v.make    || '';
+  $('fYear').value       = v.year    || '';
+  $('fStatus').value     = v.status  || 'available';
+  $('fS1').value         = v.spec1   || '';
+  $('fS2').value         = v.spec2   || '';
+  $('fS3').value         = v.spec3   || '';
+  $('fPriceType').value  = v.price_type || 'fixed';
+  $('fPrice').value      = v.price   || '';
+  $('fMpUrl').value      = v.marktplaats_url || '';
+  $('fSort').value       = v.sort_order ?? 0;
+  document.querySelectorAll('[name=cat]').forEach(cb => {
+    cb.checked = (v.category || '').split(',').map(s=>s.trim()).includes(cb.value);
+  });
+  if (v.image_url) {
+    $('existImg').value = v.image_url;
+    $('imgPrev').src    = v.image_url;
+    $('imgPh').style.display      = 'none';
+    $('imgPrevWrap').style.display = 'block';
+  }
+  togglePrice();
+  showView('form');
+  window.scrollTo(0,0);
+}
+
+function togglePrice() {
+  $('fPriceWrap').style.display = $('fPriceType').value === 'fixed' ? 'block' : 'none';
+}
+$('fPriceType').addEventListener('change', togglePrice);
+
+// Image upload
+$('imgArea').addEventListener('click', () => $('imgFile').click());
+$('imgArea').addEventListener('dragover', e => { e.preventDefault(); $('imgArea').classList.add('drag'); });
+$('imgArea').addEventListener('dragleave', () => $('imgArea').classList.remove('drag'));
+$('imgArea').addEventListener('drop', e => {
+  e.preventDefault(); $('imgArea').classList.remove('drag');
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('image/')) setFile(f);
+});
+$('imgFile').addEventListener('change', e => { if (e.target.files[0]) setFile(e.target.files[0]); });
+
+function setFile(file) {
+  selectedFile = file;
+  const r = new FileReader();
+  r.onload = e => {
+    $('imgPrev').src = e.target.result;
+    $('imgPh').style.display       = 'none';
+    $('imgPrevWrap').style.display = 'block';
+  };
+  r.readAsDataURL(file);
+}
+
+// Submit
+$('vehicleForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = $('btnSave');
+  btn.disabled = true; btn.textContent = 'Opslaan…';
+  $('formMsg').style.display = 'none';
+
+  try {
+    // Upload image
+    let imageUrl = $('existImg').value;
+    if (selectedFile) {
+      const ext  = selectedFile.name.split('.').pop().toLowerCase();
+      const path = `vehicles/${Date.now()}.${ext}`;
+      const { data: up, error: upErr } = await sb.storage.from(BUCKET)
+        .upload(path, selectedFile, { cacheControl:'3600', upsert:false });
+      if (upErr) throw new Error('Foto uploaden mislukt: ' + upErr.message);
+      imageUrl = sb.storage.from(BUCKET).getPublicUrl(up.path).data.publicUrl;
+    }
+
+    const cats = [...document.querySelectorAll('[name=cat]:checked')].map(c=>c.value).join(',');
+    const pt   = $('fPriceType').value;
+
+    const rec = {
+      title:           ($('fTitle').value || '').toUpperCase().trim(),
+      make:            ($('fMake').value  || '').toUpperCase().trim() || null,
+      year:            parseInt($('fYear').value)  || null,
+      category:        cats || 'camper',
+      status:          $('fStatus').value,
+      spec1:           ($('fS1').value || '').toUpperCase().trim() || null,
+      spec2:           ($('fS2').value || '').toUpperCase().trim() || null,
+      spec3:           ($('fS3').value || '').toUpperCase().trim() || null,
+      price_type:      pt,
+      price:           pt === 'fixed' ? (parseInt($('fPrice').value) || null) : null,
+      marktplaats_url: $('fMpUrl').value.trim() || null,
+      image_url:       imageUrl || null,
+      sort_order:      parseInt($('fSort').value) || 0,
+      updated_at:      new Date().toISOString(),
+    };
+
+    const id = $('vid').value;
+    const { error } = id
+      ? await sb.from('vehicles').update(rec).eq('id', id)
+      : await sb.from('vehicles').insert(rec);
+    if (error) throw new Error(error.message);
+
+    toast(id ? '✓ Voertuig bijgewerkt' : '✓ Voertuig toegevoegd');
+    await loadVehicles();
+    showView('list');
+  } catch(err) {
+    const d = $('formMsg');
+    d.className = 'msg msg-err';
+    d.textContent = err.message;
+    d.style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Opslaan';
+  }
+});
+
+// ── DELETE ──
+let pendingDel = null;
+
+function openDelete(id, name) {
+  pendingDel = id;
+  $('delModalName').textContent = `"${name}" wordt permanent verwijderd.`;
+  $('delModal').style.display = 'flex';
+}
+
+$('btnDelCancel').addEventListener('click', () => { $('delModal').style.display='none'; pendingDel=null; });
+
+$('btnDelConfirm').addEventListener('click', async () => {
+  if (!pendingDel) return;
+  const btn = $('btnDelConfirm');
+  btn.disabled = true; btn.textContent = 'Verwijderen…';
+  const { error } = await sb.from('vehicles').delete().eq('id', pendingDel);
+  $('delModal').style.display = 'none';
+  btn.disabled = false; btn.textContent = 'Ja, verwijderen';
+  pendingDel = null;
+  if (error) { toast('Verwijderen mislukt: ' + error.message, 'er'); return; }
+  toast('✓ Voertuig verwijderd');
+  await loadVehicles();
+});
+
+// close modal on backdrop click
+$('delModal').addEventListener('click', e => { if (e.target === $('delModal')) { $('delModal').style.display='none'; pendingDel=null; } });
+
+// ── INIT ──
+checkAuth();
+</script>
+</body>
+</html>
