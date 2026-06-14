@@ -149,6 +149,29 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .modal-box p{color:var(--muted);font-size:13px;margin-bottom:22px}
 .modal-actions{display:flex;gap:10px}
 
+/* ── SHARE VIEW ── */
+.share-intro{background:var(--surface);border:1px solid var(--green);border-radius:var(--r);padding:20px 22px;margin-bottom:24px;display:flex;align-items:center;gap:14px}
+.share-intro-icon{font-size:28px;flex-shrink:0}
+.share-intro h2{font-size:16px;font-weight:700;margin-bottom:2px}
+.share-intro p{font-size:13px;color:var(--muted)}
+.share-cards{display:flex;flex-direction:column;gap:16px;max-width:720px}
+.share-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.share-card-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);gap:12px}
+.share-card-platform{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.share-card-platform svg{width:20px;height:20px;flex-shrink:0}
+.share-card-platform .ig{color:#e1306c}
+.share-card-platform .fb{color:#1877f2}
+.share-card-platform .mp{color:#e6b545}
+.share-textarea{width:100%;background:#111;color:var(--ink);border:none;padding:16px 18px;font-size:13px;font-family:inherit;line-height:1.7;resize:vertical;min-height:160px;outline:none}
+.share-textarea:focus{background:#161616}
+.share-actions{padding:12px 18px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.share-actions small{font-size:12px;color:var(--muted)}
+.btn-copy{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--ink);transition:all 0.15s}
+.btn-copy:hover{background:var(--surface2);border-color:var(--ink)}
+.btn-copy.copied{border-color:var(--green);color:var(--green)}
+.btn-copy svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.share-done{margin-top:20px;max-width:720px}
+
 /* ── RESPONSIVE ── */
 @media(max-width:600px){
   .main{padding:20px 14px}
@@ -330,6 +353,87 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
     </form>
   </div>
 
+  <!-- SHARE VIEW -->
+  <div class="main" id="viewShare" style="display:none">
+    <div class="form-back">
+      <button class="btn-back" id="btnShareBack">← Terug naar lijst</button>
+      <h1>Voertuig opgeslagen ✓</h1>
+    </div>
+
+    <div class="share-intro">
+      <div class="share-intro-icon">📋</div>
+      <div>
+        <h2>Post teksten klaarstaan</h2>
+        <p>Klik op "Kopieer" en plak de tekst direct in Instagram, Facebook of Marktplaats. De tekst is al opgemaakt.</p>
+      </div>
+    </div>
+
+    <div class="share-cards">
+
+      <!-- Instagram -->
+      <div class="share-card">
+        <div class="share-card-header">
+          <div class="share-card-platform">
+            <svg class="ig" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            Instagram
+          </div>
+          <span style="font-size:12px;color:var(--muted)">Kopieer → open Instagram → nieuw bericht → plak</span>
+        </div>
+        <textarea class="share-textarea" id="textIg" readonly></textarea>
+        <div class="share-actions">
+          <small>Voeg daarna zelf de foto toe in de Instagram-app</small>
+          <button class="btn-copy" onclick="copyText('textIg', this)">
+            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Kopieer
+          </button>
+        </div>
+      </div>
+
+      <!-- Facebook -->
+      <div class="share-card">
+        <div class="share-card-header">
+          <div class="share-card-platform">
+            <svg class="fb" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </div>
+          <span style="font-size:12px;color:var(--muted)">Kopieer → open Facebook → nieuw bericht → plak</span>
+        </div>
+        <textarea class="share-textarea" id="textFb" readonly></textarea>
+        <div class="share-actions">
+          <small>Voeg daarna zelf de foto toe op Facebook</small>
+          <button class="btn-copy" onclick="copyText('textFb', this)">
+            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Kopieer
+          </button>
+        </div>
+      </div>
+
+      <!-- Marktplaats -->
+      <div class="share-card">
+        <div class="share-card-header">
+          <div class="share-card-platform">
+            <svg class="mp" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            Marktplaats
+          </div>
+          <span style="font-size:12px;color:var(--muted)">Kopieer → plak in omschrijving op Marktplaats</span>
+        </div>
+        <textarea class="share-textarea" id="textMp" readonly></textarea>
+        <div class="share-actions">
+          <small>Voeg daarna zelf de foto's en prijs toe op Marktplaats</small>
+          <button class="btn-copy" onclick="copyText('textMp', this)">
+            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Kopieer
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="share-done">
+      <button class="btn btn-primary" id="btnShareDone">Klaar, terug naar lijst</button>
+    </div>
+  </div>
+
 </div><!-- /screenApp -->
 
 <!-- DELETE MODAL -->
@@ -367,8 +471,83 @@ function toast(msg, type = 'ok') {
 }
 
 function showView(name) {
-  $('viewList').style.display = name === 'list' ? 'block' : 'none';
-  $('viewForm').style.display = name === 'form' ? 'block' : 'none';
+  $('viewList').style.display  = name === 'list'  ? 'block' : 'none';
+  $('viewForm').style.display  = name === 'form'  ? 'block' : 'none';
+  $('viewShare').style.display = name === 'share' ? 'block' : 'none';
+  if (name !== 'list') window.scrollTo(0, 0);
+}
+
+function generatePosts(v) {
+  const priceStr = v.price_type === 'fixed' && v.price
+    ? `€ ${Number(v.price).toLocaleString('nl-NL')}`
+    : v.price_type === 'ask' ? 'Op aanvraag' : 'Bieden';
+  const specs = [v.spec1, v.spec2, v.spec3].filter(Boolean);
+  const specsLine = specs.join(' · ');
+  const specsBullets = specs.map(s => `• ${s}`).join('\n');
+  const make = (v.make || '').toLowerCase();
+
+  const igHashtags = [
+    '#americancar', '#usakar', '#bigthreegarage', '#nunspeet',
+    make ? `#${make.replace(/\s+/g,'')}` : '',
+    v.category?.includes('camper')    ? '#camper #campervan #rv' : '',
+    v.category?.includes('pickup')    ? '#pickup #truck' : '',
+    v.category?.includes('classic')   ? '#classicar #vintage' : '',
+    '#v8', '#amerikanischeautos', '#te koop',
+  ].filter(Boolean).join(' ');
+
+  $('textIg').value =
+`🚐 ${v.year ? v.year + ' ' : ''}${v.make || ''} ${v.title}
+${specsLine ? '\n' + specsLine : ''}
+
+💶 ${priceStr}
+
+📍 The Big Three Garage · Nunspeet
+📲 Interesse? Stuur een DM of bel +31 6 12122146
+🔗 Meer foto's & info via de link in bio
+
+${igHashtags}`.trim();
+
+  $('textFb').value =
+`🚗 TE KOOP: ${v.year ? v.year + ' ' : ''}${v.make || ''} ${v.title}
+
+${specsBullets}
+
+💶 Vraagprijs: ${priceStr}
+
+Meer weten of een afspraak maken?
+📞 +31 6 12122146
+📧 info@bigthreegarage.nl
+📍 The Big Three Garage · Hullerweg 115, Nunspeet
+${v.marktplaats_url ? '\n🔗 ' + v.marktplaats_url : ''}
+
+The Big Three Garage — specialist in Amerikaanse voertuigen`.trim();
+
+  $('textMp').value =
+`${v.title}${v.year ? ' — ' + v.year : ''}${v.make ? ' ' + v.make : ''}
+
+${specsBullets}
+
+Vraagprijs: ${priceStr}
+
+——————————————
+The Big Three Garage
+Hullerweg 115, Nunspeet
+📞 +31 6 12122146
+📧 info@bigthreegarage.nl
+
+Specialist in Amerikaanse campers, pickups en classics.
+Alle voertuigen zijn doorgelicht en rijklaar.
+——————————————`.trim();
+}
+
+function copyText(id, btn) {
+  const el = $(id);
+  navigator.clipboard.writeText(el.value).then(() => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><polyline points="20,6 9,17 4,12"/></svg> Gekopieerd!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+  });
 }
 
 // ── AUTH ──
@@ -588,9 +767,11 @@ $('vehicleForm').addEventListener('submit', async e => {
       : await sb.from('vehicles').insert(rec);
     if (error) throw new Error(error.message);
 
-    toast(id ? '✓ Voertuig bijgewerkt' : '✓ Voertuig toegevoegd');
     await loadVehicles();
-    showView('list');
+    // haal het net opgeslagen voertuig op voor de post-teksten
+    const saved = vehicles.find(v => id ? v.id === id : true) || { ...rec, id: '' };
+    generatePosts({ ...rec, ...saved });
+    showView('share');
   } catch(err) {
     const d = $('formMsg');
     d.className = 'msg msg-err';
@@ -624,6 +805,9 @@ $('btnDelConfirm').addEventListener('click', async () => {
   toast('✓ Voertuig verwijderd');
   await loadVehicles();
 });
+
+$('btnShareBack').addEventListener('click',  () => showView('list'));
+$('btnShareDone').addEventListener('click',  () => showView('list'));
 
 // close modal on backdrop click
 $('delModal').addEventListener('click', e => { if (e.target === $('delModal')) { $('delModal').style.display='none'; pendingDel=null; } });
