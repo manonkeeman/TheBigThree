@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"/Users/manonkeeman/Desktop/MANONIT/Bigthree-concept/index.html\" \"/Users/manonkeeman/Desktop/MANONIT/Bigthree-concept/BigThree-Website/index.html\")",
+      "Bash(cp \"/Users/manonkeeman/Desktop/MANONIT/Bigthree-concept/auto-detail.html\" \"/Users/manonkeeman/Desktop/MANONIT/Bigthree-concept/BigThree-Website/auto-detail.html\")",
+      "Bash(npm install *)",
+      "Bash(npx serve *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/auto-detail.html)",
+      "Bash(kill %1)",
+      "Bash(curl *)",
+      "Bash(pkill -f \"serve \\\\.\")",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(gh auth *)",
+      "Bash(gh repo *)",
+      "Bash(netlify sites:list)",
+      "Bash(npx netlify-cli *)",
+      "mcp__claude_ai_Netlify__netlify-project-services-reader",
+      "mcp__claude_ai_Netlify__netlify-deploy-services-updater",
+      "Bash(npx *)",
+      "Bash(git push *)",
+      "Bash(convert --version)",
+      "Bash(python3 -c \"from PIL import Image; print\\('PIL ok'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 *)",
+      "WebFetch(domain:www.instagram.com)",
+      "WebFetch(domain:www.youtube.com)",
+      "WebFetch(domain:www.facebook.com)",
+      "WebFetch(domain:consent.youtube.com)",
+      "WebSearch",
+      "WebFetch(domain:www.marktplaats.nl)",
+      "Read(//private/tmp/**)",
+      "Bash(sips --flip horizontal hero-chevy-raw.jpg --out hero-chevy.jpg)",
+      "Bash(sips --flip horizontal hero-raw.jpg --out hero-chevy.jpg)",
+      "Bash(cp /tmp/c4_chevy_cargo.jpg /Users/manonkeeman/Desktop/MANONIT/Bigthree-concept/BigThree-Website/assets/hero-a.jpg)",
+      "Bash(cp /tmp/c5_chevy_explorer.jpg /Users/manonkeeman/Desktop/MANONIT/Bigthree-concept/BigThree-Website/assets/hero-b.jpg)",
+      "Bash(sips --flip horizontal hero-a.jpg --out hero-a.jpg)"
+    ]
+  }
+}

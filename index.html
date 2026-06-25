@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Big Three Garage · Amerikaanse voertuigen specialist Nunspeet</title>
-<meta name="description" content="The Big Three Garage in Nunspeet: specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, restauratie en import uit de VS. Bel +31 6 12122146.">
+<meta name="description" content="The Big Three Garage in Nunspeet: specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, restauratie en import uit de VS. Bel 06 82727374.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://thebigthreenunspeet.netlify.app/">
 <link rel="alternate" hreflang="nl" href="https://thebigthreenunspeet.netlify.app/">
@@ -37,8 +37,7 @@
   "name": "The Big Three Garage",
   "description": "Specialist in Amerikaanse voertuigen: verkoop, onderhoud, restauratie en import van campers, pickups en classics.",
   "url": "https://thebigthreenunspeet.netlify.app",
-  "telephone": "+31612122146",
-  "email": "info@bigthreegarage.nl",
+  "telephone": "+31682727374",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Hullerweg 115",
@@ -626,6 +625,24 @@
     font-weight:300;
   }
 
+  /* ─── SUNRISE PARTNER ─── */
+  .sunrise-partner{
+    margin-top:40px;
+    border:1px solid var(--line);
+    background:var(--panel);
+  }
+  .sunrise-partner-inner{
+    padding:32px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  @media(max-width:600px){
+    .sunrise-partner-inner{padding:24px 22px}
+  }
+
   /* HOE WERKT HET */
   .process{
     margin-top:80px;
@@ -955,6 +972,22 @@
     letter-spacing:0.05em;
   }
   .footer-col a:hover{color:var(--rust)}
+  .footer-colofon{
+    border-top:1px solid var(--line);
+    padding:14px 0 18px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:12px;
+    letter-spacing:0.12em;
+    color:var(--ink-dim);
+    opacity:0.65;
+  }
+  .footer-colofon em{
+    font-style:normal;
+    color:var(--rust);
+  }
   .footer-bottom{
     border-top:1px solid var(--line);
     padding-top:24px;
@@ -1259,6 +1292,9 @@
       <button class="chip" data-filter="modern" data-i18n="filter.modern">Modern</button>
       <button class="chip" data-filter="pickup" data-i18n="filter.pickups">Pickups</button>
       <button class="chip" data-filter="onderdeel" data-i18n="filter.parts">Onderdelen</button>
+      <button class="chip" data-filter="motor" data-i18n="filter.motors">Motoren</button>
+      <button class="chip" data-filter="plaatwerk" data-i18n="filter.bodywork">Plaatwerk</button>
+      <button class="chip" data-filter="velgen" data-i18n="filter.wheels">Velgen</button>
     </div>
 
     <div class="grid" id="voorraadGrid">
@@ -1273,7 +1309,7 @@
         <div class="eyebrow" data-i18n="srv.eyebrow">Wat we doen</div>
         <h2 data-i18n="srv.title">DE <em>WERKPLAATS</em></h2>
       </div>
-      <p data-i18n="srv.sub">Vier dingen waar we goed in zijn. Bel of loop binnen, dan kijken we samen wat jouw auto nodig heeft.</p>
+      <p data-i18n="srv.sub">Vijf dingen waar we goed in zijn. Bel of loop binnen, dan kijken we samen wat jouw auto nodig heeft.</p>
     </div>
 
     <div class="service-grid">
@@ -1297,7 +1333,7 @@
         </div>
         <h3 data-i18n="srv.2.title">RESTAURATIE</h3>
         <div class="service-for" data-i18n="srv.2.for">Voor: lange-termijn projecten</div>
-        <p data-i18n="srv.2.body">Volledig of gedeeltelijk. Plaatwerk, mechaniek, interieur. Alles onder één dak. Elk project gedocumenteerd in foto's en uren.</p>
+        <p data-i18n="srv.2.body">Jij bepaalt hoe ver je wil gaan. Wij doen de rest. Klein of groot, altijd met oog voor detail en eerlijk in de uren.</p>
       </div>
       <div class="service">
         <div class="service-num">/ 03</div>
@@ -1327,6 +1363,28 @@
         <h3 data-i18n="srv.4.title">CAMPER SPECIALIST</h3>
         <div class="service-for" data-i18n="srv.4.for">Voor: camper-eigenaren</div>
         <p data-i18n="srv.4.body">Class A, Class C, RV's en vintage motorhomes. Mechaniek, gas, elektra, water. We kennen het hele systeem en bouwen ook custom.</p>
+      </div>
+      <div class="service">
+        <div class="service-num">/ 05</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 17H20M4 17L8 13M4 17L8 21"/>
+            <path d="M20 7H4M20 7L16 3M20 7L16 11"/>
+          </svg>
+        </div>
+        <h3 data-i18n="srv.5.title">INRUIL</h3>
+        <div class="service-for" data-i18n="srv.5.for">Voor: als je van voertuig wil wisselen</div>
+        <p data-i18n="srv.5.body">Heb je een Amerikaan die je wil inruilen? Wij bieden een eerlijke inruilwaarde. Geen gedoe, gewoon een direct en transparant bod op jouw voertuig.</p>
+      </div>
+    </div>
+
+    <div class="sunrise-partner">
+      <div class="sunrise-partner-inner">
+        <div>
+          <div class="eyebrow" style="margin-bottom:10px">Partner</div>
+          <p data-i18n="srv.sunrise.sub" style="color:var(--ink-dim);font-size:15px;font-weight:300;line-height:1.6;max-width:560px">Wij werken samen met Sunrise Camper Conversions voor professionele camper-ombouwprojecten — van concept tot afwerking.</p>
+        </div>
+        <a href="https://www.sunrisecamperconversions.nl" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="srv.sunrise.btn">Bekijk Sunrise Camper Conversions</a>
       </div>
     </div>
 
@@ -1395,7 +1453,7 @@
         <h2 data-i18n="story.title">VAN AMERIKA<br>NAAR <em>NUNSPEET.</em></h2>
         <p data-i18n="story.p1">David Broeksma woonde jaren in de Verenigde Staten. Hij sleutelde daar aan auto's die hier alleen in films te zien zijn, en leerde de techniek van mensen die er hun hele leven mee bezig waren. <strong>Dat verhaal nam hij mee terug naar Nunspeet.</strong></p>
         <p data-i18n="story.p2">The Big Three Garage is geen showroom met witte vloeren. Het is een echte werkplaats met een mancave-kantine, een flipperkast, en de overtuiging dat een Amerikaan behandeld moet worden als een Amerikaan. <strong>Geen Europese trucjes, geen halve oplossingen.</strong> Doen wat het ding nodig heeft, en het netjes afmaken.</p>
-        <div class="story-quote" data-i18n="story.quote">"Ik heb daar geleerd hoe je een V8 hoort te horen lopen. Dat geluid neem je niet zomaar mee terug. Dat moet je onderhouden."</div>
+        <div class="story-quote" data-i18n="story.quote">"Ik heb daar geleerd hoe een V8 hoort te klinken. Dat geluid breng je niet zomaar mee naar huis — dat verdien je elke dag opnieuw."</div>
         <div class="story-quote-attr">
           <div class="story-quote-avatar-wrap">
             <img src="assets/david-broeksma.png" alt="David Broeksma – The Big Three Garage" class="story-quote-avatar">
@@ -1428,11 +1486,7 @@
         </div>
         <div class="contact-block">
           <span class="contact-block-label" data-i18n="ctc.tel">Telefoon</span>
-          <span class="contact-block-value"><a href="tel:+31612122146" style="color:inherit;text-decoration:none">+31 6 12122146</a></span>
-        </div>
-        <div class="contact-block">
-          <span class="contact-block-label">Email</span>
-          <span class="contact-block-value"><a href="mailto:info@bigthreegarage.nl" style="color:inherit;text-decoration:none">info@bigthreegarage.nl</a></span>
+          <span class="contact-block-value"><a href="tel:+31682727374" style="color:inherit;text-decoration:none">06 82 72 73 74</a></span>
         </div>
         <div class="contact-block">
           <span class="contact-block-label" data-i18n="ctc.hrs">Openingstijden</span>
@@ -1531,8 +1585,7 @@
     <div class="footer-col">
       <h4 data-i18n="ftr.h1">Bezoek</h4>
       <span>Hullerweg 115, Nunspeet</span>
-      <a href="tel:+31612122146">+31 6 12122146</a>
-      <a href="mailto:info@bigthreegarage.nl">info@bigthreegarage.nl</a>
+      <a href="tel:+31682727374">06 82 72 73 74</a>
     </div>
     <div class="footer-col">
       <h4 data-i18n="ftr.h2">Menu</h4>
@@ -1550,6 +1603,11 @@
       <a href="https://www.marktplaats.nl/u/the-big-3-nunspeet/42868245/" target="_blank" rel="noopener">Marktplaats</a>
     </div>
   </div>
+  <div class="footer-colofon">
+    <span><strong>The Big Three Garage</strong> · Hullerweg 115, 8071 NP Nunspeet</span>
+    <span>KvK: <em data-i18n="ftr.kvk">[invullen]</em></span>
+    <span>BTW: <em data-i18n="ftr.btw">[invullen]</em></span>
+  </div>
   <div class="footer-bottom">
     <span>© <span id="ftYear"></span> THE BIG THREE GARAGE · NUNSPEET</span>
     <span data-i18n="ftr.by">Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a></span>
@@ -1557,7 +1615,7 @@
 </footer>
 
 <!-- WhatsApp FAB -->
-<a href="https://wa.me/31612122146?text=Hallo%2C%20ik%20heb%20een%20vraag%20over..." class="wa-fab" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp The Big Three Garage" id="waFab">
+<a href="https://wa.me/31682727374?text=Hallo%2C%20ik%20heb%20een%20vraag%20over..." class="wa-fab" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp The Big Three Garage" id="waFab">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.534 5.854L0 24l6.306-1.513A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.877 9.877 0 0 1-5.034-1.377l-.36-.214-3.742.897.934-3.638-.235-.374A9.836 9.836 0 0 1 2.118 12C2.118 6.533 6.533 2.118 12 2.118S21.882 6.533 21.882 12 17.467 21.882 12 21.882z"/></svg>
 </a>
 
@@ -1666,7 +1724,7 @@
       "inv.eyebrow":"Te koop · in de showroom",
       "inv.title":"VOORRAAD<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Campers, pickups en classics. Handgekozen, doorgelicht en klaar voor de weg. Elke auto met meerdere foto's en op aanvraag een walk-around video.",
-      "filter.all":"Alles","filter.campers":"Campers","filter.classics":"Klassiekers","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Onderdelen",
+      "filter.all":"Alles","filter.campers":"Campers","filter.classics":"Klassiekers","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Onderdelen","filter.motors":"Motoren","filter.bodywork":"Plaatwerk","filter.wheels":"Velgen",
       "card.cta":"Bekijk ›","card.gallery":"Galerij ›","card.status":"VOORRAAD","card.reserved":"GERESERVEERD","card.service":"SERVICE","card.part":"ONDERDEEL","card.mp":"Marktplaats ›",
       "card.price.ask":"Op aanvraag","card.price.mp":"Zie Marktplaats","card.price.bid":"Bieden",
       "spec.v8auto":"V8 AUTOMAAT","spec.lpglth":"LPG · LEER","spec.lthmot":"LEER · APK NIEUW",
@@ -1674,11 +1732,14 @@
       "spec.cyl8auto":"8-CIL AUTOMAAT","spec.florida":"FLORIDA AUTO","spec.rustlth":"ROESTVRIJ · LEER",
       "spec.auto":"AUTOMAAT","spec.leather":"LEER","spec.loaded":"VOL OPTIES","spec.newimport":"NIEUWE IMPORT","spec.lth20":'LEER · 20"',"spec.lowkm":"LAGE KM","spec.set4":"SET VAN 4",
       "srv.eyebrow":"Wat we doen","srv.title":"DE <em>WERKPLAATS</em>",
-      "srv.sub":"Vier dingen waar we goed in zijn. Bel of loop binnen, dan kijken we samen wat jouw auto nodig heeft.",
+      "srv.sub":"Vijf dingen waar we goed in zijn. Bel of loop binnen, dan kijken we samen wat jouw auto nodig heeft.",
       "srv.1.title":"ONDERHOUD & APK","srv.1.for":"Voor: rijdende klanten","srv.1.body":"Reguliere service, APK keuring en kleine reparaties. Voor je Amerikaan, camper of klassieker. Originele en aftermarket onderdelen.",
-      "srv.2.title":"RESTAURATIE","srv.2.for":"Voor: lange-termijn projecten","srv.2.body":"Volledig of gedeeltelijk. Plaatwerk, mechaniek, interieur. Alles onder één dak. Elk project gedocumenteerd in foto's en uren.",
+      "srv.2.title":"RESTAURATIE","srv.2.for":"Voor: lange-termijn projecten","srv.2.body":"Jij bepaalt hoe ver je wil gaan. Wij doen de rest. Klein of groot, altijd met oog voor detail en eerlijk in de uren.",
       "srv.3.title":"IMPORT & KEURING","srv.3.for":"Voor: kopers uit de VS","srv.3.body":"Auto rechtstreeks uit Amerika halen? Wij regelen het hele traject: NL-kenteken, BPM, RDW-keuring en transport tot de werkplaats.",
       "srv.4.title":"CAMPER SPECIALIST","srv.4.for":"Voor: camper-eigenaren","srv.4.body":"Class A, Class C, RV's en vintage motorhomes. Mechaniek, gas, elektra, water. We kennen het hele systeem en bouwen ook custom.",
+      "srv.5.title":"INRUIL","srv.5.for":"Voor: als je van voertuig wil wisselen","srv.5.body":"Heb je een Amerikaan die je wil inruilen? Wij bieden een eerlijke inruilwaarde. Geen gedoe, gewoon een direct en transparant bod op jouw voertuig.",
+      "srv.sunrise.sub":"Wij werken samen met Sunrise Camper Conversions voor professionele camper-ombouwprojecten — van concept tot afwerking.",
+      "srv.sunrise.btn":"Bekijk Sunrise Camper Conversions",
       "proc.eyebrow":"Hoe werkt het","proc.title":"VAN BINNENRIJDEN<br>TOT <em>OPHALEN</em>",
       "proc.1.t":"BEL OF LOOP BINNEN","proc.1.d":"Vertel ons wat er aan de hand is. Geen verplichtingen, geen kosten.",
       "proc.2.t":"DIAGNOSE","proc.2.d":"We bekijken de auto en geven eerlijk aan wat hij nodig heeft.",
@@ -1688,7 +1749,7 @@
       "story.eyebrow":"Sinds dag één","story.title":"VAN AMERIKA<br>NAAR <em>NUNSPEET.</em>",
       "story.p1":"David Broeksma woonde jaren in de Verenigde Staten. Hij sleutelde daar aan auto's die hier alleen in films te zien zijn, en leerde de techniek van mensen die er hun hele leven mee bezig waren. <strong>Dat verhaal nam hij mee terug naar Nunspeet.</strong>",
       "story.p2":"The Big Three Garage is geen showroom met witte vloeren. Het is een echte werkplaats met een mancave-kantine, een flipperkast, en de overtuiging dat een Amerikaan behandeld moet worden als een Amerikaan. <strong>Geen Europese trucjes, geen halve oplossingen.</strong> Doen wat het ding nodig heeft, en het netjes afmaken.",
-      "story.quote":"\"Ik heb daar geleerd hoe je een V8 hoort te horen lopen. Dat geluid neem je niet zomaar mee terug. Dat moet je onderhouden.\"",
+      "story.quote":"\"Ik heb daar geleerd hoe een V8 hoort te klinken. Dat geluid breng je niet zomaar mee naar huis — dat verdien je elke dag opnieuw.\"",
       "story.attr":"David Broeksma · Eigenaar","story.cta":"Kom langs in Nunspeet",
       "video.eyebrow":"Zie de garage","video.title":"ZO ZIET HET ERUIT<br><em>BIJ ONS.</em>",
       "ctc.eyebrow":"Stuur een bericht · bel · loop binnen","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"VIND <em>ONS</em>",
@@ -1724,7 +1785,7 @@
       "inv.eyebrow":"For sale · in the showroom",
       "inv.title":"INVENTORY<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Campers, pickups and classics. Hand-picked, vetted and ready for the road. Each vehicle with multiple photos and a walk-around video on request.",
-      "filter.all":"All","filter.campers":"Campers","filter.classics":"Classics","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Parts",
+      "filter.all":"All","filter.campers":"Campers","filter.classics":"Classics","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Parts","filter.motors":"Motors","filter.bodywork":"Bodywork","filter.wheels":"Wheels",
       "card.cta":"View ›","card.gallery":"Gallery ›","card.status":"IN STOCK","card.reserved":"RESERVED","card.service":"SERVICE","card.part":"PART","card.mp":"Marktplaats ›",
       "card.price.ask":"On request","card.price.mp":"See listing","card.price.bid":"Make offer",
       "spec.v8auto":"V8 AUTOMATIC","spec.lpglth":"LPG · LEATHER","spec.lthmot":"LEATHER · MOT NEW",
@@ -1732,11 +1793,14 @@
       "spec.cyl8auto":"8-CYL AUTOMATIC","spec.florida":"FLORIDA CAR","spec.rustlth":"RUST FREE · LEATHER",
       "spec.auto":"AUTOMATIC","spec.leather":"LEATHER","spec.loaded":"FULLY LOADED","spec.newimport":"NEW IMPORT","spec.lth20":'LEATHER · 20"',"spec.lowkm":"LOW KM","spec.set4":"SET OF 4",
       "srv.eyebrow":"What we do","srv.title":"THE <em>WORKSHOP</em>",
-      "srv.sub":"Four things we do well. Call or drop by, and we'll figure out together what your car needs.",
+      "srv.sub":"Five things we do well. Call or drop by, and we'll figure out together what your car needs.",
       "srv.1.title":"SERVICE & MOT","srv.1.for":"For: regular drivers","srv.1.body":"Regular service, MOT inspection and minor repairs. For your American, camper or classic. Original and aftermarket parts.",
-      "srv.2.title":"RESTORATION","srv.2.for":"For: long-term projects","srv.2.body":"Full or partial. Bodywork, mechanics, interior. All under one roof. Every project documented in photos and hours.",
+      "srv.2.title":"RESTORATION","srv.2.for":"For: long-term projects","srv.2.body":"You decide how far you want to go. We handle the rest. Small or large, always with an eye for detail and honest in the hours.",
       "srv.3.title":"IMPORT & REGISTRATION","srv.3.for":"For: buyers from the US","srv.3.body":"Want a car straight from America? We handle the whole process: Dutch registration, taxes, RDW inspection and transport to the workshop.",
       "srv.4.title":"CAMPER SPECIALIST","srv.4.for":"For: camper owners","srv.4.body":"Class A, Class C, RVs and vintage motorhomes. Mechanics, gas, electrics, water. We know the whole system and we build custom too.",
+      "srv.5.title":"TRADE-IN","srv.5.for":"For: looking to swap vehicles","srv.5.body":"Got an American you want to trade in? We offer a fair trade-in value. No fuss — just a direct, transparent offer on your vehicle.",
+      "srv.sunrise.sub":"We work together with Sunrise Camper Conversions for professional camper conversion projects — from concept to completion.",
+      "srv.sunrise.btn":"Visit Sunrise Camper Conversions",
       "proc.eyebrow":"How it works","proc.title":"FROM DRIVING IN<br>TO <em>PICKING UP</em>",
       "proc.1.t":"CALL OR DROP IN","proc.1.d":"Tell us what's going on. No obligations, no costs.",
       "proc.2.t":"DIAGNOSIS","proc.2.d":"We inspect the car and give an honest take on what it needs.",
@@ -1746,7 +1810,7 @@
       "story.eyebrow":"Since day one","story.title":"FROM AMERICA<br>TO <em>NUNSPEET.</em>",
       "story.p1":"David Broeksma lived in the United States for years. He worked on cars there that you only see in movies over here, and learned the trade from people who had spent their whole life with it. <strong>He brought that story back to Nunspeet.</strong>",
       "story.p2":"The Big Three Garage isn't a showroom with white floors. It's a real workshop with a mancave kitchen, a pinball machine, and the belief that an American should be treated like an American. <strong>No European tricks, no half solutions.</strong> Do what the thing needs, and finish it properly.",
-      "story.quote":"\"I learned over there how a V8 is supposed to sound. You don't just bring that sound back. You have to maintain it.\"",
+      "story.quote":"\"I learned over there how a V8 is supposed to sound. You don't just bring that home with you — you earn it, every single day.\"",
       "story.attr":"David Broeksma · Owner","story.cta":"Drop by in Nunspeet",
       "video.eyebrow":"See the garage","video.title":"THIS IS WHAT IT<br><em>LOOKS LIKE.</em>",
       "ctc.eyebrow":"Send a message · call · drop in","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"FIND <em>US</em>",
@@ -1782,7 +1846,7 @@
       "inv.eyebrow":"Zum Verkauf · im Showroom",
       "inv.title":"FAHRZEUGE<br><em>AMERICAN STEEL</em>",
       "inv.sub":"Camper, Pickups und Klassiker. Handverlesen, geprüft und bereit für die Straße. Jedes Fahrzeug mit mehreren Fotos und auf Anfrage ein Walk-around-Video.",
-      "filter.all":"Alle","filter.campers":"Camper","filter.classics":"Klassiker","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Ersatzteile",
+      "filter.all":"Alle","filter.campers":"Camper","filter.classics":"Klassiker","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Ersatzteile","filter.motors":"Motoren","filter.bodywork":"Karosserie","filter.wheels":"Felgen",
       "card.cta":"Ansehen ›","card.gallery":"Galerie ›","card.status":"VORRÄTIG","card.reserved":"RESERVIERT","card.service":"SERVICE","card.part":"ERSATZTEIL","card.mp":"Marktplaats ›",
       "card.price.ask":"Auf Anfrage","card.price.mp":"Zur Anzeige","card.price.bid":"Bieten",
       "spec.v8auto":"V8 AUTOMATIK","spec.lpglth":"LPG · LEDER","spec.lthmot":"LEDER · HU NEU",
@@ -1790,11 +1854,14 @@
       "spec.cyl8auto":"8-ZYL AUTOMATIK","spec.florida":"FLORIDA AUTO","spec.rustlth":"ROSTFREI · LEDER",
       "spec.auto":"AUTOMATIK","spec.leather":"LEDER","spec.loaded":"VOLL AUSGESTATTET","spec.newimport":"NEUER IMPORT","spec.lth20":'LEDER · 20"',"spec.lowkm":"WENIG KM","spec.set4":"4er SET",
       "srv.eyebrow":"Was wir tun","srv.title":"DIE <em>WERKSTATT</em>",
-      "srv.sub":"Vier Dinge, die wir gut können. Rufen Sie an oder kommen Sie vorbei — wir schauen gemeinsam, was Ihr Fahrzeug braucht.",
+      "srv.sub":"Fünf Dinge, die wir gut können. Rufen Sie an oder kommen Sie vorbei — wir schauen gemeinsam, was Ihr Fahrzeug braucht.",
       "srv.1.title":"WARTUNG & TÜV","srv.1.for":"Für: Fahrer im Alltag","srv.1.body":"Reguläre Wartung, TÜV-Inspektion und kleine Reparaturen. Für Ihren Amerikaner, Camper oder Klassiker. Original- und Aftermarket-Teile.",
-      "srv.2.title":"RESTAURATION","srv.2.for":"Für: Langzeitprojekte","srv.2.body":"Komplett oder teilweise. Karosserie, Mechanik, Interieur. Alles unter einem Dach. Jedes Projekt mit Fotos und Stunden dokumentiert.",
+      "srv.2.title":"RESTAURATION","srv.2.for":"Für: Langzeitprojekte","srv.2.body":"Sie entscheiden, wie weit es gehen soll. Wir erledigen den Rest. Klein oder groß — immer mit Blick fürs Detail und ehrlich in den Stunden.",
       "srv.3.title":"IMPORT & ZULASSUNG","srv.3.for":"Für: Käufer aus den USA","srv.3.body":"Fahrzeug direkt aus Amerika? Wir kümmern uns um alles: NL-Zulassung, Steuern, RDW-Prüfung und Transport bis zur Werkstatt.",
       "srv.4.title":"CAMPER-SPEZIALIST","srv.4.for":"Für: Camper-Besitzer","srv.4.body":"Class A, Class C, RVs und Vintage-Motorhomes. Mechanik, Gas, Elektrik, Wasser. Wir kennen das ganze System und bauen auch nach Maß.",
+      "srv.5.title":"INZAHLUNG","srv.5.for":"Für: Fahrzeugwechsel","srv.5.body":"Möchten Sie Ihren Amerikaner in Zahlung geben? Wir bieten einen fairen Inzahlungnahmewert. Kein Aufwand — nur ein direktes, transparentes Angebot.",
+      "srv.sunrise.sub":"Wir arbeiten mit Sunrise Camper Conversions für professionelle Camper-Umbauprojekte zusammen — vom Konzept bis zur Fertigstellung.",
+      "srv.sunrise.btn":"Sunrise Camper Conversions besuchen",
       "proc.eyebrow":"So läuft es ab","proc.title":"VOM REINFAHREN<br>BIS <em>ZUM ABHOLEN</em>",
       "proc.1.t":"ANRUFEN ODER VORBEIKOMMEN","proc.1.d":"Erzählen Sie uns, was los ist. Kein Risiko, keine Kosten.",
       "proc.2.t":"DIAGNOSE","proc.2.d":"Wir schauen das Fahrzeug an und sagen ehrlich, was es braucht.",
@@ -1804,7 +1871,7 @@
       "story.eyebrow":"Seit Tag eins","story.title":"AUS AMERIKA<br>NACH <em>NUNSPEET.</em>",
       "story.p1":"David Broeksma lebte jahrelang in den Vereinigten Staaten. Er schraubte dort an Fahrzeugen, die man hier nur aus Filmen kennt, und lernte das Handwerk von Leuten, die ihr ganzes Leben damit verbracht haben. <strong>Diese Geschichte brachte er mit nach Nunspeet.</strong>",
       "story.p2":"The Big Three Garage ist kein Showroom mit weißen Böden. Es ist eine echte Werkstatt mit Mancave-Flair, einem Flipper, und der Überzeugung, dass ein Amerikaner wie ein Amerikaner behandelt werden muss. <strong>Keine europäischen Tricks, keine halben Lösungen.</strong> Tun, was nötig ist — und es ordentlich abschließen.",
-      "story.quote":"\"Ich habe drüben gelernt, wie ein V8 klingen muss. Diesen Sound bringt man nicht einfach mit zurück. Den muss man pflegen.\"",
+      "story.quote":"\"Ich habe drüben gelernt, wie ein V8 klingen soll. Diesen Sound bringt man nicht einfach mit nach Hause — den verdient man sich, Tag für Tag.\"",
       "story.attr":"David Broeksma · Inhaber","story.cta":"Besuchen Sie uns in Nunspeet",
       "video.eyebrow":"Schauen Sie rein","video.title":"SO SIEHT ES<br><em>BEI UNS AUS.</em>",
       "ctc.eyebrow":"Nachricht · Anruf · Vorbeikommen","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"FINDEN SIE <em>UNS</em>",
