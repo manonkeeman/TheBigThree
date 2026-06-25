@@ -964,7 +964,7 @@
   .footer-inner{
     max-width:1400px;margin:0 auto;
     display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
+    grid-template-columns:2fr 1fr 1fr 1fr 1fr;
     gap:60px;
     margin-bottom:50px;
   }
@@ -1169,7 +1169,7 @@
     .story-vid-col{position:static}
     .contact-grid{grid-template-columns:1fr;gap:48px}
     .contact-info{border-right:none}
-    .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+    .footer-inner{grid-template-columns:1fr 1fr;gap:28px}
     .footer-bottom{flex-direction:column;gap:8px;align-items:flex-start}
     .cookie-bar{padding:14px 20px}
     .map-frame iframe{height:220px}
@@ -1312,6 +1312,7 @@
       <button class="chip" data-filter="classic" data-i18n="filter.classics">Klassiekers</button>
       <button class="chip" data-filter="modern" data-i18n="filter.modern">Modern</button>
       <button class="chip" data-filter="pickup" data-i18n="filter.pickups">Pickups</button>
+      <button class="chip" data-filter="motor" data-i18n="filter.motors">Motoren</button>
       <div class="chip-dropdown" id="onderdelenDropdown">
         <button class="chip chip-has-dropdown" data-filter="onderdeel" id="onderdelenTrigger">
           <span data-i18n="filter.parts">Onderdelen</span>
@@ -1322,7 +1323,6 @@
           <button class="chip" data-filter="velgen" data-i18n="filter.wheels">Velgen</button>
         </div>
       </div>
-      <button class="chip" data-filter="motor" data-i18n="filter.motors">Motoren</button>
     </div>
 
     <div class="grid" id="voorraadGrid">
@@ -1414,6 +1414,7 @@
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:12px">
           <a href="https://www.sunrisecamperconversions.nl" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="srv.sunrise.btn">Bekijk Sunrise Camper Conversions</a>
+          <a href="https://www.youtube.com/playlist?app=desktop&list=PLD0FAEF4B6F8798BB" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="srv.sunrise.yt">YouTube</a>
           <a href="https://www.facebook.com/sunriseConversionVans" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="srv.sunrise.fb">Facebook</a>
         </div>
       </div>
@@ -1438,7 +1439,7 @@
         <div class="process-step">
           <div class="step-num">03</div>
           <div class="step-title" data-i18n="proc.3.t">OFFERTE</div>
-          <div class="step-desc" data-i18n="proc.3.d">Geen schriftelijke offerte. David vertelt je eerlijk wat het kost en of het de moeite waard is.</div>
+          <div class="step-desc" data-i18n="proc.3.d">David vertelt je eerlijk wat het kost en of het de moeite waard is.</div>
         </div>
         <div class="process-step">
           <div class="step-num">04</div>
@@ -1639,6 +1640,15 @@
       <a href="https://www.facebook.com/100082907093533/" target="_blank" rel="noopener">Facebook</a>
       <a href="https://www.marktplaats.nl/u/the-big-3-nunspeet/42868245/" target="_blank" rel="noopener">Marktplaats</a>
     </div>
+    <div class="footer-col">
+      <h4 data-i18n="ftr.h4">Juridisch</h4>
+      <span>The Big Three Garage</span>
+      <span>Hullerweg 115, 8071 NP Nunspeet</span>
+      <span>KvK: 81234090</span>
+      <span>BTW: 862005541B01</span>
+      <a href="privacy.html" data-i18n="ftr.privacy" style="margin-top:8px">Privacyverklaring</a>
+      <a href="colofon.html" data-i18n="ftr.colofon">Colofon</a>
+    </div>
   </div>
   <div class="footer-colofon">
     <span><strong>The Big Three Garage</strong> · Hullerweg 115, 8071 NP Nunspeet</span>
@@ -1777,11 +1787,11 @@
       "srv.4.title":"CAMPER SPECIALIST","srv.4.for":"Voor: camper-eigenaren","srv.4.body":"Class A, Class C, RV's en vintage motorhomes. Mechaniek, gas, elektra, water. We kennen het hele systeem en bouwen ook custom.",
       "srv.5.title":"INRUIL","srv.5.for":"Voor: als je van voertuig wil wisselen","srv.5.body":"Heb je een Amerikaan die je wil inruilen? Wij bieden een eerlijke inruilwaarde. Geen gedoe, gewoon een direct en transparant bod op jouw voertuig.",
       "srv.sunrise.sub":"Wij werken samen met Sunrise Camper Conversions voor professionele camper-ombouwprojecten - van concept tot afwerking.",
-      "srv.sunrise.btn":"Bekijk Sunrise Camper Conversions","srv.sunrise.fb":"Facebook",
+      "srv.sunrise.btn":"Bekijk Sunrise Camper Conversions","srv.sunrise.yt":"YouTube","srv.sunrise.fb":"Facebook",
       "proc.eyebrow":"Hoe werkt het","proc.title":"VAN BINNENRIJDEN<br>TOT <em>OPHALEN</em>",
       "proc.1.t":"BEL OF LOOP BINNEN","proc.1.d":"Vertel ons wat er aan de hand is. Geen verplichtingen, geen kosten.",
       "proc.2.t":"DIAGNOSE","proc.2.d":"We bekijken de auto en geven eerlijk aan wat hij nodig heeft.",
-      "proc.3.t":"OFFERTE","proc.3.d":"Geen schriftelijke offerte. David vertelt je eerlijk wat het kost en of het de moeite waard is.",
+      "proc.3.t":"OFFERTE","proc.3.d":"David vertelt je eerlijk wat het kost en of het de moeite waard is.",
       "proc.4.t":"WERK","proc.4.d":"We pakken het aan. Als er iets verandert of tegenvalt, bellen we je.",
       "proc.5.t":"OPHALEN","proc.5.d":"Klaar. We laten zien wat er gedaan is en geven je de sleutels.",
       "story.eyebrow":"Sinds dag één","story.title":"VAN AMERIKA<br>NAAR <em>NUNSPEET.</em>",
@@ -1797,7 +1807,7 @@
       "form.opt1":"Vraag over voorraad","form.opt2":"Onderhoud / werkplaats","form.opt3":"Restauratie project","form.opt4":"Import vanuit VS","form.opt5":"Anders",
       "form.ph.name":"Jouw naam","form.ph.email":"je@email.nl","form.ph.msg":"Vertel ons wat je zoekt...",
       "ftr.about":"Specialist in Amerikaanse voertuigen. Verkoop, onderhoud, APK, restauratie, import, camper specialist en inruil. Eerlijk vakmanschap van iemand die weet hoe een V8 klinkt.",
-      "ftr.h1":"Bezoek","ftr.h2":"Menu","ftr.h3":"Volg ons","ftr.by":'Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
+      "ftr.h1":"Bezoek","ftr.h2":"Menu","ftr.h3":"Volg ons","ftr.h4":"Juridisch","ftr.colofon":"Colofon","ftr.by":'Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
       "ftr.privacy":"Privacyverklaring",
       "map.route":"Route plannen","map.load":"Toon kaart","map.note":"Google Maps laadt alleen na klikken · minimale cookies","map.hint":"Klik om kaart te openen",
       "cookie.text":"Wij gebruiken functionele cookies en cookies van externe diensten (YouTube, Google Maps). Zie onze <a href=\"privacy.html\">privacyverklaring</a>.",
@@ -1839,11 +1849,11 @@
       "srv.4.title":"CAMPER SPECIALIST","srv.4.for":"For: camper owners","srv.4.body":"Class A, Class C, RVs and vintage motorhomes. Mechanics, gas, electrics, water. We know the whole system and we build custom too.",
       "srv.5.title":"TRADE-IN","srv.5.for":"For: looking to swap vehicles","srv.5.body":"Got an American you want to trade in? We offer a fair trade-in value. No fuss — just a direct, transparent offer on your vehicle.",
       "srv.sunrise.sub":"We work together with Sunrise Camper Conversions for professional camper conversion projects - from concept to completion.",
-      "srv.sunrise.btn":"Visit Sunrise Camper Conversions","srv.sunrise.fb":"Facebook",
+      "srv.sunrise.btn":"Visit Sunrise Camper Conversions","srv.sunrise.yt":"YouTube","srv.sunrise.fb":"Facebook",
       "proc.eyebrow":"How it works","proc.title":"FROM DRIVING IN<br>TO <em>PICKING UP</em>",
       "proc.1.t":"CALL OR DROP IN","proc.1.d":"Tell us what's going on. No obligations, no costs.",
       "proc.2.t":"DIAGNOSIS","proc.2.d":"We inspect the car and give an honest take on what it needs.",
-      "proc.3.t":"QUOTE","proc.3.d":"No written quote. David tells you straight what it will cost and whether it's worth it.",
+      "proc.3.t":"QUOTE","proc.3.d":"David tells you straight what it will cost and whether it's worth it.",
       "proc.4.t":"WORK","proc.4.d":"We get to it. If something changes or comes up, we call you.",
       "proc.5.t":"PICK UP","proc.5.d":"Done. We show you what we did and hand over the keys.",
       "story.eyebrow":"Since day one","story.title":"FROM AMERICA<br>TO <em>NUNSPEET.</em>",
@@ -1859,7 +1869,7 @@
       "form.opt1":"Question about inventory","form.opt2":"Service / workshop","form.opt3":"Restoration project","form.opt4":"Import from US","form.opt5":"Other",
       "form.ph.name":"Your name","form.ph.email":"your@email.com","form.ph.msg":"Tell us what you're looking for...",
       "ftr.about":"Specialist in American vehicles. Sales, service, MOT, restoration, import, camper specialist and trade-ins. Honest craftsmanship from someone who knows how a V8 sounds.",
-      "ftr.h1":"Visit","ftr.h2":"Menu","ftr.h3":"Follow us","ftr.by":'Webdevelopment by <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
+      "ftr.h1":"Visit","ftr.h2":"Menu","ftr.h3":"Follow us","ftr.h4":"Legal","ftr.colofon":"Colophon","ftr.by":'Webdevelopment by <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
       "ftr.privacy":"Privacy policy",
       "map.route":"Get directions","map.load":"Show map","map.note":"Google Maps loads on click · minimal cookies","map.hint":"Click to open map",
       "cookie.text":"We use functional cookies and cookies from third-party services (YouTube, Google Maps). See our <a href=\"privacy.html\">privacy policy</a>.",
@@ -1901,11 +1911,11 @@
       "srv.4.title":"CAMPER-SPEZIALIST","srv.4.for":"Für: Camper-Besitzer","srv.4.body":"Class A, Class C, RVs und Vintage-Motorhomes. Mechanik, Gas, Elektrik, Wasser. Wir kennen das ganze System und bauen auch nach Maß.",
       "srv.5.title":"INZAHLUNG","srv.5.for":"Für: Fahrzeugwechsel","srv.5.body":"Möchten Sie Ihren Amerikaner in Zahlung geben? Wir bieten einen fairen Inzahlungnahmewert. Kein Aufwand — nur ein direktes, transparentes Angebot.",
       "srv.sunrise.sub":"Wir arbeiten mit Sunrise Camper Conversions fuer professionelle Camper-Umbauprojekte zusammen - vom Konzept bis zur Fertigstellung.",
-      "srv.sunrise.btn":"Sunrise Camper Conversions besuchen","srv.sunrise.fb":"Facebook",
+      "srv.sunrise.btn":"Sunrise Camper Conversions besuchen","srv.sunrise.yt":"YouTube","srv.sunrise.fb":"Facebook",
       "proc.eyebrow":"So läuft es ab","proc.title":"VOM REINFAHREN<br>BIS <em>ZUM ABHOLEN</em>",
       "proc.1.t":"ANRUFEN ODER VORBEIKOMMEN","proc.1.d":"Erzählen Sie uns, was los ist. Kein Risiko, keine Kosten.",
       "proc.2.t":"DIAGNOSE","proc.2.d":"Wir schauen das Fahrzeug an und sagen ehrlich, was es braucht.",
-      "proc.3.t":"ANGEBOT","proc.3.d":"Kein schriftliches Angebot. David sagt Ihnen ehrlich, was es kostet und ob es sich lohnt.",
+      "proc.3.t":"ANGEBOT","proc.3.d":"David sagt Ihnen ehrlich, was es kostet und ob es sich lohnt.",
       "proc.4.t":"ARBEIT","proc.4.d":"Wir legen los. Wenn sich etwas aendert oder dazukommt, melden wir uns.",
       "proc.5.t":"ABHOLEN","proc.5.d":"Fertig. Wir zeigen Ihnen, was gemacht wurde, und übergeben die Schlüssel.",
       "story.eyebrow":"Seit Tag eins","story.title":"AUS AMERIKA<br>NACH <em>NUNSPEET.</em>",
@@ -1921,7 +1931,7 @@
       "form.opt1":"Frage zum Fahrzeugbestand","form.opt2":"Wartung / Werkstatt","form.opt3":"Restaurationsprojekt","form.opt4":"Import aus den USA","form.opt5":"Sonstiges",
       "form.ph.name":"Ihr Name","form.ph.email":"ihre@email.de","form.ph.msg":"Was suchen Sie? Erzählen Sie uns...",
       "ftr.about":"Spezialist fuer amerikanische Fahrzeuge. Verkauf, Wartung, TUeV, Restauration, Import, Camper-Spezialist und Inzahlungnahme. Ehrliches Handwerk von jemandem, der weiss, wie ein V8 klingt.",
-      "ftr.h1":"Besuch","ftr.h2":"Menü","ftr.h3":"Folgen Sie uns","ftr.by":'Webentwicklung von <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
+      "ftr.h1":"Besuch","ftr.h2":"Menü","ftr.h3":"Folgen Sie uns","ftr.h4":"Rechtliches","ftr.colofon":"Impressum","ftr.by":'Webentwicklung von <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a>',
       "ftr.privacy":"Datenschutzerklärung",
       "map.route":"Route planen","map.load":"Karte anzeigen","map.note":"Google Maps lädt erst nach Klick · minimale Cookies","map.hint":"Klicken um Karte zu öffnen",
       "cookie.text":"Wir verwenden funktionale Cookies und Cookies von Drittanbietern (YouTube, Google Maps). Siehe unsere <a href=\"privacy.html\">Datenschutzerklärung</a>.",
