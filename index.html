@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Big Three Garage - Amerikaanse voertuigen specialist Nunspeet</title>
 <meta name="description" content="The Big Three Garage in Nunspeet: specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, APK, restauratie en import uit de VS. Bel +31 6 82 72 73 74.">
-<meta name="keywords" content="Amerikaanse auto, camper specialist, pickup truck, classic car, restauratie, import VS, Nunspeet, Gelderland, APK keuring, American car">
+<meta name="keywords" content="Amerikaanse auto, camper specialist, pickup truck, classic car, restauratie, import VS, Nunspeet, Gelderland, APK keuring, American car, amerikanische Autos, Camper Spezialist, amerikanischer Pickup, Oldtimer USA, Restaurierung, Import USA, Nunspeet Niederlande, Gelderland, amerikanische Fahrzeuge kaufen">
 <meta name="robots" content="index, follow">
 <meta name="author" content="The Big Three Garage">
 <meta name="geo.region" content="NL-GE">
@@ -35,9 +35,6 @@
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:site_name" content="The Big Three Garage">
 
-<!-- Open Graph DE -->
-<meta property="og:title" content="The Big Three Garage - Spezialist für amerikanische Fahrzeuge in Nunspeet">
-<meta property="og:description" content="Spezialist für amerikanische Camper, Pickups und Klassiker. Verkauf, Wartung, Restauration und Import aus den USA. Nähe der deutschen Grenze in Nunspeet.">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
@@ -1214,8 +1211,9 @@
     .section-head{margin-bottom:36px}
     .section-head h2{font-size:clamp(36px,7vw,56px)}
     .grid{grid-template-columns:1fr}
-    .filter-bar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:12px;scrollbar-width:none}
-    .filter-bar::-webkit-scrollbar{display:none}
+    .filter-bar-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:12px;scrollbar-width:none}
+    .filter-bar-scroll::-webkit-scrollbar{display:none}
+    .filter-bar{flex-wrap:nowrap;overflow:visible}
     .chip{flex-shrink:0}
     .service-grid{grid-template-columns:repeat(3,1fr)}
     .process-steps{grid-template-columns:1fr}
@@ -1226,7 +1224,8 @@
     .story-vid-col{position:static}
     .contact-grid{grid-template-columns:1fr;gap:48px}
     .contact-info{border-right:none}
-    .footer-inner{grid-template-columns:1fr 1fr 1fr;gap:28px}
+    .footer-inner{grid-template-columns:1fr 1fr;gap:28px}
+    .footer-brand{grid-column:1/-1}
     .footer-bottom{flex-direction:column;gap:8px;align-items:flex-start}
     .cookie-bar{padding:14px 20px}
   }
@@ -1361,6 +1360,7 @@
       <p data-i18n="inv.sub">Campers, pickups en classics. Handgekozen, doorgelicht en klaar voor de weg. Elke auto met meerdere foto's en op aanvraag een walk-around video.</p>
     </div>
 
+    <div class="filter-bar-scroll">
     <div class="filter-bar">
       <button class="chip active" data-filter="all" data-i18n="filter.all">Alles</button>
       <button class="chip" data-filter="camper" data-i18n="filter.campers">Campers</button>
@@ -1380,6 +1380,7 @@
           <button class="chip" data-filter="motorblok" data-i18n="filter.engines">Motorblokken</button>
         </div>
       </div>
+    </div>
     </div>
 
     <div class="grid" id="voorraadGrid">
