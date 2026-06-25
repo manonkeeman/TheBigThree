@@ -437,6 +437,17 @@
   }
   .chip:hover{border-color:var(--ink);color:var(--ink)}
   .chip.active{background:var(--rust);border-color:var(--rust);color:#fff}
+  .chip-has-dropdown{display:inline-flex;align-items:center;gap:6px}
+  .chip-arrow{font-size:10px;transition:transform 0.2s;line-height:1}
+  .chip-dropdown{position:relative}
+  .chip-dropdown.open .chip-arrow{transform:rotate(180deg)}
+  .chip-dropdown-menu{
+    display:none;position:absolute;top:calc(100% + 4px);left:0;
+    background:var(--panel);border:1px solid var(--line);z-index:200;min-width:160px;flex-direction:column;
+  }
+  .chip-dropdown.open .chip-dropdown-menu{display:flex}
+  .chip-dropdown-menu .chip{border-top:none;border-left:none;border-right:none;width:100%;text-align:left;padding:10px 16px}
+  .chip-dropdown-menu .chip:last-child{border-bottom:none}
   .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
@@ -1291,10 +1302,17 @@
       <button class="chip" data-filter="classic" data-i18n="filter.classics">Klassiekers</button>
       <button class="chip" data-filter="modern" data-i18n="filter.modern">Modern</button>
       <button class="chip" data-filter="pickup" data-i18n="filter.pickups">Pickups</button>
-      <button class="chip" data-filter="onderdeel" data-i18n="filter.parts">Onderdelen</button>
+      <div class="chip-dropdown" id="onderdelenDropdown">
+        <button class="chip chip-has-dropdown" data-filter="onderdeel" id="onderdelenTrigger">
+          <span data-i18n="filter.parts">Onderdelen</span>
+          <span class="chip-arrow">▾</span>
+        </button>
+        <div class="chip-dropdown-menu">
+          <button class="chip" data-filter="plaatwerk" data-i18n="filter.bodywork">Plaatwerk</button>
+          <button class="chip" data-filter="velgen" data-i18n="filter.wheels">Velgen</button>
+        </div>
+      </div>
       <button class="chip" data-filter="motor" data-i18n="filter.motors">Motoren</button>
-      <button class="chip" data-filter="plaatwerk" data-i18n="filter.bodywork">Plaatwerk</button>
-      <button class="chip" data-filter="velgen" data-i18n="filter.wheels">Velgen</button>
     </div>
 
     <div class="grid" id="voorraadGrid">
@@ -1960,16 +1978,42 @@
   const ftYear = document.getElementById('ftYear');
   if (ftYear) ftYear.textContent = new Date().getFullYear();
 
-  document.querySelectorAll('.chip[data-filter]').forEach(chip => {
+  function applyFilter(filter) {
+    document.querySelectorAll('#voorraadGrid .card[data-cat]').forEach(card => {
+      card.style.display = (filter === 'all' || card.dataset.cat.includes(filter)) ? '' : 'none';
+    });
+  }
+
+  document.querySelectorAll('.chip[data-filter]:not(.chip-has-dropdown)').forEach(chip => {
     chip.addEventListener('click', e => {
       e.preventDefault();
+      document.querySelectorAll('.chip-dropdown').forEach(d => d.classList.remove('open'));
       document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
       chip.classList.add('active');
-      const filter = chip.dataset.filter;
-      document.querySelectorAll('#voorraadGrid .card[data-cat]').forEach(card => {
-        card.style.display = (filter === 'all' || card.dataset.cat.includes(filter)) ? '' : 'none';
-      });
+      const parentMenu = chip.closest('.chip-dropdown-menu');
+      if (parentMenu) {
+        parentMenu.closest('.chip-dropdown').querySelector('.chip-has-dropdown').classList.add('active');
+      }
+      applyFilter(chip.dataset.filter);
     });
+  });
+
+  const onderdelenTrigger = document.getElementById('onderdelenTrigger');
+  const onderdelenDropdown = document.getElementById('onderdelenDropdown');
+  if (onderdelenTrigger && onderdelenDropdown) {
+    onderdelenTrigger.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const isOpen = onderdelenDropdown.classList.contains('open');
+      document.querySelectorAll('.chip-dropdown').forEach(d => d.classList.remove('open'));
+      if (!isOpen) onderdelenDropdown.classList.add('open');
+      document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+      onderdelenTrigger.classList.add('active');
+      applyFilter('onderdeel');
+    });
+  }
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.chip-dropdown').forEach(d => d.classList.remove('open'));
   });
 
   // ─── HAMBURGER MENU ───
