@@ -174,16 +174,22 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 
 /* ── RICH EDITOR ── */
 .rich-editor{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--surface)}
-.rich-toolbar{display:flex;gap:4px;padding:6px 8px;background:var(--surface2);border-bottom:1px solid var(--border)}
-.rich-btn{background:none;border:1px solid var(--border);color:var(--ink);border-radius:3px;padding:3px 9px;cursor:pointer;font-size:13px;min-width:30px;line-height:1.4;transition:background 0.15s}
-.rich-btn:hover{background:rgba(255,255,255,0.08)}
+.rich-toolbar{display:flex;flex-wrap:wrap;gap:3px;padding:7px 10px;background:var(--surface2);border-bottom:1px solid var(--border);align-items:center}
+.rich-btn{background:none;border:1px solid var(--border);color:var(--ink);border-radius:3px;padding:3px 8px;cursor:pointer;font-size:13px;min-width:28px;line-height:1.5;transition:background 0.12s;white-space:nowrap}
+.rich-btn:hover{background:rgba(255,255,255,0.09)}
 .rich-btn.active{background:var(--rust);border-color:var(--rust);color:#fff}
-.rich-sep{width:1px;background:var(--border);margin:0 4px;align-self:stretch}
-.rich-field{min-height:88px;padding:10px 12px;font-size:14px;line-height:1.7;color:var(--ink);outline:none;font-family:'Barlow',sans-serif}
-.rich-field:focus{background:var(--surface2)}
+.rich-sep{width:1px;height:18px;background:var(--border);margin:0 3px;flex-shrink:0}
+.rich-field{min-height:96px;padding:11px 13px;font-size:14px;line-height:1.75;color:var(--ink);outline:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.rich-field:focus{background:rgba(255,255,255,0.02)}
 .rich-field:empty::before{content:attr(data-ph);color:var(--muted);pointer-events:none;display:block}
 .rich-field strong,.rich-field b{color:#fff;font-weight:600}
-.rich-field em,.rich-field i{font-style:italic;color:var(--ink-dim)}
+.rich-field em,.rich-field i{font-style:italic}
+.rich-field u{text-decoration:underline}
+.rich-field s{text-decoration:line-through;opacity:0.6}
+.rich-field a{color:var(--rust)}
+.rich-field ul,.rich-field ol{padding-left:20px}
+.rich-field ul li{list-style:disc}
+.rich-field ol li{list-style:decimal}
 
 /* ── TABS ── */
 .topbar-tabs{display:flex;gap:4px}
@@ -535,36 +541,18 @@ CREATE POLICY "auth only" ON site_settings
         <div class="field" style="margin-bottom:16px">
           <label>Alinea 1</label>
           <div class="rich-editor">
-            <div class="rich-toolbar">
-              <button type="button" class="rich-btn" onclick="fmt('bold')" title="Vet"><strong>B</strong></button>
-              <button type="button" class="rich-btn" onclick="fmt('italic')" title="Cursief"><em>I</em></button>
-              <div class="rich-sep"></div>
-              <button type="button" class="rich-btn" onclick="fmt('removeFormat')" title="Opmaak wissen" style="font-size:11px">Wis opmaak</button>
-            </div>
             <div class="rich-field" id="abP1" contenteditable="true" data-ph="David Broeksma woonde jaren in de Verenigde Staten…"></div>
           </div>
         </div>
         <div class="field" style="margin-bottom:16px">
           <label>Alinea 2</label>
           <div class="rich-editor">
-            <div class="rich-toolbar">
-              <button type="button" class="rich-btn" onclick="fmt('bold')" title="Vet"><strong>B</strong></button>
-              <button type="button" class="rich-btn" onclick="fmt('italic')" title="Cursief"><em>I</em></button>
-              <div class="rich-sep"></div>
-              <button type="button" class="rich-btn" onclick="fmt('removeFormat')" title="Opmaak wissen" style="font-size:11px">Wis opmaak</button>
-            </div>
             <div class="rich-field" id="abP2" contenteditable="true" data-ph="The Big Three Garage is geen showroom met witte vloeren…"></div>
           </div>
         </div>
         <div class="field">
           <label>Quote (het citaat onder de foto)</label>
           <div class="rich-editor">
-            <div class="rich-toolbar">
-              <button type="button" class="rich-btn" onclick="fmt('bold')" title="Vet"><strong>B</strong></button>
-              <button type="button" class="rich-btn" onclick="fmt('italic')" title="Cursief"><em>I</em></button>
-              <div class="rich-sep"></div>
-              <button type="button" class="rich-btn" onclick="fmt('removeFormat')" title="Opmaak wissen" style="font-size:11px">Wis opmaak</button>
-            </div>
             <div class="rich-field" id="abQuote" contenteditable="true" data-ph="In de States sleutelde je of je deed het niet…"></div>
           </div>
         </div>
@@ -987,8 +975,69 @@ $('btnShareDone').addEventListener('click',  () => showView('list'));
 $('delModal').addEventListener('click', e => { if (e.target === $('delModal')) { $('delModal').style.display='none'; pendingDel=null; } });
 
 // ── RICH TEXT ──
+const TOOLBAR_HTML = `
+<div class="rich-toolbar">
+  <button type="button" class="rich-btn" data-cmd="bold"               title="Vet (Ctrl+B)"><b>B</b></button>
+  <button type="button" class="rich-btn" data-cmd="italic"             title="Cursief (Ctrl+I)"><i>I</i></button>
+  <button type="button" class="rich-btn" data-cmd="underline"          title="Onderstreept (Ctrl+U)"><u>U</u></button>
+  <button type="button" class="rich-btn" data-cmd="strikeThrough"      title="Doorhalen"><s>S</s></button>
+  <div class="rich-sep"></div>
+  <button type="button" class="rich-btn" data-cmd="insertUnorderedList" title="Opsomlijst">• lijst</button>
+  <button type="button" class="rich-btn" data-cmd="insertOrderedList"   title="Genummerde lijst">1. lijst</button>
+  <div class="rich-sep"></div>
+  <button type="button" class="rich-btn" data-cmd="link"               title="Link invoegen">🔗 link</button>
+  <div class="rich-sep"></div>
+  <button type="button" class="rich-btn" data-cmd="undo"               title="Ongedaan maken (Ctrl+Z)">↩</button>
+  <button type="button" class="rich-btn" data-cmd="redo"               title="Opnieuw (Ctrl+Y)">↪</button>
+  <div class="rich-sep"></div>
+  <button type="button" class="rich-btn" data-cmd="removeFormat"       title="Alle opmaak wissen" style="font-size:11px;color:var(--muted)">✕ opmaak</button>
+</div>`;
+
+document.querySelectorAll('.rich-editor').forEach(editor => {
+  editor.insertAdjacentHTML('afterbegin', TOOLBAR_HTML);
+  editor.querySelectorAll('.rich-btn').forEach(btn => {
+    // Voorkom focus-verlies bij klikken op toolbar
+    btn.addEventListener('mousedown', e => e.preventDefault());
+    btn.addEventListener('click', () => {
+      const cmd = btn.dataset.cmd;
+      if (cmd === 'link') {
+        fmtLink();
+      } else {
+        document.execCommand(cmd, false, null);
+      }
+      updateToolbarState(editor);
+    });
+  });
+  // Update active-state van knoppen bij selectieverandering
+  editor.querySelector('.rich-field').addEventListener('keyup', () => updateToolbarState(editor));
+  editor.querySelector('.rich-field').addEventListener('mouseup', () => updateToolbarState(editor));
+});
+
+function updateToolbarState(editor) {
+  const cmds = ['bold','italic','underline','strikeThrough','insertUnorderedList','insertOrderedList'];
+  editor.querySelectorAll('.rich-btn[data-cmd]').forEach(btn => {
+    if (cmds.includes(btn.dataset.cmd)) {
+      btn.classList.toggle('active', document.queryCommandState(btn.dataset.cmd));
+    }
+  });
+}
+
 function fmt(cmd) {
   document.execCommand(cmd, false, null);
+}
+
+function fmtLink() {
+  const sel = window.getSelection();
+  const selectedText = sel ? sel.toString() : '';
+  const url = window.prompt('URL van de link:', 'https://');
+  if (!url || url === 'https://') return;
+  if (selectedText) {
+    document.execCommand('createLink', false, url);
+  } else {
+    const label = window.prompt('Tekst van de link:', url);
+    if (!label) return;
+    document.execCommand('insertHTML', false, `<a href="${url}" target="_blank" rel="noopener">${label}</a>`);
+  }
 }
 
 // ── ABOUT / SETTINGS ──
