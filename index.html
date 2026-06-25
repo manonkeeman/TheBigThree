@@ -584,13 +584,13 @@
   .services{position:relative}
   .service-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns:repeat(5,1fr);
     gap:0;
     border:1px solid var(--line);
     position:relative;z-index:1;
   }
   .service{
-    padding:48px 36px;
+    padding:28px 22px;
     border-right:1px solid var(--line);
     border-bottom:1px solid var(--line);
     transition:all 0.3s;
@@ -605,34 +605,34 @@
     color:var(--rust);
     font-size:13px;
     letter-spacing:0.25em;
-    margin-bottom:24px;
+    margin-bottom:16px;
   }
   .service-icon{
-    width:56px;height:56px;
-    margin-bottom:28px;
+    width:40px;height:40px;
+    margin-bottom:18px;
     color:var(--navy-light);
     display:flex;align-items:center;justify-content:center;
   }
   .service-icon svg{width:100%;height:100%;stroke-width:1.5}
   .service h3{
     font-family:'Bebas Neue';
-    font-size:30px;
+    font-size:22px;
     letter-spacing:0.04em;
     line-height:1;
-    margin-bottom:10px;
+    margin-bottom:8px;
   }
   .service-for{
     font-family:'Special Elite';
-    font-size:11px;
+    font-size:10px;
     color:var(--gold);
-    letter-spacing:0.25em;
+    letter-spacing:0.2em;
     text-transform:uppercase;
-    margin-bottom:18px;
+    margin-bottom:14px;
   }
   .service p{
     color:var(--ink-dim);
-    line-height:1.65;
-    font-size:15px;
+    line-height:1.6;
+    font-size:13px;
     font-weight:300;
   }
 
@@ -1150,7 +1150,7 @@
     .filter-bar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:12px;scrollbar-width:none}
     .filter-bar::-webkit-scrollbar{display:none}
     .chip{flex-shrink:0}
-    .service-grid{grid-template-columns:1fr 1fr}
+    .service-grid{grid-template-columns:repeat(3,1fr)}
     .process-steps{grid-template-columns:1fr}
     .process-step{border-right:none;border-bottom:1px solid var(--line)}
     .process-step:last-child{border-bottom:none}
@@ -1175,8 +1175,8 @@
     .stat-num{font-size:32px}
     section{padding:48px 16px}
     .section-head h2{font-size:clamp(32px,8vw,48px)}
-    .service-grid{grid-template-columns:1fr}
-    .service{padding:32px 22px}
+    .service-grid{grid-template-columns:repeat(2,1fr)}
+    .service{padding:24px 18px}
     .story-video{margin-top:40px}
     .footer-inner{grid-template-columns:1fr}
     .footer-logo-img{height:60px}
@@ -1425,12 +1425,12 @@
         <div class="process-step">
           <div class="step-num">03</div>
           <div class="step-title" data-i18n="proc.3.t">OFFERTE</div>
-          <div class="step-desc" data-i18n="proc.3.d">Schriftelijke prijs, vooraf. Geen verrassingen achteraf.</div>
+          <div class="step-desc" data-i18n="proc.3.d">Geen schriftelijke offerte. David vertelt je eerlijk wat het kost en of het de moeite waard is.</div>
         </div>
         <div class="process-step">
           <div class="step-num">04</div>
           <div class="step-title" data-i18n="proc.4.t">WERK</div>
-          <div class="step-desc" data-i18n="proc.4.d">We pakken het aan. Foto's en updates onderweg als je dat wilt.</div>
+          <div class="step-desc" data-i18n="proc.4.d">We pakken het aan. Als er iets verandert of tegenvalt, bellen we je.</div>
         </div>
         <div class="process-step">
           <div class="step-num">05</div>
@@ -1496,7 +1496,7 @@
     <div class="contact-grid">
       <div class="contact-info">
         <h2 data-i18n="ctc.h">VIND <em>ONS</em></h2>
-        <p data-i18n="ctc.p">De koffie staat klaar. Geen afspraak nodig, gewoon binnenlopen mag ook.</p>
+        <p data-i18n="ctc.p">Bel even voor je langskomt. Dan weet David dat je er aankomt en staat de koffie klaar.</p>
 
         <div class="contact-block">
           <span class="contact-block-label" data-i18n="ctc.adr">Adres</span>
@@ -1761,8 +1761,8 @@
       "proc.eyebrow":"Hoe werkt het","proc.title":"VAN BINNENRIJDEN<br>TOT <em>OPHALEN</em>",
       "proc.1.t":"BEL OF LOOP BINNEN","proc.1.d":"Vertel ons wat er aan de hand is. Geen verplichtingen, geen kosten.",
       "proc.2.t":"DIAGNOSE","proc.2.d":"We bekijken de auto en geven eerlijk aan wat hij nodig heeft.",
-      "proc.3.t":"OFFERTE","proc.3.d":"Schriftelijke prijs, vooraf. Geen verrassingen achteraf.",
-      "proc.4.t":"WERK","proc.4.d":"We pakken het aan. Foto's en updates onderweg als je dat wilt.",
+      "proc.3.t":"OFFERTE","proc.3.d":"Geen schriftelijke offerte. David vertelt je eerlijk wat het kost en of het de moeite waard is.",
+      "proc.4.t":"WERK","proc.4.d":"We pakken het aan. Als er iets verandert of tegenvalt, bellen we je.",
       "proc.5.t":"OPHALEN","proc.5.d":"Klaar. We laten zien wat er gedaan is en geven je de sleutels.",
       "story.eyebrow":"Sinds dag één","story.title":"VAN AMERIKA<br>NAAR <em>NUNSPEET.</em>",
       "story.p1":"David Broeksma woonde jaren in de Verenigde Staten. Hij sleutelde daar aan auto's die hier alleen in films te zien zijn, en leerde de techniek van mensen die er hun hele leven mee bezig waren. <strong>Dat verhaal nam hij mee terug naar Nunspeet.</strong>",
@@ -1771,7 +1771,7 @@
       "story.attr":"David Broeksma · Eigenaar","story.cta":"Kom langs in Nunspeet",
       "video.eyebrow":"Zie de garage","video.title":"ZO ZIET HET ERUIT<br><em>BIJ ONS.</em>",
       "ctc.eyebrow":"Stuur een bericht · bel · loop binnen","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"VIND <em>ONS</em>",
-      "ctc.p":"De koffie staat klaar. Geen afspraak nodig, gewoon binnenlopen mag ook.",
+      "ctc.p":"Bel even voor je langskomt. Dan weet David dat je er aankomt en staat de koffie klaar.",
       "ctc.adr":"Adres","ctc.tel":"Telefoon","ctc.hrs":"Openingstijden","ctc.hrsval":"Ma–Vr 08:30 – 17:30<br>Za op afspraak",
       "form.name":"Naam","form.subject":"Onderwerp","form.msg":"Bericht","form.send":"Verstuur bericht",
       "form.opt1":"Vraag over voorraad","form.opt2":"Onderhoud / werkplaats","form.opt3":"Restauratie project","form.opt4":"Import vanuit VS","form.opt5":"Anders",
@@ -1822,8 +1822,8 @@
       "proc.eyebrow":"How it works","proc.title":"FROM DRIVING IN<br>TO <em>PICKING UP</em>",
       "proc.1.t":"CALL OR DROP IN","proc.1.d":"Tell us what's going on. No obligations, no costs.",
       "proc.2.t":"DIAGNOSIS","proc.2.d":"We inspect the car and give an honest take on what it needs.",
-      "proc.3.t":"QUOTE","proc.3.d":"Written price, up front. No surprises afterwards.",
-      "proc.4.t":"WORK","proc.4.d":"We get to it. Photos and updates along the way if you want.",
+      "proc.3.t":"QUOTE","proc.3.d":"No written quote. David tells you straight what it will cost and whether it's worth it.",
+      "proc.4.t":"WORK","proc.4.d":"We get to it. If something changes or comes up, we call you.",
       "proc.5.t":"PICK UP","proc.5.d":"Done. We show you what we did and hand over the keys.",
       "story.eyebrow":"Since day one","story.title":"FROM AMERICA<br>TO <em>NUNSPEET.</em>",
       "story.p1":"David Broeksma lived in the United States for years. He worked on cars there that you only see in movies over here, and learned the trade from people who had spent their whole life with it. <strong>He brought that story back to Nunspeet.</strong>",
@@ -1832,7 +1832,7 @@
       "story.attr":"David Broeksma · Owner","story.cta":"Drop by in Nunspeet",
       "video.eyebrow":"See the garage","video.title":"THIS IS WHAT IT<br><em>LOOKS LIKE.</em>",
       "ctc.eyebrow":"Send a message · call · drop in","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"FIND <em>US</em>",
-      "ctc.p":"The coffee is ready. No appointment needed, just walk in.",
+      "ctc.p":"Give us a call before you drop by. That way David knows you're coming and the coffee will be waiting.",
       "ctc.adr":"Address","ctc.tel":"Phone","ctc.hrs":"Opening hours","ctc.hrsval":"Mon–Fri 08:30 – 17:30<br>Sat by appointment",
       "form.name":"Name","form.subject":"Subject","form.msg":"Message","form.send":"Send message",
       "form.opt1":"Question about inventory","form.opt2":"Service / workshop","form.opt3":"Restoration project","form.opt4":"Import from US","form.opt5":"Other",
@@ -1883,8 +1883,8 @@
       "proc.eyebrow":"So läuft es ab","proc.title":"VOM REINFAHREN<br>BIS <em>ZUM ABHOLEN</em>",
       "proc.1.t":"ANRUFEN ODER VORBEIKOMMEN","proc.1.d":"Erzählen Sie uns, was los ist. Kein Risiko, keine Kosten.",
       "proc.2.t":"DIAGNOSE","proc.2.d":"Wir schauen das Fahrzeug an und sagen ehrlich, was es braucht.",
-      "proc.3.t":"ANGEBOT","proc.3.d":"Schriftlicher Preis im Voraus. Keine Überraschungen hinterher.",
-      "proc.4.t":"ARBEIT","proc.4.d":"Wir legen los. Fotos und Updates auf Wunsch.",
+      "proc.3.t":"ANGEBOT","proc.3.d":"Kein schriftliches Angebot. David sagt Ihnen ehrlich, was es kostet und ob es sich lohnt.",
+      "proc.4.t":"ARBEIT","proc.4.d":"Wir legen los. Wenn sich etwas aendert oder dazukommt, melden wir uns.",
       "proc.5.t":"ABHOLEN","proc.5.d":"Fertig. Wir zeigen Ihnen, was gemacht wurde, und übergeben die Schlüssel.",
       "story.eyebrow":"Seit Tag eins","story.title":"AUS AMERIKA<br>NACH <em>NUNSPEET.</em>",
       "story.p1":"David Broeksma lebte jahrelang in den Vereinigten Staaten. Er schraubte dort an Fahrzeugen, die man hier nur aus Filmen kennt, und lernte das Handwerk von Leuten, die ihr ganzes Leben damit verbracht haben. <strong>Diese Geschichte brachte er mit nach Nunspeet.</strong>",
@@ -1893,7 +1893,7 @@
       "story.attr":"David Broeksma · Inhaber","story.cta":"Besuchen Sie uns in Nunspeet",
       "video.eyebrow":"Schauen Sie rein","video.title":"SO SIEHT ES<br><em>BEI UNS AUS.</em>",
       "ctc.eyebrow":"Nachricht · Anruf · Vorbeikommen","ctc.title":"LET'S <em>TALK</em><br>SHOP","ctc.h":"FINDEN SIE <em>UNS</em>",
-      "ctc.p":"Der Kaffee steht bereit. Kein Termin nötig — einfach reinkommen.",
+      "ctc.p":"Ruf kurz an, bevor du vorbeikommst. Dann weiss David Bescheid und der Kaffee steht bereit.",
       "ctc.adr":"Adresse","ctc.tel":"Telefon","ctc.hrs":"Öffnungszeiten","ctc.hrsval":"Mo–Fr 08:30 – 17:30<br>Sa nach Vereinbarung",
       "form.name":"Name","form.subject":"Betreff","form.msg":"Nachricht","form.send":"Nachricht senden",
       "form.opt1":"Frage zum Fahrzeugbestand","form.opt2":"Wartung / Werkstatt","form.opt3":"Restaurationsprojekt","form.opt4":"Import aus den USA","form.opt5":"Sonstiges",
