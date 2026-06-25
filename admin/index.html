@@ -386,6 +386,34 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
         </div>
       </div>
 
+      <!-- Beschrijving -->
+      <div class="fsec">
+        <h2>Beschrijving <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:13px">(optioneel · voor posts &amp; de site)</span></h2>
+        <div class="lang-tabs">
+          <button class="lang-tab active" onclick="switchLangTab('nl',this)" data-panel="fDescPanelNl">NL</button>
+          <button class="lang-tab" onclick="switchLangTab('en',this)" data-panel="fDescPanelEn">EN</button>
+          <button class="lang-tab" onclick="switchLangTab('de',this)" data-panel="fDescPanelDe">DE</button>
+        </div>
+        <div class="lang-panel active" id="fDescPanelNl">
+          <div class="field">
+            <div class="rich-editor"><div class="rich-field" id="fDescNl" contenteditable="true" data-ph="Korte omschrijving van dit voertuig…"></div></div>
+            <button type="button" class="crop-ctrl-btn" style="margin-top:8px" onclick="translateDesc('en')">Vertaal naar EN ↗</button>
+            <button type="button" class="crop-ctrl-btn" style="margin-top:8px;margin-left:6px" onclick="translateDesc('de')">Vertaal naar DE ↗</button>
+          </div>
+        </div>
+        <div class="lang-panel" id="fDescPanelEn">
+          <div class="field">
+            <div class="rich-editor"><div class="rich-field" id="fDescEn" contenteditable="true" data-ph="Short description of this vehicle…"></div></div>
+          </div>
+        </div>
+        <div class="lang-panel" id="fDescPanelDe">
+          <div class="field">
+            <div class="rich-editor"><div class="rich-field" id="fDescDe" contenteditable="true" data-ph="Kurze Beschreibung des Fahrzeugs…"></div></div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">Voeg <code style="background:#111;padding:1px 5px;border-radius:3px">description_nl text, description_en text, description_de text</code> toe aan de vehicles tabel in Supabase als deze velden nog niet bestaan.</p>
+      </div>
+
       <!-- Prijs & link -->
       <div class="fsec">
         <h2>Prijs &amp; link</h2>
@@ -561,9 +589,9 @@ CREATE POLICY "auth only" ON site_settings
       <div class="fsec">
         <h2>Verhaal tekst</h2>
         <div class="lang-tabs">
-          <button class="lang-tab active" onclick="switchLangTab('nl',this)">🇳🇱 NL</button>
-          <button class="lang-tab" onclick="switchLangTab('en',this)">🇬🇧 EN</button>
-          <button class="lang-tab" onclick="switchLangTab('de',this)">🇩🇪 DE</button>
+          <button class="lang-tab active" onclick="switchLangTab('nl',this)" data-panel="langNl">🇳🇱 NL</button>
+          <button class="lang-tab" onclick="switchLangTab('en',this)" data-panel="langEn">🇬🇧 EN</button>
+          <button class="lang-tab" onclick="switchLangTab('de',this)" data-panel="langDe">🇩🇪 DE</button>
         </div>
 
         <!-- NL -->
@@ -732,37 +760,39 @@ function generatePosts(v) {
     '#v8', '#amerikanischeautos', '#te koop',
   ].filter(Boolean).join(' ');
 
+  const siteUrl  = 'https://thebigthreenunspeet.netlify.app';
+  const descNl   = v.description_nl ? '\n\n' + stripHtml(v.description_nl) : '';
+
   $('textIg').value =
 `🚐 ${v.year ? v.year + ' ' : ''}${v.make || ''} ${v.title}
-${specsLine ? '\n' + specsLine : ''}
+${specsLine ? '\n' + specsLine : ''}${descNl}
 
 💶 ${priceStr}
 
 📍 The Big Three Garage · Nunspeet
-📲 Interesse? Stuur een DM of bel +31 6 82 72 73 74
-🔗 Meer foto's & info via de link in bio
+📲 Interesse? Bel +31 6 82 72 73 74
+🔗 Meer foto's & info: ${siteUrl}
 
 ${igHashtags}`.trim();
 
   $('textFb').value =
 `🚗 TE KOOP: ${v.year ? v.year + ' ' : ''}${v.make || ''} ${v.title}
 
-${specsBullets}
+${specsBullets}${descNl}
 
 💶 Vraagprijs: ${priceStr}
 
 Meer weten of een afspraak maken?
 📞 +31 6 82 72 73 74
-📧 info@bigthreegarage.nl
 📍 The Big Three Garage · Hullerweg 115, Nunspeet
-${v.marktplaats_url ? '\n🔗 ' + v.marktplaats_url : ''}
+🔗 ${siteUrl}
 
 The Big Three Garage — specialist in Amerikaanse voertuigen`.trim();
 
   $('textMp').value =
 `${v.title}${v.year ? ' — ' + v.year : ''}${v.make ? ' ' + v.make : ''}
 
-${specsBullets}
+${specsBullets}${descNl}
 
 Vraagprijs: ${priceStr}
 
@@ -770,7 +800,7 @@ Vraagprijs: ${priceStr}
 The Big Three Garage
 Hullerweg 115, Nunspeet
 📞 +31 6 82 72 73 74
-📧 info@bigthreegarage.nl
+${siteUrl}
 
 Specialist in Amerikaanse campers, pickups en classics.
 Alle voertuigen zijn doorgelicht en rijklaar.
@@ -889,6 +919,9 @@ function resetForm() {
   $('imgPrevWrap').style.display = 'none';
   $('formMsg').style.display = 'none';
   $('fPriceWrap').style.display = 'block';
+  $('fDescNl').innerHTML = '';
+  $('fDescEn').innerHTML = '';
+  $('fDescDe').innerHTML = '';
   selectedFile = null;
 }
 
@@ -918,6 +951,9 @@ function openEdit(id) {
   $('fPrice').value      = v.price   || '';
   $('fMpUrl').value      = v.marktplaats_url || '';
   $('fSort').value       = v.sort_order ?? 0;
+  $('fDescNl').innerHTML = v.description_nl || '';
+  $('fDescEn').innerHTML = v.description_en || '';
+  $('fDescDe').innerHTML = v.description_de || '';
   document.querySelectorAll('[name=cat]').forEach(cb => {
     cb.checked = (v.category || '').split(',').map(s=>s.trim()).includes(cb.value);
   });
@@ -930,6 +966,31 @@ function openEdit(id) {
   togglePrice();
   showView('form');
   window.scrollTo(0,0);
+}
+
+async function translateDesc(targetLang) {
+  const srcEl = $('fDescNl');
+  const plainText = stripHtml(srcEl.innerHTML).trim();
+  if (!plainText) { toast('Vul eerst de NL beschrijving in.', 'er'); return; }
+  const tgtEl = targetLang === 'en' ? $('fDescEn') : $('fDescDe');
+  const btn = event.currentTarget;
+  const orig = btn.textContent;
+  btn.textContent = 'Vertalen…'; btn.disabled = true;
+  try {
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=nl&tl=${targetLang}&dt=t&q=${encodeURIComponent(plainText)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const translated = data[0].map(s => s[0]).join('');
+    tgtEl.textContent = translated;
+    // switch to that language tab
+    const tab = document.querySelector(`[data-panel="fDescPanel${targetLang === 'en' ? 'En' : 'De'}"]`);
+    if (tab) tab.click();
+    toast('Vertaald ✓');
+  } catch(e) {
+    toast('Vertaling mislukt — probeer opnieuw', 'er');
+  } finally {
+    btn.textContent = orig; btn.disabled = false;
+  }
 }
 
 function togglePrice() {
@@ -1005,6 +1066,9 @@ $('vehicleForm').addEventListener('submit', async e => {
       marktplaats_url: $('fMpUrl').value.trim() || null,
       image_url:       imageUrl || null,
       sort_order:      parseInt($('fSort').value) || 0,
+      description_nl:  $('fDescNl').innerHTML.trim() || null,
+      description_en:  $('fDescEn').innerHTML.trim() || null,
+      description_de:  $('fDescDe').innerHTML.trim() || null,
       updated_at:      new Date().toISOString(),
     };
 
@@ -1146,11 +1210,18 @@ const ABOUT_DEFAULTS = {
 };
 
 function switchLangTab(lang, btn) {
-  document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('active'));
+  const scope = btn.closest('.fsec') || btn.closest('#viewAbout') || document;
+  scope.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+  scope.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
-  const panel = { nl:'langNl', en:'langEn', de:'langDe' }[lang];
-  if (panel) $( panel).classList.add('active');
+  const panelId = btn.dataset.panel;
+  if (panelId && $(panelId)) $(panelId).classList.add('active');
+}
+
+function stripHtml(html) {
+  const d = document.createElement('div');
+  d.innerHTML = html;
+  return d.textContent || d.innerText || '';
 }
 
 async function loadSettings() {
