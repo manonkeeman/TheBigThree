@@ -2051,6 +2051,7 @@
       const parentMenu = chip.closest('.chip-dropdown-menu');
       if (parentMenu) {
         parentMenu.closest('.chip-dropdown').querySelector('.chip-has-dropdown').classList.add('active');
+        document.getElementById('voorraad').scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
       applyFilter(chip.dataset.filter);
     });
