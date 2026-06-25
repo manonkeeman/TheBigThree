@@ -850,6 +850,13 @@ $('loginForm').addEventListener('submit', async e => {
 
 $('btnLogout').addEventListener('click', async () => { await sb.auth.signOut(); checkAuth(); });
 
+sb.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_OUT' || (!session && event !== 'INITIAL_SESSION')) {
+    $('screenLogin').style.display = 'flex';
+    $('screenApp').style.display   = 'none';
+  }
+});
+
 // ── LOAD VEHICLES ──
 let vehicles = [];
 
