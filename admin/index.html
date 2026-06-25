@@ -172,6 +172,19 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .btn-copy svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .share-done{margin-top:20px;max-width:720px}
 
+/* ── RICH EDITOR ── */
+.rich-editor{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.rich-toolbar{display:flex;gap:4px;padding:6px 8px;background:var(--surface2);border-bottom:1px solid var(--border)}
+.rich-btn{background:none;border:1px solid var(--border);color:var(--ink);border-radius:3px;padding:3px 9px;cursor:pointer;font-size:13px;min-width:30px;line-height:1.4;transition:background 0.15s}
+.rich-btn:hover{background:rgba(255,255,255,0.08)}
+.rich-btn.active{background:var(--rust);border-color:var(--rust);color:#fff}
+.rich-sep{width:1px;background:var(--border);margin:0 4px;align-self:stretch}
+.rich-field{min-height:88px;padding:10px 12px;font-size:14px;line-height:1.7;color:var(--ink);outline:none;font-family:'Barlow',sans-serif}
+.rich-field:focus{background:var(--surface2)}
+.rich-field:empty::before{content:attr(data-ph);color:var(--muted);pointer-events:none;display:block}
+.rich-field strong,.rich-field b{color:#fff;font-weight:600}
+.rich-field em,.rich-field i{font-style:italic;color:var(--ink-dim)}
+
 /* ── TABS ── */
 .topbar-tabs{display:flex;gap:4px}
 .tab-btn{background:none;border:none;color:var(--muted);font-size:13px;font-weight:500;padding:6px 14px;border-radius:4px;cursor:pointer;transition:all 0.15s}
@@ -520,16 +533,40 @@ CREATE POLICY "auth only" ON site_settings
       <div class="fsec">
         <h2>Verhaal tekst (NL)</h2>
         <div class="field" style="margin-bottom:16px">
-          <label for="abP1">Alinea 1</label>
-          <textarea id="abP1" rows="4" placeholder="David Broeksma woonde jaren in de Verenigde Staten…"></textarea>
+          <label>Alinea 1</label>
+          <div class="rich-editor">
+            <div class="rich-toolbar">
+              <button type="button" class="rich-btn" onclick="fmt('bold')" title="Vet"><strong>B</strong></button>
+              <button type="button" class="rich-btn" onclick="fmt('italic')" title="Cursief"><em>I</em></button>
+              <div class="rich-sep"></div>
+              <button type="button" class="rich-btn" onclick="fmt('removeFormat')" title="Opmaak wissen" style="font-size:11px">Wis opmaak</button>
+            </div>
+            <div class="rich-field" id="abP1" contenteditable="true" data-ph="David Broeksma woonde jaren in de Verenigde Staten…"></div>
+          </div>
         </div>
         <div class="field" style="margin-bottom:16px">
-          <label for="abP2">Alinea 2</label>
-          <textarea id="abP2" rows="4" placeholder="The Big Three Garage is geen showroom met witte vloeren…"></textarea>
+          <label>Alinea 2</label>
+          <div class="rich-editor">
+            <div class="rich-toolbar">
+              <button type="button" class="rich-btn" onclick="fmt('bold')" title="Vet"><strong>B</strong></button>
+              <button type="button" class="rich-btn" onclick="fmt('italic')" title="Cursief"><em>I</em></button>
+              <div class="rich-sep"></div>
+              <button type="button" class="rich-btn" onclick="fmt('removeFormat')" title="Opmaak wissen" style="font-size:11px">Wis opmaak</button>
+            </div>
+            <div class="rich-field" id="abP2" contenteditable="true" data-ph="The Big Three Garage is geen showroom met witte vloeren…"></div>
+          </div>
         </div>
         <div class="field">
-          <label for="abQuote">Quote (het citaat onder de foto)</label>
-          <textarea id="abQuote" rows="2" placeholder="Ik heb daar geleerd hoe een V8 hoort te klinken…"></textarea>
+          <label>Quote (het citaat onder de foto)</label>
+          <div class="rich-editor">
+            <div class="rich-toolbar">
+              <button type="button" class="rich-btn" onclick="fmt('bold')" title="Vet"><strong>B</strong></button>
+              <button type="button" class="rich-btn" onclick="fmt('italic')" title="Cursief"><em>I</em></button>
+              <div class="rich-sep"></div>
+              <button type="button" class="rich-btn" onclick="fmt('removeFormat')" title="Opmaak wissen" style="font-size:11px">Wis opmaak</button>
+            </div>
+            <div class="rich-field" id="abQuote" contenteditable="true" data-ph="In de States sleutelde je of je deed het niet…"></div>
+          </div>
         </div>
       </div>
 
@@ -949,6 +986,11 @@ $('btnShareDone').addEventListener('click',  () => showView('list'));
 // close modal on backdrop click
 $('delModal').addEventListener('click', e => { if (e.target === $('delModal')) { $('delModal').style.display='none'; pendingDel=null; } });
 
+// ── RICH TEXT ──
+function fmt(cmd) {
+  document.execCommand(cmd, false, null);
+}
+
 // ── ABOUT / SETTINGS ──
 // Vereist Supabase tabel: site_settings (key text PK, value text, updated_at timestamptz)
 // SQL: CREATE TABLE site_settings (key text PRIMARY KEY, value text, updated_at timestamptz DEFAULT now());
@@ -981,6 +1023,11 @@ async function loadSettings() {
     $('abImgPrev').src = '../assets/david-broeksma.png';
     $('abImgPh').style.display       = 'none';
     $('abImgPrevWrap').style.display = 'block';
+    // Vul velden met site-defaults zodat David meteen kan beginnen
+    $('abP1').innerHTML    = ABOUT_DEFAULTS.story_p1;
+    $('abP2').innerHTML    = ABOUT_DEFAULTS.story_p2;
+    $('abQuote').innerHTML = ABOUT_DEFAULTS.story_quote;
+    $('abYt').value        = ABOUT_DEFAULTS.youtube_id;
     return;
   }
 
@@ -988,10 +1035,10 @@ async function loadSettings() {
   const s = {};
   (data || []).forEach(row => { s[row.key] = row.value; });
 
-  $('abP1').value    = s['story_p1']    || ABOUT_DEFAULTS.story_p1;
-  $('abP2').value    = s['story_p2']    || ABOUT_DEFAULTS.story_p2;
-  $('abQuote').value = s['story_quote'] || ABOUT_DEFAULTS.story_quote;
-  $('abYt').value    = s['youtube_id']  || ABOUT_DEFAULTS.youtube_id;
+  $('abP1').innerHTML    = s['story_p1']    || ABOUT_DEFAULTS.story_p1;
+  $('abP2').innerHTML    = s['story_p2']    || ABOUT_DEFAULTS.story_p2;
+  $('abQuote').innerHTML = s['story_quote'] || ABOUT_DEFAULTS.story_quote;
+  $('abYt').value        = s['youtube_id']  || ABOUT_DEFAULTS.youtube_id;
 
   if (s['profile_photo_url']) {
     $('abImgPrev').src = s['profile_photo_url'];
@@ -1023,9 +1070,9 @@ $('btnAboutSave').addEventListener('click', async () => {
     }
 
     const items = [
-      { key: 'story_p1',    value: $('abP1').value.trim() },
-      { key: 'story_p2',    value: $('abP2').value.trim() },
-      { key: 'story_quote', value: $('abQuote').value.trim() },
+      { key: 'story_p1',    value: $('abP1').innerHTML.trim() },
+      { key: 'story_p2',    value: $('abP2').innerHTML.trim() },
+      { key: 'story_quote', value: $('abQuote').innerHTML.trim() },
       { key: 'youtube_id',  value: ($('abYt').value.trim() || '1nr1ZBFLPYQ') },
     ];
     if (photoUrl) items.push({ key: 'profile_photo_url', value: photoUrl });
