@@ -325,7 +325,10 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
             <label class="chk"><input type="checkbox" name="cat" value="classic"> Klassieker</label>
             <label class="chk"><input type="checkbox" name="cat" value="modern"> Modern</label>
             <label class="chk"><input type="checkbox" name="cat" value="pickup"> Pickup</label>
+            <label class="chk"><input type="checkbox" name="cat" value="motor"> Motor</label>
             <label class="chk"><input type="checkbox" name="cat" value="onderdeel"> Onderdeel</label>
+            <label class="chk"><input type="checkbox" name="cat" value="plaatwerk"> Onderdeel: Plaatwerk</label>
+            <label class="chk"><input type="checkbox" name="cat" value="velgen"> Onderdeel: Velgen</label>
           </div>
         </div>
       </div>
@@ -804,6 +807,16 @@ function togglePrice() {
   $('fPriceWrap').style.display = $('fPriceType').value === 'fixed' ? 'block' : 'none';
 }
 $('fPriceType').addEventListener('change', togglePrice);
+
+// Auto-koppel onderdeel + subcategorie
+document.querySelectorAll('[name=cat][value=plaatwerk],[name=cat][value=velgen]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const hoofdCat = document.querySelector('[name=cat][value=onderdeel]');
+    if (!hoofdCat) return;
+    const anySubActive = document.querySelector('[name=cat][value=plaatwerk]:checked,[name=cat][value=velgen]:checked');
+    if (anySubActive) hoofdCat.checked = true;
+  });
+});
 
 // Image upload
 $('imgArea').addEventListener('click', () => $('imgFile').click());
