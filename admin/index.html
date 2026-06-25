@@ -7,6 +7,8 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="../assets/logo.png">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.css">
+<script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -190,6 +192,25 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
 .rich-field ul,.rich-field ol{padding-left:20px}
 .rich-field ul li{list-style:disc}
 .rich-field ol li{list-style:decimal}
+
+/* ── LANGUAGE TABS ── */
+.lang-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;width:fit-content;margin-bottom:16px}
+.lang-tab{background:var(--surface2);border:none;color:var(--muted);font-size:12px;font-weight:600;letter-spacing:0.12em;padding:6px 18px;cursor:pointer;text-transform:uppercase;transition:all 0.15s;border-right:1px solid var(--border)}
+.lang-tab:last-child{border-right:none}
+.lang-tab.active{background:var(--rust);color:#fff}
+.lang-tab:hover:not(.active){color:var(--ink);background:var(--surface)}
+.lang-panel{display:none}
+.lang-panel.active{display:block}
+
+/* ── CROP MODAL ── */
+.crop-modal-inner{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto}
+.crop-modal-inner h2{font-size:18px;margin-bottom:16px}
+.crop-preview-wrap{max-height:380px;overflow:hidden;background:#000;border-radius:4px;margin-bottom:12px}
+.crop-preview-wrap img{display:block;max-width:100%}
+.crop-controls{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.crop-ctrl-btn{background:var(--surface2);border:1px solid var(--border);color:var(--ink);border-radius:3px;padding:5px 12px;cursor:pointer;font-size:13px}
+.crop-ctrl-btn:hover{background:var(--border)}
+.crop-ratio-select{background:var(--surface2);border:1px solid var(--border);color:var(--ink);border-radius:3px;padding:5px 10px;font-size:13px;cursor:pointer}
 
 /* ── TABS ── */
 .topbar-tabs{display:flex;gap:4px}
@@ -507,10 +528,6 @@ CREATE POLICY "auth only" ON site_settings
       <br>Klik daarna op <strong>Opslaan</strong> — dan worden de huidige teksten opgeslagen en werkt alles.
     </div>
 
-    <div class="about-info">
-      Wijzigingen zijn direct zichtbaar op de website. Voor de tekst mag je <strong>HTML</strong> gebruiken, bijv. <code>&lt;strong&gt;vet&lt;/strong&gt;</code>
-    </div>
-
     <div class="vform" style="max-width:760px">
 
       <!-- Foto -->
@@ -521,39 +538,79 @@ CREATE POLICY "auth only" ON site_settings
             <input type="file" id="abImgFile" accept="image/*" style="display:none">
             <div id="abImgPh" class="img-ph">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-              <small>Klik om foto te wijzigen</small>
+              <small>Klik om foto te uploaden</small>
             </div>
             <div id="abImgPrevWrap" style="display:none">
               <img id="abImgPrev" class="about-photo-preview" alt="David">
               <div class="img-change">Foto wijzigen</div>
             </div>
           </div>
-          <div style="font-size:13px;color:var(--muted);padding-top:8px;max-width:320px">
-            Foto van David die zichtbaar is bij het citaat op de website.<br>
-            <span style="font-size:12px;opacity:0.7">JPG · PNG · max 5 MB · aanbevolen: vierkant</span>
+          <div style="padding-top:8px">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:12px">
+              Foto van David bij het citaat.<br>
+              <span style="font-size:12px;opacity:0.7">JPG · PNG · max 5 MB</span>
+            </div>
+            <div id="abImgEditBtns" style="display:none;display:flex;gap:6px;flex-wrap:wrap">
+              <button type="button" class="crop-ctrl-btn" id="btnCropOpen">✂ Bijsnijden / bewerken</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Verhaal tekst -->
+      <!-- Verhaal tekst met taabtabs -->
       <div class="fsec">
-        <h2>Verhaal tekst (NL)</h2>
-        <div class="field" style="margin-bottom:16px">
-          <label>Alinea 1</label>
-          <div class="rich-editor">
-            <div class="rich-field" id="abP1" contenteditable="true" data-ph="David Broeksma woonde jaren in de Verenigde Staten…"></div>
+        <h2>Verhaal tekst</h2>
+        <div class="lang-tabs">
+          <button class="lang-tab active" onclick="switchLangTab('nl',this)">🇳🇱 NL</button>
+          <button class="lang-tab" onclick="switchLangTab('en',this)">🇬🇧 EN</button>
+          <button class="lang-tab" onclick="switchLangTab('de',this)">🇩🇪 DE</button>
+        </div>
+
+        <!-- NL -->
+        <div class="lang-panel active" id="langNl">
+          <div class="field" style="margin-bottom:16px">
+            <label>Alinea 1</label>
+            <div class="rich-editor"><div class="rich-field" id="abP1" contenteditable="true" data-ph="David Broeksma woonde jaren in de VS…"></div></div>
+          </div>
+          <div class="field" style="margin-bottom:16px">
+            <label>Alinea 2</label>
+            <div class="rich-editor"><div class="rich-field" id="abP2" contenteditable="true" data-ph="The Big Three Garage is geen showroom…"></div></div>
+          </div>
+          <div class="field">
+            <label>Quote</label>
+            <div class="rich-editor"><div class="rich-field" id="abQuote" contenteditable="true" data-ph="In Nederland zie je een V8…"></div></div>
           </div>
         </div>
-        <div class="field" style="margin-bottom:16px">
-          <label>Alinea 2</label>
-          <div class="rich-editor">
-            <div class="rich-field" id="abP2" contenteditable="true" data-ph="The Big Three Garage is geen showroom met witte vloeren…"></div>
+
+        <!-- EN -->
+        <div class="lang-panel" id="langEn">
+          <div class="field" style="margin-bottom:16px">
+            <label>Paragraph 1</label>
+            <div class="rich-editor"><div class="rich-field" id="abP1En" contenteditable="true" data-ph="David Broeksma lived in the United States for years…"></div></div>
+          </div>
+          <div class="field" style="margin-bottom:16px">
+            <label>Paragraph 2</label>
+            <div class="rich-editor"><div class="rich-field" id="abP2En" contenteditable="true" data-ph="The Big Three Garage isn't a showroom…"></div></div>
+          </div>
+          <div class="field">
+            <label>Quote</label>
+            <div class="rich-editor"><div class="rich-field" id="abQuoteEn" contenteditable="true" data-ph="In the Netherlands you see a V8…"></div></div>
           </div>
         </div>
-        <div class="field">
-          <label>Quote (het citaat onder de foto)</label>
-          <div class="rich-editor">
-            <div class="rich-field" id="abQuote" contenteditable="true" data-ph="In de States sleutelde je of je deed het niet…"></div>
+
+        <!-- DE -->
+        <div class="lang-panel" id="langDe">
+          <div class="field" style="margin-bottom:16px">
+            <label>Absatz 1</label>
+            <div class="rich-editor"><div class="rich-field" id="abP1De" contenteditable="true" data-ph="David Broeksma lebte jahrelang in den USA…"></div></div>
+          </div>
+          <div class="field" style="margin-bottom:16px">
+            <label>Absatz 2</label>
+            <div class="rich-editor"><div class="rich-field" id="abP2De" contenteditable="true" data-ph="The Big Three Garage ist kein Showroom…"></div></div>
+          </div>
+          <div class="field">
+            <label>Zitat</label>
+            <div class="rich-editor"><div class="rich-field" id="abQuoteDe" contenteditable="true" data-ph="In den Niederlanden sieht man einen V8…"></div></div>
           </div>
         </div>
       </div>
@@ -575,6 +632,34 @@ CREATE POLICY "auth only" ON site_settings
   </div>
 
 </div><!-- /screenApp -->
+
+<!-- CROP MODAL -->
+<div class="modal" id="cropModal" style="display:none">
+  <div class="crop-modal-inner">
+    <h2>Foto bewerken</h2>
+    <div class="crop-preview-wrap">
+      <img id="cropImg" alt="crop preview">
+    </div>
+    <div class="crop-controls">
+      <button type="button" class="crop-ctrl-btn" onclick="cropperAct('zoom',0.1)">＋ Zoom in</button>
+      <button type="button" class="crop-ctrl-btn" onclick="cropperAct('zoom',-0.1)">－ Zoom uit</button>
+      <button type="button" class="crop-ctrl-btn" onclick="cropperAct('rotate',-90)">↺ Links</button>
+      <button type="button" class="crop-ctrl-btn" onclick="cropperAct('rotate',90)">↻ Rechts</button>
+      <button type="button" class="crop-ctrl-btn" onclick="cropperAct('flipH')">↔ Spiegelen</button>
+      <button type="button" class="crop-ctrl-btn" onclick="cropperAct('reset')">⟳ Reset</button>
+      <select class="crop-ratio-select" id="cropRatioSel" onchange="setCropRatio(this.value)">
+        <option value="1">Vierkant (1:1)</option>
+        <option value="0">Vrij formaat</option>
+        <option value="1.7778">Breed (16:9)</option>
+        <option value="0.75">Staand (3:4)</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary" onclick="confirmCrop()">✓ Bijsnijden bevestigen</button>
+      <button class="btn btn-ghost" onclick="cancelCrop()">Annuleren</button>
+    </div>
+  </div>
+</div>
 
 <!-- DELETE MODAL -->
 <div class="modal" id="delModal" style="display:none">
@@ -1048,11 +1133,25 @@ function fmtLink() {
 let abSelectedFile = null;
 
 const ABOUT_DEFAULTS = {
-  story_p1:    `David Broeksma woonde jaren in de Verenigde Staten. Hij sleutelde daar aan auto's die hier alleen in films te zien zijn, en leerde de techniek van mensen die er hun hele leven mee bezig waren. <strong>Dat verhaal nam hij mee terug naar Nunspeet.</strong>`,
-  story_p2:    `The Big Three Garage is geen showroom met witte vloeren. Het is een echte werkplaats met een mancave-kantine, een flipperkast, en de overtuiging dat een Amerikaan behandeld moet worden als een Amerikaan. <strong>Geen Europese trucjes, geen halve oplossingen.</strong> Doen wat het ding nodig heeft, en het netjes afmaken.`,
-  story_quote: `"In Nederland zie je een V8. In Amerika hoor je hem. Dat verschil breng je mee. Of niet."`,
-  youtube_id:  `1nr1ZBFLPYQ`,
+  story_p1:       `David Broeksma woonde jaren in de Verenigde Staten. Hij sleutelde daar aan auto's die hier alleen in films te zien zijn, en leerde de techniek van mensen die er hun hele leven mee bezig waren. <strong>Dat verhaal nam hij mee terug naar Nunspeet.</strong>`,
+  story_p2:       `The Big Three Garage is geen showroom met witte vloeren. Het is een echte werkplaats met een mancave-kantine, een flipperkast, en de overtuiging dat een Amerikaan behandeld moet worden als een Amerikaan. <strong>Geen Europese trucjes, geen halve oplossingen.</strong> Doen wat het ding nodig heeft, en het netjes afmaken.`,
+  story_quote:    `"In Nederland zie je een V8. In Amerika hoor je hem. Dat verschil breng je mee. Of niet."`,
+  story_p1_en:    `David Broeksma lived in the United States for years. He worked on cars there that you only see in movies over here, and learned the trade from people who had spent their whole life with it. <strong>He brought that story back to Nunspeet.</strong>`,
+  story_p2_en:    `The Big Three Garage isn't a showroom with white floors. It's a real workshop with a mancave kitchen, a pinball machine, and the belief that an American should be treated like an American. <strong>No European tricks, no half solutions.</strong> Do what the thing needs, and finish it properly.`,
+  story_quote_en: `"In the Netherlands you see a V8. In America you hear one. That difference — you either bring it home or you don't."`,
+  story_p1_de:    `David Broeksma lebte jahrelang in den Vereinigten Staaten. Er schraubte dort an Fahrzeugen, die man hier nur aus Filmen kennt, und lernte das Handwerk von Leuten, die ihr ganzes Leben damit verbracht haben. <strong>Diese Geschichte brachte er mit nach Nunspeet.</strong>`,
+  story_p2_de:    `The Big Three Garage ist kein Showroom mit weißen Böden. Es ist eine echte Werkstatt mit Mancave-Flair, einem Flipper und der Überzeugung, dass ein Amerikaner wie ein Amerikaner behandelt werden muss. <strong>Keine europäischen Tricks, keine halben Lösungen.</strong> Tun, was nötig ist, und es ordentlich abschließen.`,
+  story_quote_de: `"In den Niederlanden sieht man einen V8. In Amerika hört man ihn. Diesen Unterschied bringt man mit. Oder nicht."`,
+  youtube_id:     `1nr1ZBFLPYQ`,
 };
+
+function switchLangTab(lang, btn) {
+  document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = { nl:'langNl', en:'langEn', de:'langDe' }[lang];
+  if (panel) $( panel).classList.add('active');
+}
 
 async function loadSettings() {
   const d = $('aboutMsg');
@@ -1072,22 +1171,27 @@ async function loadSettings() {
     $('abImgPrev').src = '../assets/david-broeksma.png';
     $('abImgPh').style.display       = 'none';
     $('abImgPrevWrap').style.display = 'block';
-    // Vul velden met site-defaults zodat David meteen kan beginnen
-    $('abP1').innerHTML    = ABOUT_DEFAULTS.story_p1;
-    $('abP2').innerHTML    = ABOUT_DEFAULTS.story_p2;
-    $('abQuote').innerHTML = ABOUT_DEFAULTS.story_quote;
-    $('abYt').value        = ABOUT_DEFAULTS.youtube_id;
+    applySettingsToForm(ABOUT_DEFAULTS);
     return;
   }
 
   if (setupBanner) setupBanner.style.display = 'none';
   const s = {};
   (data || []).forEach(row => { s[row.key] = row.value; });
+  applySettingsToForm(s);
+}
 
-  $('abP1').innerHTML    = s['story_p1']    || ABOUT_DEFAULTS.story_p1;
-  $('abP2').innerHTML    = s['story_p2']    || ABOUT_DEFAULTS.story_p2;
-  $('abQuote').innerHTML = s['story_quote'] || ABOUT_DEFAULTS.story_quote;
-  $('abYt').value        = s['youtube_id']  || ABOUT_DEFAULTS.youtube_id;
+function applySettingsToForm(s) {
+  $('abP1').innerHTML       = s['story_p1']       || ABOUT_DEFAULTS.story_p1;
+  $('abP2').innerHTML       = s['story_p2']       || ABOUT_DEFAULTS.story_p2;
+  $('abQuote').innerHTML    = s['story_quote']     || ABOUT_DEFAULTS.story_quote;
+  $('abP1En').innerHTML     = s['story_p1_en']     || ABOUT_DEFAULTS.story_p1_en;
+  $('abP2En').innerHTML     = s['story_p2_en']     || ABOUT_DEFAULTS.story_p2_en;
+  $('abQuoteEn').innerHTML  = s['story_quote_en']  || ABOUT_DEFAULTS.story_quote_en;
+  $('abP1De').innerHTML     = s['story_p1_de']     || ABOUT_DEFAULTS.story_p1_de;
+  $('abP2De').innerHTML     = s['story_p2_de']     || ABOUT_DEFAULTS.story_p2_de;
+  $('abQuoteDe').innerHTML  = s['story_quote_de']  || ABOUT_DEFAULTS.story_quote_de;
+  $('abYt').value           = s['youtube_id']      || ABOUT_DEFAULTS.youtube_id;
 
   if (s['profile_photo_url']) {
     $('abImgPrev').src = s['profile_photo_url'];
@@ -1119,10 +1223,16 @@ $('btnAboutSave').addEventListener('click', async () => {
     }
 
     const items = [
-      { key: 'story_p1',    value: $('abP1').innerHTML.trim() },
-      { key: 'story_p2',    value: $('abP2').innerHTML.trim() },
-      { key: 'story_quote', value: $('abQuote').innerHTML.trim() },
-      { key: 'youtube_id',  value: ($('abYt').value.trim() || '1nr1ZBFLPYQ') },
+      { key: 'story_p1',       value: $('abP1').innerHTML.trim() },
+      { key: 'story_p2',       value: $('abP2').innerHTML.trim() },
+      { key: 'story_quote',    value: $('abQuote').innerHTML.trim() },
+      { key: 'story_p1_en',    value: $('abP1En').innerHTML.trim() },
+      { key: 'story_p2_en',    value: $('abP2En').innerHTML.trim() },
+      { key: 'story_quote_en', value: $('abQuoteEn').innerHTML.trim() },
+      { key: 'story_p1_de',    value: $('abP1De').innerHTML.trim() },
+      { key: 'story_p2_de',    value: $('abP2De').innerHTML.trim() },
+      { key: 'story_quote_de', value: $('abQuoteDe').innerHTML.trim() },
+      { key: 'youtube_id',     value: ($('abYt').value.trim() || '1nr1ZBFLPYQ') },
     ];
     if (photoUrl) items.push({ key: 'profile_photo_url', value: photoUrl });
 
@@ -1156,16 +1266,69 @@ $('abImgArea').addEventListener('drop', e => {
 });
 $('abImgFile').addEventListener('change', e => { if (e.target.files[0]) setAbFile(e.target.files[0]); });
 
+let abCropper = null;
+
 function setAbFile(file) {
-  abSelectedFile = file;
   const r = new FileReader();
-  r.onload = e => {
-    $('abImgPrev').src = e.target.result;
-    $('abImgPh').style.display       = 'none';
-    $('abImgPrevWrap').style.display = 'block';
-  };
+  r.onload = e => openCropModal(e.target.result);
   r.readAsDataURL(file);
 }
+
+function openCropModal(src) {
+  $('cropImg').src = src;
+  $('cropModal').style.display = 'flex';
+  if (abCropper) { abCropper.destroy(); abCropper = null; }
+  setTimeout(() => {
+    abCropper = new Cropper($('cropImg'), {
+      aspectRatio: 1,
+      viewMode: 1,
+      autoCropArea: 0.85,
+      movable: true,
+      zoomable: true,
+      rotatable: true,
+      scalable: true,
+    });
+  }, 100);
+}
+
+function cropperAct(action, val) {
+  if (!abCropper) return;
+  switch(action) {
+    case 'zoom':   abCropper.zoom(val); break;
+    case 'rotate': abCropper.rotate(val); break;
+    case 'flipH':  abCropper.scale(-abCropper.getData().scaleX || -1, 1); break;
+    case 'reset':  abCropper.reset(); break;
+  }
+}
+
+function setCropRatio(val) {
+  if (!abCropper) return;
+  abCropper.setAspectRatio(parseFloat(val));
+}
+
+function confirmCrop() {
+  if (!abCropper) return;
+  abCropper.getCroppedCanvas({ width: 900, height: 900, imageSmoothingQuality: 'high' })
+    .toBlob(blob => {
+      abSelectedFile = new File([blob], 'david-profile.jpg', { type: 'image/jpeg' });
+      const url = URL.createObjectURL(blob);
+      $('abImgPrev').src = url;
+      $('abImgPh').style.display       = 'none';
+      $('abImgPrevWrap').style.display = 'block';
+      $('abImgEditBtns').style.display = 'flex';
+      cancelCrop();
+    }, 'image/jpeg', 0.92);
+}
+
+function cancelCrop() {
+  $('cropModal').style.display = 'none';
+  if (abCropper) { abCropper.destroy(); abCropper = null; }
+}
+
+$('btnCropOpen').addEventListener('click', () => {
+  openCropModal($('abImgPrev').src);
+});
+$('cropModal').addEventListener('click', e => { if (e.target === $('cropModal')) cancelCrop(); });
 
 // ── INIT ──
 checkAuth();

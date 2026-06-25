@@ -2073,19 +2073,17 @@
     const s = {};
     data.forEach(row => { s[row.key] = row.value; });
 
-    // Story text (override i18n for NL — only when no other lang active)
+    // Story text — pas Supabase-tekst toe voor actieve taal
     const lang = _getCurrentLang();
-    if (lang === 'nl') {
-      if (s['story_p1']) {
-        document.querySelectorAll('[data-i18n="story.p1"]').forEach(el => { el.innerHTML = s['story_p1']; });
-      }
-      if (s['story_p2']) {
-        document.querySelectorAll('[data-i18n="story.p2"]').forEach(el => { el.innerHTML = s['story_p2']; });
-      }
-      if (s['story_quote']) {
-        document.querySelectorAll('[data-i18n="story.quote"]').forEach(el => { el.innerHTML = s['story_quote']; });
-      }
-    }
+    const keyMap = {
+      nl: { p1: 'story_p1',    p2: 'story_p2',    q: 'story_quote'    },
+      en: { p1: 'story_p1_en', p2: 'story_p2_en', q: 'story_quote_en' },
+      de: { p1: 'story_p1_de', p2: 'story_p2_de', q: 'story_quote_de' },
+    };
+    const keys = keyMap[lang] || keyMap.nl;
+    if (s[keys.p1]) document.querySelectorAll('[data-i18n="story.p1"]').forEach(el => { el.innerHTML = s[keys.p1]; });
+    if (s[keys.p2]) document.querySelectorAll('[data-i18n="story.p2"]').forEach(el => { el.innerHTML = s[keys.p2]; });
+    if (s[keys.q])  document.querySelectorAll('[data-i18n="story.quote"]').forEach(el => { el.innerHTML = s[keys.q]; });
 
     // Profile photo
     if (s['profile_photo_url']) {
