@@ -1529,7 +1529,7 @@
         <div class="story-vid-thumb" id="vidThumb">
           <img id="ytThumbImg" src="" data-src="https://img.youtube.com/vi/1nr1ZBFLPYQ/maxresdefault.jpg" alt="The Big Three Garage Nunspeet">
           <div class="story-vid-overlay"></div>
-          <button class="story-play-btn" aria-label="Video afspelen" id="vidPlayBtn">
+          <button class="story-play-btn" aria-label="Video afspelen" id="vidPlayBtn" data-yt-id="1nr1ZBFLPYQ">
             <svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
           </button>
           <div class="story-vid-label">
@@ -2070,6 +2070,49 @@
   // load inventory from Supabase
   loadInventory();
 
+  // load site settings (over mij) from Supabase
+  async function loadSiteSettings() {
+    if (!_sb) return;
+    const { data } = await _sb.from('site_settings').select('*');
+    if (!data?.length) return;
+    const s = {};
+    data.forEach(row => { s[row.key] = row.value; });
+
+    // Story text (override i18n for NL — only when no other lang active)
+    const lang = _getCurrentLang();
+    if (lang === 'nl') {
+      if (s['story_p1']) {
+        document.querySelectorAll('[data-i18n="story.p1"]').forEach(el => { el.innerHTML = s['story_p1']; });
+      }
+      if (s['story_p2']) {
+        document.querySelectorAll('[data-i18n="story.p2"]').forEach(el => { el.innerHTML = s['story_p2']; });
+      }
+      if (s['story_quote']) {
+        document.querySelectorAll('[data-i18n="story.quote"]').forEach(el => { el.innerHTML = s['story_quote']; });
+      }
+    }
+
+    // Profile photo
+    if (s['profile_photo_url']) {
+      document.querySelectorAll('.story-quote-avatar').forEach(img => {
+        img.src = s['profile_photo_url'];
+      });
+    }
+
+    // YouTube video ID
+    if (s['youtube_id']) {
+      const vid = s['youtube_id'].trim();
+      const thumb = document.getElementById('ytThumbImg');
+      if (thumb) {
+        thumb.src = 'https://img.youtube.com/vi/' + vid + '/maxresdefault.jpg';
+        thumb.dataset.src = 'https://img.youtube.com/vi/' + vid + '/maxresdefault.jpg';
+      }
+      const playBtn = document.getElementById('vidPlayBtn');
+      if (playBtn) playBtn.dataset.ytId = vid;
+    }
+  }
+  loadSiteSettings();
+
   // footer year
   const ftYear = document.getElementById('ftYear');
   if (ftYear) ftYear.textContent = new Date().getFullYear();
@@ -2156,14 +2199,15 @@
   const vidPlayBtn = document.getElementById('vidPlayBtn');
   if (vidPlayBtn) {
     vidPlayBtn.addEventListener('click', function() {
+      const ytId = this.dataset.ytId || '1nr1ZBFLPYQ';
       const consent = localStorage.getItem('btg_cookie');
       if (consent === 'declined') {
-        window.open('https://www.youtube.com/watch?v=1nr1ZBFLPYQ', '_blank', 'noopener');
+        window.open('https://www.youtube.com/watch?v=' + ytId, '_blank', 'noopener');
       } else {
         document.getElementById('vidThumb').hidden = true;
         const embed = document.getElementById('vidEmbed');
         embed.hidden = false;
-        embed.querySelector('iframe').src = 'https://www.youtube-nocookie.com/embed/1nr1ZBFLPYQ?autoplay=1';
+        embed.querySelector('iframe').src = 'https://www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1';
       }
     });
   }
