@@ -697,11 +697,10 @@
     background:var(--panel);
   }
   .sunrise-partner-inner{
-    padding:32px 40px;
+    padding:40px 48px;
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:24px;
+    gap:40px;
     flex-wrap:wrap;
   }
   .sunrise-partner-brand{
@@ -709,6 +708,7 @@
     align-items:center;
     gap:24px;
     flex-wrap:wrap;
+    flex:1 1 320px;
   }
   .sunrise-logo{
     height:64px;
@@ -716,9 +716,40 @@
     flex-shrink:0;
     display:block;
   }
+  .sunrise-partner-text{
+    flex:1 1 240px;
+    min-width:0;
+  }
+  .sunrise-partner-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    flex-shrink:0;
+  }
+  @media(max-width:1024px){
+    .sunrise-partner-inner{padding:36px}
+  }
+  @media(max-width:768px){
+    .sunrise-partner-inner{
+      flex-direction:column;
+      align-items:stretch;
+      text-align:center;
+      padding:32px 28px;
+    }
+    .sunrise-partner-brand{
+      flex-direction:column;
+      text-align:center;
+    }
+    .sunrise-partner-text p{max-width:100% !important;margin:0 auto}
+    .sunrise-partner-actions{justify-content:center}
+  }
   @media(max-width:600px){
     .sunrise-partner-inner{padding:24px 22px}
     .sunrise-logo{height:48px}
+  }
+  @media(max-width:480px){
+    .sunrise-partner-actions{flex-direction:column;width:100%}
+    .sunrise-partner-actions .btn{width:100%;text-align:center}
   }
 
   /* HOE WERKT HET */
@@ -1491,12 +1522,12 @@
       <div class="sunrise-partner-inner">
         <div class="sunrise-partner-brand">
           <img src="assets/sunrise-logo.png" alt="Sunrise Conversion Vans" class="sunrise-logo">
-          <div>
+          <div class="sunrise-partner-text">
             <div class="eyebrow" style="margin-bottom:10px">Partner</div>
             <p data-i18n="srv.sunrise.sub" style="color:var(--ink-dim);font-size:15px;font-weight:300;line-height:1.6;max-width:560px">Wij werken samen met Sunrise Camper Conversions voor professionele camper-ombouwprojecten, van concept tot afwerking.</p>
           </div>
         </div>
-        <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <div class="sunrise-partner-actions">
           <a href="https://www.youtube.com/playlist?app=desktop&list=PLD0FAEF4B6F8798BB" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="srv.sunrise.btn">Bekijk Sunrise Camper Conversions</a>
           <a href="https://www.facebook.com/sunriseConversionVans" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="srv.sunrise.fb">Facebook</a>
         </div>
