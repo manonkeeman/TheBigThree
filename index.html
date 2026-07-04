@@ -704,8 +704,21 @@
     gap:24px;
     flex-wrap:wrap;
   }
+  .sunrise-partner-brand{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .sunrise-logo{
+    height:64px;
+    width:auto;
+    flex-shrink:0;
+    display:block;
+  }
   @media(max-width:600px){
     .sunrise-partner-inner{padding:24px 22px}
+    .sunrise-logo{height:48px}
   }
 
   /* HOE WERKT HET */
@@ -1476,9 +1489,12 @@
 
     <div class="sunrise-partner">
       <div class="sunrise-partner-inner">
-        <div>
-          <div class="eyebrow" style="margin-bottom:10px">Partner</div>
-          <p data-i18n="srv.sunrise.sub" style="color:var(--ink-dim);font-size:15px;font-weight:300;line-height:1.6;max-width:560px">Wij werken samen met Sunrise Camper Conversions voor professionele camper-ombouwprojecten, van concept tot afwerking.</p>
+        <div class="sunrise-partner-brand">
+          <img src="assets/sunrise-logo.png" alt="Sunrise Conversion Vans" class="sunrise-logo">
+          <div>
+            <div class="eyebrow" style="margin-bottom:10px">Partner</div>
+            <p data-i18n="srv.sunrise.sub" style="color:var(--ink-dim);font-size:15px;font-weight:300;line-height:1.6;max-width:560px">Wij werken samen met Sunrise Camper Conversions voor professionele camper-ombouwprojecten, van concept tot afwerking.</p>
+          </div>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:12px">
           <a href="https://www.youtube.com/playlist?app=desktop&list=PLD0FAEF4B6F8798BB" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="srv.sunrise.btn">Bekijk Sunrise Camper Conversions</a>
