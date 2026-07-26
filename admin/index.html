@@ -257,7 +257,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
     <form id="loginForm" autocomplete="on" style="display:flex;flex-direction:column;gap:14px">
       <div class="field">
         <label for="loginEmail">E-mail</label>
-        <input type="email" id="loginEmail" required autocomplete="email" placeholder="david@bigthreegarage.nl">
+        <input type="email" id="loginEmail" required autocomplete="email" placeholder="davidbroeksma@icloud.com">
       </div>
       <div class="field">
         <label for="loginPw">Wachtwoord</label>
@@ -760,7 +760,7 @@ function generatePosts(v) {
     '#v8', '#amerikanischeautos', '#te koop',
   ].filter(Boolean).join(' ');
 
-  const siteUrl  = 'https://thebigthreenunspeet.netlify.app';
+  const siteUrl  = 'https://thebigthree.nl';
   const descNl   = v.description_nl ? '\n\n' + stripHtml(v.description_nl) : '';
 
   $('textIg').value =
