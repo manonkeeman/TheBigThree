@@ -42,6 +42,67 @@
   path = "/voorraad/*"
   function = "vehicle-meta"
 
+# publish = "." serveert de hele repo; onderstaande bestanden horen niet publiek
+[[redirects]]
+  from = "/package.json"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tsconfig.json"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/README.md"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/supabase-setup.sql"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/voorraad-import.sql"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.gitignore"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/src/*"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.idea/*"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.claude/*"
+  to = "/"
+  status = 404
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
