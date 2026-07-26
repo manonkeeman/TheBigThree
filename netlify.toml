@@ -1,6 +1,43 @@
 [build]
   publish = "."
 
+# Alternatieve domeinen 301-doorverwijzen naar het hoofddomein
+[[redirects]]
+  from = "https://bigthree.nl/*"
+  to = "https://thebigthree.nl/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.bigthree.nl/*"
+  to = "https://thebigthree.nl/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://thebig3.nl/*"
+  to = "https://thebigthree.nl/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.thebig3.nl/*"
+  to = "https://thebigthree.nl/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://thebigtree.nl/*"
+  to = "https://thebigthree.nl/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.thebigtree.nl/*"
+  to = "https://thebigthree.nl/:splat"
+  status = 301
+  force = true
+
 [[edge_functions]]
   path = "/voorraad/*"
   function = "vehicle-meta"
