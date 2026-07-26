@@ -2224,7 +2224,23 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
 // ─── THIRD-PARTY LOADING ───
+  const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // vervang door het eigen GA4 Measurement ID
+
+  function loadGoogleAnalytics() {
+    if (window._gaLoaded || GA_MEASUREMENT_ID.includes('XXXXXXXXXX')) return;
+    window._gaLoaded = true;
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+    document.head.appendChild(script);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+  }
+
   function loadThirdParty() {
+    loadGoogleAnalytics();
     const mapsIframe = document.getElementById('mapsIframe');
     if (mapsIframe && !mapsIframe.dataset.loaded) {
       mapsIframe.src = mapsIframe.dataset.src;
