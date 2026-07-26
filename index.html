@@ -1794,6 +1794,11 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  function _slugify(s) {
+    return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+  }
+
   function _getCurrentLang() {
     const u = new URLSearchParams(window.location.search).get('lang');
     const s = localStorage.getItem('btg_lang');
@@ -1812,7 +1817,7 @@
     };
     const [stClass, stKey] = statusMap[v.status] || statusMap.available;
     const stText  = t?.[stKey]           || 'VOORRAAD';
-    const mpText  = t?.['card.mp']       || 'Marktplaats ›';
+    const ctaText = t?.['card.cta']      || 'Bekijk ›';
 
     let priceHtml;
     if (v.price_type === 'fixed' && v.price) {
@@ -1827,10 +1832,9 @@
     const alt   = [v.year, v.make, v.title, 'te koop The Big Three Nunspeet'].filter(Boolean).join(' ');
     const specs = [v.spec1, v.spec2, v.spec3].filter(Boolean)
                     .map(s => `<span>${_escHtml(s)}</span>`).join('');
-    const href  = v.marktplaats_url || '#';
-    const tgt   = v.marktplaats_url ? 'target="_blank" rel="noopener"' : '';
+    const href  = `/voorraad/${_slugify(v.title)}`;
 
-    return `<a href="${_escHtml(href)}" ${tgt} class="card" data-cat="${_escHtml(v.category||'camper')}">
+    return `<a href="${_escHtml(href)}" class="card" data-cat="${_escHtml(v.category||'camper')}">
       <div class="card-img">
         <img loading="lazy" src="${_escHtml(v.image_url||'')}" alt="${_escHtml(alt)}">
         <span class="card-status ${stClass}" data-i18n="${stKey}">${_escHtml(stText)}</span>
@@ -1839,7 +1843,7 @@
         <div class="card-meta">${_escHtml(meta)}</div>
         <h3>${_escHtml(v.title)}</h3>
         <div class="card-specs">${specs}</div>
-        <div class="card-price">${priceHtml}<small data-i18n="card.mp">${_escHtml(mpText)}</small></div>
+        <div class="card-price">${priceHtml}<small data-i18n="card.cta">${_escHtml(ctaText)}</small></div>
       </div>
     </a>`;
   }

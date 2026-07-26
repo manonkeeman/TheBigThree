@@ -67,7 +67,8 @@
       "Bash(cp logo.png /tmp/og-src.png)",
       "Bash(sips --resampleWidth 1200 /tmp/og-src.png --out /tmp/og-resized.png)",
       "Bash(sips -c 630 1200 /tmp/og-resized.png --out og-image.png)",
-      "WebFetch(domain:loolxbizdribqyulxbop.supabase.co)"
+      "WebFetch(domain:loolxbizdribqyulxbop.supabase.co)",
+      "Bash(node *)"
     ]
   }
 }

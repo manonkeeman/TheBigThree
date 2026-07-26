@@ -3,60 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>1978 GMC Motorhome 26ft te koop · The Big Three Garage Nunspeet</title>
-<meta name="description" content="1978 GMC Motorhome 26ft te koop bij The Big Three Garage in Nunspeet. 455 V8, automaat, 92.000 km, NL-kenteken, recente APK. Vraagprijs € 49.500.">
+<title>__TITLE__</title>
+<meta name="description" content="__DESCRIPTION__">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://thebigthree.nl/auto-detail.html">
+<link rel="canonical" href="__CANONICAL__">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://thebigthree.nl/auto-detail.html">
-<meta property="og:title" content="1978 GMC Motorhome 26ft · Te koop bij The Big Three Garage">
-<meta property="og:description" content="455 V8 · Automaat · 92.000 km · NL-kenteken · APK 10-2026 · € 49.500 · Nunspeet">
-<meta property="og:image" content="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=1200&q=80">
+<meta property="og:url" content="__CANONICAL__">
+<meta property="og:title" content="__OG_TITLE__">
+<meta property="og:description" content="__DESCRIPTION__">
+<meta property="og:image" content="__IMAGE__">
 <meta property="og:site_name" content="The Big Three Garage">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="1978 GMC Motorhome 26ft · Te koop bij The Big Three Garage">
-<meta name="twitter:description" content="455 V8 · Automaat · 92.000 km · NL-kenteken · € 49.500 · Nunspeet">
-<meta name="twitter:image" content="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=1200&q=80">
+<meta name="twitter:title" content="__OG_TITLE__">
+<meta name="twitter:description" content="__DESCRIPTION__">
+<meta name="twitter:image" content="__IMAGE__">
 
-<!-- Structured data: Vehicle -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Vehicle",
-  "name": "1978 GMC Motorhome 26ft",
-  "vehicleModelDate": "1978",
-  "brand": { "@type": "Brand", "name": "GMC" },
-  "model": "Motorhome 26ft",
-  "fuelType": "Gasoline",
-  "vehicleTransmission": "Automatic",
-  "mileageFromOdometer": { "@type": "QuantitativeValue", "value": 92000, "unitCode": "KMT" },
-  "offers": {
-    "@type": "Offer",
-    "price": "49500",
-    "priceCurrency": "EUR",
-    "availability": "https://schema.org/InStock",
-    "seller": {
-      "@type": "AutoDealer",
-      "name": "The Big Three Garage",
-      "telephone": "+31612122146",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Hullerweg 115",
-        "addressLocality": "Nunspeet",
-        "addressCountry": "NL"
-      }
-    }
-  }
-}
-</script>
-<link rel="icon" type="image/png" href="assets/logo.png">
+<!-- Structured data: Vehicle (per-voertuig ingevuld door de vehicle-meta edge function) -->
+<script type="application/ld+json">__JSONLD__</script>
+
+<link rel="icon" type="image/png" href="/assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root{
     --bg:#0a0e18;
@@ -104,12 +77,6 @@
   .logo{
     font-family:'Bebas Neue';font-size:26px;letter-spacing:0.08em;line-height:1;
     display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;
-  }
-  .logo-mark{
-    width:38px;height:38px;border:2px solid var(--rust);
-    background:var(--navy);
-    display:flex;align-items:center;justify-content:center;
-    font-size:18px;color:#fff;transform:rotate(-3deg);
   }
   .logo-img{height:52px;width:auto;display:block;}
   .logo-text{display:flex;flex-direction:column;line-height:0.95}
@@ -160,10 +127,9 @@
   }
   .detail-head h1{
     font-family:'Bebas Neue';
-    font-size:clamp(48px,7vw,96px);
-    line-height:0.92;letter-spacing:0.01em;
+    font-size:clamp(40px,7vw,88px);
+    line-height:0.95;letter-spacing:0.01em;
   }
-  .detail-head h1 em{color:var(--rust);font-style:italic}
   .detail-head-right{
     text-align:right;
     display:flex;flex-direction:column;align-items:flex-end;gap:12px;
@@ -181,56 +147,20 @@
     letter-spacing:0.3em;text-transform:uppercase;
   }
 
-  /* GALLERY */
+  /* PHOTO */
   .gallery-section{
     max-width:1400px;margin:0 auto;
     padding:48px 32px;
   }
-  .gallery{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:14px;
-  }
   .main-photo{
-    aspect-ratio:16/10;
+    aspect-ratio:16/9;
     background:var(--panel);
     border:1px solid var(--line);
     overflow:hidden;
-    position:relative;
   }
   .main-photo img{
     width:100%;height:100%;object-fit:cover;
     filter:saturate(0.85) contrast(1.05);
-    transition:opacity 0.3s;
-  }
-  .main-photo-counter{
-    position:absolute;bottom:16px;right:16px;
-    background:rgba(0,0,0,0.7);
-    backdrop-filter:blur(6px);
-    color:var(--ink);
-    padding:8px 14px;
-    font-family:'Barlow Condensed';font-size:12px;
-    letter-spacing:0.25em;text-transform:uppercase;
-    z-index:2;
-  }
-  .thumbs{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:10px;
-  }
-  .thumb{
-    aspect-ratio:4/3;
-    background:var(--panel);
-    border:1px solid var(--line);
-    overflow:hidden;
-    cursor:pointer;
-    transition:all 0.2s;
-    opacity:0.55;
-  }
-  .thumb img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85)}
-  .thumb:hover, .thumb.active{
-    opacity:1;
-    border-color:var(--rust);
   }
 
   /* INFO GRID */
@@ -241,22 +171,8 @@
     grid-template-columns:1.5fr 1fr;
     gap:60px;
   }
-  .info-main h2{
-    font-family:'Bebas Neue';
-    font-size:42px;letter-spacing:0.04em;
-    margin-bottom:24px;
-    line-height:1;
-  }
-  .info-main h2 em{color:var(--rust);font-style:italic}
-  .info-main p{
-    color:var(--ink-dim);
-    line-height:1.75;
-    margin-bottom:18px;
-    font-size:16px;font-weight:300;
-  }
-  .info-main p strong{color:var(--ink)}
   .features{
-    margin:32px 0;
+    margin:8px 0 32px;
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:0;
@@ -276,6 +192,13 @@
     content:"●";color:var(--rust);font-size:10px;
   }
   .feature:nth-child(2n){border-right:none}
+  .info-main p{
+    color:var(--ink-dim);
+    line-height:1.75;
+    margin-top:24px;
+    font-size:16px;font-weight:300;
+  }
+  .info-main p a{color:var(--rust)}
 
   /* SPECS SIDEBAR */
   .specs{
@@ -327,37 +250,6 @@
   .btn-ghost:hover{background:var(--ink);color:var(--bg)}
   .btn::after{content:"›";font-size:22px;line-height:0.7}
 
-  /* VIDEO */
-  .video-section{
-    background:var(--bg-2);
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    padding:80px 32px;
-  }
-  .video-inner{max-width:1100px;margin:0 auto}
-  .eyebrow{
-    font-family:'Special Elite';color:var(--rust);
-    font-size:13px;letter-spacing:0.3em;text-transform:uppercase;
-    margin-bottom:16px;display:flex;align-items:center;gap:12px;
-  }
-  .eyebrow::before{content:"";width:36px;height:1px;background:var(--rust)}
-  .video-section h2{
-    font-family:'Bebas Neue';
-    font-size:clamp(36px,5vw,64px);
-    line-height:0.92;margin-bottom:32px;
-  }
-  .video-section h2 em{color:var(--rust);font-style:italic}
-  .video-frame{
-    aspect-ratio:16/9;
-    border:1px solid var(--line);
-    background:#000;
-    overflow:hidden;
-    position:relative;
-  }
-  .video-frame iframe{
-    width:100%;height:100%;border:none;
-  }
-
   /* RELATED */
   .related{
     max-width:1400px;margin:0 auto;
@@ -385,7 +277,7 @@
     transition:all 0.3s;
   }
   .rel-card:hover{border-color:var(--rust);transform:translateY(-3px)}
-  .rel-card-img{aspect-ratio:4/3;overflow:hidden}
+  .rel-card-img{aspect-ratio:4/3;overflow:hidden;background:var(--panel)}
   .rel-card-img img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85)}
   .rel-card-body{padding:18px}
   .rel-card-meta{
@@ -417,7 +309,6 @@
   @media(max-width:900px){
     .info-grid{grid-template-columns:1fr;gap:32px;padding:32px 24px 60px}
     .specs{position:static}
-    .thumbs{grid-template-columns:repeat(4,1fr)}
     .nav-links{display:none}
     .features{grid-template-columns:1fr}
     .feature{border-right:none}
@@ -431,18 +322,18 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo">
-      <img src="assets/logo.png" alt="The Big Three Garage Nunspeet" class="logo-img">
+    <a href="/index.html" class="logo">
+      <img src="/assets/logo.png" alt="The Big Three Garage Nunspeet" class="logo-img">
       <div class="logo-text">
         THE BIG THREE
         <small>GARAGE · NUNSPEET</small>
       </div>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html#voorraad" data-i18n="nav.inventory">Voorraad</a></li>
-      <li><a href="index.html#werkplaats" data-i18n="nav.services">Werkplaats</a></li>
-      <li><a href="index.html#verhaal" data-i18n="nav.story">Ons verhaal</a></li>
-      <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="/index.html#voorraad" data-i18n="nav.inventory">Voorraad</a></li>
+      <li><a href="/index.html#werkplaats" data-i18n="nav.services">Werkplaats</a></li>
+      <li><a href="/index.html#verhaal" data-i18n="nav.story">Ons verhaal</a></li>
+      <li><a href="/index.html#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
     <div class="lang">
       <button class="active" data-lang="nl">NL</button>
@@ -453,132 +344,53 @@
 </nav>
 
 <div class="crumb">
-  <a href="index.html" data-i18n="crumb.home">Home</a><span>›</span>
-  <a href="index.html#voorraad" data-i18n="nav.inventory">Voorraad</a><span>›</span>
-  GMC Motorhome 26ft
+  <a href="/index.html" data-i18n="crumb.home">Home</a><span>›</span>
+  <a href="/index.html#voorraad" data-i18n="nav.inventory">Voorraad</a><span>›</span>
+  <span id="crumbTitle">…</span>
 </div>
 
-<div class="detail-head">
-  <div>
-    <div class="detail-meta">1978 · GMC · KENTEKEN NL</div>
-    <h1>GMC<br>MOTORHOME <em>26FT</em></h1>
+<main id="detailRoot">
+  <div class="detail-head">
+    <div>
+      <div class="detail-meta" id="dMeta">…</div>
+      <h1 id="dTitle">…</h1>
+    </div>
+    <div class="detail-head-right">
+      <span class="status-pill" id="dStatus">VOORRAAD</span>
+      <div class="price-tag" id="dPrice">…</div>
+    </div>
   </div>
-  <div class="detail-head-right">
-    <span class="status-pill" data-i18n="detail.pill">VOORRAAD · 12 FOTO'S · VIDEO</span>
-    <div class="price-tag">€ 49.500</div>
-  </div>
-</div>
 
-<div class="gallery-section">
-  <div class="gallery">
+  <div class="gallery-section">
     <div class="main-photo">
-      <img id="mainImg" src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=1600&q=85" alt="GMC Motorhome">
-      <span class="main-photo-counter"><span id="counter">1</span> / 6</span>
-    </div>
-    <div class="thumbs">
-      <div class="thumb active" data-src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=1600&q=85">
-        <img src="https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=400&q=70" alt="">
-      </div>
-      <div class="thumb" data-src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=1600&q=85">
-        <img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=400&q=70" alt="">
-      </div>
-      <div class="thumb" data-src="https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?w=1600&q=85">
-        <img src="https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?w=400&q=70" alt="">
-      </div>
-      <div class="thumb" data-src="https://images.unsplash.com/photo-1605893477799-b99e3b8b29b6?w=1600&q=85">
-        <img src="https://images.unsplash.com/photo-1605893477799-b99e3b8b29b6?w=400&q=70" alt="">
-      </div>
-      <div class="thumb" data-src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=1600&q=85">
-        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=400&q=70" alt="">
-      </div>
-      <div class="thumb" data-src="https://images.unsplash.com/photo-1597007066704-67bf2068d5b2?w=1600&q=85">
-        <img src="https://images.unsplash.com/photo-1597007066704-67bf2068d5b2?w=400&q=70" alt="">
-      </div>
+      <img id="mainImg" src="" alt="">
     </div>
   </div>
-</div>
 
-<div class="info-grid">
-  <div class="info-main">
-    <div class="eyebrow" data-i18n="detail.desc.eyebrow">Beschrijving</div>
-    <h2 data-i18n="detail.desc.title">EEN <em>STUKJE</em><br>AMERIKA OP WIELEN</h2>
-    <p data-i18n="detail.desc.p1">Deze 1978 GMC Motorhome 26ft is een echte rijdende showcase. <strong>Origineel front-wheel drive,</strong> 455 cubic inch V8 die nog steeds zingt zoals hij in Detroit bedoeld was. Onlangs gerevideerd door David in eigen werkplaats: nieuwe radiateur, vernieuwde remmen rondom, koppeling nagekeken.</p>
-    <p data-i18n="detail.desc.p2">Interieur is compleet en in oorspronkelijke staat behouden, met respect voor het originele jaren '70 design. Werkende keuken, koelkast op gas/elektra, douche, toilet en slaapruimte voor vier. <strong>Klaar voor een zomer richting de Alpen of de Italiaanse kust.</strong></p>
-    <p data-i18n="detail.desc.p3">Wordt geleverd met geldig NL kenteken, recente APK, complete documentatie en een walk-around video op YouTube. Geen verrassingen achteraf, alles zwart op wit.</p>
-
-    <div class="features">
-      <div class="feature" data-i18n="detail.feat.1">FRONT-WHEEL DRIVE</div>
-      <div class="feature" data-i18n="detail.feat.2">455 V8 OLDSMOBILE</div>
-      <div class="feature" data-i18n="detail.feat.3">AUTOMAAT TH425</div>
-      <div class="feature" data-i18n="detail.feat.4">NL KENTEKEN</div>
-      <div class="feature" data-i18n="detail.feat.5">RECENTE APK</div>
-      <div class="feature" data-i18n="detail.feat.6">SLAAPT VIER PERSONEN</div>
-      <div class="feature" data-i18n="detail.feat.7">KEUKEN COMPLEET</div>
-      <div class="feature" data-i18n="detail.feat.8">DOUCHE & TOILET</div>
+  <div class="info-grid">
+    <div class="info-main">
+      <div class="features" id="dSpecs"></div>
+      <p data-i18n="detail.desc.cta">Interesse? Bel David op <a href="tel:+31682727374">+31 6 82 72 73 74</a> of plan een afspraak via het contactformulier. Een bezichtiging op locatie is altijd mogelijk.</p>
     </div>
 
-    <p style="margin-top:32px" data-i18n="detail.desc.cta">Wil je hem zien rijden? Bel David op <a href="tel:+31612122146" style="color:var(--rust)">+31 6 12122146</a> of plan een afspraak via het contactformulier. Een proefrit is altijd mogelijk, neem gerust een eigen monteur mee als je dat wilt.</p>
+    <aside class="specs">
+      <h3 data-i18n="detail.spec.title">SPECIFICATIES</h3>
+      <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.year">Bouwjaar</span><span class="spec-val" id="sYear">–</span></div>
+      <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.make">Merk</span><span class="spec-val" id="sMake">–</span></div>
+      <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.status">Status</span><span class="spec-val" id="sStatus">–</span></div>
+      <a href="/index.html#afspraak" class="btn btn-primary" data-i18n="detail.btn.view">Plan bezichtiging</a>
+      <a href="tel:+31682727374" class="btn btn-ghost" style="margin-top:10px" data-i18n="detail.btn.call">Bel direct</a>
+      <a href="#" id="mpBtn" class="btn btn-ghost" style="margin-top:10px" target="_blank" rel="noopener" hidden data-i18n="detail.btn.mp">Bekijk op Marktplaats</a>
+    </aside>
   </div>
+</main>
 
-  <aside class="specs">
-    <h3 data-i18n="detail.spec.title">SPECIFICATIES</h3>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.year">Bouwjaar</span><span class="spec-val">1978</span></div>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.make">Merk</span><span class="spec-val">GMC</span></div>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.model">Model</span><span class="spec-val">Motorhome 26ft</span></div>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.engine">Motor</span><span class="spec-val">455 V8</span></div>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.power">Vermogen</span><span class="spec-val">230 PK</span></div>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.trans">Versnelling</span><span class="spec-val">Automaat</span></div>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.fuel">Brandstof</span><span class="spec-val">Benzine</span></div>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.mileage">Km-stand</span><span class="spec-val">92.000 km</span></div>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.color">Kleur</span><span class="spec-val">Beige / Bruin</span></div>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.reg">Kenteken</span><span class="spec-val">NL</span></div>
-    <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.mot">APK</span><span class="spec-val">10-2026</span></div>
-    <a href="index.html#contact" class="btn btn-primary" data-i18n="detail.btn.view">Plan bezichtiging</a>
-    <a href="tel:+31612122146" class="btn btn-ghost" style="margin-top:10px" data-i18n="detail.btn.call">Bel direct</a>
-  </aside>
-</div>
-
-<section class="video-section">
-  <div class="video-inner">
-    <div class="eyebrow" data-i18n="detail.vid.eyebrow">Walk-around video</div>
-    <h2 data-i18n="detail.vid.title">ZIE HEM <em>RIJDEN</em>.</h2>
-    <div class="video-frame">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
-
-<section class="related">
+<section class="related" id="relatedSection" hidden>
   <div class="related-head">
     <h2 data-i18n="detail.related.title">OOK <em>INTERESSANT</em></h2>
-    <a href="index.html#voorraad" class="btn btn-ghost" data-i18n="detail.related.all">Hele voorraad</a>
+    <a href="/index.html#voorraad" class="btn btn-ghost" data-i18n="detail.related.all">Hele voorraad</a>
   </div>
-  <div class="related-grid">
-    <a href="auto-detail.html" class="rel-card">
-      <div class="rel-card-img"><img src="https://images.unsplash.com/photo-1626668893632-6f3a4466d22f?w=600&q=80" alt=""></div>
-      <div class="rel-card-body">
-        <div class="rel-card-meta">1969 · CHEVROLET</div>
-        <h3>CHEVY G20 VAN</h3>
-        <div class="rel-card-price" data-i18n="detail.on.request">Op aanvraag</div>
-      </div>
-    </a>
-    <a href="auto-detail.html" class="rel-card">
-      <div class="rel-card-img"><img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=600&q=80" alt=""></div>
-      <div class="rel-card-body">
-        <div class="rel-card-meta">1974 · DODGE</div>
-        <h3>DODGE TRADESMAN</h3>
-        <div class="rel-card-price">€ 28.900</div>
-      </div>
-    </a>
-    <a href="auto-detail.html" class="rel-card">
-      <div class="rel-card-img"><img src="https://images.unsplash.com/photo-1605893477799-b99e3b8b29b6?w=600&q=80" alt=""></div>
-      <div class="rel-card-body">
-        <div class="rel-card-meta">1985 · FORD</div>
-        <h3>FORD F-250 4X4</h3>
-        <div class="rel-card-price" data-i18n="detail.sold">Verkocht</div>
-      </div>
-    </a>
-  </div>
+  <div class="related-grid" id="relatedGrid"></div>
 </section>
 
 <footer>
@@ -586,87 +398,119 @@
 </footer>
 
 <script>
-  const mainImg = document.getElementById('mainImg');
-  const counter = document.getElementById('counter');
-  document.querySelectorAll('.thumb').forEach((t,i)=>{
-    t.addEventListener('click',()=>{
-      document.querySelectorAll('.thumb').forEach(x=>x.classList.remove('active'));
-      t.classList.add('active');
-      mainImg.style.opacity = '0';
-      setTimeout(()=>{
-        mainImg.src = t.dataset.src;
-        mainImg.style.opacity = '1';
-        counter.textContent = i+1;
-      }, 150);
-    });
-  });
+  const SUPABASE_URL      = 'https://loolxbizdribqyulxbop.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_nMu2RzoUWmaKnwjeR3kRPg_EzGzbVIg';
+  const sb = (typeof supabase !== 'undefined')
+    ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+
+  function esc(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function slugify(s) {
+    return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+  }
+
+  function slugFromPath() {
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    const i = parts.indexOf('voorraad');
+    return i !== -1 && parts[i+1] ? decodeURIComponent(parts[i+1]) : '';
+  }
+
+  const statusLabel = { available:'VOORRAAD', reserved:'GERESERVEERD', service:'IN SERVICE', part:'ONDERDEEL' };
+
+  function fmtPrice(v) {
+    if (v.price_type === 'fixed' && v.price) return `€ ${Number(v.price).toLocaleString('nl-NL')}`;
+    if (v.price_type === 'ask') return 'Op aanvraag';
+    return 'Bieden';
+  }
+
+  function showNotFound() {
+    document.title = 'Voorraad · The Big Three Garage Nunspeet';
+    document.getElementById('detailRoot').innerHTML = `
+      <div style="max-width:640px;margin:100px auto;text-align:center;padding:0 24px">
+        <h1 style="font-family:'Bebas Neue';font-size:44px;margin-bottom:16px">AUTO NIET GEVONDEN</h1>
+        <p style="color:var(--ink-dim);margin-bottom:24px">Deze auto is niet meer beschikbaar, of de link klopt niet meer.</p>
+        <a href="/index.html#voorraad" class="btn btn-primary">Bekijk de voorraad</a>
+      </div>`;
+  }
+
+  function renderVehicle(v) {
+    document.title = `${v.title} te koop · The Big Three Garage Nunspeet`;
+    document.getElementById('crumbTitle').textContent = v.title;
+    document.getElementById('dMeta').textContent = [v.year, v.make].filter(Boolean).join(' · ');
+    document.getElementById('dTitle').textContent = v.title;
+    document.getElementById('dStatus').textContent = statusLabel[v.status] || 'VOORRAAD';
+    document.getElementById('dPrice').textContent = fmtPrice(v);
+    document.getElementById('sYear').textContent = v.year || '–';
+    document.getElementById('sMake').textContent = v.make || '–';
+    document.getElementById('sStatus').textContent = statusLabel[v.status] || 'VOORRAAD';
+
+    const img = document.getElementById('mainImg');
+    img.src = v.image_url || '/assets/hero-a.jpg';
+    img.alt = v.title || '';
+
+    document.getElementById('dSpecs').innerHTML = [v.spec1, v.spec2, v.spec3]
+      .filter(Boolean).map(s => `<div class="feature">${esc(s)}</div>`).join('');
+
+    const mpBtn = document.getElementById('mpBtn');
+    if (v.marktplaats_url) { mpBtn.href = v.marktplaats_url; mpBtn.hidden = false; }
+  }
+
+  function renderRelated(all, current) {
+    const others = all.filter(v => v.id !== current.id).slice(0, 3);
+    if (!others.length) return;
+    document.getElementById('relatedSection').hidden = false;
+    document.getElementById('relatedGrid').innerHTML = others.map(v => `
+      <a href="/voorraad/${encodeURIComponent(slugify(v.title))}" class="rel-card">
+        <div class="rel-card-img"><img src="${esc(v.image_url||'')}" alt="${esc(v.title)}"></div>
+        <div class="rel-card-body">
+          <div class="rel-card-meta">${esc([v.year, v.make].filter(Boolean).join(' · '))}</div>
+          <h3>${esc(v.title)}</h3>
+          <div class="rel-card-price">${fmtPrice(v)}</div>
+        </div>
+      </a>`).join('');
+  }
+
+  async function init() {
+    if (!sb) { showNotFound(); return; }
+    const slug = slugFromPath();
+    const { data, error } = await sb.from('vehicles').select('*');
+    if (error || !data) { showNotFound(); return; }
+    const vehicle = data.find(v => slugify(v.title) === slug);
+    if (!vehicle) { showNotFound(); return; }
+    renderVehicle(vehicle);
+    renderRelated(data, vehicle);
+  }
+  init();
 
   const t = {
     nl: {
       "nav.inventory":"Voorraad","nav.services":"Werkplaats","nav.story":"Ons verhaal","nav.contact":"Contact",
       "crumb.home":"Home",
-      "detail.pill":"VOORRAAD · 12 FOTO'S · VIDEO",
-      "detail.desc.eyebrow":"Beschrijving",
-      "detail.desc.title":"EEN <em>STUKJE</em><br>AMERIKA OP WIELEN",
-      "detail.desc.p1":"Deze 1978 GMC Motorhome 26ft is een echte rijdende showcase. <strong>Origineel front-wheel drive,</strong> 455 cubic inch V8 die nog steeds zingt zoals hij in Detroit bedoeld was. Onlangs gerevideerd door David in eigen werkplaats: nieuwe radiateur, vernieuwde remmen rondom, koppeling nagekeken.",
-      "detail.desc.p2":"Interieur is compleet en in oorspronkelijke staat behouden, met respect voor het originele jaren '70 design. Werkende keuken, koelkast op gas/elektra, douche, toilet en slaapruimte voor vier. <strong>Klaar voor een zomer richting de Alpen of de Italiaanse kust.</strong>",
-      "detail.desc.p3":"Wordt geleverd met geldig NL kenteken, recente APK, complete documentatie en een walk-around video op YouTube. Geen verrassingen achteraf, alles zwart op wit.",
-      "detail.feat.1":"FRONT-WHEEL DRIVE","detail.feat.2":"455 V8 OLDSMOBILE","detail.feat.3":"AUTOMAAT TH425",
-      "detail.feat.4":"NL KENTEKEN","detail.feat.5":"RECENTE APK","detail.feat.6":"SLAAPT VIER PERSONEN",
-      "detail.feat.7":"KEUKEN COMPLEET","detail.feat.8":"DOUCHE & TOILET",
-      "detail.desc.cta":"Wil je hem zien rijden? Bel David op <a href=\"tel:+31612122146\" style=\"color:var(--rust)\">+31 6 12122146</a> of plan een afspraak via het contactformulier. Een proefrit is altijd mogelijk, neem gerust een eigen monteur mee als je dat wilt.",
-      "detail.spec.title":"SPECIFICATIES","detail.spec.year":"Bouwjaar","detail.spec.make":"Merk",
-      "detail.spec.model":"Model","detail.spec.engine":"Motor","detail.spec.power":"Vermogen",
-      "detail.spec.trans":"Versnelling","detail.spec.fuel":"Brandstof","detail.spec.mileage":"Km-stand",
-      "detail.spec.color":"Kleur","detail.spec.reg":"Kenteken","detail.spec.mot":"APK",
-      "detail.btn.view":"Plan bezichtiging","detail.btn.call":"Bel direct",
-      "detail.vid.eyebrow":"Walk-around video","detail.vid.title":"ZIE HEM <em>RIJDEN</em>.",
-      "detail.related.title":"OOK <em>INTERESSANT</em>","detail.related.all":"Hele voorraad",
-      "detail.on.request":"Op aanvraag","detail.sold":"Verkocht"
+      "detail.desc.cta":"Interesse? Bel David op <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> of plan een afspraak via het contactformulier. Een bezichtiging op locatie is altijd mogelijk.",
+      "detail.spec.title":"SPECIFICATIES","detail.spec.year":"Bouwjaar","detail.spec.make":"Merk","detail.spec.status":"Status",
+      "detail.btn.view":"Plan bezichtiging","detail.btn.call":"Bel direct","detail.btn.mp":"Bekijk op Marktplaats",
+      "detail.related.title":"OOK <em>INTERESSANT</em>","detail.related.all":"Hele voorraad"
     },
     en: {
       "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact",
       "crumb.home":"Home",
-      "detail.pill":"IN STOCK · 12 PHOTOS · VIDEO",
-      "detail.desc.eyebrow":"Description",
-      "detail.desc.title":"A <em>PIECE OF</em><br>AMERICA ON WHEELS",
-      "detail.desc.p1":"This 1978 GMC Motorhome 26ft is a genuine rolling showcase. <strong>Original front-wheel drive,</strong> 455 cubic inch V8 that still sings exactly as intended in Detroit. Recently serviced by David in his own workshop: new radiator, renewed brakes all round, clutch checked.",
-      "detail.desc.p2":"The interior is complete and preserved in its original condition, respecting the original 1970s design. Working kitchen, fridge on gas/electric, shower, toilet and sleeping room for four. <strong>Ready for a summer to the Alps or the Italian coast.</strong>",
-      "detail.desc.p3":"Delivered with valid Dutch registration, recent MOT, complete documentation and a walk-around video on YouTube. No surprises afterwards — everything in writing.",
-      "detail.feat.1":"FRONT-WHEEL DRIVE","detail.feat.2":"455 V8 OLDSMOBILE","detail.feat.3":"AUTO TH425",
-      "detail.feat.4":"DUTCH REGISTRATION","detail.feat.5":"RECENT MOT","detail.feat.6":"SLEEPS FOUR",
-      "detail.feat.7":"FULL KITCHEN","detail.feat.8":"SHOWER & TOILET",
-      "detail.desc.cta":"Want to see it drive? Call David on <a href=\"tel:+31612122146\" style=\"color:var(--rust)\">+31 6 12122146</a> or book a visit through the contact form. A test drive is always possible — feel free to bring your own mechanic.",
-      "detail.spec.title":"SPECIFICATIONS","detail.spec.year":"Year","detail.spec.make":"Make",
-      "detail.spec.model":"Model","detail.spec.engine":"Engine","detail.spec.power":"Power",
-      "detail.spec.trans":"Transmission","detail.spec.fuel":"Fuel","detail.spec.mileage":"Mileage",
-      "detail.spec.color":"Colour","detail.spec.reg":"Registration","detail.spec.mot":"MOT",
-      "detail.btn.view":"Book a viewing","detail.btn.call":"Call now",
-      "detail.vid.eyebrow":"Walk-around video","detail.vid.title":"SEE IT <em>DRIVE</em>.",
-      "detail.related.title":"ALSO <em>INTERESTING</em>","detail.related.all":"Full inventory",
-      "detail.on.request":"On request","detail.sold":"Sold"
+      "detail.desc.cta":"Interested? Call David on <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> or book a visit through the contact form. A viewing on location is always possible.",
+      "detail.spec.title":"SPECIFICATIONS","detail.spec.year":"Year","detail.spec.make":"Make","detail.spec.status":"Status",
+      "detail.btn.view":"Book a viewing","detail.btn.call":"Call now","detail.btn.mp":"View on Marktplaats",
+      "detail.related.title":"ALSO <em>INTERESTING</em>","detail.related.all":"Full inventory"
     },
     de: {
       "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt",
       "crumb.home":"Startseite",
-      "detail.pill":"VORRÄTIG · 12 FOTOS · VIDEO",
-      "detail.desc.eyebrow":"Beschreibung",
-      "detail.desc.title":"EIN <em>STÜCK</em><br>AMERIKA AUF RÄDERN",
-      "detail.desc.p1":"Dieser 1978 GMC Motorhome 26ft ist eine echte fahrende Sensation. <strong>Originaler Frontantrieb,</strong> 455 Kubikzoll V8, der noch immer so klingt wie in Detroit gedacht. Kürzlich von David in eigener Werkstatt überholt: neuer Kühler, erneuerte Bremsen rundum, Kupplung geprüft.",
-      "detail.desc.p2":"Das Interieur ist vollständig und im ursprünglichen Zustand erhalten, mit Respekt für das originale 70er-Jahre-Design. Funktionierende Küche, Kühlschrank auf Gas/Strom, Dusche, Toilette und Schlafplatz für vier. <strong>Bereit für einen Sommer Richtung Alpen oder italienische Küste.</strong>",
-      "detail.desc.p3":"Wird geliefert mit gültigem NL-Kennzeichen, aktuellem TÜV, vollständiger Dokumentation und einem Walk-around-Video auf YouTube. Keine Überraschungen hinterher — alles schriftlich.",
-      "detail.feat.1":"FRONTANTRIEB","detail.feat.2":"455 V8 OLDSMOBILE","detail.feat.3":"AUTOMATIK TH425",
-      "detail.feat.4":"NL-ZULASSUNG","detail.feat.5":"AKTUELLER TÜV","detail.feat.6":"SCHLÄFT VIER PERSONEN",
-      "detail.feat.7":"KÜCHE KOMPLETT","detail.feat.8":"DUSCHE & TOILETTE",
-      "detail.desc.cta":"Möchten Sie ihn fahren sehen? Rufen Sie David an: <a href=\"tel:+31612122146\" style=\"color:var(--rust)\">+31 6 12122146</a> oder vereinbaren Sie einen Termin über das Kontaktformular. Eine Probefahrt ist jederzeit möglich — bringen Sie gerne Ihren eigenen Mechaniker mit.",
-      "detail.spec.title":"SPEZIFIKATIONEN","detail.spec.year":"Baujahr","detail.spec.make":"Marke",
-      "detail.spec.model":"Modell","detail.spec.engine":"Motor","detail.spec.power":"Leistung",
-      "detail.spec.trans":"Getriebe","detail.spec.fuel":"Kraftstoff","detail.spec.mileage":"Kilometerstand",
-      "detail.spec.color":"Farbe","detail.spec.reg":"Zulassung","detail.spec.mot":"TÜV",
-      "detail.btn.view":"Besichtigung buchen","detail.btn.call":"Jetzt anrufen",
-      "detail.vid.eyebrow":"Walk-around-Video","detail.vid.title":"SEHEN SIE ES <em>FAHREN</em>.",
-      "detail.related.title":"AUCH <em>INTERESSANT</em>","detail.related.all":"Alle Fahrzeuge",
-      "detail.on.request":"Auf Anfrage","detail.sold":"Verkauft"
+      "detail.desc.cta":"Interesse? Rufen Sie David an: <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> oder vereinbaren Sie einen Termin über das Kontaktformular. Eine Besichtigung vor Ort ist jederzeit möglich.",
+      "detail.spec.title":"SPEZIFIKATIONEN","detail.spec.year":"Baujahr","detail.spec.make":"Marke","detail.spec.status":"Status",
+      "detail.btn.view":"Besichtigung buchen","detail.btn.call":"Jetzt anrufen","detail.btn.mp":"Auf Marktplaats ansehen",
+      "detail.related.title":"AUCH <em>INTERESSANT</em>","detail.related.all":"Alle Fahrzeuge"
     }
   };
 

@@ -1,10 +1,9 @@
 [build]
   publish = "."
 
-[[redirects]]
-  from = "/voorraad/*"
-  to = "/auto-detail.html"
-  status = 200
+[[edge_functions]]
+  path = "/voorraad/*"
+  function = "vehicle-meta"
 
 [[headers]]
   for = "/*"
