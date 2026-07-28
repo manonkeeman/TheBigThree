@@ -57,16 +57,19 @@ export default async (request, context) => {
       const ogTitle = `${vehicle.title} · Te koop bij The Big Three Garage`;
       const image = vehicle.image_url || 'https://thebigthree.nl/assets/og-image.png';
 
+      const hasFixedPrice = vehicle.price_type === 'fixed' && !!vehicle.price;
+
       const jsonLd = {
         "@context": "https://schema.org",
         "@type": "Vehicle",
         "name": vehicle.title,
+        "description": description,
         "vehicleModelDate": vehicle.year ? String(vehicle.year) : undefined,
         "brand": vehicle.make ? { "@type": "Brand", "name": vehicle.make } : undefined,
         "image": image,
-        "offers": {
+        "offers": hasFixedPrice ? {
           "@type": "Offer",
-          "price": vehicle.price_type === 'fixed' && vehicle.price ? String(vehicle.price) : undefined,
+          "price": String(vehicle.price),
           "priceCurrency": "EUR",
           "availability": vehicle.status === 'available' ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
           "seller": {
@@ -80,7 +83,22 @@ export default async (request, context) => {
               "addressCountry": "NL",
             },
           },
-        },
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "EUR" },
+            "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "NL" },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+              "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "DAY" },
+            },
+          },
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+            "returnPolicyCountry": "NL",
+          },
+        } : undefined,
       };
 
       html = html
