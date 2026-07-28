@@ -42,6 +42,10 @@
   path = "/voorraad/*"
   function = "vehicle-meta"
 
+[[edge_functions]]
+  path = "/sitemap.xml"
+  function = "sitemap"
+
 # publish = "." serveert de hele repo; onderstaande bestanden horen niet publiek
 [[redirects]]
   from = "/package.json"
@@ -99,6 +103,12 @@
 
 [[redirects]]
   from = "/.claude/*"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/backups/*"
   to = "/"
   status = 301
   force = true
