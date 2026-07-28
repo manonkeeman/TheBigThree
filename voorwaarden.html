@@ -31,6 +31,7 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:20px;
   }
   .nav-logo{
     font-family:'Bebas Neue',sans-serif;
@@ -39,6 +40,7 @@
     color:var(--ink);
     text-decoration:none;
   }
+  .nav-right{display:flex;align-items:center;gap:20px}
   .nav-back{
     font-family:'Barlow Condensed',sans-serif;
     font-size:12px;
@@ -49,12 +51,25 @@
     transition:color 0.2s;
   }
   .nav-back:hover{color:var(--rust)}
+  .lang{
+    display:flex;gap:4px;border:1px solid var(--line);padding:4px;
+    font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.15em;
+  }
+  .lang button{
+    background:none;border:none;color:var(--ink-dim);
+    padding:5px 10px;cursor:pointer;font-family:inherit;
+    font-size:inherit;letter-spacing:inherit;text-transform:uppercase;transition:all 0.2s;
+  }
+  .lang button.active{background:var(--rust);color:#fff}
 
   main{
     max-width:800px;
     margin:0 auto;
     padding:64px 32px 96px;
   }
+
+  .voor-lang{display:none}
+  .voor-lang.active{display:block}
 
   .eyebrow{
     font-family:'Barlow Condensed',sans-serif;
@@ -117,90 +132,266 @@
     color:var(--ink-dim);
   }
   footer a{color:var(--rust);text-decoration:none}
+
+  @media(max-width:640px){
+    nav{flex-wrap:wrap;padding:14px 20px}
+  }
 </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="nav-logo">THE BIG THREE GARAGE</a>
-  <a href="index.html" class="nav-back">← Terug naar de site</a>
+  <div class="nav-right">
+    <div class="lang">
+      <button class="active" data-lang="nl">NL</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="de">DE</button>
+    </div>
+    <a href="index.html" class="nav-back" id="navBack">← Terug naar de site</a>
+  </div>
 </nav>
 
 <main>
-  <div class="eyebrow">Voorwaarden</div>
-  <h1>ALGEMENE <em>VOORWAARDEN</em></h1>
-  <p class="intro">Deze voorwaarden zijn van toepassing op alle aanbiedingen, verkopen en werkzaamheden van The Big Three Garage (David Broeksma), gevestigd aan de Hullerweg 115, 8071 NP Nunspeet, KvK 81234090, BTW NL862005541B01.</p>
 
-  <div class="block">
-    <h2>1. TOEPASSELIJKHEID</h2>
-    <p>Deze voorwaarden gelden voor iedere aanbieding, offerte en overeenkomst tussen The Big Three Garage en een koper of opdrachtgever, tenzij schriftelijk anders is overeengekomen.</p>
+  <!-- NL -->
+  <div class="voor-lang active" id="lang-nl">
+    <div class="eyebrow">Voorwaarden</div>
+    <h1>ALGEMENE <em>VOORWAARDEN</em></h1>
+    <p class="intro">Deze voorwaarden zijn van toepassing op alle aanbiedingen, verkopen en werkzaamheden van The Big Three Garage (David Broeksma), gevestigd aan de Hullerweg 115, 8071 NP Nunspeet, KvK 81234090, BTW NL862005541B01.</p>
+
+    <div class="block">
+      <h2>1. TOEPASSELIJKHEID</h2>
+      <p>Deze voorwaarden gelden voor iedere aanbieding, offerte en overeenkomst tussen The Big Three Garage en een koper of opdrachtgever, tenzij schriftelijk anders is overeengekomen.</p>
+    </div>
+
+    <div class="block">
+      <h2>2. AANBIEDINGEN EN PRIJZEN</h2>
+      <p>Alle vermelde prijzen zijn in euro's, inclusief btw, en onder voorbehoud van type- en drukfouten. Vermelde voertuigen, onderdelen en beschikbaarheid op de website zijn indicatief; wijzigingen en tussentijdse verkoop zijn voorbehouden. Een voertuig is pas gereserveerd na wederzijdse schriftelijke of mondelinge bevestiging.</p>
+    </div>
+
+    <div class="block">
+      <h2>3. BEZICHTIGING EN AANKOOP</h2>
+      <p>Voertuigen worden verkocht op basis van bezichtiging en (indien gewenst) proefrit op onze locatie in Nunspeet. Wij raden aan het voertuig voorafgaand aan aankoop zelf te (laten) keuren. Koper wordt geacht het voertuig in de staat te hebben geaccepteerd zoals waargenomen bij bezichtiging, tenzij schriftelijk anders overeengekomen of sprake is van een gebrek dat redelijkerwijs niet bij bezichtiging kon worden vastgesteld.</p>
+    </div>
+
+    <div class="block">
+      <h2>4. HERROEPINGSRECHT</h2>
+      <p>Een voertuig wordt bij ons uitsluitend gekocht na bezichtiging op locatie. Er is daarom geen sprake van een overeenkomst op afstand en geldt er <strong>geen wettelijk herroepingsrecht</strong> (bedenktijd) op de aankoop. Eventuele afspraken over bedenktijd of ontbinding worden alleen schriftelijk per geval vastgelegd.</p>
+    </div>
+
+    <div class="block">
+      <h2>5. CONFORMITEIT EN GARANTIE</h2>
+      <p>Voertuigen worden verkocht als gebruikt voertuig ("as is"), met inachtneming van de wettelijke conformiteitseisen die gelden voor verkoop door een bedrijf aan een particulier (artikel 7:17 e.v. Burgerlijk Wetboek). Eventuele aanvullende garantie op een specifiek voertuig of onderdeel wordt alleen schriftelijk overeengekomen en vermeld op de factuur of orderbevestiging.</p>
+    </div>
+
+    <div class="block">
+      <h2>6. BETALING EN EIGENDOM</h2>
+      <p>Betaling vindt plaats zoals overeengekomen bij aankoop, in de regel voorafgaand aan of bij aflevering. Het voertuig blijft eigendom van The Big Three Garage totdat de volledige koopsom is voldaan.</p>
+    </div>
+
+    <div class="block">
+      <h2>7. AFLEVERING</h2>
+      <p>Voertuigen worden opgehaald bij onze vestiging in Nunspeet, tenzij schriftelijk anders is overeengekomen. Aflevering op een ander adres is in overleg mogelijk; eventuele kosten hiervoor worden vooraf gecommuniceerd.</p>
+    </div>
+
+    <div class="block">
+      <h2>8. WERKPLAATS, ONDERHOUD EN APK</h2>
+      <p>Voor onderhoud, reparatie en APK-keuringen geldt dat wij u vooraf informeren over de verwachte kosten. Meerwerk wordt pas uitgevoerd na overleg, tenzij dit noodzakelijk is voor de veiligheid of om verdere schade te voorkomen.</p>
+    </div>
+
+    <div class="block">
+      <h2>9. AANSPRAKELIJKHEID</h2>
+      <p>The Big Three Garage is niet aansprakelijk voor schade die het gevolg is van onjuistheden op de website, tenzij sprake is van opzet of grove nalatigheid. Prijzen, specificaties en beschikbaarheid zijn onder voorbehoud.</p>
+    </div>
+
+    <div class="block">
+      <h2>10. KLACHTEN</h2>
+      <p>Heeft u een klacht over een aankoop of uitgevoerde werkzaamheden? Neem dan zo snel mogelijk contact met ons op via <a href="mailto:info@thebigthree.nl">info@thebigthree.nl</a> of telefonisch: <a href="tel:+31682727374">+31 6 82 72 73 74</a>. Wij spannen ons in om samen tot een passende oplossing te komen.</p>
+    </div>
+
+    <div class="block">
+      <h2>11. TOEPASSELIJK RECHT</h2>
+      <p>Op alle overeenkomsten is Nederlands recht van toepassing. Geschillen worden zo mogelijk in onderling overleg opgelost en anders voorgelegd aan de bevoegde rechter in het arrondissement Gelderland.</p>
+    </div>
+
+    <p class="meta">Versie: juli 2026 · The Big Three Garage · Hullerweg 115, Nunspeet</p>
   </div>
 
-  <div class="block">
-    <h2>2. AANBIEDINGEN EN PRIJZEN</h2>
-    <p>Alle vermelde prijzen zijn in euro's, inclusief btw, en onder voorbehoud van type- en drukfouten. Vermelde voertuigen, onderdelen en beschikbaarheid op de website zijn indicatief; wijzigingen en tussentijdse verkoop zijn voorbehouden. Een voertuig is pas gereserveerd na wederzijdse schriftelijke of mondelinge bevestiging.</p>
+  <!-- EN -->
+  <div class="voor-lang" id="lang-en">
+    <div class="eyebrow">Terms</div>
+    <h1>TERMS &amp; <em>CONDITIONS</em></h1>
+    <p class="intro">These terms apply to all offers, sales and services provided by The Big Three Garage (David Broeksma), based at Hullerweg 115, 8071 NP Nunspeet, the Netherlands, Chamber of Commerce (KvK) 81234090, VAT NL862005541B01.</p>
+
+    <div class="block">
+      <h2>1. APPLICABILITY</h2>
+      <p>These terms apply to every offer, quotation and agreement between The Big Three Garage and a buyer or client, unless otherwise agreed in writing.</p>
+    </div>
+
+    <div class="block">
+      <h2>2. OFFERS AND PRICES</h2>
+      <p>All prices shown are in euros, including VAT, and subject to typographical and printing errors. Vehicles, parts and availability listed on the website are indicative; changes and interim sales are reserved. A vehicle is only reserved after mutual written or verbal confirmation.</p>
+    </div>
+
+    <div class="block">
+      <h2>3. VIEWING AND PURCHASE</h2>
+      <p>Vehicles are sold on the basis of an in-person viewing and (if desired) a test drive at our location in Nunspeet. We recommend having the vehicle inspected before purchase. The buyer is deemed to have accepted the vehicle in the condition observed at viewing, unless otherwise agreed in writing or in the case of a defect that could not reasonably have been detected at viewing.</p>
+    </div>
+
+    <div class="block">
+      <h2>4. RIGHT OF WITHDRAWAL</h2>
+      <p>A vehicle is only purchased from us after an in-person viewing at our location. There is therefore no distance-selling agreement, and no statutory right of withdrawal (cooling-off period) applies to the purchase. Any agreements on a cooling-off period or dissolution are only recorded in writing on a case-by-case basis.</p>
+    </div>
+
+    <div class="block">
+      <h2>5. CONFORMITY AND WARRANTY</h2>
+      <p>Vehicles are sold as used vehicles ("as is"), subject to the statutory conformity requirements that apply to a sale by a business to a consumer (Dutch Civil Code, Article 7:17 et seq.). Any additional warranty on a specific vehicle or part is only agreed in writing and stated on the invoice or order confirmation.</p>
+    </div>
+
+    <div class="block">
+      <h2>6. PAYMENT AND OWNERSHIP</h2>
+      <p>Payment takes place as agreed at purchase, generally prior to or upon delivery. The vehicle remains the property of The Big Three Garage until the full purchase price has been paid.</p>
+    </div>
+
+    <div class="block">
+      <h2>7. DELIVERY</h2>
+      <p>Vehicles are collected from our premises in Nunspeet, unless otherwise agreed in writing. Delivery to another address is possible by arrangement; any related costs are communicated in advance.</p>
+    </div>
+
+    <div class="block">
+      <h2>8. WORKSHOP, MAINTENANCE AND MOT (APK)</h2>
+      <p>For maintenance, repairs and MOT (APK) inspections, we inform you of the expected costs in advance. Additional work is only carried out after consultation, unless necessary for safety or to prevent further damage.</p>
+    </div>
+
+    <div class="block">
+      <h2>9. LIABILITY</h2>
+      <p>The Big Three Garage is not liable for damage resulting from inaccuracies on the website, unless there is intent or gross negligence. Prices, specifications and availability are subject to change.</p>
+    </div>
+
+    <div class="block">
+      <h2>10. COMPLAINTS</h2>
+      <p>Do you have a complaint about a purchase or work carried out? Please contact us as soon as possible via <a href="mailto:info@thebigthree.nl">info@thebigthree.nl</a> or by phone: <a href="tel:+31682727374">+31 6 82 72 73 74</a>. We will make every effort to reach a suitable solution together.</p>
+    </div>
+
+    <div class="block">
+      <h2>11. GOVERNING LAW</h2>
+      <p>Dutch law applies to all agreements. Disputes will, where possible, be resolved through mutual consultation and otherwise submitted to the competent court in the Gelderland district.</p>
+    </div>
+
+    <p class="meta">Version: July 2026 · The Big Three Garage · Hullerweg 115, Nunspeet</p>
   </div>
 
-  <div class="block">
-    <h2>3. BEZICHTIGING EN AANKOOP</h2>
-    <p>Voertuigen worden verkocht op basis van bezichtiging en (indien gewenst) proefrit op onze locatie in Nunspeet. Wij raden aan het voertuig voorafgaand aan aankoop zelf te (laten) keuren. Koper wordt geacht het voertuig in de staat te hebben geaccepteerd zoals waargenomen bij bezichtiging, tenzij schriftelijk anders overeengekomen of sprake is van een gebrek dat redelijkerwijs niet bij bezichtiging kon worden vastgesteld.</p>
+  <!-- DE -->
+  <div class="voor-lang" id="lang-de">
+    <div class="eyebrow">Geschäftsbedingungen</div>
+    <h1>ALLGEMEINE <em>GESCHÄFTSBEDINGUNGEN</em></h1>
+    <p class="intro">Diese Bedingungen gelten für alle Angebote, Verkäufe und Dienstleistungen von The Big Three Garage (David Broeksma), Hullerweg 115, 8071 NP Nunspeet, Niederlande, Handelsregister (KvK) 81234090, USt-IdNr. NL862005541B01.</p>
+
+    <div class="block">
+      <h2>1. GELTUNGSBEREICH</h2>
+      <p>Diese Bedingungen gelten für jedes Angebot, jeden Kostenvoranschlag und jede Vereinbarung zwischen The Big Three Garage und einem Käufer oder Auftraggeber, sofern nicht schriftlich anders vereinbart.</p>
+    </div>
+
+    <div class="block">
+      <h2>2. ANGEBOTE UND PREISE</h2>
+      <p>Alle angegebenen Preise verstehen sich in Euro, inklusive MwSt., vorbehaltlich Satz- und Druckfehler. Angegebene Fahrzeuge, Teile und Verfügbarkeit auf der Website sind unverbindlich; Änderungen und zwischenzeitlicher Verkauf bleiben vorbehalten. Ein Fahrzeug gilt erst nach gegenseitiger schriftlicher oder mündlicher Bestätigung als reserviert.</p>
+    </div>
+
+    <div class="block">
+      <h2>3. BESICHTIGUNG UND KAUF</h2>
+      <p>Fahrzeuge werden auf Grundlage einer Besichtigung und (auf Wunsch) einer Probefahrt an unserem Standort in Nunspeet verkauft. Wir empfehlen, das Fahrzeug vor dem Kauf selbst prüfen zu lassen. Der Käufer wird so behandelt, als habe er das Fahrzeug in dem bei der Besichtigung festgestellten Zustand akzeptiert, sofern nicht schriftlich anders vereinbart oder ein Mangel vorliegt, der bei der Besichtigung vernünftigerweise nicht erkennbar war.</p>
+    </div>
+
+    <div class="block">
+      <h2>4. WIDERRUFSRECHT</h2>
+      <p>Ein Fahrzeug wird bei uns ausschließlich nach einer Besichtigung vor Ort gekauft. Es liegt daher kein Fernabsatzgeschäft vor, und es besteht <strong>kein gesetzliches Widerrufsrecht</strong> (Bedenkzeit) für den Kauf. Etwaige Vereinbarungen über eine Bedenkzeit oder Rückabwicklung werden nur schriftlich im Einzelfall festgelegt.</p>
+    </div>
+
+    <div class="block">
+      <h2>5. KONFORMITÄT UND GARANTIE</h2>
+      <p>Fahrzeuge werden als Gebrauchtfahrzeuge ("wie besichtigt") verkauft, unter Beachtung der gesetzlichen Konformitätsanforderungen, die für den Verkauf durch ein Unternehmen an einen Verbraucher gelten (niederländisches Bürgerliches Gesetzbuch, Art. 7:17 ff.). Eine zusätzliche Garantie auf ein bestimmtes Fahrzeug oder Teil wird nur schriftlich vereinbart und auf der Rechnung oder Auftragsbestätigung vermerkt.</p>
+    </div>
+
+    <div class="block">
+      <h2>6. ZAHLUNG UND EIGENTUM</h2>
+      <p>Die Zahlung erfolgt wie beim Kauf vereinbart, in der Regel vor oder bei Übergabe. Das Fahrzeug bleibt bis zur vollständigen Zahlung des Kaufpreises Eigentum von The Big Three Garage.</p>
+    </div>
+
+    <div class="block">
+      <h2>7. ÜBERGABE</h2>
+      <p>Fahrzeuge werden bei unserem Standort in Nunspeet abgeholt, sofern nicht schriftlich anders vereinbart. Eine Lieferung an eine andere Adresse ist nach Absprache möglich; etwaige Kosten hierfür werden im Voraus mitgeteilt.</p>
+    </div>
+
+    <div class="block">
+      <h2>8. WERKSTATT, WARTUNG UND HAUPTUNTERSUCHUNG</h2>
+      <p>Für Wartung, Reparaturen und Hauptuntersuchungen (APK) informieren wir Sie vorab über die voraussichtlichen Kosten. Zusatzarbeiten werden erst nach Rücksprache ausgeführt, es sei denn, sie sind aus Sicherheitsgründen oder zur Vermeidung weiterer Schäden notwendig.</p>
+    </div>
+
+    <div class="block">
+      <h2>9. HAFTUNG</h2>
+      <p>The Big Three Garage haftet nicht für Schäden, die durch Ungenauigkeiten auf der Website entstehen, es sei denn, es liegt Vorsatz oder grobe Fahrlässigkeit vor. Preise, Spezifikationen und Verfügbarkeit sind unverbindlich.</p>
+    </div>
+
+    <div class="block">
+      <h2>10. BESCHWERDEN</h2>
+      <p>Haben Sie eine Beschwerde über einen Kauf oder ausgeführte Arbeiten? Kontaktieren Sie uns bitte so schnell wie möglich unter <a href="mailto:info@thebigthree.nl">info@thebigthree.nl</a> oder telefonisch: <a href="tel:+31682727374">+31 6 82 72 73 74</a>. Wir bemühen uns, gemeinsam eine passende Lösung zu finden.</p>
+    </div>
+
+    <div class="block">
+      <h2>11. ANWENDBARES RECHT</h2>
+      <p>Auf alle Vereinbarungen findet niederländisches Recht Anwendung. Streitigkeiten werden nach Möglichkeit einvernehmlich gelöst und andernfalls dem zuständigen Gericht im Bezirk Gelderland vorgelegt.</p>
+    </div>
+
+    <p class="meta">Version: Juli 2026 · The Big Three Garage · Hullerweg 115, Nunspeet</p>
   </div>
 
-  <div class="block">
-    <h2>4. HERROEPINGSRECHT</h2>
-    <p>Een voertuig wordt bij ons uitsluitend gekocht na bezichtiging op locatie. Er is daarom geen sprake van een overeenkomst op afstand en geldt er <strong>geen wettelijk herroepingsrecht</strong> (bedenktijd) op de aankoop. Eventuele afspraken over bedenktijd of ontbinding worden alleen schriftelijk per geval vastgelegd.</p>
-  </div>
-
-  <div class="block">
-    <h2>5. CONFORMITEIT EN GARANTIE</h2>
-    <p>Voertuigen worden verkocht als gebruikt voertuig ("as is"), met inachtneming van de wettelijke conformiteitseisen die gelden voor verkoop door een bedrijf aan een particulier (artikel 7:17 e.v. Burgerlijk Wetboek). Eventuele aanvullende garantie op een specifiek voertuig of onderdeel wordt alleen schriftelijk overeengekomen en vermeld op de factuur of orderbevestiging.</p>
-  </div>
-
-  <div class="block">
-    <h2>6. BETALING EN EIGENDOM</h2>
-    <p>Betaling vindt plaats zoals overeengekomen bij aankoop, in de regel voorafgaand aan of bij aflevering. Het voertuig blijft eigendom van The Big Three Garage totdat de volledige koopsom is voldaan.</p>
-  </div>
-
-  <div class="block">
-    <h2>7. AFLEVERING</h2>
-    <p>Voertuigen worden opgehaald bij onze vestiging in Nunspeet, tenzij schriftelijk anders is overeengekomen. Aflevering op een ander adres is in overleg mogelijk; eventuele kosten hiervoor worden vooraf gecommuniceerd.</p>
-  </div>
-
-  <div class="block">
-    <h2>8. WERKPLAATS, ONDERHOUD EN APK</h2>
-    <p>Voor onderhoud, reparatie en APK-keuringen geldt dat wij u vooraf informeren over de verwachte kosten. Meerwerk wordt pas uitgevoerd na overleg, tenzij dit noodzakelijk is voor de veiligheid of om verdere schade te voorkomen.</p>
-  </div>
-
-  <div class="block">
-    <h2>9. AANSPRAKELIJKHEID</h2>
-    <p>The Big Three Garage is niet aansprakelijk voor schade die het gevolg is van onjuistheden op de website, tenzij sprake is van opzet of grove nalatigheid. Prijzen, specificaties en beschikbaarheid zijn onder voorbehoud.</p>
-  </div>
-
-  <div class="block">
-    <h2>10. KLACHTEN</h2>
-    <p>Heeft u een klacht over een aankoop of uitgevoerde werkzaamheden? Neem dan zo snel mogelijk contact met ons op via <a href="mailto:info@thebigthree.nl">info@thebigthree.nl</a> of telefonisch: <a href="tel:+31682727374">+31 6 82 72 73 74</a>. Wij spannen ons in om samen tot een passende oplossing te komen.</p>
-  </div>
-
-  <div class="block">
-    <h2>11. TOEPASSELIJK RECHT</h2>
-    <p>Op alle overeenkomsten is Nederlands recht van toepassing. Geschillen worden zo mogelijk in onderling overleg opgelost en anders voorgelegd aan de bevoegde rechter in het arrondissement Gelderland.</p>
-  </div>
-
-  <p class="meta">Versie: juli 2026 · The Big Three Garage · Hullerweg 115, Nunspeet</p>
 </main>
 
-<footer>
+<footer id="siteFooter">
   <span>© <span id="yearFtr"></span> The Big Three Garage · Nunspeet</span>
   &nbsp;·&nbsp;
-  <a href="privacy.html">Privacyverklaring</a>
+  <a href="privacy.html" id="ftrPrivacy">Privacyverklaring</a>
   &nbsp;·&nbsp;
-  <a href="colofon.html">Colofon</a>
+  <a href="colofon.html" id="ftrColofon">Colofon</a>
   &nbsp;·&nbsp;
-  <a href="index.html">Terug naar de site</a>
+  <a href="index.html" id="ftrBack">Terug naar de site</a>
 </footer>
 
 <script>
   document.getElementById('yearFtr').textContent = new Date().getFullYear();
+
+  const titles = {
+    nl: { navBack:'← Terug naar de site', ftrPrivacy:'Privacyverklaring', ftrColofon:'Colofon', ftrBack:'Terug naar de site' },
+    en: { navBack:'← Back to website', ftrPrivacy:'Privacy policy', ftrColofon:'Colophon', ftrBack:'Back to website' },
+    de: { navBack:'← Zurück zur Website', ftrPrivacy:'Datenschutzerklärung', ftrColofon:'Impressum', ftrBack:'Zurück zur Website' }
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.querySelectorAll('.voor-lang').forEach(el => el.classList.remove('active'));
+    const target = document.getElementById('lang-' + lang);
+    if (target) target.classList.add('active');
+    const t = titles[lang];
+    if (t) {
+      document.getElementById('navBack').textContent = t.navBack;
+      document.getElementById('ftrPrivacy').textContent = t.ftrPrivacy;
+      document.getElementById('ftrColofon').textContent = t.ftrColofon;
+      document.getElementById('ftrBack').textContent = t.ftrBack;
+    }
+    localStorage.setItem('btg_lang', lang);
+  }
+
+  document.querySelectorAll('.lang button').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.dataset.lang));
+  });
+
+  const saved = localStorage.getItem('btg_lang');
+  if (saved && titles[saved]) setLang(saved);
 </script>
+
 </body>
 </html>

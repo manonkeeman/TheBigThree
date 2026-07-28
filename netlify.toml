@@ -46,6 +46,14 @@
   path = "/sitemap.xml"
   function = "sitemap"
 
+[[edge_functions]]
+  path = "/"
+  function = "homepage-meta"
+
+[[edge_functions]]
+  path = "/index.html"
+  function = "homepage-meta"
+
 # publish = "." serveert de hele repo; onderstaande bestanden horen niet publiek
 [[redirects]]
   from = "/package.json"

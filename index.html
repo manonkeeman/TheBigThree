@@ -1869,6 +1869,7 @@
 
   const translations = {
     nl: {
+      "seo.title":"The Big Three Garage - Amerikaanse voertuigen specialist Nunspeet","seo.description":"The Big Three Garage in Nunspeet: specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, APK, restauratie en import uit de VS. Bel +31 6 82 72 73 74.",
       "nav.inventory":"Voorraad","nav.services":"Werkplaats","nav.story":"Ons verhaal","nav.contact":"Contact",
       "hero.tag":"★ AMERICAN IRON · NUNSPEET ★",
       "hero.title":'BUILT IN <span class="stamp">AMERICA</span><br><span class="accent">SERVICED</span> IN<br>NUNSPEET',
@@ -1932,6 +1933,7 @@
       "book.note":"Bevestiging per e-mail · Geen account nodig"
     },
     en: {
+      "seo.title":"The Big Three Garage - American Vehicle Specialist Nunspeet","seo.description":"The Big Three Garage in Nunspeet: specialist in American campers, pickups and classics. Sales, maintenance, MOT (APK), restoration and import from the US. Call +31 6 82 72 73 74.",
       "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact",
       "hero.tag":"★ AMERICAN IRON · NUNSPEET ★",
       "hero.title":'BUILT IN <span class="stamp">AMERICA</span><br><span class="accent">SERVICED</span> IN<br>NUNSPEET',
@@ -1995,6 +1997,7 @@
       "book.note":"Confirmation by email · No account needed"
     },
     de: {
+      "seo.title":"The Big Three Garage - Spezialist für amerikanische Fahrzeuge Nunspeet","seo.description":"The Big Three Garage in Nunspeet: Spezialist für amerikanische Camper, Pickups und Oldtimer. Verkauf, Wartung, Hauptuntersuchung, Restaurierung und Import aus den USA. Rufen Sie an: +31 6 82 72 73 74.",
       "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt",
       "hero.tag":"★ AMERICAN IRON · NUNSPEET ★",
       "hero.title":'GEBAUT IN <span class="stamp">AMERIKA</span><br><span class="accent">GEWARTET</span> IN<br>NUNSPEET',
@@ -2061,6 +2064,13 @@
 
   function applyLang(lang) {
     document.documentElement.lang = lang;
+    const seoTitle = translations[lang]?.['seo.title'];
+    const seoDescription = translations[lang]?.['seo.description'];
+    if (seoTitle) document.title = seoTitle;
+    if (seoDescription) {
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', seoDescription);
+    }
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.dataset.i18n;
       if (translations[lang]?.[key]) el.innerHTML = translations[lang][key];

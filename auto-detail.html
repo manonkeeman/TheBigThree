@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="__LANG__">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
 <meta name="description" content="__DESCRIPTION__">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="__CANONICAL__">
+__HREFLANG__
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -15,6 +16,7 @@
 <meta property="og:description" content="__DESCRIPTION__">
 <meta property="og:image" content="__IMAGE__">
 <meta property="og:site_name" content="The Big Three Garage">
+<meta property="og:locale" content="__OG_LOCALE__">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
@@ -514,18 +516,25 @@
     }
   };
 
-  document.querySelectorAll('.lang button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.lang button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const lang = btn.dataset.lang;
-      document.documentElement.lang = lang;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.dataset.i18n;
-        if (t[lang]?.[key]) el.innerHTML = t[lang][key];
-      });
+  function applyLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (t[lang]?.[key]) el.innerHTML = t[lang][key];
     });
+    localStorage.setItem('btg_lang', lang);
+  }
+
+  document.querySelectorAll('.lang button').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
   });
+
+  const urlLang = new URLSearchParams(window.location.search).get('lang');
+  const initLang = (urlLang === 'en' || urlLang === 'de') ? urlLang
+    : (document.documentElement.lang === 'en' || document.documentElement.lang === 'de') ? document.documentElement.lang
+    : localStorage.getItem('btg_lang');
+  if (initLang === 'en' || initLang === 'de') applyLang(initLang);
 </script>
 
 </body>
