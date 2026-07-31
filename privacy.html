@@ -140,6 +140,44 @@
     .privacy-body{padding:36px 16px 64px}
     .priv-section h2{font-size:26px}
   }
+
+  /* ─── COOKIE BANNER ─── */
+  .cookie-bar{
+    position:fixed;bottom:0;left:0;right:0;
+    background:rgba(16,22,38,0.97);border-top:1px solid var(--line);
+    backdrop-filter:blur(14px);z-index:150;
+    padding:16px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;
+  }
+  .cookie-bar.hidden{display:none}
+  .cookie-text{
+    font-family:'Barlow';font-size:13px;
+    color:var(--ink-dim);font-weight:300;
+    max-width:700px;flex:1;line-height:1.6;
+  }
+  .cookie-text a{color:var(--rust);text-decoration:none}
+  .cookie-text a:hover{text-decoration:underline}
+  .cookie-btns{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;align-items:center}
+  .cookie-accept{
+    font-family:'Barlow Condensed';font-size:11px;letter-spacing:0.2em;
+    text-transform:uppercase;font-weight:600;
+    padding:10px 18px;border:none;cursor:pointer;
+    background:var(--rust);color:#fff;white-space:nowrap;transition:background 0.2s;
+  }
+  .cookie-accept:hover{background:var(--rust-deep)}
+  .cookie-decline{
+    font-family:'Barlow Condensed';font-size:11px;letter-spacing:0.2em;
+    text-transform:uppercase;font-weight:600;
+    padding:10px 18px;border:1px solid var(--line);cursor:pointer;
+    background:transparent;color:var(--ink-dim);white-space:nowrap;transition:all 0.2s;
+  }
+  .cookie-decline:hover{color:var(--ink);border-color:var(--ink-dim)}
+  @media(max-width:480px){
+    .cookie-bar{padding:12px 16px;gap:10px}
+    .cookie-btns{width:100%}
+    .cookie-accept,.cookie-decline{flex:1;text-align:center}
+  }
 </style>
 </head>
 <body>
@@ -427,11 +465,28 @@
   © THE BIG THREE GARAGE · NUNSPEET · <a href="voorwaarden.html">Algemene voorwaarden</a> · <a href="colofon.html">Colofon</a> · Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener">ManonIT</a>
 </footer>
 
+<!-- Cookie Banner -->
+<div class="cookie-bar" id="cookieBar">
+  <p class="cookie-text" id="cookieText">
+    Wij gebruiken functionele cookies en cookies van externe diensten (YouTube, Google Maps). Zie onze <a href="privacy.html">privacyverklaring</a>.
+  </p>
+  <div class="cookie-btns">
+    <button class="cookie-accept" id="cookieAccept">Accepteer alles</button>
+    <button class="cookie-decline" id="cookieDecline">Alleen noodzakelijk</button>
+  </div>
+</div>
+
 <script>
   const titles = {
-    nl: { eyebrow:'AVG · GDPR', title:'PRIVACY<br><em>VERKLARING</em>', sub:'The Big Three Garage · Nunspeet · Laatste update: juli 2026' },
-    en: { eyebrow:'GDPR · Privacy', title:'PRIVACY<br><em>POLICY</em>', sub:'The Big Three Garage · Nunspeet · Last updated: July 2026' },
-    de: { eyebrow:'DSGVO · Datenschutz', title:'DATENSCHUTZ<br><em>ERKLÄRUNG</em>', sub:'The Big Three Garage · Nunspeet · Letzte Aktualisierung: Juli 2026' }
+    nl: { eyebrow:'AVG · GDPR', title:'PRIVACY<br><em>VERKLARING</em>', sub:'The Big Three Garage · Nunspeet · Laatste update: juli 2026',
+      cookieText:'Wij gebruiken functionele cookies en cookies van externe diensten (YouTube, Google Maps). Zie onze <a href="privacy.html">privacyverklaring</a>.',
+      cookieAccept:'Accepteer alles', cookieDecline:'Alleen noodzakelijk' },
+    en: { eyebrow:'GDPR · Privacy', title:'PRIVACY<br><em>POLICY</em>', sub:'The Big Three Garage · Nunspeet · Last updated: July 2026',
+      cookieText:'We use functional cookies and cookies from third-party services (YouTube, Google Maps). See our <a href="privacy.html">privacy policy</a>.',
+      cookieAccept:'Accept all', cookieDecline:'Necessary only' },
+    de: { eyebrow:'DSGVO · Datenschutz', title:'DATENSCHUTZ<br><em>ERKLÄRUNG</em>', sub:'The Big Three Garage · Nunspeet · Letzte Aktualisierung: Juli 2026',
+      cookieText:'Wir verwenden funktionale Cookies und Cookies von Drittanbietern (YouTube, Google Maps). Siehe unsere <a href="privacy.html">Datenschutzerklärung</a>.',
+      cookieAccept:'Alle akzeptieren', cookieDecline:'Nur notwendige' }
   };
 
   function setLang(lang) {
@@ -447,6 +502,9 @@
       document.getElementById('pvEyebrow').textContent = t.eyebrow;
       document.getElementById('pvTitle').innerHTML = t.title;
       document.getElementById('pvSub').textContent = t.sub;
+      document.getElementById('cookieText').innerHTML = t.cookieText;
+      document.getElementById('cookieAccept').textContent = t.cookieAccept;
+      document.getElementById('cookieDecline').textContent = t.cookieDecline;
     }
     localStorage.setItem('btg_lang', lang);
   }
@@ -457,6 +515,20 @@
 
   const saved = localStorage.getItem('btg_lang');
   if (saved && titles[saved]) setLang(saved);
+
+  const cookieBar = document.getElementById('cookieBar');
+  function dismissCookie() { cookieBar.classList.add('hidden'); }
+  const existingConsent = localStorage.getItem('btg_cookie');
+  if (existingConsent === 'accepted' || existingConsent === 'declined') dismissCookie();
+
+  document.getElementById('cookieAccept').addEventListener('click', () => {
+    localStorage.setItem('btg_cookie', 'accepted');
+    dismissCookie();
+  });
+  document.getElementById('cookieDecline').addEventListener('click', () => {
+    localStorage.setItem('btg_cookie', 'declined');
+    dismissCookie();
+  });
 </script>
 
 </body>

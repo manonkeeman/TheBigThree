@@ -318,6 +318,44 @@ __HREFLANG__
     .detail-head-right{align-items:flex-start;text-align:left}
     .gallery-section{padding:32px 24px}
   }
+
+  /* ─── COOKIE BANNER ─── */
+  .cookie-bar{
+    position:fixed;bottom:0;left:0;right:0;
+    background:rgba(16,22,38,0.97);border-top:1px solid var(--line);
+    backdrop-filter:blur(14px);z-index:150;
+    padding:16px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;
+  }
+  .cookie-bar.hidden{display:none}
+  .cookie-text{
+    font-family:'Barlow';font-size:13px;
+    color:var(--ink-dim);font-weight:300;
+    max-width:700px;flex:1;line-height:1.6;
+  }
+  .cookie-text a{color:var(--rust);text-decoration:none}
+  .cookie-text a:hover{text-decoration:underline}
+  .cookie-btns{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;align-items:center}
+  .cookie-accept{
+    font-family:'Barlow Condensed';font-size:11px;letter-spacing:0.2em;
+    text-transform:uppercase;font-weight:600;
+    padding:10px 18px;border:none;cursor:pointer;
+    background:var(--rust);color:#fff;white-space:nowrap;transition:background 0.2s;
+  }
+  .cookie-accept:hover{background:var(--rust-deep)}
+  .cookie-decline{
+    font-family:'Barlow Condensed';font-size:11px;letter-spacing:0.2em;
+    text-transform:uppercase;font-weight:600;
+    padding:10px 18px;border:1px solid var(--line);cursor:pointer;
+    background:transparent;color:var(--ink-dim);white-space:nowrap;transition:all 0.2s;
+  }
+  .cookie-decline:hover{color:var(--ink);border-color:var(--ink-dim)}
+  @media(max-width:480px){
+    .cookie-bar{padding:12px 16px;gap:10px}
+    .cookie-btns{width:100%}
+    .cookie-accept,.cookie-decline{flex:1;text-align:center}
+  }
 </style>
 </head>
 <body>
@@ -398,6 +436,17 @@ __HREFLANG__
 <footer>
   © THE BIG THREE GARAGE · NUNSPEET · Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener">ManonIT</a>
 </footer>
+
+<!-- Cookie Banner -->
+<div class="cookie-bar" id="cookieBar">
+  <p class="cookie-text" id="cookieText" data-i18n="cookie.text">
+    Wij gebruiken functionele cookies en cookies van externe diensten (YouTube, Google Maps). Zie onze <a href="/privacy.html">privacyverklaring</a>.
+  </p>
+  <div class="cookie-btns">
+    <button class="cookie-accept" id="cookieAccept" data-i18n="cookie.accept">Accepteer alles</button>
+    <button class="cookie-decline" id="cookieDecline" data-i18n="cookie.decline">Alleen noodzakelijk</button>
+  </div>
+</div>
 
 <script>
   const SUPABASE_URL      = 'https://loolxbizdribqyulxbop.supabase.co';
@@ -496,7 +545,9 @@ __HREFLANG__
       "detail.desc.cta":"Interesse? Bel David op <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> of plan een afspraak via het contactformulier. Een bezichtiging op locatie is altijd mogelijk.",
       "detail.spec.title":"SPECIFICATIES","detail.spec.year":"Bouwjaar","detail.spec.make":"Merk","detail.spec.status":"Status",
       "detail.btn.view":"Plan bezichtiging","detail.btn.call":"Bel direct","detail.btn.mp":"Bekijk op Marktplaats",
-      "detail.related.title":"OOK <em>INTERESSANT</em>","detail.related.all":"Hele voorraad"
+      "detail.related.title":"OOK <em>INTERESSANT</em>","detail.related.all":"Hele voorraad",
+      "cookie.text":"Wij gebruiken functionele cookies en cookies van externe diensten (YouTube, Google Maps). Zie onze <a href=\"/privacy.html\">privacyverklaring</a>.",
+      "cookie.accept":"Accepteer alles","cookie.decline":"Alleen noodzakelijk"
     },
     en: {
       "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact",
@@ -504,7 +555,9 @@ __HREFLANG__
       "detail.desc.cta":"Interested? Call David on <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> or book a visit through the contact form. A viewing on location is always possible.",
       "detail.spec.title":"SPECIFICATIONS","detail.spec.year":"Year","detail.spec.make":"Make","detail.spec.status":"Status",
       "detail.btn.view":"Book a viewing","detail.btn.call":"Call now","detail.btn.mp":"View on Marktplaats",
-      "detail.related.title":"ALSO <em>INTERESTING</em>","detail.related.all":"Full inventory"
+      "detail.related.title":"ALSO <em>INTERESTING</em>","detail.related.all":"Full inventory",
+      "cookie.text":"We use functional cookies and cookies from third-party services (YouTube, Google Maps). See our <a href=\"/privacy.html\">privacy policy</a>.",
+      "cookie.accept":"Accept all","cookie.decline":"Necessary only"
     },
     de: {
       "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt",
@@ -512,7 +565,9 @@ __HREFLANG__
       "detail.desc.cta":"Interesse? Rufen Sie David an: <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> oder vereinbaren Sie einen Termin über das Kontaktformular. Eine Besichtigung vor Ort ist jederzeit möglich.",
       "detail.spec.title":"SPEZIFIKATIONEN","detail.spec.year":"Baujahr","detail.spec.make":"Marke","detail.spec.status":"Status",
       "detail.btn.view":"Besichtigung buchen","detail.btn.call":"Jetzt anrufen","detail.btn.mp":"Auf Marktplaats ansehen",
-      "detail.related.title":"AUCH <em>INTERESSANT</em>","detail.related.all":"Alle Fahrzeuge"
+      "detail.related.title":"AUCH <em>INTERESSANT</em>","detail.related.all":"Alle Fahrzeuge",
+      "cookie.text":"Wir verwenden funktionale Cookies und Cookies von Drittanbietern (YouTube, Google Maps). Siehe unsere <a href=\"/privacy.html\">Datenschutzerklärung</a>.",
+      "cookie.accept":"Alle akzeptieren","cookie.decline":"Nur notwendige"
     }
   };
 
@@ -535,6 +590,21 @@ __HREFLANG__
     : (document.documentElement.lang === 'en' || document.documentElement.lang === 'de') ? document.documentElement.lang
     : localStorage.getItem('btg_lang');
   if (initLang === 'en' || initLang === 'de') applyLang(initLang);
+
+  // ─── COOKIE BANNER ───
+  const cookieBar = document.getElementById('cookieBar');
+  function dismissCookie() { cookieBar.classList.add('hidden'); }
+  const existingConsent = localStorage.getItem('btg_cookie');
+  if (existingConsent === 'accepted' || existingConsent === 'declined') dismissCookie();
+
+  document.getElementById('cookieAccept').addEventListener('click', () => {
+    localStorage.setItem('btg_cookie', 'accepted');
+    dismissCookie();
+  });
+  document.getElementById('cookieDecline').addEventListener('click', () => {
+    localStorage.setItem('btg_cookie', 'declined');
+    dismissCookie();
+  });
 </script>
 
 </body>
