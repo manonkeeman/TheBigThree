@@ -155,6 +155,7 @@ __HREFLANG__
     padding:48px 32px;
   }
   .main-photo{
+    position:relative;
     aspect-ratio:16/9;
     background:var(--panel);
     border:1px solid var(--line);
@@ -163,6 +164,21 @@ __HREFLANG__
   .main-photo img{
     width:100%;height:100%;object-fit:cover;
     filter:saturate(0.85) contrast(1.05);
+  }
+  .mp-photo-badge{
+    position:absolute;bottom:16px;right:16px;z-index:2;
+    display:flex;align-items:center;gap:8px;
+    background:rgba(10,9,8,0.82);backdrop-filter:blur(6px);
+    border:1px solid rgba(245,239,230,0.25);
+    color:var(--ink);text-decoration:none;
+    padding:9px 16px;
+    font-family:'Barlow Condensed';font-size:12px;letter-spacing:0.12em;
+    text-transform:uppercase;transition:all 0.2s;
+  }
+  .mp-photo-badge:hover{border-color:var(--rust);color:#fff}
+  .mp-photo-badge svg{width:15px;height:15px;flex-shrink:0}
+  @media(max-width:600px){
+    .mp-photo-badge{bottom:10px;right:10px;padding:7px 12px;font-size:10px}
   }
 
   /* INFO GRID */
@@ -453,6 +469,10 @@ __HREFLANG__
   <div class="gallery-section">
     <div class="main-photo">
       <img id="mainImg" src="" alt="">
+      <a href="#" id="mpPhotoBadge" class="mp-photo-badge" target="_blank" rel="noopener" hidden title="Meer foto's en informatie op Marktplaats">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span data-i18n="detail.mp.badge">Meer foto's op Marktplaats</span>
+      </a>
     </div>
   </div>
 
@@ -469,7 +489,7 @@ __HREFLANG__
       <div class="spec-row"><span class="spec-label" data-i18n="detail.spec.status">Status</span><span class="spec-val" id="sStatus">–</span></div>
       <a href="/index.html#afspraak" class="btn btn-primary" data-i18n="detail.btn.view">Plan bezichtiging</a>
       <a href="tel:+31682727374" class="btn btn-ghost" style="margin-top:10px" data-i18n="detail.btn.call">Bel direct</a>
-      <a href="#" id="mpBtn" class="btn btn-ghost" style="margin-top:10px" target="_blank" rel="noopener" hidden data-i18n="detail.btn.mp">Bekijk op Marktplaats</a>
+      <a href="#" id="mpBtn" class="btn btn-ghost" style="margin-top:10px" target="_blank" rel="noopener" hidden data-i18n="detail.btn.mp">Meer foto's &amp; info op Marktplaats</a>
     </aside>
   </div>
 </main>
@@ -603,7 +623,13 @@ __HREFLANG__
       .filter(Boolean).map(s => `<div class="feature">${esc(s)}</div>`).join('');
 
     const mpBtn = document.getElementById('mpBtn');
-    if (v.marktplaats_url) { mpBtn.href = v.marktplaats_url; mpBtn.hidden = false; }
+    const mpPhotoBadge = document.getElementById('mpPhotoBadge');
+    if (v.marktplaats_url) {
+      mpBtn.href = v.marktplaats_url;
+      mpBtn.hidden = false;
+      mpPhotoBadge.href = v.marktplaats_url;
+      mpPhotoBadge.hidden = false;
+    }
   }
 
   function renderRelated(all, current) {
@@ -639,7 +665,8 @@ __HREFLANG__
       "crumb.home":"Home",
       "detail.desc.cta":"Interesse? Bel David op <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> of plan een afspraak via het contactformulier. Een bezichtiging op locatie is altijd mogelijk.",
       "detail.spec.title":"SPECIFICATIES","detail.spec.year":"Bouwjaar","detail.spec.make":"Merk","detail.spec.status":"Status",
-      "detail.btn.view":"Plan bezichtiging","detail.btn.call":"Bel direct","detail.btn.mp":"Bekijk op Marktplaats",
+      "detail.btn.view":"Plan bezichtiging","detail.btn.call":"Bel direct","detail.btn.mp":"Meer foto's &amp; info op Marktplaats",
+      "detail.mp.badge":"Meer foto's op Marktplaats",
       "detail.related.title":"OOK <em>INTERESSANT</em>","detail.related.all":"Hele voorraad",
       "cookie.eyebrow":"Jouw privacy","cookie.title":"Cookie-instellingen",
       "cookie.text":"Wij gebruiken cookies om deze website goed te laten werken. Optioneel gebruiken we ook cookies voor bezoekersstatistieken en om video's en een kaart te tonen. Lees onze <a href=\"/privacy.html\">privacyverklaring</a> voor meer informatie.",
@@ -653,7 +680,8 @@ __HREFLANG__
       "crumb.home":"Home",
       "detail.desc.cta":"Interested? Call David on <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> or book a visit through the contact form. A viewing on location is always possible.",
       "detail.spec.title":"SPECIFICATIONS","detail.spec.year":"Year","detail.spec.make":"Make","detail.spec.status":"Status",
-      "detail.btn.view":"Book a viewing","detail.btn.call":"Call now","detail.btn.mp":"View on Marktplaats",
+      "detail.btn.view":"Book a viewing","detail.btn.call":"Call now","detail.btn.mp":"More photos &amp; info on Marktplaats",
+      "detail.mp.badge":"More photos on Marktplaats",
       "detail.related.title":"ALSO <em>INTERESTING</em>","detail.related.all":"Full inventory",
       "cookie.eyebrow":"Your privacy","cookie.title":"Cookie settings",
       "cookie.text":"We use cookies to make this website work properly. Optionally, we also use cookies for visitor statistics and to show videos and a map. Read our <a href=\"/privacy.html\">privacy policy</a> for more information.",
@@ -667,7 +695,8 @@ __HREFLANG__
       "crumb.home":"Startseite",
       "detail.desc.cta":"Interesse? Rufen Sie David an: <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> oder vereinbaren Sie einen Termin über das Kontaktformular. Eine Besichtigung vor Ort ist jederzeit möglich.",
       "detail.spec.title":"SPEZIFIKATIONEN","detail.spec.year":"Baujahr","detail.spec.make":"Marke","detail.spec.status":"Status",
-      "detail.btn.view":"Besichtigung buchen","detail.btn.call":"Jetzt anrufen","detail.btn.mp":"Auf Marktplaats ansehen",
+      "detail.btn.view":"Besichtigung buchen","detail.btn.call":"Jetzt anrufen","detail.btn.mp":"Mehr Fotos &amp; Infos auf Marktplaats",
+      "detail.mp.badge":"Mehr Fotos auf Marktplaats",
       "detail.related.title":"AUCH <em>INTERESSANT</em>","detail.related.all":"Alle Fahrzeuge",
       "cookie.eyebrow":"Ihre Privatsphäre","cookie.title":"Cookie-Einstellungen",
       "cookie.text":"Wir verwenden Cookies, damit diese Website ordnungsgemäß funktioniert. Optional verwenden wir auch Cookies für Besucherstatistiken und zur Anzeige von Videos und einer Karte. Lesen Sie unsere <a href=\"/privacy.html\">Datenschutzerklärung</a> für weitere Informationen.",

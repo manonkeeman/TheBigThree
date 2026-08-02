@@ -589,6 +589,17 @@
   .card-status.reserved{color:var(--ink-dim);border-color:var(--ink-dim)}
   .card-status.service{color:var(--navy);border-color:var(--navy)}
   .card-status.part{color:var(--gold);border-color:var(--gold)}
+  .card-mp-badge{
+    position:absolute;top:14px;left:14px;z-index:2;
+    display:flex;align-items:center;gap:6px;
+    background:rgba(10,9,8,0.78);backdrop-filter:blur(4px);
+    color:var(--ink);
+    padding:6px 12px;
+    font-family:'Barlow Condensed';
+    font-size:10px;letter-spacing:0.13em;text-transform:uppercase;
+    border:1px solid rgba(245,239,230,0.2);
+  }
+  .card-mp-badge svg{width:13px;height:13px;flex-shrink:0}
   .card-body{padding:26px}
   .card-meta{
     font-family:'Special Elite';
@@ -1937,10 +1948,15 @@
     const specs = [v.spec1, v.spec2, v.spec3].filter(Boolean)
                     .map(s => `<span>${_escHtml(s)}</span>`).join('');
     const href  = `/voorraad/${_slugify(v.title)}`;
+    const mpText = t?.['card.mp'] || "Meer foto's";
+    const mpBadge = v.marktplaats_url
+      ? `<span class="card-mp-badge" title="${_escHtml(mpText)} op Marktplaats"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="card.mp">${_escHtml(mpText)}</span></span>`
+      : '';
 
     return `<a href="${_escHtml(href)}" class="card" data-cat="${_escHtml(v.category||'camper')}">
       <div class="card-img">
         <img loading="lazy" src="${_escHtml(v.image_url||'')}" alt="${_escHtml(alt)}">
+        ${mpBadge}
         <span class="card-status ${stClass}" data-i18n="${stKey}">${_escHtml(stText)}</span>
       </div>
       <div class="card-body">
@@ -1984,7 +2000,7 @@
       "inv.empty.title":"Momenteel geen aanbod","inv.empty.sub":"In deze categorie staat nu niets in de showroom. Houd onze website in de gaten, of geef je nummer door aan David. Dan houdt hij het voor je in de gaten.","inv.empty.cta":"Nummer doorgeven: +31 6 82 72 73 74",
       "filter.all":"Alles","filter.campers":"Campers","filter.classics":"Klassiekers","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Onderdelen","filter.motors":"Motoren","filter.bodywork":"Plaatwerk","filter.wheels":"Velgen","filter.lights":"Lampen","filter.engines":"Motorblokken",
       "card.cta":"Bekijk ›","card.gallery":"Galerij ›","card.status":"VOORRAAD","card.reserved":"GERESERVEERD","card.service":"SERVICE","card.part":"ONDERDEEL","card.mp":"Marktplaats ›",
-      "card.price.ask":"Op aanvraag","card.price.mp":"Zie Marktplaats","card.price.bid":"Bieden",
+      "card.price.ask":"Op aanvraag","card.price.mp":"Zie Marktplaats","card.price.bid":"Bieden","card.mp":"Meer foto's",
       "spec.v8auto":"V8 AUTOMAAT","spec.lpglth":"LPG · LEER","spec.lthmot":"LEER · APK NIEUW",
       "spec.wheels":'20" VELGEN',"spec.liftdak":"HEFBALKDAK","spec.rust":"ROESTVRIJ",
       "spec.cyl8auto":"8-CIL AUTOMAAT","spec.florida":"FLORIDA AUTO","spec.rustlth":"ROESTVRIJ · LEER",
@@ -2052,7 +2068,7 @@
       "inv.empty.title":"Nothing available right now","inv.empty.sub":"This category is currently empty. Keep an eye on our website, or leave your number with David and he will let you know when something comes in.","inv.empty.cta":"Leave your number: +31 6 82 72 73 74",
       "filter.all":"All","filter.campers":"Campers","filter.classics":"Classics","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Parts","filter.motors":"Motors","filter.bodywork":"Bodywork","filter.wheels":"Wheels","filter.lights":"Lights","filter.engines":"Engine blocks",
       "card.cta":"View ›","card.gallery":"Gallery ›","card.status":"IN STOCK","card.reserved":"RESERVED","card.service":"SERVICE","card.part":"PART","card.mp":"Marktplaats ›",
-      "card.price.ask":"On request","card.price.mp":"See listing","card.price.bid":"Make offer",
+      "card.price.ask":"On request","card.price.mp":"See listing","card.price.bid":"Make offer","card.mp":"More photos",
       "spec.v8auto":"V8 AUTOMATIC","spec.lpglth":"LPG · LEATHER","spec.lthmot":"LEATHER · MOT NEW",
       "spec.wheels":'20" WHEELS',"spec.liftdak":"LIFT ROOF","spec.rust":"RUST FREE",
       "spec.cyl8auto":"8-CYL AUTOMATIC","spec.florida":"FLORIDA CAR","spec.rustlth":"RUST FREE · LEATHER",
@@ -2120,7 +2136,7 @@
       "inv.empty.title":"Aktuell kein Angebot","inv.empty.sub":"In dieser Kategorie ist momentan nichts im Showroom. Behalten Sie unsere Website im Blick oder hinterlassen Sie David Ihre Nummer. Er meldet sich, sobald etwas hereinkommt.","inv.empty.cta":"Nummer hinterlassen: +31 6 82 72 73 74",
       "filter.all":"Alle","filter.campers":"Camper","filter.classics":"Klassiker","filter.modern":"Modern","filter.pickups":"Pickups","filter.parts":"Ersatzteile","filter.motors":"Motoren","filter.bodywork":"Karosserie","filter.wheels":"Felgen","filter.lights":"Beleuchtung","filter.engines":"Motorblöcke",
       "card.cta":"Ansehen ›","card.gallery":"Galerie ›","card.status":"VORRÄTIG","card.reserved":"RESERVIERT","card.service":"SERVICE","card.part":"ERSATZTEIL","card.mp":"Marktplaats ›",
-      "card.price.ask":"Auf Anfrage","card.price.mp":"Zur Anzeige","card.price.bid":"Bieten",
+      "card.price.ask":"Auf Anfrage","card.price.mp":"Zur Anzeige","card.price.bid":"Bieten","card.mp":"Mehr Fotos",
       "spec.v8auto":"V8 AUTOMATIK","spec.lpglth":"LPG · LEDER","spec.lthmot":"LEDER · HU NEU",
       "spec.wheels":'20" FELGEN',"spec.liftdak":"HUBDACH","spec.rust":"ROSTFREI",
       "spec.cyl8auto":"8-ZYL AUTOMATIK","spec.florida":"FLORIDA AUTO","spec.rustlth":"ROSTFREI · LEDER",
