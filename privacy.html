@@ -511,7 +511,7 @@
 </div>
 
 <footer>
-  © THE BIG THREE GARAGE · NUNSPEET · <a href="voorwaarden.html">Algemene voorwaarden</a> · <a href="colofon.html">Colofon</a> · Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener">ManonIT</a>
+  © THE BIG THREE GARAGE · NUNSPEET · <a href="voorwaarden.html">Algemene voorwaarden</a> · <a href="colofon.html">Colofon</a> · <a href="faq.html">FAQ</a> · Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener">ManonIT</a>
 </footer>
 
 <!-- Cookie Consent -->
@@ -571,6 +571,7 @@
 
 <button class="cookie-reopen hidden" id="cookieReopen">Cookie-instellingen</button>
 
+<script src="assets/analytics.js"></script>
 <script>
   const titles = {
     nl: { eyebrow:'AVG · GDPR', title:'PRIVACY<br><em>VERKLARING</em>', sub:'The Big Three Garage · Nunspeet · Laatste update: juli 2026',
@@ -659,6 +660,7 @@
   if (existingConsent) {
     toggleAnalytics.checked = !!existingConsent.analytics;
     toggleMedia.checked = !!existingConsent.media;
+    if (existingConsent.analytics) window.BTG.loadGoogleAnalytics();
     closeCookieModal();
   } else {
     openCookieModal();
@@ -668,6 +670,7 @@
     toggleAnalytics.checked = true;
     toggleMedia.checked = true;
     saveConsent(true, true);
+    window.BTG.loadGoogleAnalytics();
     closeCookieModal();
   });
   document.getElementById('cookieDeclineAll').addEventListener('click', () => {
@@ -678,6 +681,7 @@
   });
   document.getElementById('cookieSave').addEventListener('click', () => {
     saveConsent(toggleAnalytics.checked, toggleMedia.checked);
+    if (toggleAnalytics.checked) window.BTG.loadGoogleAnalytics();
     closeCookieModal();
   });
   cookieReopen.addEventListener('click', openCookieModal);

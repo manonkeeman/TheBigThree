@@ -1395,6 +1395,7 @@
       <li><a href="#werkplaats" data-i18n="nav.services">Werkplaats</a></li>
       <li><a href="#verhaal" data-i18n="nav.story">Ons verhaal</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="faq.html" data-i18n="nav.faq">FAQ</a></li>
     </ul>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMobile">
       <span></span><span></span><span></span>
@@ -1413,6 +1414,7 @@
     <li><a href="#werkplaats" data-i18n="nav.services">Werkplaats</a></li>
     <li><a href="#verhaal" data-i18n="nav.story">Ons verhaal</a></li>
     <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    <li><a href="faq.html" data-i18n="nav.faq">FAQ</a></li>
     <li><a href="privacy.html" data-i18n="ftr.privacy">Privacyverklaring</a></li>
     <li><a href="voorwaarden.html" data-i18n="ftr.terms">Algemene voorwaarden</a></li>
   </ul>
@@ -1808,6 +1810,7 @@
       <a href="#werkplaats" data-i18n="nav.services">Werkplaats</a>
       <a href="#verhaal" data-i18n="nav.story">Verhaal</a>
       <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <a href="faq.html" data-i18n="nav.faq">FAQ</a>
     </div>
     <div class="footer-col">
       <h4 data-i18n="ftr.h4">Juridisch</h4>
@@ -1893,6 +1896,7 @@
 <button class="cookie-reopen hidden" id="cookieReopen" data-i18n="cookie.settings">Cookie-instellingen</button>
 
 <script src="assets/i18n.js"></script>
+<script src="assets/analytics.js"></script>
 <script>
   // ─── SUPABASE CONFIG ─────────────────────────────────────────────────────
   // Vul hieronder jouw gegevens in na het aanmaken van het project op supabase.com
@@ -2160,24 +2164,7 @@
   navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-// ─── THIRD-PARTY LOADING ───
-  const GA_MEASUREMENT_ID = 'G-Y3RZJLKKSQ';
-
-  function loadGoogleAnalytics() {
-    if (window._gaLoaded || GA_MEASUREMENT_ID.includes('XXXXXXXXXX')) return;
-    window._gaLoaded = true;
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
-    document.head.appendChild(script);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () { window.dataLayer.push(arguments); };
-    window.gtag('js', new Date());
-    window.gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
-  }
-
-
-  // ─── COOKIE CONSENT (granulair: noodzakelijk / statistieken / media) ───
+// ─── COOKIE CONSENT (granulair: noodzakelijk / statistieken / media) ───
   function getConsent() {
     try { return JSON.parse(localStorage.getItem('btg_consent')); } catch (e) { return null; }
   }
@@ -2185,7 +2172,7 @@
     localStorage.setItem('btg_consent', JSON.stringify({ analytics: !!analytics, media: !!media, v: 1, ts: Date.now() }));
   }
   function applyConsent(c) {
-    if (c.analytics) loadGoogleAnalytics();
+    if (c.analytics) window.BTG.loadGoogleAnalytics();
     if (c.media) {
       const mapsIframe = document.getElementById('mapsIframe');
       if (mapsIframe && !mapsIframe.dataset.loaded) {

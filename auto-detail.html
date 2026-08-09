@@ -439,6 +439,7 @@ __HREFLANG__
       <li><a href="/index.html#werkplaats" data-i18n="nav.services">Werkplaats</a></li>
       <li><a href="/index.html#verhaal" data-i18n="nav.story">Ons verhaal</a></li>
       <li><a href="/index.html#contact" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="/faq.html" data-i18n="nav.faq">FAQ</a></li>
     </ul>
     <div class="lang">
       <button class="active" data-lang="nl">NL</button>
@@ -563,6 +564,7 @@ __HREFLANG__
 
 <button class="cookie-reopen hidden" id="cookieReopen" data-i18n="cookie.settings">Cookie-instellingen</button>
 
+<script src="/assets/analytics.js"></script>
 <script>
   const SUPABASE_URL      = 'https://loolxbizdribqyulxbop.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_nMu2RzoUWmaKnwjeR3kRPg_EzGzbVIg';
@@ -661,7 +663,7 @@ __HREFLANG__
 
   const t = {
     nl: {
-      "nav.inventory":"Voorraad","nav.services":"Werkplaats","nav.story":"Ons verhaal","nav.contact":"Contact",
+      "nav.inventory":"Voorraad","nav.services":"Werkplaats","nav.story":"Ons verhaal","nav.contact":"Contact","nav.faq":"FAQ",
       "crumb.home":"Home",
       "detail.desc.cta":"Interesse? Bel David op <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> of plan een afspraak via het contactformulier. Een bezichtiging op locatie is altijd mogelijk.",
       "detail.spec.title":"SPECIFICATIES","detail.spec.year":"Bouwjaar","detail.spec.make":"Merk","detail.spec.status":"Status",
@@ -676,7 +678,7 @@ __HREFLANG__
       "cookie.acceptAll":"Alles accepteren","cookie.declineAll":"Alles weigeren","cookie.save":"Voorkeuren opslaan","cookie.settings":"Cookie-instellingen"
     },
     en: {
-      "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact",
+      "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact","nav.faq":"FAQ",
       "crumb.home":"Home",
       "detail.desc.cta":"Interested? Call David on <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> or book a visit through the contact form. A viewing on location is always possible.",
       "detail.spec.title":"SPECIFICATIONS","detail.spec.year":"Year","detail.spec.make":"Make","detail.spec.status":"Status",
@@ -691,7 +693,7 @@ __HREFLANG__
       "cookie.acceptAll":"Accept all","cookie.declineAll":"Reject all","cookie.save":"Save preferences","cookie.settings":"Cookie settings"
     },
     de: {
-      "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt",
+      "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt","nav.faq":"FAQ",
       "crumb.home":"Startseite",
       "detail.desc.cta":"Interesse? Rufen Sie David an: <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> oder vereinbaren Sie einen Termin über das Kontaktformular. Eine Besichtigung vor Ort ist jederzeit möglich.",
       "detail.spec.title":"SPEZIFIKATIONEN","detail.spec.year":"Baujahr","detail.spec.make":"Marke","detail.spec.status":"Status",
@@ -754,6 +756,7 @@ __HREFLANG__
   if (existingConsent) {
     toggleAnalytics.checked = !!existingConsent.analytics;
     toggleMedia.checked = !!existingConsent.media;
+    if (existingConsent.analytics) window.BTG.loadGoogleAnalytics();
     closeCookieModal();
   } else {
     openCookieModal();
@@ -763,6 +766,7 @@ __HREFLANG__
     toggleAnalytics.checked = true;
     toggleMedia.checked = true;
     saveConsent(true, true);
+    window.BTG.loadGoogleAnalytics();
     closeCookieModal();
   });
   document.getElementById('cookieDeclineAll').addEventListener('click', () => {
@@ -773,6 +777,7 @@ __HREFLANG__
   });
   document.getElementById('cookieSave').addEventListener('click', () => {
     saveConsent(toggleAnalytics.checked, toggleMedia.checked);
+    if (toggleAnalytics.checked) window.BTG.loadGoogleAnalytics();
     closeCookieModal();
   });
   cookieReopen.addEventListener('click', openCookieModal);

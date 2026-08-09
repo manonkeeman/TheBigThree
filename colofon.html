@@ -322,6 +322,8 @@
   &nbsp;·&nbsp;
   <a href="voorwaarden.html">Algemene voorwaarden</a>
   &nbsp;·&nbsp;
+  <a href="faq.html">FAQ</a>
+  &nbsp;·&nbsp;
   <a href="index.html">Terug naar de site</a>
 </footer>
 
@@ -377,6 +379,7 @@
 
 <button class="cookie-reopen hidden" id="cookieReopen">Cookie-instellingen</button>
 
+<script src="assets/analytics.js"></script>
 <script>
   const y = new Date().getFullYear();
   document.getElementById('year').textContent = y;
@@ -408,6 +411,7 @@
   if (existingConsent) {
     toggleAnalytics.checked = !!existingConsent.analytics;
     toggleMedia.checked = !!existingConsent.media;
+    if (existingConsent.analytics) window.BTG.loadGoogleAnalytics();
     closeCookieModal();
   } else {
     openCookieModal();
@@ -417,6 +421,7 @@
     toggleAnalytics.checked = true;
     toggleMedia.checked = true;
     saveConsent(true, true);
+    window.BTG.loadGoogleAnalytics();
     closeCookieModal();
   });
   document.getElementById('cookieDeclineAll').addEventListener('click', () => {
@@ -427,6 +432,7 @@
   });
   document.getElementById('cookieSave').addEventListener('click', () => {
     saveConsent(toggleAnalytics.checked, toggleMedia.checked);
+    if (toggleAnalytics.checked) window.BTG.loadGoogleAnalytics();
     closeCookieModal();
   });
   cookieReopen.addEventListener('click', openCookieModal);

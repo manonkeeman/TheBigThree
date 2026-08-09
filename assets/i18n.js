@@ -4,7 +4,7 @@
 window.I18N = {
     nl: {
       "seo.title":"The Big Three Garage - Amerikaanse voertuigen specialist Nunspeet","seo.description":"The Big Three Garage in Nunspeet: specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, APK, restauratie en import uit de VS. Bel +31 6 82 72 73 74.",
-      "nav.inventory":"Voorraad","nav.services":"Werkplaats","nav.story":"Ons verhaal","nav.contact":"Contact",
+      "nav.inventory":"Voorraad","nav.services":"Werkplaats","nav.story":"Ons verhaal","nav.contact":"Contact","nav.faq":"FAQ",
       "hero.tag":"★ AMERICAN IRON · NUNSPEET ★",
       "hero.title":'BUILT IN <span class="stamp">AMERICA</span><br><span class="accent">SERVICED</span> IN<br>NUNSPEET',
       "hero.sub":"Verkoop, onderhoud en restauratie van Amerikaanse campers, pickups en classics. <strong>Vakmanschap van een man die jaren in de States heeft geleefd.</strong>",
@@ -72,7 +72,7 @@ window.I18N = {
     },
     en: {
       "seo.title":"The Big Three Garage - American Vehicle Specialist Nunspeet","seo.description":"The Big Three Garage in Nunspeet: specialist in American campers, pickups and classics. Sales, maintenance, MOT (APK), restoration and import from the US. Call +31 6 82 72 73 74.",
-      "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact",
+      "nav.inventory":"Inventory","nav.services":"Workshop","nav.story":"Our story","nav.contact":"Contact","nav.faq":"FAQ",
       "hero.tag":"★ AMERICAN IRON · NUNSPEET ★",
       "hero.title":'BUILT IN <span class="stamp">AMERICA</span><br><span class="accent">SERVICED</span> IN<br>NUNSPEET',
       "hero.sub":"Sales, service and restoration of American campers, pickups and classics. <strong>Craftsmanship from a man who lived in the States for years.</strong>",
@@ -140,7 +140,7 @@ window.I18N = {
     },
     de: {
       "seo.title":"The Big Three Garage - Spezialist für amerikanische Fahrzeuge Nunspeet","seo.description":"The Big Three Garage in Nunspeet: Spezialist für amerikanische Camper, Pickups und Oldtimer. Verkauf, Wartung, Hauptuntersuchung, Restaurierung und Import aus den USA. Rufen Sie an: +31 6 82 72 73 74.",
-      "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt",
+      "nav.inventory":"Fahrzeuge","nav.services":"Werkstatt","nav.story":"Unsere Geschichte","nav.contact":"Kontakt","nav.faq":"FAQ",
       "hero.tag":"★ AMERICAN IRON · NUNSPEET ★",
       "hero.title":'GEBAUT IN <span class="stamp">AMERIKA</span><br><span class="accent">GEWARTET</span> IN<br>NUNSPEET',
       "hero.sub":"Verkauf, Wartung und Restauration amerikanischer Camper, Pickups und Klassiker. <strong>Handwerk von einem Mann, der jahrelang in den USA gelebt hat.</strong>",
