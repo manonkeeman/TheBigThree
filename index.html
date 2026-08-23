@@ -1975,7 +1975,6 @@
 
     const { data, error } = await _sb.from('vehicles')
       .select('*')
-      .eq('hidden', false)
       .order('sort_order', { ascending: true })
       .order('created_at', { ascending: false });
 
