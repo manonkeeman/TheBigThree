@@ -972,8 +972,6 @@
     margin-bottom:24px;
   }
   .reviews h2 em{color:var(--rust);font-style:italic}
-  .reviews-stars{display:flex;justify-content:center;gap:6px;margin-bottom:24px}
-  .reviews-stars svg{width:26px;height:26px;fill:var(--gold)}
   .reviews p{
     color:var(--ink-dim);
     font-size:16px;
@@ -982,6 +980,33 @@
     margin:0 auto 36px;
     max-width:480px;
   }
+  .testimonial{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:40px 44px;
+    margin:0 auto 40px;
+    max-width:560px;
+    text-align:left;
+  }
+  .testimonial-stars{display:flex;gap:6px;margin-bottom:20px}
+  .testimonial-stars svg{width:22px;height:22px;fill:var(--gold)}
+  .reviews .testimonial-text{
+    font-family:'Special Elite';
+    font-style:italic;
+    color:var(--chrome);
+    font-size:16px;
+    line-height:1.7;
+    max-width:none;
+    margin:0 0 24px;
+  }
+  .testimonial-author{
+    font-family:'Barlow Condensed';
+    font-size:13px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink);
+  }
+  .testimonial-author span{color:var(--ink-dim);font-weight:300;text-transform:none;letter-spacing:0}
 
   .contact-grid{
     display:grid;
@@ -1620,13 +1645,19 @@
   <div class="container">
     <div class="eyebrow" data-i18n="rev.eyebrow">Wat klanten zeggen</div>
     <h2 data-i18n="rev.title">VIJF STERREN <em>WAARD?</em></h2>
-    <div class="reviews-stars" aria-hidden="true">
-      <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
-      <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
-      <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
-      <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
-      <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
+
+    <div class="testimonial">
+      <div class="testimonial-stars" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
+      </div>
+      <p class="testimonial-text">"Geweldige ervaring bij The Big Three in Nunspeet. David weet alles van Amerikaanse auto's — geen Europese trucjes of halve oplossingen, gewoon eerlijk advies en vakwerk van iemand die dit al zijn hele leven doet. Momenteel zet hij samen met zijn monteur Johan een nieuwe motor onder onze Chevy G20 uit 1986, en we hebben er alle vertrouwen in: duidelijke communicatie, reële planning, en je merkt meteen dat ze precies weten wat zo'n Amerikaan nodig heeft. Geen showroom met witte vloeren, maar een échte werkplaats waar het werk klopt. Aanrader voor iedereen met een Amerikaan, camper of klassieker."</p>
+      <div class="testimonial-author">Manon &amp; Maxim <span>· Google review</span></div>
     </div>
+
     <p data-i18n="rev.sub">Ben je klant bij ons geweest? We zouden het geweldig vinden als je jouw ervaring deelt via een Google review. Kost je een minuutje, helpt ons enorm.</p>
     <a href="/review" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="rev.cta">Schrijf een review op Google</a>
   </div>
