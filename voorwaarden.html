@@ -11,17 +11,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 <style>
   :root{
-    --bg:#0a0e18;
-    --panel:#161e2f;
-    --line:#26304a;
-    --ink:#f5efe6;
     --ink-dim:#8a8fa8;
     --rust:#c0392b;
     --gold:#b8922a;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);font-family:'Barlow',sans-serif;font-weight:300;min-height:100vh}
 
   nav{
@@ -137,92 +133,6 @@
     nav{flex-wrap:wrap;padding:14px 20px}
   }
 
-  /* ─── COOKIE CONSENT MODAL ─── */
-  .cookie-overlay{
-    position:fixed;inset:0;z-index:200;
-    background:rgba(6,8,14,0.82);backdrop-filter:blur(4px);
-    display:flex;align-items:center;justify-content:center;
-    padding:24px;
-  }
-  .cookie-overlay.hidden{display:none}
-  .cookie-modal{
-    position:relative;
-    background:var(--panel);border:1px solid var(--line);
-    max-width:620px;width:100%;max-height:min(680px,86vh);overflow-y:auto;
-    padding:40px 40px 32px;
-    box-shadow:0 30px 80px rgba(0,0,0,0.5);
-  }
-  .cookie-modal .lang{position:absolute;top:24px;right:24px;background:var(--bg)}
-  .cookie-eyebrow{
-    font-family:'Barlow Condensed';font-size:11px;letter-spacing:0.3em;
-    text-transform:uppercase;color:var(--rust);margin-bottom:10px;
-  }
-  .cookie-title{
-    font-family:'Bebas Neue';font-size:clamp(28px,4vw,36px);
-    letter-spacing:0.02em;line-height:1;margin-bottom:16px;
-  }
-  .cookie-intro{
-    font-family:'Barlow';font-size:14px;line-height:1.7;
-    color:var(--ink-dim);font-weight:300;margin-bottom:28px;
-  }
-  .cookie-intro a{color:var(--rust);text-decoration:none}
-  .cookie-intro a:hover{text-decoration:underline}
-  .cookie-row{
-    display:flex;align-items:flex-start;justify-content:space-between;
-    gap:20px;padding:18px 0;border-top:1px solid var(--line);
-  }
-  .cookie-row-text{flex:1}
-  .cookie-row-text strong{
-    display:block;font-family:'Barlow Condensed';font-size:14px;
-    letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);margin-bottom:4px;
-  }
-  .cookie-row-text span{
-    display:block;font-family:'Barlow';font-size:13px;line-height:1.6;
-    color:var(--ink-dim);font-weight:300;
-  }
-  .cookie-toggle{position:relative;display:inline-block;width:46px;height:26px;flex-shrink:0;margin-top:2px}
-  .cookie-toggle input{position:absolute;opacity:0;width:0;height:0}
-  .cookie-toggle-slider{
-    position:absolute;inset:0;background:var(--line);border-radius:26px;
-    cursor:pointer;transition:background 0.2s;
-  }
-  .cookie-toggle-slider::before{
-    content:"";position:absolute;height:20px;width:20px;left:3px;top:3px;
-    background:#fff;border-radius:50%;transition:transform 0.2s;
-  }
-  .cookie-toggle input:checked + .cookie-toggle-slider{background:var(--rust)}
-  .cookie-toggle input:checked + .cookie-toggle-slider::before{transform:translateX(20px)}
-  .cookie-toggle input:disabled + .cookie-toggle-slider{opacity:0.45;cursor:not-allowed}
-  .cookie-modal-actions{
-    display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;padding-top:24px;
-    border-top:1px solid var(--line);
-  }
-  .cookie-modal-actions button{
-    font-family:'Barlow Condensed';font-size:11px;letter-spacing:0.15em;
-    text-transform:uppercase;font-weight:600;
-    padding:13px 16px;cursor:pointer;flex:1;min-width:140px;white-space:nowrap;
-    transition:all 0.2s;
-  }
-  .cookie-accept-all{background:var(--rust);color:#fff;border:1px solid var(--rust)}
-  .cookie-accept-all:hover{background:#8e0a1f;border-color:#8e0a1f}
-  .cookie-save{background:transparent;color:var(--ink);border:1px solid var(--line)}
-  .cookie-save:hover{border-color:var(--ink-dim)}
-  .cookie-decline-all{background:transparent;color:var(--ink-dim);border:1px solid var(--line)}
-  .cookie-decline-all:hover{color:var(--ink);border-color:var(--ink-dim)}
-  .cookie-reopen{
-    position:fixed;left:20px;bottom:20px;z-index:140;
-    background:rgba(16,22,38,0.95);border:1px solid var(--line);color:var(--ink-dim);
-    font-family:'Barlow Condensed';font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
-    padding:10px 16px;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.2s;
-  }
-  .cookie-reopen:hover{color:var(--ink);border-color:var(--ink-dim)}
-  .cookie-reopen.hidden{display:none}
-  @media(max-width:600px){
-    .cookie-modal{padding:32px 24px 24px}
-    .cookie-modal .lang{position:static;margin-bottom:20px}
-    .cookie-modal-actions{flex-direction:column}
-    .cookie-modal-actions button{width:100%}
-  }
 </style>
 </head>
 <body>
@@ -241,10 +151,11 @@
 
 <main>
 
+  <div class="eyebrow" id="vwEyebrow">Voorwaarden</div>
+  <h1 id="vwTitle">ALGEMENE <em>VOORWAARDEN</em></h1>
+
   <!-- NL -->
   <div class="voor-lang active" id="lang-nl">
-    <div class="eyebrow">Voorwaarden</div>
-    <h1>ALGEMENE <em>VOORWAARDEN</em></h1>
     <p class="intro">Deze voorwaarden zijn van toepassing op alle aanbiedingen, verkopen en werkzaamheden van The Big Three Garage (David Broeksma), gevestigd aan de Hullerweg 115, 8071 NP Nunspeet, KvK 81234090, BTW NL862005541B01.</p>
 
     <div class="block">
@@ -307,8 +218,6 @@
 
   <!-- EN -->
   <div class="voor-lang" id="lang-en">
-    <div class="eyebrow">Terms</div>
-    <h1>TERMS &amp; <em>CONDITIONS</em></h1>
     <p class="intro">These terms apply to all offers, sales and services provided by The Big Three Garage (David Broeksma), based at Hullerweg 115, 8071 NP Nunspeet, the Netherlands, Chamber of Commerce (KvK) 81234090, VAT NL862005541B01.</p>
 
     <div class="block">
@@ -371,8 +280,6 @@
 
   <!-- DE -->
   <div class="voor-lang" id="lang-de">
-    <div class="eyebrow">Geschäftsbedingungen</div>
-    <h1>ALLGEMEINE <em>GESCHÄFTSBEDINGUNGEN</em></h1>
     <p class="intro">Diese Bedingungen gelten für alle Angebote, Verkäufe und Dienstleistungen von The Big Three Garage (David Broeksma), Hullerweg 115, 8071 NP Nunspeet, Niederlande, Handelsregister (KvK) 81234090, USt-IdNr. NL862005541B01.</p>
 
     <div class="block">
@@ -509,21 +416,24 @@
   document.getElementById('yearFtr').textContent = new Date().getFullYear();
 
   const titles = {
-    nl: { navBack:'← Terug naar de site', ftrPrivacy:'Privacyverklaring', ftrColofon:'Colofon', ftrBack:'Terug naar de site',
+    nl: { eyebrow:'Voorwaarden', title:'ALGEMENE <em>VOORWAARDEN</em>',
+      navBack:'← Terug naar de site', ftrPrivacy:'Privacyverklaring', ftrColofon:'Colofon', ftrBack:'Terug naar de site',
       cookieEyebrow:'Jouw privacy', cookieTitle:'Cookie-instellingen',
       cookieText:'Wij gebruiken cookies om deze website goed te laten werken. Optioneel gebruiken we ook cookies voor bezoekersstatistieken en om video\'s en een kaart te tonen. Lees onze <a href="privacy.html">privacyverklaring</a> voor meer informatie.',
       cookieNecessaryTitle:'Noodzakelijk', cookieNecessaryDesc:'Nodig voor de basiswerking van de site, zoals je taal- en cookievoorkeur. Kan niet worden uitgeschakeld.',
       cookieAnalyticsTitle:'Statistieken', cookieAnalyticsDesc:'Anonieme bezoekersstatistieken via Google Analytics, met IP-anonimisering.',
       cookieMediaTitle:'Media &amp; kaarten', cookieMediaDesc:'Voor het tonen van video\'s (YouTube) en een kaart (Google Maps) op de site.',
       cookieAcceptAll:'Alles accepteren', cookieDeclineAll:'Alles weigeren', cookieSave:'Voorkeuren opslaan', cookieSettings:'Cookie-instellingen' },
-    en: { navBack:'← Back to website', ftrPrivacy:'Privacy policy', ftrColofon:'Colophon', ftrBack:'Back to website',
+    en: { eyebrow:'Terms', title:'TERMS &amp; <em>CONDITIONS</em>',
+      navBack:'← Back to website', ftrPrivacy:'Privacy policy', ftrColofon:'Colophon', ftrBack:'Back to website',
       cookieEyebrow:'Your privacy', cookieTitle:'Cookie settings',
       cookieText:'We use cookies to make this website work properly. Optionally, we also use cookies for visitor statistics and to show videos and a map. Read our <a href="privacy.html">privacy policy</a> for more information.',
       cookieNecessaryTitle:'Necessary', cookieNecessaryDesc:'Required for the site to work, such as your language and cookie preference. Cannot be switched off.',
       cookieAnalyticsTitle:'Statistics', cookieAnalyticsDesc:'Anonymous visitor statistics via Google Analytics, with IP anonymisation.',
       cookieMediaTitle:'Media &amp; maps', cookieMediaDesc:'For showing videos (YouTube) and a map (Google Maps) on the site.',
       cookieAcceptAll:'Accept all', cookieDeclineAll:'Reject all', cookieSave:'Save preferences', cookieSettings:'Cookie settings' },
-    de: { navBack:'← Zurück zur Website', ftrPrivacy:'Datenschutzerklärung', ftrColofon:'Impressum', ftrBack:'Zurück zur Website',
+    de: { eyebrow:'Geschäftsbedingungen', title:'ALLGEMEINE <em>GESCHÄFTSBEDINGUNGEN</em>',
+      navBack:'← Zurück zur Website', ftrPrivacy:'Datenschutzerklärung', ftrColofon:'Impressum', ftrBack:'Zurück zur Website',
       cookieEyebrow:'Ihre Privatsphäre', cookieTitle:'Cookie-Einstellungen',
       cookieText:'Wir verwenden Cookies, damit diese Website ordnungsgemäß funktioniert. Optional verwenden wir auch Cookies für Besucherstatistiken und zur Anzeige von Videos und einer Karte. Lesen Sie unsere <a href="privacy.html">Datenschutzerklärung</a> für weitere Informationen.',
       cookieNecessaryTitle:'Notwendig', cookieNecessaryDesc:'Erforderlich für die Grundfunktionen der Website, z. B. Ihre Sprach- und Cookie-Einstellung. Kann nicht deaktiviert werden.',
@@ -542,6 +452,8 @@
     if (target) target.classList.add('active');
     const t = titles[lang];
     if (t) {
+      document.getElementById('vwEyebrow').textContent = t.eyebrow;
+      document.getElementById('vwTitle').innerHTML = t.title;
       document.getElementById('navBack').textContent = t.navBack;
       document.getElementById('ftrPrivacy').textContent = t.ftrPrivacy;
       document.getElementById('ftrColofon').textContent = t.ftrColofon;

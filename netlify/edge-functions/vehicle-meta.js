@@ -48,6 +48,10 @@ function escAttr(s) {
   return String(s || '').replace(/"/g, '&quot;');
 }
 
+function escHtml(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function pickLang(url) {
   const lang = url.searchParams.get('lang');
   return (lang === 'en' || lang === 'de') ? lang : 'nl';
@@ -166,7 +170,7 @@ export default async (request, context) => {
 
       html = html
         .replace(/__LANG__/g, lang)
-        .replace(/__TITLE__/g, escAttr(c.title(vehicle.title)))
+        .replace(/__TITLE__/g, escHtml(c.title(vehicle.title)))
         .replace(/__OG_TITLE__/g, escAttr(ogTitle))
         .replace(/__DESCRIPTION__/g, escAttr(description))
         .replace(/__CANONICAL__/g, canonical)
