@@ -116,10 +116,13 @@ function renderCard(v, dict) {
   const mpBadge = v.marktplaats_url
     ? `<span class="card-mp-badge" title="${escHtml(mpText)} op Marktplaats"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="card.mp">${escHtml(mpText)}</span></span>`
     : '';
+  const imgHtml = v.image_url
+    ? `<img loading="lazy" src="${escHtml(v.image_url)}" alt="${escHtml(alt)}">`
+    : `<div class="card-img-placeholder"><img loading="lazy" src="/assets/logo.png" alt="${escHtml(alt)}"></div>`;
 
   return `<a href="${escHtml(href)}" class="card" data-cat="${escHtml(v.category || 'camper')}">
       <div class="card-img">
-        <img loading="lazy" src="${escHtml(v.image_url || '')}" alt="${escHtml(alt)}">
+        ${imgHtml}
         ${mpBadge}
         <span class="card-status ${stClass}" data-i18n="${stKey}">${escHtml(stText)}</span>
       </div>
