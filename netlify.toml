@@ -93,6 +93,12 @@
   force = true
 
 [[redirects]]
+  from = "/supabase-hide-migration.sql"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/voorraad-import.sql"
   to = "/"
   status = 301

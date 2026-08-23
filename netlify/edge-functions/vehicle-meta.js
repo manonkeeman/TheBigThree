@@ -102,7 +102,7 @@ export default async (request, context) => {
   let html = await originResponse.text();
 
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*&hidden=eq.false`, {
       headers: {
         apikey: SUPABASE_ANON_KEY,
         Authorization: `Bearer ${SUPABASE_ANON_KEY}`,

@@ -310,6 +310,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <div class="stat"><span id="cTotal">–</span> totaal</div>
       <div class="stat green"><span id="cAvail">–</span> beschikbaar</div>
       <div class="stat amber"><span id="cRes">–</span> gereserveerd</div>
+      <div class="stat"><span id="cHidden">–</span> verborgen</div>
     </div>
     <div id="vehicleList"><div class="loading">Voorraad laden…</div></div>
   </div>
@@ -444,6 +445,10 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
           <label for="fMpUrl">Marktplaats link</label>
           <input type="url" id="fMpUrl" placeholder="https://www.marktplaats.nl/v/...">
           <small style="display:block;margin-top:4px;font-size:12px;color:var(--muted)">Vul dit in om op de website een knop "Meer foto's &amp; info op Marktplaats" te tonen — handig omdat hier maar 1 foto per voertuig staat. Leeg = geen knop.</small>
+        </div>
+        <div class="field" style="margin-bottom:14px">
+          <label class="chk"><input type="checkbox" id="fHidden"> Verborgen op de website</label>
+          <small style="display:block;margin-top:4px;font-size:12px;color:var(--muted)">Voertuig blijft in dit adminpaneel staan, maar verschijnt nergens meer op de site. Wordt ook automatisch aangezet door "Check advertenties" bij een verlopen Marktplaats-link.</small>
         </div>
         <div class="field" style="max-width:160px">
           <label for="fSort">Volgorde <span style="font-weight:400">(0 = bovenaan)</span></label>
@@ -869,7 +874,6 @@ sb.auth.onAuthStateChange((event, session) => {
 
 // ── LOAD VEHICLES ──
 let vehicles = [];
-let mpGoneIds = new Set();
 
 async function loadVehicles() {
   $('vehicleList').innerHTML = '<div class="loading">Voorraad laden…</div>';
@@ -881,9 +885,10 @@ async function loadVehicles() {
   }
   vehicles = data || [];
   renderList();
-  $('cTotal').textContent = vehicles.length;
-  $('cAvail').textContent = vehicles.filter(v => v.status === 'available').length;
-  $('cRes').textContent   = vehicles.filter(v => v.status === 'reserved').length;
+  $('cTotal').textContent  = vehicles.length;
+  $('cAvail').textContent  = vehicles.filter(v => v.status === 'available').length;
+  $('cRes').textContent    = vehicles.filter(v => v.status === 'reserved').length;
+  $('cHidden').textContent = vehicles.filter(v => v.hidden).length;
 }
 
 const badgeMap = {
@@ -907,8 +912,7 @@ function renderList() {
     const price = v.price_type === 'fixed' && v.price
       ? `€ ${Number(v.price).toLocaleString('nl-NL')}`
       : v.price_type === 'ask' ? 'Op aanvraag' : 'Bieden';
-    const isGone = mpGoneIds.has(v.id);
-    return `<div class="vrow${isGone ? ' vrow-gone' : ''}">
+    return `<div class="vrow${v.hidden ? ' vrow-gone' : ''}">
       ${thumb}
       <div>
         <div class="vinfo-title">${esc(v.title)}</div>
@@ -916,7 +920,7 @@ function renderList() {
       </div>
       <div class="row-badges">
         <span class="badge ${bc}">${bl}</span>
-        ${isGone ? '<span class="badge b-gone" title="Advertentie geeft 404/410 terug op Marktplaats">⚠ Verlopen op Marktplaats</span>' : ''}
+        ${v.hidden ? '<span class="badge b-gone" title="Staat niet op de website">Verborgen</span>' : ''}
       </div>
       <div class="row-actions">
         <button class="btn-icon" title="Bewerken" onclick="openEdit('${esc(v.id)}')">
@@ -957,9 +961,9 @@ $('btnAdd').addEventListener('click', () => {
 // ── MARKTPLAATS CHECK ──
 $('btnCheckMp').addEventListener('click', async () => {
   const items = vehicles
-    .filter(v => v.marktplaats_url)
+    .filter(v => v.marktplaats_url && !v.hidden)
     .map(v => ({ id: v.id, url: v.marktplaats_url }));
-  if (!items.length) { toast('Geen voertuigen met een Marktplaats-link.'); return; }
+  if (!items.length) { toast('Geen actieve voertuigen met een Marktplaats-link om te checken.'); return; }
 
   const btn = $('btnCheckMp');
   btn.disabled = true; btn.textContent = 'Checken…';
@@ -971,11 +975,14 @@ $('btnCheckMp').addEventListener('click', async () => {
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const { results } = await res.json();
-    mpGoneIds = new Set(results.filter(r => r.state === 'gone').map(r => r.id));
+    const goneIds = results.filter(r => r.state === 'gone').map(r => r.id);
     const unknownCount = results.filter(r => r.state === 'unknown').length;
-    renderList();
-    if (mpGoneIds.size) {
-      toast(`⚠ ${mpGoneIds.size} advertentie${mpGoneIds.size === 1 ? '' : 's'} lijkt verlopen/verwijderd — bekijk de rode markering hieronder.`, 'er');
+
+    if (goneIds.length) {
+      const { error } = await sb.from('vehicles').update({ hidden: true }).in('id', goneIds);
+      if (error) throw new Error('verbergen mislukt: ' + error.message);
+      toast(`⚠ ${goneIds.length} verlopen advertentie${goneIds.length === 1 ? '' : 's'} verborgen van de website.`, 'er');
+      await loadVehicles();
     } else {
       toast(`✓ ${items.length} advertentie${items.length === 1 ? '' : 's'} gecontroleerd, allemaal nog actief.`);
     }
@@ -1008,6 +1015,7 @@ function openEdit(id) {
   $('fPriceType').value  = v.price_type || 'fixed';
   $('fPrice').value      = v.price   || '';
   $('fMpUrl').value      = v.marktplaats_url || '';
+  $('fHidden').checked   = !!v.hidden;
   $('fSort').value       = v.sort_order ?? 0;
   $('fDescNl').innerHTML = v.description_nl || '';
   $('fDescEn').innerHTML = v.description_en || '';
@@ -1122,6 +1130,7 @@ $('vehicleForm').addEventListener('submit', async e => {
       price_type:      pt,
       price:           pt === 'fixed' ? (parseInt($('fPrice').value) || null) : null,
       marktplaats_url: $('fMpUrl').value.trim() || null,
+      hidden:          $('fHidden').checked,
       image_url:       imageUrl || null,
       sort_order:      parseInt($('fSort').value) || 0,
       description_nl:  $('fDescNl').innerHTML.trim() || null,

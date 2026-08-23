@@ -79,7 +79,7 @@ async function loadVehicles() {
     return _vehicleCache.data;
   }
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/vehicles?select=*&order=sort_order.asc,created_at.desc`,
+    `${SUPABASE_URL}/rest/v1/vehicles?select=*&hidden=eq.false&order=sort_order.asc,created_at.desc`,
     { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } }
   );
   const data = res.ok ? await res.json() : [];
