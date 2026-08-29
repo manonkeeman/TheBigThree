@@ -349,6 +349,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
           <div class="field" style="grid-column:1/-1">
             <label for="fTitle">Titel <span class="req">*</span></label>
             <input type="text" id="fTitle" required placeholder="EXPRESS EXPLORER CAMPER">
+            <small id="fTitleWarn" style="display:none;margin-top:4px;font-size:12px;color:#fbbf24">⚠ Er bestaat al een voertuig met deze titel — voeg iets toe om te onderscheiden (bv. jaartal of kenmerk), anders delen ze dezelfde pagina op de website.</small>
           </div>
           <div class="field">
             <label for="fMake">Merk</label>
@@ -944,8 +945,20 @@ function resetForm() {
   $('fDescNl').innerHTML = '';
   $('fDescEn').innerHTML = '';
   $('fDescDe').innerHTML = '';
+  $('fTitleWarn').style.display = 'none';
   selectedFile = null;
 }
+
+// Twee voertuigen met dezelfde titel delen anders dezelfde /voorraad/-URL
+// op de website (zie index.html/_slugMap) — waarschuw David hier live
+// zodat hij het meteen ziet i.p.v. achteraf op de site.
+function checkTitleDuplicate() {
+  const title = ($('fTitle').value || '').trim().toUpperCase();
+  const currentId = $('vid').value;
+  const dup = title && vehicles.some(v => v.id !== currentId && (v.title || '').trim().toUpperCase() === title);
+  $('fTitleWarn').style.display = dup ? 'block' : 'none';
+}
+$('fTitle').addEventListener('input', checkTitleDuplicate);
 
 $('btnAdd').addEventListener('click', () => {
   resetForm();
