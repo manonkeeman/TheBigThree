@@ -1920,6 +1920,24 @@
       .toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
   }
 
+  // Meerdere voertuigen kunnen dezelfde titel hebben (bv. 4x "Express Explorer
+  // Camper") en zouden dan zonder disambiguatie dezelfde /voorraad/-URL delen.
+  // Alleen voertuigen wiens titel-slug botst krijgen een id-suffix; unieke
+  // titels behouden hun bestaande (mogelijk al geïndexeerde) schone URL.
+  function _slugMap(vehicles) {
+    const counts = {};
+    vehicles.forEach(v => {
+      const s = _slugify(v.title);
+      counts[s] = (counts[s] || 0) + 1;
+    });
+    const map = {};
+    vehicles.forEach(v => {
+      const s = _slugify(v.title);
+      map[v.id] = counts[s] > 1 ? `${s}-${v.id.slice(0, 6)}` : s;
+    });
+    return map;
+  }
+
   function _getCurrentLang() {
     const u = new URLSearchParams(window.location.search).get('lang');
     const s = localStorage.getItem('btg_lang');
@@ -1927,7 +1945,7 @@
     return u || s || 'nl';
   }
 
-  function _renderCard(v) {
+  function _renderCard(v, slug) {
     const lang = _getCurrentLang();
     const t = (typeof translations !== 'undefined') ? translations[lang] : {};
     const statusMap = {
@@ -1953,7 +1971,7 @@
     const alt   = [v.year, v.make, v.title, 'te koop The Big Three Nunspeet'].filter(Boolean).join(' ');
     const specs = [v.spec1, v.spec2, v.spec3].filter(Boolean)
                     .map(s => `<span>${_escHtml(s)}</span>`).join('');
-    const href  = `/voorraad/${_slugify(v.title)}`;
+    const href  = `/voorraad/${slug}`;
     const mpText = t?.['card.mp'] || "Meer foto's";
     const mpBadge = v.marktplaats_url
       ? `<span class="card-mp-badge" title="${_escHtml(mpText)} op Marktplaats"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="card.mp">${_escHtml(mpText)}</span></span>`
@@ -1991,7 +2009,8 @@
       grid.innerHTML = '<div style="grid-column:1/-1;padding:56px 0;text-align:center;color:var(--ink-dim);font-family:\'Barlow Condensed\',sans-serif;letter-spacing:0.15em;text-transform:uppercase;font-size:13px">Geen voertuigen gevonden.</div>';
       return;
     }
-    grid.innerHTML = data.map(_renderCard).join('');
+    const slugMap = _slugMap(data);
+    grid.innerHTML = data.map(v => _renderCard(v, slugMap[v.id])).join('');
   }
 
   const translations = window.I18N;

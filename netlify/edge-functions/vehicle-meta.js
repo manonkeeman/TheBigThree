@@ -44,6 +44,24 @@ function slugify(s) {
     .toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
 
+// Meerdere voertuigen kunnen dezelfde titel hebben en zouden dan zonder
+// disambiguatie dezelfde /voorraad/-URL delen. Moet identiek zijn aan de
+// logica in index.html en sitemap.js, anders matcht deze functie de
+// verkeerde auto bij de URL die de sitemap/kaart daadwerkelijk gebruikt.
+function slugMap(vehicles) {
+  const counts = {};
+  vehicles.forEach(v => {
+    const s = slugify(v.title);
+    counts[s] = (counts[s] || 0) + 1;
+  });
+  const map = {};
+  vehicles.forEach(v => {
+    const s = slugify(v.title);
+    map[v.id] = counts[s] > 1 ? `${s}-${v.id.slice(0, 6)}` : s;
+  });
+  return map;
+}
+
 function escAttr(s) {
   return String(s || '').replace(/"/g, '&quot;');
 }
@@ -109,7 +127,8 @@ export default async (request, context) => {
       },
     });
     const vehicles = res.ok ? await res.json() : [];
-    const vehicle = vehicles.find((v) => slugify(v.title) === slug);
+    const slugs = slugMap(vehicles);
+    const vehicle = vehicles.find((v) => slugs[v.id] === slug);
 
     if (!vehicle) {
       html = fallbackMeta(html, basePath, lang);

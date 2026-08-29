@@ -53,6 +53,23 @@ function slugify(s) {
     .toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
 
+// Meerdere voertuigen kunnen dezelfde titel hebben en zouden dan zonder
+// disambiguatie dezelfde /voorraad/-URL delen. Moet identiek zijn aan de
+// logica in index.html, sitemap.js en vehicle-meta.js.
+function slugMap(vehicles) {
+  const counts = {};
+  vehicles.forEach(v => {
+    const s = slugify(v.title);
+    counts[s] = (counts[s] || 0) + 1;
+  });
+  const map = {};
+  vehicles.forEach(v => {
+    const s = slugify(v.title);
+    map[v.id] = counts[s] > 1 ? `${s}-${v.id.slice(0, 6)}` : s;
+  });
+  return map;
+}
+
 // Eén gedeelde vertaalbron: assets/i18n.js (window.I18N = {...}) wordt door
 // zowel de browser als deze edge function gebruikt, zodat er geen tweede
 // kopie van de vertalingen kan ontstaan die uit sync raakt.
@@ -88,7 +105,7 @@ async function loadVehicles() {
 }
 
 // Server-side equivalent van de client-side _renderCard() in index.html.
-function renderCard(v, dict) {
+function renderCard(v, dict, slug) {
   const statusMap = {
     available: ['', 'card.status'],
     reserved: ['reserved', 'card.reserved'],
@@ -111,7 +128,7 @@ function renderCard(v, dict) {
   const meta = [v.year, v.make].filter(Boolean).join(' · ');
   const alt = [v.year, v.make, v.title, 'te koop The Big Three Nunspeet'].filter(Boolean).join(' ');
   const specs = [v.spec1, v.spec2, v.spec3].filter(Boolean).map(s => `<span>${escHtml(s)}</span>`).join('');
-  const href = `/voorraad/${slugify(v.title)}`;
+  const href = `/voorraad/${slug}`;
   const mpText = dict?.['card.mp'] || "Meer foto's";
   const mpBadge = v.marktplaats_url
     ? `<span class="card-mp-badge" title="${escHtml(mpText)} op Marktplaats"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="card.mp">${escHtml(mpText)}</span></span>`
@@ -144,7 +161,8 @@ function renderCard(v, dict) {
 async function injectInventory(html, dict) {
   const vehicles = await loadVehicles();
   if (vehicles.length) {
-    const cardsHtml = vehicles.map(v => renderCard(v, dict)).join('\n');
+    const slugs = slugMap(vehicles);
+    const cardsHtml = vehicles.map(v => renderCard(v, dict, slugs[v.id])).join('\n');
     return html.replace(
       '<div class="grid" id="voorraadGrid">\n    </div>',
       `<div class="grid" id="voorraadGrid">\n${cardsHtml}\n    </div>`
