@@ -1,6 +1,12 @@
 [build]
   publish = "."
 
+[build.environment]
+  # Google Places API-key in index.html is bewust publiek (referrer-beperkt tot
+  # thebigthree.nl in Google Cloud Console) — sluit 'm uit van Netlify's secret-scan
+  # zodat die de build niet blokkeert. Zie: https://ntl.fyi/configure-secrets-scanning
+  SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES = "AIzaSyC6AX2QDNAQHagtn38zy3RRqU3jNH5yfvI"
+
 # Makkelijk te delen review-link: thebigthree.nl/review -> Google review-formulier
 [[redirects]]
   from = "/review"
