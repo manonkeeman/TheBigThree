@@ -491,6 +491,24 @@ __HREFLANG__
       .toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
   }
 
+  // Meerdere voertuigen kunnen dezelfde titel hebben en zouden dan zonder
+  // disambiguatie dezelfde /voorraad/-URL delen. Moet identiek zijn aan de
+  // logica in index.html, sitemap.js en vehicle-meta.js, anders matcht deze
+  // pagina de verkeerde (of geen) auto bij de URL die daadwerkelijk gedeeld wordt.
+  function slugMap(vehicles) {
+    const counts = {};
+    vehicles.forEach(v => {
+      const s = slugify(v.title);
+      counts[s] = (counts[s] || 0) + 1;
+    });
+    const map = {};
+    vehicles.forEach(v => {
+      const s = slugify(v.title);
+      map[v.id] = counts[s] > 1 ? `${s}-${v.id.slice(0, 6)}` : s;
+    });
+    return map;
+  }
+
   function slugFromPath() {
     const parts = window.location.pathname.split('/').filter(Boolean);
     const i = parts.indexOf('voorraad');
@@ -546,9 +564,10 @@ __HREFLANG__
   function renderRelated(all, current) {
     const others = all.filter(v => v.id !== current.id).slice(0, 3);
     if (!others.length) return;
+    const slugs = slugMap(all);
     document.getElementById('relatedSection').hidden = false;
     document.getElementById('relatedGrid').innerHTML = others.map(v => `
-      <a href="/voorraad/${encodeURIComponent(slugify(v.title))}" class="rel-card">
+      <a href="/voorraad/${encodeURIComponent(slugs[v.id])}" class="rel-card">
         <div class="rel-card-img"><img src="${esc(v.image_url||'')}" alt="${esc(v.title)}"></div>
         <div class="rel-card-body">
           <div class="rel-card-meta">${esc([v.year, v.make].filter(Boolean).join(' · '))}</div>
@@ -563,7 +582,8 @@ __HREFLANG__
     const slug = slugFromPath();
     const { data, error } = await sb.from('vehicles').select('*');
     if (error || !data) { showNotFound(); return; }
-    const vehicle = data.find(v => slugify(v.title) === slug);
+    const slugs = slugMap(data);
+    const vehicle = data.find(v => slugs[v.id] === slug);
     if (!vehicle) { showNotFound(); return; }
     renderVehicle(vehicle);
     renderRelated(data, vehicle);
