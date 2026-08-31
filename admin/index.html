@@ -870,7 +870,29 @@ sb.auth.onAuthStateChange((event, session) => {
 
 // ── LOAD VEHICLES ──
 let vehicles = [];
-let mpGoneIds = new Set();
+// Resultaat van de laatste "Check advertenties"-run blijft bewaard in
+// localStorage, anders verdween de rode "Verlopen" markering weer bij
+// elke herlaad/nieuwe sessie en moest je steeds opnieuw handmatig checken.
+let mpGoneIds;
+try { mpGoneIds = new Set(JSON.parse(localStorage.getItem('btg_mp_gone') || '[]')); }
+catch { mpGoneIds = new Set(); }
+let mpCheckedAt = localStorage.getItem('btg_mp_checked_at') || null;
+
+function saveMpGoneIds() {
+  localStorage.setItem('btg_mp_gone', JSON.stringify([...mpGoneIds]));
+  mpCheckedAt = new Date().toISOString();
+  localStorage.setItem('btg_mp_checked_at', mpCheckedAt);
+  updateMpCheckLabel();
+}
+
+function updateMpCheckLabel() {
+  const btn = $('btnCheckMp');
+  if (!btn) return;
+  btn.title = mpCheckedAt
+    ? `Checkt alle gekoppelde Marktplaats-advertenties op verlopen/verwijderd\nLaatst gecheckt: ${new Date(mpCheckedAt).toLocaleString('nl-NL')}`
+    : 'Checkt alle gekoppelde Marktplaats-advertenties op verlopen/verwijderd';
+}
+updateMpCheckLabel();
 
 async function loadVehicles() {
   $('vehicleList').innerHTML = '<div class="loading">Voorraad laden…</div>';
@@ -908,7 +930,7 @@ function renderList() {
     const price = v.price_type === 'fixed' && v.price
       ? `€ ${Number(v.price).toLocaleString('nl-NL')}`
       : v.price_type === 'ask' ? 'Op aanvraag' : 'Bieden';
-    const isGone = mpGoneIds.has(v.id);
+    const isGone = mpGoneIds.has(v.id) && !!v.marktplaats_url;
     return `<div class="vrow${isGone ? ' vrow-gone' : ''}">
       ${thumb}
       <div>
@@ -996,6 +1018,7 @@ $('btnCheckMp').addEventListener('click', async () => {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const { results } = await res.json();
     mpGoneIds = new Set(results.filter(r => r.state === 'gone').map(r => r.id));
+    saveMpGoneIds();
     const unknownCount = results.filter(r => r.state === 'unknown').length;
     renderList();
     if (mpGoneIds.size) {
