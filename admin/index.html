@@ -1144,14 +1144,12 @@ $('vehicleForm').addEventListener('submit', async e => {
     };
 
     const id = $('vid').value;
-    const { error } = id
-      ? await sb.from('vehicles').update(rec).eq('id', id)
-      : await sb.from('vehicles').insert(rec);
+    const { data: saved, error } = id
+      ? await sb.from('vehicles').update(rec).eq('id', id).select().single()
+      : await sb.from('vehicles').insert(rec).select().single();
     if (error) throw new Error(error.message);
 
     await loadVehicles();
-    // haal het net opgeslagen voertuig op voor de post-teksten
-    const saved = vehicles.find(v => id ? v.id === id : true) || { ...rec, id: '' };
     generatePosts({ ...rec, ...saved });
     showView('share');
   } catch(err) {
