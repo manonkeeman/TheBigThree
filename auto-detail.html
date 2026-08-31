@@ -484,6 +484,9 @@ __HREFLANG__
 <script>
   const SUPABASE_URL      = 'https://loolxbizdribqyulxbop.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_nMu2RzoUWmaKnwjeR3kRPg_EzGzbVIg';
+  // Standaard YouTube-link voor elk voertuig, tenzij David in het admin-
+  // paneel een specifieke video-link voor dat voertuig heeft ingevuld.
+  const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@TheBIGThreeNunspeet';
   const sb = (typeof supabase !== 'undefined')
     ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
@@ -568,10 +571,8 @@ __HREFLANG__
     }
 
     const ytBtn = document.getElementById('ytBtn');
-    if (v.youtube_url) {
-      ytBtn.href = v.youtube_url;
-      ytBtn.hidden = false;
-    }
+    ytBtn.href = v.youtube_url || YOUTUBE_CHANNEL_URL;
+    ytBtn.hidden = false;
   }
 
   function renderRelated(all, current) {
