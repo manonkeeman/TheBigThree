@@ -30,8 +30,15 @@ function escXml(s) {
 
 export default async (request, context) => {
   const url = new URL(request.url);
-  const staticResponse = await fetch(new URL('/sitemap-static.xml', url));
-  let xml = await staticResponse.text();
+  let xml;
+  try {
+    const staticResponse = await fetch(new URL('/sitemap-static.xml', url));
+    xml = await staticResponse.text();
+  } catch {
+    // Origin-fetch mislukt (transiënt netwerkprobleem) — val terug op een
+    // lege maar geldige sitemap i.p.v. de hele functie te laten crashen.
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n</urlset>';
+  }
 
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=id,title,updated_at&order=sort_order.asc`, {

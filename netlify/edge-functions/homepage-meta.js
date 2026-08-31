@@ -74,13 +74,15 @@ function slugMap(vehicles) {
 // zowel de browser als deze edge function gebruikt, zodat er geen tweede
 // kopie van de vertalingen kan ontstaan die uit sync raakt.
 async function loadTranslations(origin) {
-  const res = await fetch(new URL('/assets/i18n.js', origin));
-  if (!res.ok) return null;
-  const src = await res.text();
   try {
+    const res = await fetch(new URL('/assets/i18n.js', origin));
+    if (!res.ok) return null;
+    const src = await res.text();
     const fn = new Function('window', src + '\nreturn window.I18N;');
     return fn({});
   } catch {
+    // Origin-fetch of parsing mislukt (transiënt netwerkprobleem of onverwachte
+    // inhoud) — de rest van de functie werkt ook zonder vertalingen door.
     return null;
   }
 }

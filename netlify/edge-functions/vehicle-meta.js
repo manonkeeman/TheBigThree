@@ -116,8 +116,15 @@ export default async (request, context) => {
   const basePath = isVoorraadPath ? `/voorraad/${slug}` : url.pathname;
   const canonical = canonicalFor(basePath, lang);
 
-  const originResponse = await fetch(new URL('/auto-detail.html', url));
-  let html = await originResponse.text();
+  let originResponse, html;
+  try {
+    originResponse = await fetch(new URL('/auto-detail.html', url));
+    html = await originResponse.text();
+  } catch {
+    // Origin-fetch mislukt (transiënt netwerkprobleem) — laat Netlify de
+    // pagina gewoon normaal serveren i.p.v. de hele functie te laten crashen.
+    return context.next();
+  }
 
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*`, {
