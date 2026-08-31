@@ -739,6 +739,32 @@ function toast(msg, type = 'ok') {
   setTimeout(() => t.remove(), 3200);
 }
 
+// Slaat een voertuig op. Als de database (nog) niet alle kolommen heeft —
+// bv. een migratie die nog niet gedraaid is — laat dit de ontbrekende
+// velden automatisch weg i.p.v. de hele opslag te laten mislukken, zodat
+// toevoegen/bewerken blijft werken terwijl de rest van het formulier al
+// wél opgeslagen wordt. Geeft terug welke velden zijn weggelaten, zodat
+// de aanroeper daarover kan waarschuwen.
+async function saveVehicle(rec, id) {
+  const payload = { ...rec };
+  const dropped = [];
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const { data, error } = id
+      ? await sb.from('vehicles').update(payload).eq('id', id).select().single()
+      : await sb.from('vehicles').insert(payload).select().single();
+    if (!error) return { data, dropped };
+    // PostgREST meldt een ontbrekende kolom via insert/update als PGRST204
+    // ("Could not find the 'x' column..."), via select als 42703 ("column
+    // vehicles.x does not exist") — beide vormen afvangen.
+    const m = /Could not find the '(\w+)' column/.exec(error.message || '')
+      || /column vehicles\.(\w+) does not exist/.exec(error.message || '');
+    if (!m || !(m[1] in payload)) throw new Error(error.message);
+    delete payload[m[1]];
+    dropped.push(m[1]);
+  }
+  throw new Error('Opslaan mislukt: te veel ontbrekende kolommen in de database.');
+}
+
 function showView(name) {
   $('viewList').style.display  = name === 'list'  ? 'block' : 'none';
   $('viewForm').style.display  = name === 'form'  ? 'block' : 'none';
@@ -1185,15 +1211,16 @@ $('vehicleForm').addEventListener('submit', async e => {
     };
 
     const id = $('vid').value;
-    const { data: saved, error } = id
-      ? await sb.from('vehicles').update(rec).eq('id', id).select().single()
-      : await sb.from('vehicles').insert(rec).select().single();
-    if (error) throw new Error(error.message);
+    const { data: saved, dropped } = await saveVehicle(rec, id);
 
     await loadVehicles();
     $('shareTitle').textContent = 'Voertuig opgeslagen ✓';
     generatePosts({ ...rec, ...saved });
     showView('share');
+
+    if (dropped.length) {
+      toast(`⚠ Opgeslagen, maar dit is (nog) niet bewaard: ${dropped.join(', ')} — database mist deze kolommen. Vraag Manon dit te fixen.`, 'er');
+    }
   } catch(err) {
     const d = $('formMsg');
     d.className = 'msg msg-err';
