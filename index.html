@@ -966,60 +966,6 @@
   .video-wrap:hover::before{opacity:0}
   .video-wrap iframe{width:100%;height:100%;border:none;display:block;position:relative;z-index:1;}
 
-  /* ─── GOOGLE REVIEWS ─── */
-  .reviews{
-    background:var(--bg-2);
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    text-align:center;
-    padding:56px 32px;
-  }
-  .reviews .container{max-width:560px}
-  .reviews .eyebrow{justify-content:center;margin-bottom:10px}
-  .reviews .eyebrow::before{display:none}
-  .reviews h2{
-    font-family:'Bebas Neue';
-    font-size:clamp(26px,3.2vw,36px);
-    line-height:0.95;
-    margin-bottom:16px;
-  }
-  .reviews h2 em{color:var(--rust);font-style:italic}
-  .reviews p{
-    color:var(--ink-dim);
-    font-size:14px;
-    line-height:1.6;
-    font-weight:300;
-    margin:0 auto 20px;
-    max-width:420px;
-  }
-  .testimonial{
-    background:var(--panel);
-    border:1px solid var(--line);
-    padding:24px 28px;
-    margin:0 auto 24px;
-    max-width:500px;
-    text-align:left;
-  }
-  .testimonial-stars{display:flex;gap:4px;margin-bottom:12px}
-  .testimonial-stars svg{width:16px;height:16px;fill:var(--gold)}
-  .reviews .testimonial-text{
-    font-family:'Special Elite';
-    font-style:italic;
-    color:var(--chrome);
-    font-size:13px;
-    line-height:1.6;
-    max-width:none;
-    margin:0 0 14px;
-  }
-  .testimonial-author{
-    font-family:'Barlow Condensed';
-    font-size:11px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--ink);
-  }
-  .testimonial-author span{color:var(--ink-dim);font-weight:300;text-transform:none;letter-spacing:0}
-
   .contact-grid{
     display:grid;
     grid-template-columns:1.2fr 1fr;
@@ -1653,31 +1599,6 @@
   </div>
 </section>
 
-<section class="reviews" id="reviews">
-  <div class="container">
-    <div class="eyebrow" data-i18n="rev.eyebrow">Wat klanten zeggen</div>
-    <h2 data-i18n="rev.title">VIJF STERREN <em>WAARD?</em></h2>
-
-    <div id="testimonialsList">
-      <div class="testimonial">
-        <div class="testimonial-stars" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
-          <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>
-        </div>
-        <p class="testimonial-text">"Geweldige ervaring bij The Big Three in Nunspeet. David weet alles van Amerikaanse auto's, eerlijk advies en vakwerk van iemand die dit al zijn hele leven doet. Momenteel zet hij samen met zijn monteur Johan een nieuwe motor onder onze Chevy G20 uit 1986, en we hebben er alle vertrouwen in: duidelijke communicatie, reële planning, en je merkt meteen dat ze precies weten wat zo'n Amerikaan nodig heeft. Een échte werkplaats, en een kantine met een jukebox en een flipperkast! Aanrader voor iedereen met een Amerikaan, camper of klassieker."</p>
-        <div class="testimonial-author">Manon &amp; Maxim <span>· Google review</span></div>
-      </div>
-    </div>
-    <p class="reviews-attribution" style="font-size:11px;color:var(--ink-dim);opacity:0.6;margin:-8px 0 20px">Reviews via Google</p>
-
-    <p data-i18n="rev.sub">Ben je klant bij ons geweest? We zouden het geweldig vinden als je jouw ervaring deelt via een Google review. Kost je een minuutje, helpt ons enorm.</p>
-    <a href="/review" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="rev.cta">Schrijf een review op Google</a>
-  </div>
-</section>
-
 <section id="contact">
   <div class="container">
     <div class="section-head">
@@ -1900,12 +1821,6 @@
   const SUPABASE_ANON_KEY = 'sb_publishable_nMu2RzoUWmaKnwjeR3kRPg_EzGzbVIg';
   // ─────────────────────────────────────────────────────────────────────────
 
-  // ─── GOOGLE REVIEWS CONFIG ─────────────────────────────────────────────────
-  // Key is beperkt tot thebigthree.nl via HTTP-referrer restrictie in Google Cloud Console
-  const GOOGLE_PLACES_API_KEY = 'AIzaSyC6AX2QDNAQHagtn38zy3RRqU3jNH5yfvI';
-  const GOOGLE_PLACE_ID       = 'ChIJEbK9eLfNx0cRQkX0WKAyvdY';
-  // ─────────────────────────────────────────────────────────────────────────
-
   const _sb = (typeof supabase !== 'undefined')
     ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
@@ -2119,55 +2034,6 @@
     }
   }
   loadSiteSettings();
-
-  // load live Google reviews (valt terug op de statische quote in de HTML als er geen reviews zijn of de call faalt)
-  async function loadGoogleReviews() {
-    try {
-      const res = await fetch(
-        `https://places.googleapis.com/v1/places/${GOOGLE_PLACE_ID}?fields=reviews`,
-        { headers: { 'X-Goog-Api-Key': GOOGLE_PLACES_API_KEY } }
-      );
-      if (!res.ok) return;
-      const data = await res.json();
-      const reviews = (data.reviews || []).filter(r => r.text && r.text.text);
-      if (!reviews.length) return;
-
-      const list = document.getElementById('testimonialsList');
-      if (!list) return;
-      list.innerHTML = '';
-
-      reviews.slice(0, 5).forEach(r => {
-        const box = document.createElement('div');
-        box.className = 'testimonial';
-
-        const stars = document.createElement('div');
-        stars.className = 'testimonial-stars';
-        stars.setAttribute('aria-hidden', 'true');
-        const filled = Math.round(r.rating || 5);
-        for (let i = 0; i < 5; i++) {
-          stars.insertAdjacentHTML('beforeend',
-            `<svg viewBox="0 0 24 24"${i < filled ? '' : ' style="opacity:.25"'}><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21.5 12,17.5 5.5,21.5 7.5,14 2,9.5 9,9"/></svg>`);
-        }
-
-        const text = document.createElement('p');
-        text.className = 'testimonial-text';
-        text.textContent = '"' + r.text.text + '"';
-
-        const author = document.createElement('div');
-        author.className = 'testimonial-author';
-        author.appendChild(document.createTextNode((r.authorAttribution && r.authorAttribution.displayName) || 'Google-gebruiker'));
-        const meta = document.createElement('span');
-        meta.textContent = ' · Google review' + (r.relativePublishTimeDescription ? ' · ' + r.relativePublishTimeDescription : '');
-        author.appendChild(meta);
-
-        box.appendChild(stars);
-        box.appendChild(text);
-        box.appendChild(author);
-        list.appendChild(box);
-      });
-    } catch (e) { /* stille fallback op statische quote */ }
-  }
-  loadGoogleReviews();
 
   // footer year
   const ftYear = document.getElementById('ftYear');

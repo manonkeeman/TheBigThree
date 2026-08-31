@@ -1,13 +1,6 @@
 [build]
   publish = "."
 
-# Makkelijk te delen review-link: thebigthree.nl/review -> Google review-formulier
-[[redirects]]
-  from = "/review"
-  to = "https://g.page/r/CUJF9FigMr3WEBM/review"
-  status = 302
-  force = true
-
 # Alternatieve domeinen 301-doorverwijzen naar het hoofddomein
 [[redirects]]
   from = "https://bigthree.nl/*"
@@ -137,7 +130,7 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     X-XSS-Protection = "1; mode=block"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://loolxbizdribqyulxbop.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://places.googleapis.com; frame-src https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://loolxbizdribqyulxbop.supabase.co https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; frame-src https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
 
 [[headers]]
   for = "/admin/*"

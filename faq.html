@@ -121,6 +121,13 @@
   .logo-img{height:52px;width:auto;display:block;}
   .logo-text{display:flex;flex-direction:column;line-height:0.95}
   .logo-text small{font-size:9px;letter-spacing:0.4em;color:var(--ink-dim);font-family:'Barlow Condensed';margin-top:3px;}
+  .nav-links{
+    display:flex;gap:32px;list-style:none;
+    font-family:'Barlow Condensed';font-size:14px;
+    letter-spacing:0.2em;text-transform:uppercase;font-weight:500;
+  }
+  .nav-links a{color:var(--ink);text-decoration:none;transition:color 0.2s}
+  .nav-links a:hover{color:var(--rust)}
   .lang{
     display:flex;gap:4px;border:1px solid var(--line);padding:4px;
     font-family:'Barlow Condensed';font-size:12px;letter-spacing:0.15em;
@@ -212,6 +219,7 @@
 
   @media(max-width:768px){
     .nav-inner{padding:14px 20px}
+    .nav-links{display:none}
     .logo-img{height:42px}
     .faq-hero{padding:56px 20px 48px}
     .faq-body{padding:48px 20px 80px}
@@ -237,6 +245,13 @@
         <small>GARAGE · NUNSPEET</small>
       </div>
     </a>
+    <ul class="nav-links">
+      <li><a href="index.html#voorraad" data-i18n="nav.inventory">Voorraad</a></li>
+      <li><a href="index.html#werkplaats" data-i18n="nav.services">Werkplaats</a></li>
+      <li><a href="index.html#verhaal" data-i18n="nav.story">Ons verhaal</a></li>
+      <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="faq.html" data-i18n="nav.faq">FAQ</a></li>
+    </ul>
     <div class="lang">
       <button class="active" data-lang="nl">NL</button>
       <button data-lang="en">EN</button>
