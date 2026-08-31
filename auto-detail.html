@@ -400,6 +400,7 @@ __HREFLANG__
       <a href="/index.html#afspraak" class="btn btn-primary" data-i18n="detail.btn.view">Plan bezichtiging</a>
       <a href="tel:+31682727374" class="btn btn-ghost" style="margin-top:10px" data-i18n="detail.btn.call">Bel direct</a>
       <a href="#" id="mpBtn" class="btn btn-ghost" style="margin-top:10px" target="_blank" rel="noopener" hidden data-i18n="detail.btn.mp">Meer foto's &amp; info op Marktplaats</a>
+      <a href="#" id="ytBtn" class="btn btn-ghost" style="margin-top:10px" target="_blank" rel="noopener" hidden data-i18n="detail.btn.yt">Bekijk video op YouTube</a>
     </aside>
   </div>
 </main>
@@ -559,6 +560,12 @@ __HREFLANG__
       mpPhotoBadge.href = v.marktplaats_url;
       mpPhotoBadge.hidden = false;
     }
+
+    const ytBtn = document.getElementById('ytBtn');
+    if (v.youtube_url) {
+      ytBtn.href = v.youtube_url;
+      ytBtn.hidden = false;
+    }
   }
 
   function renderRelated(all, current) {
@@ -596,7 +603,7 @@ __HREFLANG__
       "crumb.home":"Home",
       "detail.desc.cta":"Interesse? Bel David op <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> of plan een afspraak via het contactformulier. Een bezichtiging op locatie is altijd mogelijk.",
       "detail.spec.title":"SPECIFICATIES","detail.spec.year":"Bouwjaar","detail.spec.make":"Merk","detail.spec.status":"Status",
-      "detail.btn.view":"Plan bezichtiging","detail.btn.call":"Bel direct","detail.btn.mp":"Meer foto's &amp; info op Marktplaats",
+      "detail.btn.view":"Plan bezichtiging","detail.btn.call":"Bel direct","detail.btn.mp":"Meer foto's &amp; info op Marktplaats","detail.btn.yt":"Bekijk video op YouTube",
       "detail.mp.badge":"Meer foto's op Marktplaats",
       "detail.related.title":"OOK <em>INTERESSANT</em>","detail.related.all":"Hele voorraad",
       "cookie.eyebrow":"Jouw privacy","cookie.title":"Cookie-instellingen",
@@ -611,7 +618,7 @@ __HREFLANG__
       "crumb.home":"Home",
       "detail.desc.cta":"Interested? Call David on <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> or book a visit through the contact form. A viewing on location is always possible.",
       "detail.spec.title":"SPECIFICATIONS","detail.spec.year":"Year","detail.spec.make":"Make","detail.spec.status":"Status",
-      "detail.btn.view":"Book a viewing","detail.btn.call":"Call now","detail.btn.mp":"More photos &amp; info on Marktplaats",
+      "detail.btn.view":"Book a viewing","detail.btn.call":"Call now","detail.btn.mp":"More photos &amp; info on Marktplaats","detail.btn.yt":"Watch video on YouTube",
       "detail.mp.badge":"More photos on Marktplaats",
       "detail.related.title":"ALSO <em>INTERESTING</em>","detail.related.all":"Full inventory",
       "cookie.eyebrow":"Your privacy","cookie.title":"Cookie settings",
@@ -626,7 +633,7 @@ __HREFLANG__
       "crumb.home":"Startseite",
       "detail.desc.cta":"Interesse? Rufen Sie David an: <a href=\"tel:+31682727374\">+31 6 82 72 73 74</a> oder vereinbaren Sie einen Termin über das Kontaktformular. Eine Besichtigung vor Ort ist jederzeit möglich.",
       "detail.spec.title":"SPEZIFIKATIONEN","detail.spec.year":"Baujahr","detail.spec.make":"Marke","detail.spec.status":"Status",
-      "detail.btn.view":"Besichtigung buchen","detail.btn.call":"Jetzt anrufen","detail.btn.mp":"Mehr Fotos &amp; Infos auf Marktplaats",
+      "detail.btn.view":"Besichtigung buchen","detail.btn.call":"Jetzt anrufen","detail.btn.mp":"Mehr Fotos &amp; Infos auf Marktplaats","detail.btn.yt":"Video auf YouTube ansehen",
       "detail.mp.badge":"Mehr Fotos auf Marktplaats",
       "detail.related.title":"AUCH <em>INTERESSANT</em>","detail.related.all":"Alle Fahrzeuge",
       "cookie.eyebrow":"Ihre Privatsphäre","cookie.title":"Cookie-Einstellungen",

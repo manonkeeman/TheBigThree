@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS public.vehicles (
                   CHECK (price_type IN ('fixed','ask','bid')),
   price           integer,
   marktplaats_url text,
+  youtube_url     text,
   image_url       text,
   sort_order      integer     NOT NULL DEFAULT 0
 );
@@ -35,6 +36,13 @@ CREATE POLICY "Publiek lezen" ON public.vehicles
 -- 4. Alleen ingelogde gebruikers mogen schrijven (David via /admin)
 CREATE POLICY "Beheerder schrijven" ON public.vehicles
   FOR ALL USING (auth.uid() IS NOT NULL);
+
+-- ══════════════════════════════════════════════════════════════════
+-- Migratie: YouTube-link toevoegen (voor een bestaande database die al
+-- draait — bij een nieuwe setup zit de kolom al in de CREATE TABLE hierboven)
+-- Plak dit in: Supabase Dashboard → SQL Editor → New query → Run
+-- ══════════════════════════════════════════════════════════════════
+ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS youtube_url text;
 
 -- ══════════════════════════════════════════════════════════════════
 -- Na het uitvoeren van dit script:

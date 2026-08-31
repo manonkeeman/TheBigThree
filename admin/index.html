@@ -446,6 +446,11 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
           <input type="url" id="fMpUrl" placeholder="https://www.marktplaats.nl/v/...">
           <small style="display:block;margin-top:4px;font-size:12px;color:var(--muted)">Vul dit in om op de website een knop "Meer foto's &amp; info op Marktplaats" te tonen — handig omdat hier maar 1 foto per voertuig staat. Leeg = geen knop.</small>
         </div>
+        <div class="field" style="margin-bottom:14px">
+          <label for="fYtUrl">YouTube link</label>
+          <input type="url" id="fYtUrl" placeholder="https://www.youtube.com/watch?v=...">
+          <small style="display:block;margin-top:4px;font-size:12px;color:var(--muted)">Link naar een video van deze auto (bv. walk-around). Toont een "Bekijk video op YouTube"-knop op de autopagina. Leeg = geen knop.</small>
+        </div>
         <div class="field" style="max-width:160px">
           <label for="fSort">Volgorde <span style="font-weight:400">(0 = bovenaan)</span></label>
           <input type="number" id="fSort" value="0" min="0">
@@ -1055,6 +1060,7 @@ function openEdit(id) {
   $('fPriceType').value  = v.price_type || 'fixed';
   $('fPrice').value      = v.price   || '';
   $('fMpUrl').value      = v.marktplaats_url || '';
+  $('fYtUrl').value      = v.youtube_url || '';
   $('fSort').value       = v.sort_order ?? 0;
   $('fDescNl').innerHTML = v.description_nl || '';
   $('fDescEn').innerHTML = v.description_en || '';
@@ -1169,6 +1175,7 @@ $('vehicleForm').addEventListener('submit', async e => {
       price_type:      pt,
       price:           pt === 'fixed' ? (parseInt($('fPrice').value) || null) : null,
       marktplaats_url: $('fMpUrl').value.trim() || null,
+      youtube_url:     $('fYtUrl').value.trim() || null,
       image_url:       imageUrl || null,
       sort_order:      parseInt($('fSort').value) || 0,
       description_nl:  $('fDescNl').innerHTML.trim() || null,
