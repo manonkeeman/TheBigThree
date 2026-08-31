@@ -175,6 +175,20 @@ __HREFLANG__
   @media(max-width:600px){
     .mp-photo-badge{bottom:10px;right:10px;padding:7px 12px;font-size:10px}
   }
+  .thumb-strip{
+    display:flex;gap:12px;margin-top:12px;overflow-x:auto;
+    scrollbar-width:thin;
+  }
+  .thumb-strip button{
+    flex:0 0 auto;width:96px;aspect-ratio:4/3;padding:0;cursor:pointer;
+    background:var(--panel);border:2px solid var(--line);overflow:hidden;
+    transition:border-color 0.2s;
+  }
+  .thumb-strip button img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85)}
+  .thumb-strip button.active{border-color:var(--rust)}
+  @media(max-width:600px){
+    .thumb-strip button{width:76px}
+  }
 
   /* INFO GRID */
   .info-grid{
@@ -384,6 +398,7 @@ __HREFLANG__
         <span data-i18n="detail.mp.badge">Meer foto's op Marktplaats</span>
       </a>
     </div>
+    <div class="thumb-strip" id="thumbStrip" hidden></div>
   </div>
 
   <div class="info-grid">
@@ -557,6 +572,25 @@ __HREFLANG__
     const img = document.getElementById('mainImg');
     img.src = v.image_url || '/assets/hero-a.jpg';
     img.alt = v.title || '';
+
+    const photos = (v.image_urls && v.image_urls.length) ? v.image_urls : (v.image_url ? [v.image_url] : []);
+    const strip = document.getElementById('thumbStrip');
+    if (photos.length > 1) {
+      strip.hidden = false;
+      strip.innerHTML = photos.map((url, i) => `
+        <button type="button" class="${i === 0 ? 'active' : ''}" data-i="${i}">
+          <img src="${esc(url)}" alt="${esc(v.title)} foto ${i + 1}">
+        </button>`).join('');
+      strip.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          img.src = photos[parseInt(btn.dataset.i)];
+          strip.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+        });
+      });
+    } else {
+      strip.hidden = true;
+      strip.innerHTML = '';
+    }
 
     document.getElementById('dSpecs').innerHTML = [v.spec1, v.spec2, v.spec3]
       .filter(Boolean).map(s => `<div class="feature">${esc(s)}</div>`).join('');

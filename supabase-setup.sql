@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS public.vehicles (
   marktplaats_url text,
   youtube_url     text,
   image_url       text,
+  image_urls      text[],
   sort_order      integer     NOT NULL DEFAULT 0,
   description_nl  text,
   description_en  text,
@@ -52,6 +53,7 @@ ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS youtube_url    text;
 ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS description_nl text;
 ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS description_en text;
 ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS description_de text;
+ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS image_urls     text[];
 
 -- ══════════════════════════════════════════════════════════════════
 -- Na het uitvoeren van dit script:
