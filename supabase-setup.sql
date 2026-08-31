@@ -23,7 +23,10 @@ CREATE TABLE IF NOT EXISTS public.vehicles (
   marktplaats_url text,
   youtube_url     text,
   image_url       text,
-  sort_order      integer     NOT NULL DEFAULT 0
+  sort_order      integer     NOT NULL DEFAULT 0,
+  description_nl  text,
+  description_en  text,
+  description_de  text
 );
 
 -- 2. Row Level Security aanzetten
@@ -38,11 +41,17 @@ CREATE POLICY "Beheerder schrijven" ON public.vehicles
   FOR ALL USING (auth.uid() IS NOT NULL);
 
 -- ══════════════════════════════════════════════════════════════════
--- Migratie: YouTube-link toevoegen (voor een bestaande database die al
--- draait — bij een nieuwe setup zit de kolom al in de CREATE TABLE hierboven)
+-- Migratie: ontbrekende kolommen toevoegen (voor een bestaande database
+-- die al draait — bij een nieuwe setup zitten ze al in de CREATE TABLE
+-- hierboven). Zonder dit lukt opslaan in /admin niet: het formulier stuurt
+-- deze velden altijd mee, en Postgrest weigert dan met "column vehicles.
+-- ... does not exist" zodra er ook maar één kolom ontbreekt.
 -- Plak dit in: Supabase Dashboard → SQL Editor → New query → Run
 -- ══════════════════════════════════════════════════════════════════
-ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS youtube_url text;
+ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS youtube_url    text;
+ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS description_nl text;
+ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS description_en text;
+ALTER TABLE public.vehicles ADD COLUMN IF NOT EXISTS description_de text;
 
 -- ══════════════════════════════════════════════════════════════════
 -- Na het uitvoeren van dit script:
