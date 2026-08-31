@@ -176,9 +176,13 @@ __HREFLANG__
     .mp-photo-badge{bottom:10px;right:10px;padding:7px 12px;font-size:10px}
   }
   .thumb-strip{
-    display:flex;gap:12px;margin-top:12px;overflow-x:auto;
-    scrollbar-width:thin;
+    display:flex;gap:12px;margin-top:12px;padding-bottom:12px;overflow-x:auto;
+    scrollbar-width:thin;scrollbar-color:var(--rust) var(--panel);
   }
+  .thumb-strip::-webkit-scrollbar{height:6px}
+  .thumb-strip::-webkit-scrollbar-track{background:var(--panel)}
+  .thumb-strip::-webkit-scrollbar-thumb{background:var(--rust);border-radius:3px}
+  .thumb-strip::-webkit-scrollbar-thumb:hover{background:var(--rust-deep)}
   .thumb-strip button{
     flex:0 0 auto;width:96px;aspect-ratio:4/3;padding:0;cursor:pointer;
     background:var(--panel);border:2px solid var(--line);overflow:hidden;
