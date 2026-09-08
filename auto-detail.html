@@ -544,7 +544,7 @@ __HREFLANG__
     return i !== -1 && parts[i+1] ? decodeURIComponent(parts[i+1]) : '';
   }
 
-  const statusLabel = { available:'VOORRAAD', reserved:'GERESERVEERD', service:'IN SERVICE', part:'ONDERDEEL' };
+  const statusLabel = { available:'VOORRAAD', reserved:'GERESERVEERD', service:'IN SERVICE', part:'ONDERDEEL', sold:'VERKOCHT' };
 
   function fmtPrice(v) {
     if (v.price_type === 'fixed' && v.price) return `€ ${Number(v.price).toLocaleString('nl-NL')}`;
