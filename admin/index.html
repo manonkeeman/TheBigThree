@@ -773,6 +773,7 @@ CREATE POLICY "auth only" ON site_settings
 const SUPABASE_URL      = 'https://qjatfptkggabgdddqnkv.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqYXRmcHRrZ2dhYmdkZGRxbmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4NTk1MjQsImV4cCI6MjEwNDQzNTUyNH0.QeZiJxuq8g-ouVmjjEJb4IUexYk9JLTlg9qM5UdPJ_8';
 const BUCKET            = 'vehicle-images';
+const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@TheBIGThreeNunspeet';
 // ═══════════════════════════════════════════════════════════════════════
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1108,6 +1109,7 @@ $('photoGrid').addEventListener('click', e => {
 function resetForm() {
   $('vehicleForm').reset();
   $('vid').value = '';
+  $('fYtUrl').value = YOUTUBE_CHANNEL_URL;
   $('formMsg').style.display = 'none';
   $('fPriceWrap').style.display = 'block';
   $('fDescNl').innerHTML = '';
@@ -1191,7 +1193,7 @@ function openEdit(id) {
   $('fPriceType').value  = v.price_type || 'fixed';
   $('fPrice').value      = v.price   || '';
   $('fMpUrl').value      = v.marktplaats_url || '';
-  $('fYtUrl').value      = v.youtube_url || '';
+  $('fYtUrl').value      = v.youtube_url || YOUTUBE_CHANNEL_URL;
   $('fSort').value       = v.sort_order ?? 0;
   $('fDescNl').innerHTML = v.description_nl || '';
   $('fDescEn').innerHTML = v.description_en || '';
