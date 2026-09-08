@@ -21,7 +21,7 @@
 html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;background:var(--bg);color:var(--ink);line-height:1.5}
 
 /* ── LOGIN ── */
-#screenLogin{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+#screenLogin,#screenReset{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
 .login-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:40px;width:100%;max-width:380px}
 .login-brand{display:flex;align-items:center;gap:14px;margin-bottom:32px}
 .login-brand img{width:48px;height:48px;object-fit:contain}
@@ -302,6 +302,29 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
   </div>
 </div>
 
+<!-- ══════════════════════════ WACHTWOORD RESETTEN ═════════════════ -->
+<div id="screenReset" style="display:none">
+  <div class="login-box">
+    <div class="login-brand">
+      <img src="../assets/logo.png" alt="The Big Three Garage">
+      <div class="login-brand-text">
+        <strong>THE BIG THREE</strong>
+        Garage · Beheer
+      </div>
+    </div>
+    <form id="resetForm" style="display:flex;flex-direction:column;gap:14px">
+      <p style="margin:0;font-size:13px;color:var(--muted,#888)">Kies een nieuw wachtwoord voor je account.</p>
+      <div class="field">
+        <label for="resetPw">Nieuw wachtwoord</label>
+        <input type="password" id="resetPw" required minlength="6" autocomplete="new-password">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px">Wachtwoord instellen</button>
+      <div id="resetErr" class="msg msg-err" style="display:none"></div>
+      <div id="resetOk" class="msg msg-ok" style="display:none"></div>
+    </form>
+  </div>
+</div>
+
 <!-- ══════════════════════════ APP ════════════════════════════════ -->
 <div id="screenApp">
 
@@ -315,7 +338,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
       <button class="tab-btn" id="tabAbout" onclick="switchTab('about')">Over mij</button>
     </div>
     <div class="topbar-right">
-      <a href="https://supabase.com/dashboard/project/loolxbizdribqyulxbop" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="font-size:11px;opacity:0.7">Supabase ↗</a>
+      <a href="https://supabase.com/dashboard/project/qjatfptkggabgdddqnkv" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="font-size:11px;opacity:0.7">Supabase ↗</a>
       <span id="userEmail"></span>
       <button class="btn btn-ghost btn-sm" id="btnLogout">Uitloggen</button>
     </div>
@@ -587,7 +610,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sa
     <div id="aboutSetup" style="display:none;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.35);border-radius:6px;padding:16px 20px;margin-bottom:20px;font-size:13px;line-height:1.7">
       <strong style="color:#fbbf24">Eenmalige setup vereist</strong> — de tabel <code style="background:#111;padding:1px 6px;border-radius:3px">site_settings</code> bestaat nog niet in Supabase.<br>
       Voer dit eenmalig uit via de
-      <a href="https://supabase.com/dashboard/project/loolxbizdribqyulxbop/sql/new" target="_blank" rel="noopener" style="color:#fbbf24;font-weight:600">Supabase SQL Editor ↗</a>:<br><br>
+      <a href="https://supabase.com/dashboard/project/qjatfptkggabgdddqnkv/sql/new" target="_blank" rel="noopener" style="color:#fbbf24;font-weight:600">Supabase SQL Editor ↗</a>:<br><br>
       <code style="display:block;background:#0a0e18;padding:12px 14px;border-radius:4px;font-size:12px;white-space:pre;color:#93c5fd">CREATE TABLE site_settings (
   key text PRIMARY KEY,
   value text,
@@ -889,6 +912,7 @@ function copyText(id, btn) {
 // ── AUTH ──
 async function checkAuth() {
   const { data: { session } } = await sb.auth.getSession();
+  $('screenReset').style.display = 'none';
   if (session) {
     $('userEmail').textContent = session.user.email;
     $('screenLogin').style.display = 'none';
@@ -919,7 +943,30 @@ $('loginForm').addEventListener('submit', async e => {
 
 $('btnLogout').addEventListener('click', async () => { await sb.auth.signOut(); checkAuth(); });
 
+$('resetForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = e.target.querySelector('[type=submit]');
+  btn.disabled = true; btn.textContent = 'Bezig…';
+  $('resetErr').style.display = 'none';
+  const { error } = await sb.auth.updateUser({ password: $('resetPw').value });
+  if (error) {
+    $('resetErr').textContent = 'Kon wachtwoord niet instellen: ' + error.message;
+    $('resetErr').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Wachtwoord instellen';
+  } else {
+    $('resetOk').textContent = 'Wachtwoord ingesteld! Je wordt ingelogd…';
+    $('resetOk').style.display = 'block';
+    setTimeout(checkAuth, 1200);
+  }
+});
+
 sb.auth.onAuthStateChange((event, session) => {
+  if (event === 'PASSWORD_RECOVERY') {
+    $('screenLogin').style.display = 'none';
+    $('screenApp').style.display   = 'none';
+    $('screenReset').style.display = 'flex';
+    return;
+  }
   if (event === 'SIGNED_OUT' || (!session && event !== 'INITIAL_SESSION')) {
     $('screenLogin').style.display = 'flex';
     $('screenApp').style.display   = 'none';
