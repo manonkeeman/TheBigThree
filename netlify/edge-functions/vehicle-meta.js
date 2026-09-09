@@ -126,6 +126,13 @@ export default async (request, context) => {
     return context.next();
   }
 
+  // Verkocht/verwijderd voertuig op een /voorraad/-URL: blijft anders een
+  // generieke pagina met status 200 tonen, wat voor Google een soft 404 is
+  // (URL blijft eindeloos hangen in "Gevonden - niet geïndexeerd"). Alleen
+  // van toepassing op /voorraad/-paden — andere pagina's die deze functie
+  // gebruikt (zoals index.html) mogen nooit een 404 krijgen.
+  let vehicleNotFound = false;
+
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*`, {
       headers: {
@@ -139,6 +146,7 @@ export default async (request, context) => {
 
     if (!vehicle) {
       html = fallbackMeta(html, basePath, lang);
+      vehicleNotFound = isVoorraadPath;
     } else {
       const c = COPY[lang];
       const priceText = vehicle.price_type === 'fixed' && vehicle.price
@@ -212,5 +220,7 @@ export default async (request, context) => {
   const headers = new Headers(originResponse.headers);
   headers.delete('content-length');
 
-  return new Response(html, { status: originResponse.status, headers });
+  const status = vehicleNotFound ? 404 : originResponse.status;
+
+  return new Response(html, { status, headers });
 };
