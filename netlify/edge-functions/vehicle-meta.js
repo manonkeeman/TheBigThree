@@ -211,7 +211,11 @@ export default async (request, context) => {
         .replace(/__HREFLANG__/g, hreflangBlock(basePath))
         .replace(/__OG_LOCALE__/g, OG_LOCALE[lang])
         .replace(/__IMAGE__/g, image)
-        .replace('__JSONLD__', JSON.stringify(jsonLd).replace(/</g, '\\u003c'));
+        .replace('__JSONLD__', JSON.stringify(jsonLd).replace(/</g, '\\u003c'))
+        // auto-detail.html staat standaard op noindex (veilig als het bestand
+        // ooit direct wordt opgevraagd) — alleen een bevestigd voertuig mag
+        // geïndexeerd worden.
+        .replace('<meta name="robots" content="noindex, follow">', '<meta name="robots" content="index, follow">');
     }
   } catch (e) {
     html = fallbackMeta(html, basePath, lang);
