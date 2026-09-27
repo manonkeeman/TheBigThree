@@ -17,13 +17,13 @@ jobs:
       - name: Fetch vehicles and site_settings from Supabase
         run: |
           mkdir -p backups
-          curl -sf "https://loolxbizdribqyulxbop.supabase.co/rest/v1/vehicles?select=*&order=sort_order.asc" \
-            -H "apikey: sb_publishable_nMu2RzoUWmaKnwjeR3kRPg_EzGzbVIg" \
-            -H "Authorization: Bearer sb_publishable_nMu2RzoUWmaKnwjeR3kRPg_EzGzbVIg" \
+          curl -sf "https://qjatfptkggabgdddqnkv.supabase.co/rest/v1/vehicles?select=*&order=sort_order.asc" \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqYXRmcHRrZ2dhYmdkZGRxbmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4NTk1MjQsImV4cCI6MjEwNDQzNTUyNH0.QeZiJxuq8g-ouVmjjEJb4IUexYk9JLTlg9qM5UdPJ_8" \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqYXRmcHRrZ2dhYmdkZGRxbmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4NTk1MjQsImV4cCI6MjEwNDQzNTUyNH0.QeZiJxuq8g-ouVmjjEJb4IUexYk9JLTlg9qM5UdPJ_8" \
             -o backups/vehicles-latest.json
-          curl -sf "https://loolxbizdribqyulxbop.supabase.co/rest/v1/site_settings?select=*" \
-            -H "apikey: sb_publishable_nMu2RzoUWmaKnwjeR3kRPg_EzGzbVIg" \
-            -H "Authorization: Bearer sb_publishable_nMu2RzoUWmaKnwjeR3kRPg_EzGzbVIg" \
+          curl -sf "https://qjatfptkggabgdddqnkv.supabase.co/rest/v1/site_settings?select=*" \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqYXRmcHRrZ2dhYmdkZGRxbmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4NTk1MjQsImV4cCI6MjEwNDQzNTUyNH0.QeZiJxuq8g-ouVmjjEJb4IUexYk9JLTlg9qM5UdPJ_8" \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqYXRmcHRrZ2dhYmdkZGRxbmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4NTk1MjQsImV4cCI6MjEwNDQzNTUyNH0.QeZiJxuq8g-ouVmjjEJb4IUexYk9JLTlg9qM5UdPJ_8" \
             -o backups/site_settings-latest.json
 
       - name: Commit backup if changed
