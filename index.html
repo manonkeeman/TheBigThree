@@ -2051,7 +2051,9 @@
   function applyFilter(filter) {
     let visible = 0;
     document.querySelectorAll('#voorraadGrid .card[data-cat]').forEach(card => {
-      const show = filter === 'all' || card.dataset.cat.includes(filter);
+      // Op hele woorden matchen: 'motor' mag niet 'onderdeel,motorblok' vinden.
+      // Splitsen op komma's en witruimte vangt ook regeleinden in de CMS-data op.
+      const show = filter === 'all' || card.dataset.cat.split(/[\s,]+/).includes(filter);
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
