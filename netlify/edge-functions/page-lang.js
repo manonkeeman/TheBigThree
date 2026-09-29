@@ -126,11 +126,15 @@ async function loadTranslations(origin) {
   }
 }
 
+// Let op: Netlify's pretty-URL-verwerking herschrijft elementen met een interne
+// link vóórdat de edge function de HTML krijgt: enkele quotes en /faq i.p.v.
+// faq.html. Daarom accepteren de regexes hieronder beide quotes en beide vormen.
+
 // Menu/footer: <a ... data-i18n="nav.faq">FAQ</a>. Alleen elementen zonder
 // geneste tags, dat geldt voor alle data-i18n-elementen op deze pagina's.
 function applySharedI18n(html, dict) {
   return html.replace(
-    /(<([a-zA-Z0-9]+)\b[^>]*\sdata-i18n="([^"]+)"[^>]*>)[^<]*(<\/\2>)/g,
+    /(<([a-zA-Z0-9]+)\b[^>]*\sdata-i18n=["']([^"']+)["'][^>]*>)[^<]*(<\/\2>)/g,
     (full, open, _tag, key, close) => (dict[key] !== undefined ? open + dict[key] + close : full)
   );
 }
@@ -139,8 +143,8 @@ function applySharedI18n(html, dict) {
 // zodat crawlers vanaf de DE-versie ook bij de andere DE-pagina's uitkomen.
 function localizeLinks(html, lang) {
   return html.replace(
-    /href="((?:index|faq|import|colofon)\.html)(#[^"]*)?"/g,
-    (_, path, hash) => `href="${path}?lang=${lang}${hash || ''}"`
+    /href=(["'])(\/|\/(?:faq|import|colofon)(?:\.html)?|(?:index|faq|import|colofon)\.html)(#[^"']*)?\1/g,
+    (_, q, path, hash) => `href=${q}${path}?lang=${lang}${hash || ''}${q}`
   );
 }
 

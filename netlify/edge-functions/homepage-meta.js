@@ -208,7 +208,9 @@ function findMatchingClose(html, tagName, searchFrom) {
 function applyI18nToHtml(html, dict) {
   let out = '';
   let lastIndex = 0;
-  const attrRe = /<([a-zA-Z][a-zA-Z0-9]*)\b([^>]*?)\sdata-i18n="([^"]+)"([^>]*)>/g;
+  // Beide quotes: Netlify's pretty-URL-verwerking herschrijft elementen met een
+  // interne link (bijv. footerlinks naar /privacy) naar enkele quotes.
+  const attrRe = /<([a-zA-Z][a-zA-Z0-9]*)\b([^>]*?)\sdata-i18n=["']([^"']+)["']([^>]*)>/g;
   let m;
   while ((m = attrRe.exec(html))) {
     const [full, tagName, , key] = m;

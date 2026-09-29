@@ -623,7 +623,8 @@
 
   // Menu/footer vertalen met dezelfde bron als de homepage (assets/i18n.js) en
   // interne links naar pagina's die ?lang= ondersteunen in de gekozen taal houden.
-  const LANG_PAGES = /^(index|faq|import|colofon)\.html(?=$|#)/;
+  // Live herschrijft Netlify faq.html naar /faq en index.html naar /, dus beide vormen.
+  const LANG_PAGES = /^(\/|\/(faq|import|colofon)(\.html)?|(index|faq|import|colofon)\.html)(?=$|#)/;
   function applySharedLang(lang) {
     const d = window.I18N && window.I18N[lang];
     if (d) {
