@@ -280,7 +280,7 @@
     </details>
     <details class="faq-item">
       <summary>Kan ik een Amerikaans voertuig rechtstreeks uit de VS laten importeren?</summary>
-      <p>Ja. Wij regelen het hele traject: NL-kenteken, BPM, RDW-keuring en transport tot aan onze werkplaats in Nunspeet.</p>
+      <p>Ja. Wij regelen het hele traject: NL-kenteken, BPM, RDW-keuring en transport tot aan onze werkplaats in Nunspeet. Lees <a href="import.html">hoe import uit de VS werkt</a>.</p>
     </details>
     <details class="faq-item">
       <summary>Kan ik ook terecht voor onderhoud en APK als ik mijn voertuig niet bij jullie heb gekocht?</summary>
@@ -332,7 +332,7 @@
     </details>
     <details class="faq-item">
       <summary>Can I have an American vehicle imported directly from the US?</summary>
-      <p>Yes. We handle the whole process: Dutch registration, taxes, RDW inspection and transport to our workshop in Nunspeet.</p>
+      <p>Yes. We handle the whole process: Dutch registration, taxes, RDW inspection and transport to our workshop in Nunspeet. Read <a href="import.html?lang=en">how importing from the US works</a>.</p>
     </details>
     <details class="faq-item">
       <summary>Can I bring my vehicle in for service or MOT even if I didn't buy it from you?</summary>
@@ -384,7 +384,7 @@
     </details>
     <details class="faq-item">
       <summary>Kann ich ein amerikanisches Fahrzeug direkt aus den USA importieren lassen?</summary>
-      <p>Ja. Wir kümmern uns um den gesamten Ablauf: niederländische Zulassung, Steuern, RDW-Prüfung und Transport bis zu unserer Werkstatt in Nunspeet.</p>
+      <p>Ja. Wir kümmern uns um den gesamten Ablauf: niederländische Zulassung, Steuern, RDW-Prüfung und Transport bis zu unserer Werkstatt in Nunspeet. Lesen Sie, <a href="import.html?lang=de">wie der Import aus den USA abläuft</a>.</p>
     </details>
     <details class="faq-item">
       <summary>Kann ich mein Fahrzeug auch zur Wartung oder HU bringen, wenn ich es nicht bei Ihnen gekauft habe?</summary>
@@ -436,7 +436,7 @@
 </div>
 
 <footer>
-  © THE BIG THREE GARAGE · NUNSPEET · <a href="voorwaarden.html">Algemene voorwaarden</a> · <a href="privacy.html">Privacyverklaring</a> · <a href="colofon.html">Colofon</a> · Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener">ManonIT</a>
+  © THE BIG THREE GARAGE · NUNSPEET · <a href="voorwaarden.html" data-i18n="ftr.terms">Algemene voorwaarden</a> · <a href="privacy.html" data-i18n="ftr.privacy">Privacyverklaring</a> · <a href="colofon.html" data-i18n="ftr.colofon">Colofon</a> · Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener">ManonIT</a>
 </footer>
 
 <!-- Cookie Consent -->
@@ -497,6 +497,7 @@
 <button class="cookie-reopen hidden" id="cookieReopen">Cookie-instellingen</button>
 
 <script src="assets/analytics.js"></script>
+<script src="assets/i18n.js"></script>
 <script>
   const titles = {
     nl: { eyebrow:'Vraag & antwoord', title:'VEELGESTELDE<br><em>VRAGEN</em>', sub:'Alles over import, onderhoud, APK, restauratie, inruil en afspraken. Staat je vraag er niet bij? Bel gerust: +31 6 82 72 73 74.',
@@ -524,6 +525,26 @@
       cookieMediaTitle:'Medien &amp; Karten', cookieMediaDesc:'Für die Anzeige von Videos (YouTube) und einer Karte (Google Maps) auf der Website.',
       cookieAcceptAll:'Alle akzeptieren', cookieDeclineAll:'Alle ablehnen', cookieSave:'Einstellungen speichern', cookieSettings:'Cookie-Einstellungen' }
   };
+
+
+  // Menu/footer vertalen met dezelfde bron als de homepage (assets/i18n.js) en
+  // interne links naar pagina's die ?lang= ondersteunen in de gekozen taal houden.
+  const LANG_PAGES = /^(index|faq|import|colofon)\.html(?=$|#)/;
+  function applySharedLang(lang) {
+    const d = window.I18N && window.I18N[lang];
+    if (d) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = d[el.dataset.i18n];
+        if (v !== undefined) el.innerHTML = v;
+      });
+    }
+    document.querySelectorAll('a[href]').forEach(a => {
+      const base = a.dataset.baseHref || (a.dataset.baseHref = a.getAttribute('href'));
+      if (!LANG_PAGES.test(base)) return;
+      const [path, hash] = base.split('#');
+      a.setAttribute('href', path + (lang === 'nl' ? '' : '?lang=' + lang) + (hash ? '#' + hash : ''));
+    });
+  }
 
   function setLang(lang) {
     document.documentElement.lang = lang;
@@ -553,6 +574,7 @@
       document.getElementById('cookieSave').textContent = t.cookieSave;
       document.getElementById('cookieReopen').textContent = t.cookieSettings;
     }
+    applySharedLang(lang);
     localStorage.setItem('btg_lang', lang);
     // URL bijwerken zodat een link/refresh dezelfde taal toont (en overeenkomt met hreflang)
     const u = new URL(window.location.href);

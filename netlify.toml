@@ -63,6 +63,14 @@
   function = "page-lang"
 
 [[edge_functions]]
+  path = "/import"
+  function = "page-lang"
+
+[[edge_functions]]
+  path = "/import.html"
+  function = "page-lang"
+
+[[edge_functions]]
   path = "/colofon"
   function = "page-lang"
 

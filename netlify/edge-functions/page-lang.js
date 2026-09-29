@@ -1,5 +1,5 @@
-// Server-side taalversie van faq.html en colofon.html voor ?lang=en en ?lang=de.
-// De pagina's bevatten alle drie de talen al (div.faq-lang / div.col-lang); de
+// Server-side taalversie van faq.html, import.html en colofon.html voor ?lang=en
+// en ?lang=de. De pagina's bevatten alle drie de talen al (div.faq-lang / div.col-lang); de
 // client-side setLang() wisselt alleen welke zichtbaar is. Crawlers die geen JS
 // uitvoeren zouden op ?lang=de dus de Nederlandse versie zien. Deze functie zet
 // de juiste taal actief en vertaalt meta-tags, hero en (FAQ) de JSON-LD.
@@ -26,6 +26,32 @@ const PAGES = {
         fqTitle: 'HÄUFIG GESTELLTE<br><em>FRAGEN</em>',
         fqSub: 'Alles über Import, Wartung, Hauptuntersuchung, Restaurierung, Inzahlungnahme und Termine. Ihre Frage ist nicht dabei? Rufen Sie einfach an: +31 6 82 72 73 74.',
         fqCtaText: 'Ihre Frage ist nicht dabei? Rufen Sie David direkt an, er hilft Ihnen weiter.',
+      },
+    },
+  },
+  import: {
+    file: 'import.html',
+    blockClass: 'faq-lang',
+    en: {
+      title: 'Importing an American camper or pickup from the US · The Big Three Garage',
+      description: 'Importing an American camper, pickup or classic from the US to the Netherlands? The Big Three Garage in Nunspeet handles shipping, customs, RDW inspection, registration tax and Dutch registration.',
+      serviceName: 'Import of American vehicles from the US',
+      ids: {
+        fqEyebrow: 'Import from the US',
+        fqTitle: 'IMPORT AN AMERICAN<br><em>VEHICLE</em>',
+        fqSub: 'Bring a camper, pickup or classic from the US to the Netherlands without having to deal with customs, the RDW and registration tax yourself. We handle everything up to your Dutch registration.',
+        fqCtaText: 'Planning to import an American vehicle? Call David to talk through the options.',
+      },
+    },
+    de: {
+      title: 'Amerikanisches Wohnmobil oder Pickup aus den USA importieren · The Big Three Garage',
+      description: 'Amerikanisches Wohnmobil, Pickup oder Oldtimer aus den USA importieren? The Big Three Garage in Nunspeet (Niederlande) übernimmt Transport, Zoll, RDW-Prüfung, BPM und niederländische Zulassung.',
+      serviceName: 'Import amerikanischer Fahrzeuge aus den USA',
+      ids: {
+        fqEyebrow: 'Import aus den USA',
+        fqTitle: 'AMERIKANISCHES FAHRZEUG<br><em>IMPORTIEREN</em>',
+        fqSub: 'Ein Wohnmobil, einen Pickup oder einen Klassiker aus den USA holen, ohne sich selbst um Zoll, RDW und Zulassungssteuer kümmern zu müssen. Wir übernehmen den gesamten Ablauf bis zur niederländischen Zulassung.',
+        fqCtaText: 'Sie planen den Import eines amerikanischen Fahrzeugs? Rufen Sie David an und besprechen Sie die Möglichkeiten.',
       },
     },
   },
@@ -87,6 +113,37 @@ function extractBlock(html, blockClass, lang) {
   return next === -1 ? rest : rest.slice(0, next);
 }
 
+// Zelfde bron als homepage-meta.js: assets/i18n.js (menu- en footerteksten).
+async function loadTranslations(origin) {
+  try {
+    const res = await fetch(new URL('/assets/i18n.js', origin));
+    if (!res.ok) return null;
+    const src = await res.text();
+    const fn = new Function('window', src + '\nreturn window.I18N;');
+    return fn({});
+  } catch {
+    return null;
+  }
+}
+
+// Menu/footer: <a ... data-i18n="nav.faq">FAQ</a>. Alleen elementen zonder
+// geneste tags, dat geldt voor alle data-i18n-elementen op deze pagina's.
+function applySharedI18n(html, dict) {
+  return html.replace(
+    /(<([a-zA-Z0-9]+)\b[^>]*\sdata-i18n="([^"]+)"[^>]*>)[^<]*(<\/\2>)/g,
+    (full, open, _tag, key, close) => (dict[key] !== undefined ? open + dict[key] + close : full)
+  );
+}
+
+// Interne links naar pagina's die ?lang= ondersteunen in dezelfde taal houden,
+// zodat crawlers vanaf de DE-versie ook bij de andere DE-pagina's uitkomen.
+function localizeLinks(html, lang) {
+  return html.replace(
+    /href="((?:index|faq|import|colofon)\.html)(#[^"]*)?"/g,
+    (_, path, hash) => `href="${path}?lang=${lang}${hash || ''}"`
+  );
+}
+
 function faqJsonLd(block) {
   const items = [];
   const re = /<summary>([\s\S]*?)<\/summary>\s*<p>([\s\S]*?)<\/p>/g;
@@ -142,14 +199,36 @@ export default async (request, context) => {
     html = replaceById(html, id, value);
   }
 
-  if (key === 'faq') {
+  const dict = await loadTranslations(url.origin);
+  if (dict && dict[lang]) html = applySharedI18n(html, dict[lang]);
+  html = localizeLinks(html, lang);
+
+  if (page.blockClass === 'faq-lang') {
     const ld = faqJsonLd(extractBlock(html, page.blockClass, lang));
     if (ld) {
+      // (?:(?!<\/script>)...) voorkomt dat de match over meerdere JSON-LD-blokken heen loopt
       html = html.replace(
-        /<script type="application\/ld\+json">\s*\{[\s\S]*?"@type": "FAQPage"[\s\S]*?<\/script>/,
+        /<script type="application\/ld\+json">(?:(?!<\/script>)[\s\S])*?"@type": "FAQPage"(?:(?!<\/script>)[\s\S])*?<\/script>/,
         `<script type="application/ld+json">\n${ld}\n</script>`
       );
     }
+  }
+
+  if (m.serviceName) {
+    html = html.replace(
+      /(<script type="application\/ld\+json" id="ld-service">)([\s\S]*?)(<\/script>)/,
+      (full, open, json, close) => {
+        try {
+          const data = JSON.parse(json);
+          data.name = m.serviceName;
+          data.description = m.description;
+          data.url = canonical;
+          return `${open}\n${JSON.stringify(data, null, 2)}\n${close}`;
+        } catch {
+          return full;
+        }
+      }
+    );
   }
 
   const headers = new Headers(response.headers);

@@ -545,6 +545,26 @@
       cookieAcceptAll:'Alle akzeptieren', cookieDeclineAll:'Alle ablehnen', cookieSave:'Einstellungen speichern', cookieSettings:'Cookie-Einstellungen' }
   };
 
+
+  // Menu/footer vertalen met dezelfde bron als de homepage (assets/i18n.js) en
+  // interne links naar pagina's die ?lang= ondersteunen in de gekozen taal houden.
+  const LANG_PAGES = /^(index|faq|import|colofon)\.html(?=$|#)/;
+  function applySharedLang(lang) {
+    const d = window.I18N && window.I18N[lang];
+    if (d) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = d[el.dataset.i18n];
+        if (v !== undefined) el.innerHTML = v;
+      });
+    }
+    document.querySelectorAll('a[href]').forEach(a => {
+      const base = a.dataset.baseHref || (a.dataset.baseHref = a.getAttribute('href'));
+      if (!LANG_PAGES.test(base)) return;
+      const [path, hash] = base.split('#');
+      a.setAttribute('href', path + (lang === 'nl' ? '' : '?lang=' + lang) + (hash ? '#' + hash : ''));
+    });
+  }
+
   function setLang(lang) {
     document.documentElement.lang = lang;
     document.querySelectorAll('.lang button').forEach(b => {
@@ -576,6 +596,7 @@
       document.getElementById('cookieSave').textContent = t.cookieSave;
       document.getElementById('cookieReopen').textContent = t.cookieSettings;
     }
+    applySharedLang(lang);
     localStorage.setItem('btg_lang', lang);
     // URL bijwerken zodat een link/refresh dezelfde taal toont (en overeenkomt met hreflang)
     const u = new URL(window.location.href);

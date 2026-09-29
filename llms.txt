@@ -21,6 +21,7 @@ The Big Three Garage (eigenaar: David Broeksma) is een Nederlandse garage en aut
 
 ## Belangrijke pagina's
 - [Homepage](https://thebigthree.nl/): voorraad, diensten, verhaal en contact
+- [Import uit de VS](https://thebigthree.nl/import.html): hoe The Big Three een Amerikaanse camper, pickup of klassieker importeert (transport, douane, RDW-keuring, BPM, Nederlands kenteken), stappenplan en kostenposten. Ook in het [Engels](https://thebigthree.nl/import.html?lang=en) en [Duits](https://thebigthree.nl/import.html?lang=de)
 - [Veelgestelde vragen](https://thebigthree.nl/faq.html): antwoorden over import, onderhoud, garantie, herroepingsrecht en afspraken
 - [Algemene voorwaarden](https://thebigthree.nl/voorwaarden.html): verkoopvoorwaarden, garantie en aansprakelijkheid
 - [Privacyverklaring](https://thebigthree.nl/privacy.html)
