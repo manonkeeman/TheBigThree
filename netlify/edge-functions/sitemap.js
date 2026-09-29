@@ -37,7 +37,7 @@ export default async (request, context) => {
   } catch {
     // Origin-fetch mislukt (transiënt netwerkprobleem) — val terug op een
     // lege maar geldige sitemap i.p.v. de hele functie te laten crashen.
-    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n</urlset>';
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n</urlset>';
   }
 
   try {
@@ -50,11 +50,21 @@ export default async (request, context) => {
     const vehicles = res.ok ? await res.json() : [];
     const slugs = slugMap(vehicles);
 
+    // Elke taalversie krijgt een eigen <url> met de volledige set alternates,
+    // gelijk aan hreflangBlock() in vehicle-meta.js.
     const entries = vehicles.map((v) => {
       const slug = slugs[v.id];
       if (!slug) return '';
       const lastmod = v.updated_at ? String(v.updated_at).slice(0, 10) : new Date().toISOString().slice(0, 10);
-      return `  <url>\n    <loc>https://thebigthree.nl/voorraad/${escXml(slug)}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
+      const base = `https://thebigthree.nl/voorraad/${escXml(slug)}`;
+      const alternates =
+        `    <xhtml:link rel="alternate" hreflang="nl" href="${base}"/>\n` +
+        `    <xhtml:link rel="alternate" hreflang="en" href="${base}?lang=en"/>\n` +
+        `    <xhtml:link rel="alternate" hreflang="de" href="${base}?lang=de"/>\n` +
+        `    <xhtml:link rel="alternate" hreflang="x-default" href="${base}"/>\n`;
+      return [base, `${base}?lang=en`, `${base}?lang=de`].map((loc) =>
+        `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n${alternates}  </url>\n`
+      ).join('');
     }).join('');
 
     xml = xml.replace('</urlset>', entries + '</urlset>');
