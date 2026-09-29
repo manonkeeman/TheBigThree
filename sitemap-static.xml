@@ -44,14 +44,62 @@
   </url>
   <url>
     <loc>https://thebigthree.nl/colofon.html</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.1</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://thebigthree.nl/colofon.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thebigthree.nl/colofon.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://thebigthree.nl/colofon.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thebigthree.nl/colofon.html"/>
+  </url>
+  <url>
+    <loc>https://thebigthree.nl/colofon.html?lang=en</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://thebigthree.nl/colofon.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thebigthree.nl/colofon.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://thebigthree.nl/colofon.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thebigthree.nl/colofon.html"/>
+  </url>
+  <url>
+    <loc>https://thebigthree.nl/colofon.html?lang=de</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://thebigthree.nl/colofon.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thebigthree.nl/colofon.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://thebigthree.nl/colofon.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thebigthree.nl/colofon.html"/>
   </url>
   <url>
     <loc>https://thebigthree.nl/faq.html</loc>
-    <lastmod>2026-08-09</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://thebigthree.nl/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thebigthree.nl/faq.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://thebigthree.nl/faq.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thebigthree.nl/faq.html"/>
+  </url>
+  <url>
+    <loc>https://thebigthree.nl/faq.html?lang=en</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://thebigthree.nl/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thebigthree.nl/faq.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://thebigthree.nl/faq.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thebigthree.nl/faq.html"/>
+  </url>
+  <url>
+    <loc>https://thebigthree.nl/faq.html?lang=de</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://thebigthree.nl/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thebigthree.nl/faq.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://thebigthree.nl/faq.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thebigthree.nl/faq.html"/>
   </url>
 </urlset>

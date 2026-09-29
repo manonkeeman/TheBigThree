@@ -7,6 +7,10 @@
 <meta name="description" content="Antwoorden op veelgestelde vragen over import, onderhoud, APK, restauratie, inruil, garantie en afspraken bij The Big Three Garage in Nunspeet.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://thebigthree.nl/faq.html">
+<link rel="alternate" hreflang="nl" href="https://thebigthree.nl/faq.html">
+<link rel="alternate" hreflang="en" href="https://thebigthree.nl/faq.html?lang=en">
+<link rel="alternate" hreflang="de" href="https://thebigthree.nl/faq.html?lang=de">
+<link rel="alternate" hreflang="x-default" href="https://thebigthree.nl/faq.html">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -550,14 +554,21 @@
       document.getElementById('cookieReopen').textContent = t.cookieSettings;
     }
     localStorage.setItem('btg_lang', lang);
+    // URL bijwerken zodat een link/refresh dezelfde taal toont (en overeenkomt met hreflang)
+    const u = new URL(window.location.href);
+    if (lang === 'nl') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+    history.replaceState(null, '', u);
   }
 
   document.querySelectorAll('.lang button').forEach(btn => {
     btn.addEventListener('click', () => setLang(btn.dataset.lang));
   });
 
+  // URL-parameter gaat voor opgeslagen voorkeur (zelfde volgorde als index.html)
+  const urlLang = new URLSearchParams(window.location.search).get('lang');
   const saved = localStorage.getItem('btg_lang');
-  if (saved && titles[saved]) setLang(saved);
+  const initLang = (urlLang && titles[urlLang]) ? urlLang : (saved && titles[saved] ? saved : null);
+  if (initLang) setLang(initLang);
 
   function getConsent() {
     try { return JSON.parse(localStorage.getItem('btg_consent')); } catch (e) { return null; }

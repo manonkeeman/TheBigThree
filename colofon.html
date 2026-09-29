@@ -5,8 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colofon - The Big Three Garage Nunspeet</title>
 <meta name="description" content="Colofon van The Big Three Garage Nunspeet. Bedrijfsgegevens, KvK, BTW en websitecredits.">
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="index, follow">
 <link rel="canonical" href="https://thebigthree.nl/colofon.html">
+<link rel="alternate" hreflang="nl" href="https://thebigthree.nl/colofon.html">
+<link rel="alternate" hreflang="en" href="https://thebigthree.nl/colofon.html?lang=en">
+<link rel="alternate" hreflang="de" href="https://thebigthree.nl/colofon.html?lang=de">
+<link rel="alternate" hreflang="x-default" href="https://thebigthree.nl/colofon.html">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,6 +49,19 @@
     transition:color 0.2s;
   }
   .nav-back:hover{color:var(--rust)}
+  .nav-right{display:flex;align-items:center;gap:20px}
+  .lang{
+    display:flex;gap:4px;border:1px solid var(--line);padding:4px;
+    font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:0.15em;
+  }
+  .lang button{
+    background:none;border:none;color:var(--ink-dim);
+    padding:5px 10px;cursor:pointer;font-family:inherit;
+    font-size:inherit;letter-spacing:inherit;text-transform:uppercase;transition:all 0.2s;
+  }
+  .lang button.active{background:var(--rust);color:#fff}
+  .col-lang{display:none}
+  .col-lang.active{display:block}
 
   main{
     max-width:800px;
@@ -124,13 +141,22 @@
 
 <nav>
   <a href="index.html" class="nav-logo">THE BIG THREE GARAGE</a>
-  <a href="index.html" class="nav-back">← Terug naar de site</a>
+  <div class="nav-right">
+    <div class="lang">
+      <button class="active" data-lang="nl">NL</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="de">DE</button>
+    </div>
+    <a href="index.html" class="nav-back" id="navBack">← Terug naar de site</a>
+  </div>
 </nav>
 
 <main>
-  <div class="eyebrow">Transparantie</div>
-  <h1>COLE<em>FON</em></h1>
+  <div class="eyebrow" id="colEyebrow">Transparantie</div>
+  <h1 id="colTitle">COLO<em>FON</em></h1>
 
+  <!-- NL -->
+  <div class="col-lang active" id="lang-nl">
   <div class="block">
     <h2>BEDRIJFSGEGEVENS</h2>
     <div class="row">
@@ -162,7 +188,6 @@
       <span class="row-value">NL862005541B01</span>
     </div>
   </div>
-
   <div class="block">
     <h2>WEBSITE</h2>
     <div class="row">
@@ -194,19 +219,17 @@
       <span class="row-value">Nederlands, Engels, Duits</span>
     </div>
   </div>
-
   <div class="block">
     <h2>AUTEURSRECHT</h2>
     <div class="row">
       <span class="row-label">Copyright</span>
-      <span class="row-value">© <span id="year"></span> The Big Three Garage. Alle rechten voorbehouden.</span>
+      <span class="row-value">© <span class="year"></span> The Big Three Garage. Alle rechten voorbehouden.</span>
     </div>
     <div class="row">
       <span class="row-label">Tekst en beeld</span>
       <span class="row-value">Niets van deze website mag worden overgenomen zonder schriftelijke toestemming van The Big Three Garage.</span>
     </div>
   </div>
-
   <div class="block">
     <h2>JURIDISCH</h2>
     <div class="row">
@@ -226,33 +249,231 @@
       <span class="row-value">Nederlands recht. Bevoegde rechter: Rechtbank Gelderland.</span>
     </div>
   </div>
+  </div>
+
+  <!-- EN -->
+  <div class="col-lang" id="lang-en">
+  <div class="block">
+    <h2>COMPANY DETAILS</h2>
+    <div class="row">
+      <span class="row-label">Name</span>
+      <span class="row-value">The Big Three Garage</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Owner</span>
+      <span class="row-value">David Broeksma</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Address</span>
+      <span class="row-value">Hullerweg 115, 8071 RN Nunspeet, the Netherlands</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Phone</span>
+      <span class="row-value"><a href="tel:+31682727374">+31 6 82 72 73 74</a></span>
+    </div>
+    <div class="row">
+      <span class="row-label">Email</span>
+      <span class="row-value"><a href="mailto:broeksmadavid@icloud.com">broeksmadavid@icloud.com</a></span>
+    </div>
+    <div class="row">
+      <span class="row-label">Chamber of Commerce (KvK)</span>
+      <span class="row-value">81234090</span>
+    </div>
+    <div class="row">
+      <span class="row-label">VAT number</span>
+      <span class="row-value">NL862005541B01</span>
+    </div>
+  </div>
+  <div class="block">
+    <h2>WEBSITE</h2>
+    <div class="row">
+      <span class="row-label">Web development</span>
+      <span class="row-value"><a href="https://www.manonit.com" target="_blank" rel="noopener">ManonIT</a></span>
+    </div>
+    <div class="row">
+      <span class="row-label">Design</span>
+      <span class="row-value">ManonIT in collaboration with David Broeksma</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Domain</span>
+      <span class="row-value">TransIP</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Hosting</span>
+      <span class="row-value">Netlify</span>
+    </div>
+    <div class="row">
+      <span class="row-label">CMS / Database</span>
+      <span class="row-value">Supabase</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Photography</span>
+      <span class="row-value">The Big Three Garage</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Languages</span>
+      <span class="row-value">Dutch, English, German</span>
+    </div>
+  </div>
+  <div class="block">
+    <h2>COPYRIGHT</h2>
+    <div class="row">
+      <span class="row-label">Copyright</span>
+      <span class="row-value">© <span class="year"></span> The Big Three Garage. All rights reserved.</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Text and images</span>
+      <span class="row-value">Nothing on this website may be reproduced without written permission from The Big Three Garage.</span>
+    </div>
+  </div>
+  <div class="block">
+    <h2>LEGAL</h2>
+    <div class="row">
+      <span class="row-label">Privacy</span>
+      <span class="row-value"><a href="privacy.html">Read the privacy policy</a></span>
+    </div>
+    <div class="row">
+      <span class="row-label">Terms</span>
+      <span class="row-value"><a href="voorwaarden.html">Read the terms and conditions</a></span>
+    </div>
+    <div class="row">
+      <span class="row-label">Liability</span>
+      <span class="row-value">The Big Three Garage is not liable for inaccuracies on this website. Prices and availability are subject to change.</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Governing law</span>
+      <span class="row-value">Dutch law. Competent court: District Court of Gelderland (Rechtbank Gelderland).</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- DE -->
+  <div class="col-lang" id="lang-de">
+  <div class="block">
+    <h2>ANGABEN ZUM UNTERNEHMEN</h2>
+    <div class="row">
+      <span class="row-label">Name</span>
+      <span class="row-value">The Big Three Garage</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Inhaber</span>
+      <span class="row-value">David Broeksma</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Anschrift</span>
+      <span class="row-value">Hullerweg 115, 8071 RN Nunspeet, Niederlande</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Telefon</span>
+      <span class="row-value"><a href="tel:+31682727374">+31 6 82 72 73 74</a></span>
+    </div>
+    <div class="row">
+      <span class="row-label">E-Mail</span>
+      <span class="row-value"><a href="mailto:broeksmadavid@icloud.com">broeksmadavid@icloud.com</a></span>
+    </div>
+    <div class="row">
+      <span class="row-label">Handelsregister (KvK)</span>
+      <span class="row-value">81234090, Kamer van Koophandel</span>
+    </div>
+    <div class="row">
+      <span class="row-label">USt-IdNr.</span>
+      <span class="row-value">NL862005541B01</span>
+    </div>
+  </div>
+  <div class="block">
+    <h2>WEBSITE</h2>
+    <div class="row">
+      <span class="row-label">Webentwicklung</span>
+      <span class="row-value"><a href="https://www.manonit.com" target="_blank" rel="noopener">ManonIT</a></span>
+    </div>
+    <div class="row">
+      <span class="row-label">Gestaltung</span>
+      <span class="row-value">ManonIT in Zusammenarbeit mit David Broeksma</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Domain</span>
+      <span class="row-value">TransIP</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Hosting</span>
+      <span class="row-value">Netlify</span>
+    </div>
+    <div class="row">
+      <span class="row-label">CMS / Datenbank</span>
+      <span class="row-value">Supabase</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Fotografie</span>
+      <span class="row-value">The Big Three Garage</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Sprachen</span>
+      <span class="row-value">Niederländisch, Englisch, Deutsch</span>
+    </div>
+  </div>
+  <div class="block">
+    <h2>URHEBERRECHT</h2>
+    <div class="row">
+      <span class="row-label">Copyright</span>
+      <span class="row-value">© <span class="year"></span> The Big Three Garage. Alle Rechte vorbehalten.</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Texte und Bilder</span>
+      <span class="row-value">Die Inhalte dieser Website dürfen ohne schriftliche Zustimmung von The Big Three Garage nicht übernommen werden.</span>
+    </div>
+  </div>
+  <div class="block">
+    <h2>RECHTLICHES</h2>
+    <div class="row">
+      <span class="row-label">Datenschutz</span>
+      <span class="row-value"><a href="privacy.html">Datenschutzerklärung lesen</a></span>
+    </div>
+    <div class="row">
+      <span class="row-label">AGB</span>
+      <span class="row-value"><a href="voorwaarden.html">Allgemeine Geschäftsbedingungen lesen</a></span>
+    </div>
+    <div class="row">
+      <span class="row-label">Haftung</span>
+      <span class="row-value">The Big Three Garage haftet nicht für Unrichtigkeiten auf dieser Website. Preise und Verfügbarkeit unter Vorbehalt.</span>
+    </div>
+    <div class="row">
+      <span class="row-label">Anwendbares Recht</span>
+      <span class="row-value">Niederländisches Recht. Zuständiges Gericht: Rechtbank Gelderland.</span>
+    </div>
+  </div>
+  </div>
 </main>
 
 <footer>
-  <span>© <span id="yearFtr"></span> The Big Three Garage · Nunspeet</span>
+  <span>© <span class="year"></span> The Big Three Garage · Nunspeet</span>
   &nbsp;·&nbsp;
-  <a href="privacy.html">Privacyverklaring</a>
+  <a href="privacy.html" id="ftrPrivacy">Privacyverklaring</a>
   &nbsp;·&nbsp;
-  <a href="voorwaarden.html">Algemene voorwaarden</a>
+  <a href="voorwaarden.html" id="ftrTerms">Algemene voorwaarden</a>
   &nbsp;·&nbsp;
   <a href="faq.html">FAQ</a>
   &nbsp;·&nbsp;
-  <a href="index.html">Terug naar de site</a>
+  <a href="index.html" id="ftrBack">Terug naar de site</a>
 </footer>
 
 <!-- Cookie Consent -->
 <div class="cookie-overlay hidden" id="cookieOverlay">
   <div class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookieTitle">
-    <p class="cookie-eyebrow">Jouw privacy</p>
+    <div class="lang">
+      <button class="active" data-lang="nl">NL</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="de">DE</button>
+    </div>
+    <p class="cookie-eyebrow" id="cookieEyebrow">Jouw privacy</p>
     <h2 class="cookie-title" id="cookieTitle">Cookie-instellingen</h2>
-    <p class="cookie-intro">
+    <p class="cookie-intro" id="cookieText">
       Wij gebruiken cookies om deze website goed te laten werken. Optioneel gebruiken we ook cookies voor bezoekersstatistieken en om video's en een kaart te tonen. Lees onze <a href="privacy.html">privacyverklaring</a> voor meer informatie.
     </p>
 
     <div class="cookie-row">
       <div class="cookie-row-text">
-        <strong>Noodzakelijk</strong>
-        <span>Nodig voor de basiswerking van de site, zoals je taal- en cookievoorkeur. Kan niet worden uitgeschakeld.</span>
+        <strong id="cookieNecessaryTitle">Noodzakelijk</strong>
+        <span id="cookieNecessaryDesc">Nodig voor de basiswerking van de site, zoals je taal- en cookievoorkeur. Kan niet worden uitgeschakeld.</span>
       </div>
       <label class="cookie-toggle">
         <input type="checkbox" checked disabled aria-label="Noodzakelijke cookies (altijd aan)">
@@ -262,8 +483,8 @@
 
     <div class="cookie-row">
       <div class="cookie-row-text">
-        <strong>Statistieken</strong>
-        <span>Anonieme bezoekersstatistieken via Google Analytics, met IP-anonimisering.</span>
+        <strong id="cookieAnalyticsTitle">Statistieken</strong>
+        <span id="cookieAnalyticsDesc">Anonieme bezoekersstatistieken via Google Analytics, met IP-anonimisering.</span>
       </div>
       <label class="cookie-toggle">
         <input type="checkbox" id="toggleAnalytics" aria-label="Statistiek-cookies">
@@ -273,8 +494,8 @@
 
     <div class="cookie-row">
       <div class="cookie-row-text">
-        <strong>Media &amp; kaarten</strong>
-        <span>Voor het tonen van video's (YouTube) en een kaart (Google Maps) op de site.</span>
+        <strong id="cookieMediaTitle">Media &amp; kaarten</strong>
+        <span id="cookieMediaDesc">Voor het tonen van video's (YouTube) en een kaart (Google Maps) op de site.</span>
       </div>
       <label class="cookie-toggle">
         <input type="checkbox" id="toggleMedia" aria-label="Media- en kaart-cookies">
@@ -295,8 +516,82 @@
 <script src="assets/analytics.js"></script>
 <script>
   const y = new Date().getFullYear();
-  document.getElementById('year').textContent = y;
-  document.getElementById('yearFtr').textContent = y;
+  document.querySelectorAll('.year').forEach(el => { el.textContent = y; });
+
+  const titles = {
+    nl: { eyebrow:'Transparantie', title:'COLO<em>FON</em>', metaTitle:'Colofon - The Big Three Garage Nunspeet',
+      navBack:'← Terug naar de site', ftrPrivacy:'Privacyverklaring', ftrTerms:'Algemene voorwaarden', ftrBack:'Terug naar de site',
+      cookieEyebrow:'Jouw privacy', cookieTitle:'Cookie-instellingen',
+      cookieText:'Wij gebruiken cookies om deze website goed te laten werken. Optioneel gebruiken we ook cookies voor bezoekersstatistieken en om video\'s en een kaart te tonen. Lees onze <a href="privacy.html">privacyverklaring</a> voor meer informatie.',
+      cookieNecessaryTitle:'Noodzakelijk', cookieNecessaryDesc:'Nodig voor de basiswerking van de site, zoals je taal- en cookievoorkeur. Kan niet worden uitgeschakeld.',
+      cookieAnalyticsTitle:'Statistieken', cookieAnalyticsDesc:'Anonieme bezoekersstatistieken via Google Analytics, met IP-anonimisering.',
+      cookieMediaTitle:'Media &amp; kaarten', cookieMediaDesc:'Voor het tonen van video\'s (YouTube) en een kaart (Google Maps) op de site.',
+      cookieAcceptAll:'Alles accepteren', cookieDeclineAll:'Alles weigeren', cookieSave:'Voorkeuren opslaan', cookieSettings:'Cookie-instellingen' },
+    en: { eyebrow:'Transparency', title:'COLO<em>PHON</em>', metaTitle:'Colophon - The Big Three Garage Nunspeet',
+      navBack:'← Back to website', ftrPrivacy:'Privacy policy', ftrTerms:'Terms and conditions', ftrBack:'Back to website',
+      cookieEyebrow:'Your privacy', cookieTitle:'Cookie settings',
+      cookieText:'We use cookies to make this website work properly. Optionally, we also use cookies for visitor statistics and to show videos and a map. Read our <a href="privacy.html">privacy policy</a> for more information.',
+      cookieNecessaryTitle:'Necessary', cookieNecessaryDesc:'Required for the site to work, such as your language and cookie preference. Cannot be switched off.',
+      cookieAnalyticsTitle:'Statistics', cookieAnalyticsDesc:'Anonymous visitor statistics via Google Analytics, with IP anonymisation.',
+      cookieMediaTitle:'Media &amp; maps', cookieMediaDesc:'For showing videos (YouTube) and a map (Google Maps) on the site.',
+      cookieAcceptAll:'Accept all', cookieDeclineAll:'Reject all', cookieSave:'Save preferences', cookieSettings:'Cookie settings' },
+    de: { eyebrow:'Transparenz', title:'IMPRES<em>SUM</em>', metaTitle:'Impressum - The Big Three Garage Nunspeet',
+      navBack:'← Zurück zur Website', ftrPrivacy:'Datenschutzerklärung', ftrTerms:'AGB', ftrBack:'Zurück zur Website',
+      cookieEyebrow:'Ihre Privatsphäre', cookieTitle:'Cookie-Einstellungen',
+      cookieText:'Wir verwenden Cookies, damit diese Website ordnungsgemäß funktioniert. Optional verwenden wir auch Cookies für Besucherstatistiken und zur Anzeige von Videos und einer Karte. Lesen Sie unsere <a href="privacy.html">Datenschutzerklärung</a> für weitere Informationen.',
+      cookieNecessaryTitle:'Notwendig', cookieNecessaryDesc:'Erforderlich für die Grundfunktionen der Website, z. B. Ihre Sprach- und Cookie-Einstellung. Kann nicht deaktiviert werden.',
+      cookieAnalyticsTitle:'Statistiken', cookieAnalyticsDesc:'Anonyme Besucherstatistiken über Google Analytics, mit IP-Anonymisierung.',
+      cookieMediaTitle:'Medien &amp; Karten', cookieMediaDesc:'Für die Anzeige von Videos (YouTube) und einer Karte (Google Maps) auf der Website.',
+      cookieAcceptAll:'Alle akzeptieren', cookieDeclineAll:'Alle ablehnen', cookieSave:'Einstellungen speichern', cookieSettings:'Cookie-Einstellungen' }
+  };
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.querySelectorAll('.col-lang').forEach(el => el.classList.remove('active'));
+    const target = document.getElementById('lang-' + lang);
+    if (target) target.classList.add('active');
+    const t = titles[lang];
+    if (t) {
+      document.getElementById('colEyebrow').textContent = t.eyebrow;
+      document.getElementById('colTitle').innerHTML = t.title;
+      document.getElementById('navBack').textContent = t.navBack;
+      document.getElementById('ftrPrivacy').textContent = t.ftrPrivacy;
+      document.getElementById('ftrTerms').textContent = t.ftrTerms;
+      document.title = t.metaTitle;
+      document.getElementById('ftrBack').textContent = t.ftrBack;
+      document.getElementById('cookieEyebrow').textContent = t.cookieEyebrow;
+      document.getElementById('cookieTitle').textContent = t.cookieTitle;
+      document.getElementById('cookieText').innerHTML = t.cookieText;
+      document.getElementById('cookieNecessaryTitle').textContent = t.cookieNecessaryTitle;
+      document.getElementById('cookieNecessaryDesc').textContent = t.cookieNecessaryDesc;
+      document.getElementById('cookieAnalyticsTitle').textContent = t.cookieAnalyticsTitle;
+      document.getElementById('cookieAnalyticsDesc').textContent = t.cookieAnalyticsDesc;
+      document.getElementById('cookieMediaTitle').innerHTML = t.cookieMediaTitle;
+      document.getElementById('cookieMediaDesc').textContent = t.cookieMediaDesc;
+      document.getElementById('cookieAcceptAll').textContent = t.cookieAcceptAll;
+      document.getElementById('cookieDeclineAll').textContent = t.cookieDeclineAll;
+      document.getElementById('cookieSave').textContent = t.cookieSave;
+      document.getElementById('cookieReopen').textContent = t.cookieSettings;
+    }
+    localStorage.setItem('btg_lang', lang);
+    // URL bijwerken zodat een link/refresh dezelfde taal toont (en overeenkomt met hreflang)
+    const u = new URL(window.location.href);
+    if (lang === 'nl') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+    history.replaceState(null, '', u);
+  }
+
+  document.querySelectorAll('.lang button').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.dataset.lang));
+  });
+
+  // URL-parameter gaat voor opgeslagen voorkeur (zelfde volgorde als index.html)
+  const urlLang = new URLSearchParams(window.location.search).get('lang');
+  const saved = localStorage.getItem('btg_lang');
+  const initLang = (urlLang && titles[urlLang]) ? urlLang : (saved && titles[saved] ? saved : null);
+  if (initLang) setLang(initLang);
 
   function getConsent() {
     try { return JSON.parse(localStorage.getItem('btg_consent')); } catch (e) { return null; }

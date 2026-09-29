@@ -54,6 +54,22 @@
   path = "/index.html"
   function = "homepage-meta"
 
+[[edge_functions]]
+  path = "/faq"
+  function = "page-lang"
+
+[[edge_functions]]
+  path = "/faq.html"
+  function = "page-lang"
+
+[[edge_functions]]
+  path = "/colofon"
+  function = "page-lang"
+
+[[edge_functions]]
+  path = "/colofon.html"
+  function = "page-lang"
+
 # publish = "." serveert de hele repo; onderstaande bestanden horen niet publiek
 [[redirects]]
   from = "/package.json"
