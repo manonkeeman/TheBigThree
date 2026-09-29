@@ -1,0 +1,14 @@
+# Dependabot houdt twee dingen bij:
+# - GitHub Actions (de keep-alive/back-up-workflow), zodat die niet op verouderde versies blijft draaien
+# - npm (alleen de dev-tool 'serve'; wordt niet gedeployed, dus laag risico)
+# Let op: supabase-js wordt via een CDN-link in index.html geladen en valt hier niet onder.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
