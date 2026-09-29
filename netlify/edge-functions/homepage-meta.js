@@ -158,8 +158,8 @@ function renderCard(v, dict, slug) {
 // in echt gerenderde, vertaalde voertuigkaarten (of maakt het "geen aanbod"
 // -blok zichtbaar als de voorraad leeg is). Dit is precies de content die
 // een crawler zonder JS-executie anders nooit te zien kreeg, in geen enkele
-// taal — de client-side loadInventory() ververst 'm meteen daarna opnieuw,
-// dit verandert daar niets aan voor gewone bezoekers.
+// taal. De client-side loadInventory() laat deze server-render staan en haalt
+// alleen zelf op als de grid leeg is (scheelt een tweede keer alle foto's laden).
 async function injectInventory(html, dict) {
   const vehicles = await loadVehicles();
   if (vehicles.length) {

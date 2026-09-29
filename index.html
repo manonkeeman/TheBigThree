@@ -88,11 +88,13 @@
   ]
 }
 </script>
-<link rel="preload" as="image" href="assets/hero-a.jpg">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3" integrity="sha384-l8ah+VgaWtk1mvOe9VC+OirC6qHFF4yH7l7mKRidV9MSti3E9F463bMp6ZVN4kuC" crossorigin="anonymous"></script>
+<link rel="preload" as="image" href="assets/hero-a.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://qjatfptkggabgdddqnkv.supabase.co" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Lettertypen laden zonder de eerste weergave te blokkeren (display=swap toont eerst het systeemfont) -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="assets/style.css">
 <style>
   :root{
@@ -1833,9 +1835,13 @@
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqYXRmcHRrZ2dhYmdkZGRxbmt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4NTk1MjQsImV4cCI6MjEwNDQzNTUyNH0.QeZiJxuq8g-ouVmjjEJb4IUexYk9JLTlg9qM5UdPJ_8';
   // ─────────────────────────────────────────────────────────────────────────
 
-  const _sb = (typeof supabase !== 'undefined')
-    ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    : null;
+  // De site leest alleen; daarvoor is de Supabase-REST-API genoeg. supabase-js
+  // (55 KB, render-blokkerend via jsDelivr) kostte op mobiel ruim 2,5 s laadtijd.
+  function _sbGet(path) {
+    return fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+    }).then(r => (r.ok ? r.json() : null)).catch(() => null);
+  }
 
   function _escHtml(s) {
     if (!s) return '';
@@ -1925,15 +1931,17 @@
 
   async function loadInventory() {
     const grid = document.getElementById('voorraadGrid');
-    if (!grid || !_sb) return;
+    if (!grid) return;
+    // De edge function (homepage-meta) zet de voorraad al server-side in de
+    // pagina. Opnieuw ophalen en vervangen liet alle foto's een tweede keer
+    // laden en vertraagde de LCP op mobiel tot >12 s. Alleen ophalen als
+    // de server-render ontbreekt (bijv. lokaal of als Supabase even faalde).
+    if (grid.querySelector('.card')) return;
     grid.innerHTML = '<div style="grid-column:1/-1;padding:56px 0;text-align:center;color:var(--ink-dim);font-family:\'Barlow Condensed\',sans-serif;letter-spacing:0.15em;text-transform:uppercase;font-size:13px">Voorraad laden…</div>';
 
-    const { data, error } = await _sb.from('vehicles')
-      .select('*')
-      .order('sort_order', { ascending: true })
-      .order('created_at', { ascending: false });
+    const data = await _sbGet('vehicles?select=*&order=sort_order.asc,created_at.desc');
 
-    if (error || !data?.length) {
+    if (!data?.length) {
       grid.innerHTML = '<div style="grid-column:1/-1;padding:56px 0;text-align:center;color:var(--ink-dim);font-family:\'Barlow Condensed\',sans-serif;letter-spacing:0.15em;text-transform:uppercase;font-size:13px">Geen voertuigen gevonden.</div>';
       return;
     }
@@ -2009,8 +2017,7 @@
 
   // load site settings (over mij) from Supabase
   async function loadSiteSettings() {
-    if (!_sb) return;
-    const { data } = await _sb.from('site_settings').select('*');
+    const data = await _sbGet('site_settings?select=*');
     if (!data?.length) return;
     const s = {};
     data.forEach(row => { s[row.key] = row.value; });
