@@ -1046,6 +1046,8 @@
     font-size:15px;
     transition:border 0.2s;
   }
+  /* Pas rood na een verzendpoging, niet al bij het openen van de pagina */
+  .booking-form.was-validated input:invalid, .booking-form.was-validated textarea:invalid, .booking-form.was-validated select:invalid{border-color:var(--rust)}
   .form-row input:focus, .form-row textarea:focus, .form-row select:focus{
     outline:none;
     border-color:var(--rust);
@@ -1676,12 +1678,13 @@
             <input type="email" id="bf-email" name="email" required autocomplete="email">
           </div>
           <div class="form-row">
-            <label for="bf-tel" data-i18n="book.f.phone">Telefoon (optioneel)</label>
-            <input type="tel" id="bf-tel" name="telefoon" autocomplete="tel">
+            <label for="bf-tel" data-i18n="book.f.phone">Telefoon</label>
+            <input type="tel" id="bf-tel" name="telefoon" required autocomplete="tel" pattern="[0-9+\(\)\s\-]{8,}" inputmode="tel">
           </div>
           <div class="form-row">
             <label for="bf-type" data-i18n="book.f.type">Soort afspraak</label>
-            <select id="bf-type" name="soort">
+            <select id="bf-type" name="soort" required>
+              <option value="" disabled selected data-i18n="book.o.t0">Kies een soort afspraak</option>
               <option data-i18n="book.o.t1">Onderhoud / APK</option>
               <option data-i18n="book.o.t2">Restauratie</option>
               <option data-i18n="book.o.t3">Import vanuit VS</option>
@@ -1695,15 +1698,15 @@
           </div>
           <div class="form-row">
             <label for="bf-tijd" data-i18n="book.f.time">Voorkeur tijdstip</label>
-            <select id="bf-tijd" name="tijdstip">
+            <select id="bf-tijd" name="tijdstip" required>
               <option data-i18n="book.o.tm1">Ochtend (08:30 – 12:00)</option>
               <option data-i18n="book.o.tm2">Middag (12:00 – 17:30)</option>
               <option data-i18n="book.o.tm3">Geen voorkeur</option>
             </select>
           </div>
           <div class="form-row">
-            <label for="bf-msg" data-i18n="book.f.msg">Bericht (optioneel)</label>
-            <textarea id="bf-msg" name="bericht" rows="3"></textarea>
+            <label for="bf-msg" data-i18n="book.f.msg">Bericht</label>
+            <textarea id="bf-msg" name="bericht" rows="3" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary" data-i18n="book.f.send">Afspraak aanvragen</button>
         </form>
@@ -1988,8 +1991,36 @@
 
   const bookingForm = document.getElementById('booking-form');
   if (bookingForm) {
+    // Alle velden zijn verplicht. Met novalidate tonen we zelf de melding, in de taal van de site.
+    function bookingMsg(key, fallback) {
+      const lang = _getCurrentLang();
+      return (translations[lang] && translations[lang][key]) || fallback;
+    }
+    function validateBookingField(el) {
+      el.setCustomValidity('');
+      if (el.name === 'bot-field' || el.type === 'hidden') return;
+      if (el.tagName === 'SELECT') {
+        if (!el.value) el.setCustomValidity(bookingMsg('book.err.choose', 'Kies een soort afspraak.'));
+      } else if (!el.value.trim()) {
+        // Alleen spaties telt niet als ingevuld
+        el.setCustomValidity(bookingMsg('book.err.required', 'Vul dit veld in.'));
+      } else if (el.name === 'telefoon' && el.validity.patternMismatch) {
+        el.setCustomValidity(bookingMsg('book.err.phone', 'Vul een geldig telefoonnummer in.'));
+      }
+    }
+    bookingForm.querySelectorAll('input, select, textarea').forEach(el => {
+      el.addEventListener('input', () => validateBookingField(el));
+      el.addEventListener('change', () => validateBookingField(el));
+    });
+
     bookingForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      bookingForm.querySelectorAll('input, select, textarea').forEach(validateBookingField);
+      bookingForm.classList.add('was-validated');
+      if (!bookingForm.checkValidity()) {
+        bookingForm.reportValidity();
+        return;
+      }
       const btn = bookingForm.querySelector('[type="submit"]');
       btn.disabled = true;
       fetch('/', {
