@@ -10,10 +10,11 @@ const COPY = {
     fallbackDescription: 'Bekijk de actuele voorraad Amerikaanse campers, pickups en classics bij The Big Three Garage in Nunspeet.',
     priceAsk: 'Op aanvraag',
     priceBid: 'Bieden',
-    title: (title) => `${title} te koop · The Big Three Garage Nunspeet`,
-    ogTitle: (title) => `${title} · Te koop bij The Big Three Garage`,
-    description: (metaLine, title, specsLine, priceText) =>
-      `${[metaLine, title].filter(Boolean).join(' ')} te koop bij The Big Three Garage in Nunspeet.${specsLine ? ' ' + specsLine + '.' : ''} ${priceText}.`,
+    status: { available: 'VOORRAAD', reserved: 'GERESERVEERD', service: 'IN SERVICE', part: 'ONDERDEEL', sold: 'VERKOCHT' },
+    title: (name) => `${name} te koop · The Big Three Nunspeet`,
+    ogTitle: (name) => `${name} · Te koop bij The Big Three Garage`,
+    description: (name, specsLine, priceText) =>
+      `${name} te koop bij The Big Three Garage in Nunspeet.${specsLine ? ' ' + specsLine + '.' : ''} ${priceText}. Bezichtigen op afspraak.`,
   },
   en: {
     fallbackTitle: 'Inventory · The Big Three Garage Nunspeet',
@@ -21,10 +22,11 @@ const COPY = {
     fallbackDescription: 'Browse the current inventory of American campers, pickups and classics at The Big Three Garage in Nunspeet.',
     priceAsk: 'Price on request',
     priceBid: 'Make an offer',
-    title: (title) => `${title} for sale · The Big Three Garage Nunspeet`,
-    ogTitle: (title) => `${title} · For sale at The Big Three Garage`,
-    description: (metaLine, title, specsLine, priceText) =>
-      `${[metaLine, title].filter(Boolean).join(' ')} for sale at The Big Three Garage in Nunspeet.${specsLine ? ' ' + specsLine + '.' : ''} ${priceText}.`,
+    status: { available: 'IN STOCK', reserved: 'RESERVED', service: 'IN SERVICE', part: 'PART', sold: 'SOLD' },
+    title: (name) => `${name} for sale · The Big Three Nunspeet (NL)`,
+    ogTitle: (name) => `${name} · For sale at The Big Three Garage`,
+    description: (name, specsLine, priceText) =>
+      `${name} for sale at The Big Three Garage in Nunspeet, the Netherlands.${specsLine ? ' ' + specsLine + '.' : ''} ${priceText}. Viewing by appointment.`,
   },
   de: {
     fallbackTitle: 'Fahrzeugbestand · The Big Three Garage Nunspeet',
@@ -32,10 +34,11 @@ const COPY = {
     fallbackDescription: 'Entdecken Sie den aktuellen Bestand an amerikanischen Campern, Pickups und Oldtimern bei The Big Three Garage in Nunspeet.',
     priceAsk: 'Preis auf Anfrage',
     priceBid: 'Gebot',
-    title: (title) => `${title} zu verkaufen · The Big Three Garage Nunspeet`,
-    ogTitle: (title) => `${title} · Zu verkaufen bei The Big Three Garage`,
-    description: (metaLine, title, specsLine, priceText) =>
-      `${[metaLine, title].filter(Boolean).join(' ')} zu verkaufen bei The Big Three Garage in Nunspeet.${specsLine ? ' ' + specsLine + '.' : ''} ${priceText}.`,
+    status: { available: 'VERFÜGBAR', reserved: 'RESERVIERT', service: 'IN SERVICE', part: 'ERSATZTEIL', sold: 'VERKAUFT' },
+    title: (name) => `${name} kaufen · The Big Three Nunspeet (NL)`,
+    ogTitle: (name) => `${name} · Zu verkaufen bei The Big Three Garage`,
+    description: (name, specsLine, priceText) =>
+      `${name} zu verkaufen bei The Big Three Garage in Nunspeet, Niederlande.${specsLine ? ' ' + specsLine + '.' : ''} ${priceText}. Besichtigung nach Vereinbarung.`,
   },
 };
 
@@ -69,6 +72,28 @@ function escAttr(s) {
 function escHtml(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
+
+// Gedeelde voertuigteksten (vertaalde titel/specs, nette naam): dezelfde
+// bron als de browser gebruikt, zie assets/vehicle-text.js.
+async function loadVehicleText(origin) {
+  try {
+    const res = await fetch(new URL('/assets/vehicle-text.js', origin));
+    if (!res.ok) return null;
+    const src = await res.text();
+    const fn = new Function('window', src + '\nreturn window.BTG_VEHICLE;');
+    return fn({});
+  } catch {
+    return null;
+  }
+}
+
+// Zonder vehicle-text.js (fetch mislukt) valt alles terug op de ruwe velden.
+const RAW_VEHICLE_TEXT = {
+  seoName: (v) => [v.year, v.make, v.title].filter(Boolean).join(' '),
+  title: (v) => v.title || '',
+  specs: (v) => [v.spec1, v.spec2, v.spec3].filter(Boolean),
+  description: () => '',
+};
 
 function pickLang(url) {
   const lang = url.searchParams.get('lang');
@@ -141,6 +166,7 @@ export default async (request, context) => {
       },
     });
     const vehicles = res.ok ? await res.json() : [];
+    const VT = (await loadVehicleText(url)) || RAW_VEHICLE_TEXT;
     const slugs = slugMap(vehicles);
     const vehicle = vehicles.find((v) => slugs[v.id] === slug);
 
@@ -152,10 +178,12 @@ export default async (request, context) => {
       const priceText = vehicle.price_type === 'fixed' && vehicle.price
         ? `€ ${Number(vehicle.price).toLocaleString('nl-NL')}`
         : (vehicle.price_type === 'ask' ? c.priceAsk : c.priceBid);
-      const metaLine = [vehicle.year, vehicle.make].filter(Boolean).join(' ');
-      const specsLine = [vehicle.spec1, vehicle.spec2, vehicle.spec3].filter(Boolean).join(' · ');
-      const description = c.description(metaLine, vehicle.title, specsLine, priceText).slice(0, 300);
-      const ogTitle = c.ogTitle(vehicle.title);
+      const name = VT.seoName(vehicle, lang);
+      const specs = VT.specs(vehicle, lang);
+      const specsLine = specs.join(' · ');
+      const ownText = VT.description(vehicle, lang);
+      const description = c.description(name, specsLine, priceText).slice(0, 300);
+      const ogTitle = c.ogTitle(name);
       const image = vehicle.image_url || 'https://thebigthree.nl/assets/og-image.png';
 
       const hasFixedPrice = vehicle.price_type === 'fixed' && !!vehicle.price;
@@ -163,8 +191,9 @@ export default async (request, context) => {
       const jsonLd = {
         "@context": "https://schema.org",
         "@type": "Vehicle",
-        "name": vehicle.title,
-        "description": description,
+        "name": name,
+        "url": canonical,
+        "description": ownText ? `${ownText} ${description}`.slice(0, 500) : description,
         "vehicleModelDate": vehicle.year ? String(vehicle.year) : undefined,
         "brand": vehicle.make ? { "@type": "Brand", "name": vehicle.make } : undefined,
         "image": image,
@@ -204,7 +233,7 @@ export default async (request, context) => {
 
       html = html
         .replace(/__LANG__/g, lang)
-        .replace(/__TITLE__/g, escHtml(c.title(vehicle.title)))
+        .replace(/__TITLE__/g, escHtml(c.title(name)))
         .replace(/__OG_TITLE__/g, escAttr(ogTitle))
         .replace(/__DESCRIPTION__/g, escAttr(description))
         .replace(/__CANONICAL__/g, canonical)
@@ -215,7 +244,15 @@ export default async (request, context) => {
         // auto-detail.html staat standaard op noindex (veilig als het bestand
         // ooit direct wordt opgevraagd) — alleen een bevestigd voertuig mag
         // geïndexeerd worden.
-        .replace('<meta name="robots" content="noindex, follow">', '<meta name="robots" content="index, follow">');
+        .replace('<meta name="robots" content="noindex, follow">', '<meta name="robots" content="index, follow">')
+        // Zichtbare kern alvast server-side in de juiste taal, zodat crawlers
+        // en AI-zoekmachines zonder JavaScript ook titel en specs zien.
+        .replace('<span id="crumbTitle">…</span>', `<span id="crumbTitle">${escHtml(VT.title(vehicle, lang))}</span>`)
+        .replace('<div class="detail-meta" id="dMeta">…</div>', `<div class="detail-meta" id="dMeta">${escHtml([vehicle.year, vehicle.make].filter(Boolean).join(' · '))}</div>`)
+        .replace('<h1 id="dTitle">…</h1>', `<h1 id="dTitle">${escHtml(VT.title(vehicle, lang))}</h1>`)
+        .replace('<span class="status-pill" id="dStatus">VOORRAAD</span>', `<span class="status-pill" id="dStatus">${escHtml(c.status[vehicle.status] || c.status.available)}</span>`)
+        .replace('<div class="price-tag" id="dPrice">…</div>', `<div class="price-tag" id="dPrice">${escHtml(priceText)}</div>`)
+        .replace('<div class="features" id="dSpecs"></div>', `<div class="features" id="dSpecs">${specs.map(s => `<div class="feature">${escHtml(s)}</div>`).join('')}${ownText ? `<p>${escHtml(ownText)}</p>` : ''}</div>`);
     }
   } catch (e) {
     html = fallbackMeta(html, basePath, lang);

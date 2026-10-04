@@ -50,6 +50,7 @@
   "@context": "https://schema.org",
   "@type": ["AutoRepair", "AutoDealer"],
   "name": "The Big Three Garage",
+  "alternateName": ["The Big Three Nunspeet", "The Big 3 Nunspeet", "Big Three Garage Nunspeet"],
   "description": "Specialist in Amerikaanse voertuigen: verkoop, onderhoud, APK, restauratie en import van campers, pickups en classics.",
   "url": "https://thebigthree.nl",
   "telephone": "+31682727374",
@@ -80,6 +81,14 @@
   "currenciesAccepted": "EUR",
   "areaServed": ["NL","DE","BE"],
   "availableLanguage": ["Dutch","German","English"],
+  "email": "broeksmadavid@icloud.com",
+  "brand": [
+    {"@type": "Brand", "name": "Chevrolet"},
+    {"@type": "Brand", "name": "Ford"},
+    {"@type": "Brand", "name": "Dodge"},
+    {"@type": "Brand", "name": "GMC"}
+  ],
+  "knowsAbout": ["Amerikaanse campers", "American RVs and motorhomes", "Amerikanische Wohnmobile", "Chevrolet Express", "GMC Savana", "Ford Econoline", "Dodge Ram Van", "Amerikaanse pickups", "Amerikaanse klassiekers", "Import uit de VS", "RDW-keuring", "BPM"],
   "image": "https://thebigthree.nl/assets/hero-a.jpg",
   "sameAs": [
     "https://www.instagram.com/the_big_3_nunspeet/",
@@ -1830,6 +1839,7 @@
 <button class="cookie-reopen hidden" id="cookieReopen" data-i18n="cookie.settings">Cookie-instellingen</button>
 
 <script src="assets/i18n.js"></script>
+<script src="assets/vehicle-text.js"></script>
 <script src="assets/analytics.js"></script>
 <script>
   // ─── SUPABASE CONFIG ─────────────────────────────────────────────────────
@@ -1905,19 +1915,22 @@
     }
 
     const meta  = [v.year, v.make].filter(Boolean).join(' · ');
-    const alt   = [v.year, v.make, v.title, 'te koop The Big Three Nunspeet'].filter(Boolean).join(' ');
+    const VT    = window.BTG_VEHICLE;
+    const alt   = VT.alt(v, lang);
+    const altAttrs = VT.langAttrs(l => VT.alt(v, l));
     const specs = [v.spec1, v.spec2, v.spec3].filter(Boolean)
-                    .map(s => `<span>${_escHtml(s)}</span>`).join('');
-    const href  = `/voorraad/${slug}`;
+                    .map(s => `<span${VT.langAttrs(l => VT.translate(s, l))}>${_escHtml(VT.translate(s, lang))}</span>`).join('');
+    const href  = VT.href(slug, lang);
+    const hrefAttrs = VT.langAttrs(l => VT.href(slug, l));
     const mpText = t?.['card.mp'] || "Meer foto's";
     const mpBadge = v.marktplaats_url
-      ? `<span class="card-mp-badge" title="${_escHtml(mpText)} op Marktplaats"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="card.mp">${_escHtml(mpText)}</span></span>`
+      ? `<span class="card-mp-badge" title="${_escHtml(mpText)} · Marktplaats"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="card.mp">${_escHtml(mpText)}</span></span>`
       : '';
     const imgHtml = v.image_url
-      ? `<img loading="lazy" src="${_escHtml(v.image_url)}" alt="${_escHtml(alt)}" onerror="this.closest('.card').remove()">`
-      : `<div class="card-img-placeholder"><img loading="lazy" src="assets/logo.png" alt="${_escHtml(alt)}"></div>`;
+      ? `<img loading="lazy" src="${_escHtml(v.image_url)}" alt="${_escHtml(alt)}"${altAttrs} onerror="this.closest('.card').remove()">`
+      : `<div class="card-img-placeholder"><img loading="lazy" src="assets/logo.png" alt="${_escHtml(alt)}"${altAttrs}></div>`;
 
-    return `<a href="${_escHtml(href)}" class="card" data-cat="${_escHtml(v.category||'camper')}">
+    return `<a href="${_escHtml(href)}"${hrefAttrs} class="card" data-cat="${_escHtml(v.category||'camper')}">
       <div class="card-img">
         ${imgHtml}
         ${mpBadge}
@@ -1925,7 +1938,7 @@
       </div>
       <div class="card-body">
         <div class="card-meta">${_escHtml(meta)}</div>
-        <h3>${_escHtml(v.title)}</h3>
+        <h3${VT.langAttrs(l => VT.title(v, l))}>${_escHtml(VT.title(v, lang))}</h3>
         <div class="card-specs">${specs}</div>
         <div class="card-price">${priceHtml}<small data-i18n="card.cta">${_escHtml(ctaText)}</small></div>
       </div>
@@ -1974,6 +1987,8 @@
     document.querySelectorAll('.lang button').forEach(b => {
       b.classList.toggle('active', b.dataset.lang === lang);
     });
+    // Voertuigkaarten: titel, specs, alt-tekst en link per taal (data-vt-*)
+    if (window.BTG_VEHICLE) window.BTG_VEHICLE.applyLang(document, lang);
     localStorage.setItem('btg_lang', lang);
     // update URL so hreflang URLs work
     const url = new URL(window.location);

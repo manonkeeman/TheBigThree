@@ -87,6 +87,19 @@ async function loadTranslations(origin) {
   }
 }
 
+// Gedeelde voertuigteksten (vertaalde titel/specs), zie assets/vehicle-text.js.
+async function loadVehicleText(origin) {
+  try {
+    const res = await fetch(new URL('/assets/vehicle-text.js', origin));
+    if (!res.ok) return null;
+    const src = await res.text();
+    const fn = new Function('window', src + '\nreturn window.BTG_VEHICLE;');
+    return fn({});
+  } catch {
+    return null;
+  }
+}
+
 // Best-effort cache tussen "warme" invocaties van dezelfde edge function
 // isolate, zodat niet elke paginaweergave opnieuw Supabase belast.
 let _vehicleCache = null;
@@ -107,7 +120,7 @@ async function loadVehicles() {
 }
 
 // Server-side equivalent van de client-side _renderCard() in index.html.
-function renderCard(v, dict, slug) {
+function renderCard(v, dict, slug, VT, lang) {
   const statusMap = {
     available: ['', 'card.status'],
     reserved: ['reserved', 'card.reserved'],
@@ -128,18 +141,26 @@ function renderCard(v, dict, slug) {
   }
 
   const meta = [v.year, v.make].filter(Boolean).join(' · ');
-  const alt = [v.year, v.make, v.title, 'te koop The Big Three Nunspeet'].filter(Boolean).join(' ');
-  const specs = [v.spec1, v.spec2, v.spec3].filter(Boolean).map(s => `<span>${escHtml(s)}</span>`).join('');
-  const href = `/voorraad/${slug}`;
+  // Zonder vehicle-text.js: ruwe (Nederlandse) velden, zoals voorheen.
+  const rawSpecs = [v.spec1, v.spec2, v.spec3].filter(Boolean);
+  const alt = VT ? VT.alt(v, lang) : [v.year, v.make, v.title, 'te koop The Big Three Nunspeet'].filter(Boolean).join(' ');
+  const altAttrs = VT ? VT.langAttrs(l => VT.alt(v, l)) : '';
+  const specs = rawSpecs.map(s => VT
+    ? `<span${VT.langAttrs(l => VT.translate(s, l))}>${escHtml(VT.translate(s, lang))}</span>`
+    : `<span>${escHtml(s)}</span>`).join('');
+  const href = VT ? VT.href(slug, lang) : `/voorraad/${slug}`;
+  const hrefAttrs = VT ? VT.langAttrs(l => VT.href(slug, l)) : '';
+  const titleText = VT ? VT.title(v, lang) : v.title;
+  const titleAttrs = VT ? VT.langAttrs(l => VT.title(v, l)) : '';
   const mpText = dict?.['card.mp'] || "Meer foto's";
   const mpBadge = v.marktplaats_url
-    ? `<span class="card-mp-badge" title="${escHtml(mpText)} op Marktplaats"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="card.mp">${escHtml(mpText)}</span></span>`
+    ? `<span class="card-mp-badge" title="${escHtml(mpText)} · Marktplaats"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="card.mp">${escHtml(mpText)}</span></span>`
     : '';
   const imgHtml = v.image_url
-    ? `<img loading="lazy" src="${escHtml(v.image_url)}" alt="${escHtml(alt)}">`
-    : `<div class="card-img-placeholder"><img loading="lazy" src="/assets/logo.png" alt="${escHtml(alt)}"></div>`;
+    ? `<img loading="lazy" src="${escHtml(v.image_url)}" alt="${escHtml(alt)}"${altAttrs}>`
+    : `<div class="card-img-placeholder"><img loading="lazy" src="/assets/logo.png" alt="${escHtml(alt)}"${altAttrs}></div>`;
 
-  return `<a href="${escHtml(href)}" class="card" data-cat="${escHtml(v.category || 'camper')}">
+  return `<a href="${escHtml(href)}"${hrefAttrs} class="card" data-cat="${escHtml(v.category || 'camper')}">
       <div class="card-img">
         ${imgHtml}
         ${mpBadge}
@@ -147,7 +168,7 @@ function renderCard(v, dict, slug) {
       </div>
       <div class="card-body">
         <div class="card-meta">${escHtml(meta)}</div>
-        <h3>${escHtml(v.title)}</h3>
+        <h3${titleAttrs}>${escHtml(titleText)}</h3>
         <div class="card-specs">${specs}</div>
         <div class="card-price">${priceHtml}<small data-i18n="card.cta">${escHtml(ctaText)}</small></div>
       </div>
@@ -160,11 +181,12 @@ function renderCard(v, dict, slug) {
 // een crawler zonder JS-executie anders nooit te zien kreeg, in geen enkele
 // taal. De client-side loadInventory() laat deze server-render staan en haalt
 // alleen zelf op als de grid leeg is (scheelt een tweede keer alle foto's laden).
-async function injectInventory(html, dict) {
+async function injectInventory(html, dict, lang, origin) {
   const vehicles = await loadVehicles();
   if (vehicles.length) {
     const slugs = slugMap(vehicles);
-    const cardsHtml = vehicles.map(v => renderCard(v, dict, slugs[v.id])).join('\n');
+    const VT = await loadVehicleText(origin);
+    const cardsHtml = vehicles.map(v => renderCard(v, dict, slugs[v.id], VT, lang)).join('\n');
     return html.replace(
       '<div class="grid" id="voorraadGrid">\n    </div>',
       `<div class="grid" id="voorraadGrid">\n${cardsHtml}\n    </div>`
@@ -278,7 +300,7 @@ export default async (request, context) => {
   }
 
   try {
-    html = await injectInventory(html, dict?.[lang]);
+    html = await injectInventory(html, dict?.[lang], lang, url.origin);
   } catch {
     // Supabase niet bereikbaar of onverwachte data: pagina blijft werken,
     // de bestaande client-side loadInventory() vult de voorraad dan alsnog.

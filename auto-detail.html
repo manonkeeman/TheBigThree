@@ -32,6 +32,7 @@ __HREFLANG__
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3" integrity="sha384-l8ah+VgaWtk1mvOe9VC+OirC6qHFF4yH7l7mKRidV9MSti3E9F463bMp6ZVN4kuC" crossorigin="anonymous"></script>
+<script src="/assets/vehicle-text.js"></script>
 <link rel="stylesheet" href="/assets/style.css">
 <style>
   :root{
@@ -544,38 +545,84 @@ __HREFLANG__
     return i !== -1 && parts[i+1] ? decodeURIComponent(parts[i+1]) : '';
   }
 
-  const statusLabel = { available:'VOORRAAD', reserved:'GERESERVEERD', service:'IN SERVICE', part:'ONDERDEEL', sold:'VERKOCHT' };
+  // Teksten die per voertuig in elkaar gezet worden; vaste labels staan in `t` hieronder.
+  const DETAIL_COPY = {
+    nl: {
+      status: { available:'VOORRAAD', reserved:'GERESERVEERD', service:'IN SERVICE', part:'ONDERDEEL', sold:'VERKOCHT' },
+      ask: 'Op aanvraag', bid: 'Bieden', photo: 'foto',
+      title: name => `${name} te koop · The Big Three Nunspeet`,
+      fallbackTitle: 'Voorraad · The Big Three Garage Nunspeet',
+      nfTitle: 'AUTO NIET GEVONDEN', nfText: 'Deze auto is niet meer beschikbaar, of de link klopt niet meer.', nfBtn: 'Bekijk de voorraad',
+    },
+    en: {
+      status: { available:'IN STOCK', reserved:'RESERVED', service:'IN SERVICE', part:'PART', sold:'SOLD' },
+      ask: 'Price on request', bid: 'Make an offer', photo: 'photo',
+      title: name => `${name} for sale · The Big Three Nunspeet (NL)`,
+      fallbackTitle: 'Inventory · The Big Three Garage Nunspeet',
+      nfTitle: 'VEHICLE NOT FOUND', nfText: 'This vehicle is no longer available, or the link is out of date.', nfBtn: 'View inventory',
+    },
+    de: {
+      status: { available:'VERFÜGBAR', reserved:'RESERVIERT', service:'IN SERVICE', part:'ERSATZTEIL', sold:'VERKAUFT' },
+      ask: 'Preis auf Anfrage', bid: 'Gebot', photo: 'Foto',
+      title: name => `${name} kaufen · The Big Three Nunspeet (NL)`,
+      fallbackTitle: 'Fahrzeugbestand · The Big Three Garage Nunspeet',
+      nfTitle: 'FAHRZEUG NICHT GEFUNDEN', nfText: 'Dieses Fahrzeug ist nicht mehr verfügbar oder der Link ist veraltet.', nfBtn: 'Alle Fahrzeuge ansehen',
+    },
+  };
+
+  // Valt terug op de ruwe velden als vehicle-text.js niet geladen is.
+  const VT = window.BTG_VEHICLE || {
+    seoName: v => [v.year, v.make, v.title].filter(Boolean).join(' '),
+    title: v => v.title || '',
+    specs: v => [v.spec1, v.spec2, v.spec3].filter(Boolean),
+    description: () => '',
+  };
+
+  function currentLang() {
+    const l = document.documentElement.lang;
+    return (l === 'en' || l === 'de') ? l : 'nl';
+  }
+
+  function copy() { return DETAIL_COPY[currentLang()]; }
 
   function fmtPrice(v) {
     if (v.price_type === 'fixed' && v.price) return `€ ${Number(v.price).toLocaleString('nl-NL')}`;
-    if (v.price_type === 'ask') return 'Op aanvraag';
-    return 'Bieden';
+    if (v.price_type === 'ask') return copy().ask;
+    return copy().bid;
   }
 
+  let notFound = false;
   function showNotFound() {
-    document.title = 'Voorraad · The Big Three Garage Nunspeet';
+    notFound = true;
+    const c = copy();
+    document.title = c.fallbackTitle;
     document.getElementById('detailRoot').innerHTML = `
       <div style="max-width:640px;margin:100px auto;text-align:center;padding:0 24px">
-        <h1 style="font-family:'Bebas Neue';font-size:44px;margin-bottom:16px">AUTO NIET GEVONDEN</h1>
-        <p style="color:var(--ink-dim);margin-bottom:24px">Deze auto is niet meer beschikbaar, of de link klopt niet meer.</p>
-        <a href="/index.html#voorraad" class="btn btn-primary">Bekijk de voorraad</a>
+        <h1 style="font-family:'Bebas Neue';font-size:44px;margin-bottom:16px">${esc(c.nfTitle)}</h1>
+        <p style="color:var(--ink-dim);margin-bottom:24px">${esc(c.nfText)}</p>
+        <a href="/index.html#voorraad" class="btn btn-primary">${esc(c.nfBtn)}</a>
       </div>`;
   }
 
+  let currentVehicle = null, allVehicles = null;
   function renderVehicle(v) {
-    document.title = `${v.title} te koop · The Big Three Garage Nunspeet`;
-    document.getElementById('crumbTitle').textContent = v.title;
+    const lang = currentLang();
+    const c = copy();
+    const title = VT.title(v, lang);
+    const statusText = c.status[v.status] || c.status.available;
+    document.title = c.title(VT.seoName(v, lang));
+    document.getElementById('crumbTitle').textContent = title;
     document.getElementById('dMeta').textContent = [v.year, v.make].filter(Boolean).join(' · ');
-    document.getElementById('dTitle').textContent = v.title;
-    document.getElementById('dStatus').textContent = statusLabel[v.status] || 'VOORRAAD';
+    document.getElementById('dTitle').textContent = title;
+    document.getElementById('dStatus').textContent = statusText;
     document.getElementById('dPrice').textContent = fmtPrice(v);
     document.getElementById('sYear').textContent = v.year || '–';
     document.getElementById('sMake').textContent = v.make || '–';
-    document.getElementById('sStatus').textContent = statusLabel[v.status] || 'VOORRAAD';
+    document.getElementById('sStatus').textContent = statusText;
 
     const img = document.getElementById('mainImg');
     img.src = v.image_url || '/assets/hero-a.jpg';
-    img.alt = v.title || '';
+    img.alt = VT.seoName(v, lang);
 
     const photos = (v.image_urls && v.image_urls.length) ? v.image_urls : (v.image_url ? [v.image_url] : []);
     const strip = document.getElementById('thumbStrip');
@@ -583,7 +630,7 @@ __HREFLANG__
       strip.hidden = false;
       strip.innerHTML = photos.map((url, i) => `
         <button type="button" class="${i === 0 ? 'active' : ''}" data-i="${i}">
-          <img src="${esc(url)}" alt="${esc(v.title)} foto ${i + 1}">
+          <img src="${esc(url)}" alt="${esc(VT.seoName(v, lang))} ${c.photo} ${i + 1}">
         </button>`).join('');
       strip.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -596,8 +643,10 @@ __HREFLANG__
       strip.innerHTML = '';
     }
 
-    document.getElementById('dSpecs').innerHTML = [v.spec1, v.spec2, v.spec3]
-      .filter(Boolean).map(s => `<div class="feature">${esc(s)}</div>`).join('');
+    const ownText = VT.description(v, lang);
+    document.getElementById('dSpecs').innerHTML = VT.specs(v, lang)
+      .map(s => `<div class="feature">${esc(s)}</div>`).join('')
+      + (ownText ? `<p>${esc(ownText)}</p>` : '');
 
     const mpBtn = document.getElementById('mpBtn');
     const mpPhotoBadge = document.getElementById('mpPhotoBadge');
@@ -620,10 +669,10 @@ __HREFLANG__
     document.getElementById('relatedSection').hidden = false;
     document.getElementById('relatedGrid').innerHTML = others.map(v => `
       <a href="/voorraad/${encodeURIComponent(slugs[v.id])}" class="rel-card">
-        <div class="rel-card-img"><img src="${esc(v.image_url||'')}" alt="${esc(v.title)}"></div>
+        <div class="rel-card-img"><img src="${esc(v.image_url||'')}" alt="${esc(VT.seoName(v, currentLang()))}"></div>
         <div class="rel-card-body">
           <div class="rel-card-meta">${esc([v.year, v.make].filter(Boolean).join(' · '))}</div>
-          <h3>${esc(v.title)}</h3>
+          <h3>${esc(VT.title(v, currentLang()))}</h3>
           <div class="rel-card-price">${fmtPrice(v)}</div>
         </div>
       </a>`).join('');
@@ -637,10 +686,11 @@ __HREFLANG__
     const slugs = slugMap(data);
     const vehicle = data.find(v => slugs[v.id] === slug);
     if (!vehicle) { showNotFound(); return; }
+    currentVehicle = vehicle;
+    allVehicles = data;
     renderVehicle(vehicle);
     renderRelated(data, vehicle);
   }
-  init();
 
   const t = {
     nl: {
@@ -692,6 +742,17 @@ __HREFLANG__
 
   function applyLang(lang) {
     document.documentElement.lang = lang;
+    // Voertuigteksten (titel, specs, status, prijs) opnieuw opbouwen in de nieuwe taal.
+    if (currentVehicle) {
+      renderVehicle(currentVehicle);
+      renderRelated(allVehicles, currentVehicle);
+    } else if (notFound) {
+      showNotFound();
+    }
+    // URL bijwerken zodat ?lang= overeenkomt met de hreflang-URL's.
+    const url = new URL(window.location.href);
+    if (lang === 'nl') url.searchParams.delete('lang'); else url.searchParams.set('lang', lang);
+    history.replaceState(null, '', url);
     document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.dataset.i18n;
@@ -709,6 +770,7 @@ __HREFLANG__
     : (document.documentElement.lang === 'en' || document.documentElement.lang === 'de') ? document.documentElement.lang
     : localStorage.getItem('btg_lang');
   if (initLang === 'en' || initLang === 'de') applyLang(initLang);
+  init();
 
   // ─── COOKIE CONSENT (granulair: noodzakelijk / statistieken / media) ───
   function getConsent() {
