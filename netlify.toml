@@ -38,6 +38,38 @@
   status = 301
   force = true
 
+# Netlify serveert /faq én /faq.html (beide 200): dubbele URL's voor Google.
+# Eén vaste versie (.html, ook de canonical); ?lang= blijft behouden.
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/import"
+  to = "/import.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/colofon"
+  to = "/colofon.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/voorwaarden"
+  to = "/voorwaarden.html"
+  status = 301
+  force = true
+
 [[edge_functions]]
   path = "/voorraad/*"
   function = "vehicle-meta"

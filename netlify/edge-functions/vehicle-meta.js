@@ -65,6 +65,22 @@ function slugMap(vehicles) {
   return map;
 }
 
+// Zoekt bij een onbekende slug de auto waar die URL eerder bij hoorde:
+// "titel-abc123" (achtervoegsel = begin van het id) of "titel" zonder
+// achtervoegsel. Bij meerdere auto's met die titel de oudste: de URL zonder
+// achtervoegsel bestond toen die auto nog de enige met die titel was.
+function findMovedVehicle(vehicles, slugs, slug) {
+  const m = slug.match(/^(.*)-([0-9a-f]{6})$/);
+  if (m) {
+    const byId = vehicles.find((v) => v.id.startsWith(m[2]) && slugify(v.title) === m[1]);
+    if (byId) return byId;
+  }
+  const sameTitle = vehicles
+    .filter((v) => slugify(v.title) === slug)
+    .sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
+  return sameTitle[0] || null;
+}
+
 function escAttr(s) {
   return String(s || '').replace(/"/g, '&quot;');
 }
@@ -169,6 +185,16 @@ export default async (request, context) => {
     const VT = (await loadVehicleText(url)) || RAW_VEHICLE_TEXT;
     const slugs = slugMap(vehicles);
     const vehicle = vehicles.find((v) => slugs[v.id] === slug);
+
+    // De slug krijgt een id-achtervoegsel zodra twee auto's dezelfde titel
+    // hebben, en verliest het weer als er één verkocht is. De oude URL zou dan
+    // 404 geven terwijl de auto er nog staat: stuur door naar de huidige URL.
+    const moved = !vehicle && isVoorraadPath && findMovedVehicle(vehicles, slugs, slug);
+    if (moved) {
+      const target = new URL(`/voorraad/${encodeURIComponent(slugs[moved.id])}`, url);
+      if (lang !== 'nl') target.searchParams.set('lang', lang);
+      return Response.redirect(target.toString(), 301);
+    }
 
     if (!vehicle) {
       html = fallbackMeta(html, basePath, lang);

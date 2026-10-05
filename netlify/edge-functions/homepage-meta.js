@@ -4,9 +4,9 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 const META = {
   nl: {
-    title: 'The Big Three Garage - Amerikaanse voertuigen specialist Nunspeet',
-    description: 'The Big Three Garage in Nunspeet: specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, APK, restauratie en import uit de VS. Bel +31 6 82 72 73 74.',
-    ogTitle: 'The Big Three Garage - Amerikaanse voertuigen specialist Nunspeet',
+    title: 'The Big Three Garage Nunspeet | Amerikaanse campers & auto's',
+    description: 'Garage en autobedrijf in Nunspeet, specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, APK, restauratie en import uit de VS. Bel +31 6 82 72 73 74.',
+    ogTitle: 'The Big Three Garage Nunspeet | Amerikaanse campers & auto's',
     ogDescription: 'Specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, APK, restauratie en import uit de VS. Gevestigd in Nunspeet.',
     twitterTitle: 'The Big Three Garage - Amerikaanse voertuigen Nunspeet',
     twitterDescription: 'Specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, APK, restauratie en import uit de VS.',

@@ -3,7 +3,7 @@
 // de zichtbare paginatekst ook server-side vertaald kan worden voor /?lang=de en /?lang=en.
 window.I18N = {
     nl: {
-      "seo.title":"The Big Three Garage - Amerikaanse voertuigen specialist Nunspeet","seo.description":"The Big Three Garage in Nunspeet: specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, APK, restauratie en import uit de VS. Bel +31 6 82 72 73 74.",
+      "seo.title":"The Big Three Garage Nunspeet | Amerikaanse campers & auto's","seo.description":"Garage en autobedrijf in Nunspeet, specialist in Amerikaanse campers, pickups en classics. Verkoop, onderhoud, APK, restauratie en import uit de VS. Bel +31 6 82 72 73 74.",
       "nav.inventory":"Voorraad","nav.services":"Werkplaats","nav.story":"Ons verhaal","nav.contact":"Contact","nav.faq":"FAQ",
       "hero.tag":"★ AMERICAN IRON · NUNSPEET ★",
       "hero.title":'GEBOUWD IN <span class="stamp">AMERIKA</span><br><span class="accent">ONDERHOUDEN</span> IN<br>NUNSPEET',

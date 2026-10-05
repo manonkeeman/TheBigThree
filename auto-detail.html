@@ -685,9 +685,14 @@ __HREFLANG__
     if (error || !data) { showNotFound(); return; }
     const slugs = slugMap(data);
     const vehicle = data.find(v => slugs[v.id] === slug);
-    if (!vehicle) { showNotFound(); return; }
-    currentVehicle = vehicle;
     allVehicles = data;
+    if (!vehicle) {
+      // Verkocht of verwijderd: toon wel de rest van de voorraad.
+      showNotFound();
+      renderRelated(data, { id: null });
+      return;
+    }
+    currentVehicle = vehicle;
     renderVehicle(vehicle);
     renderRelated(data, vehicle);
   }
@@ -748,6 +753,7 @@ __HREFLANG__
       renderRelated(allVehicles, currentVehicle);
     } else if (notFound) {
       showNotFound();
+      if (allVehicles) renderRelated(allVehicles, { id: null });
     }
     // URL bijwerken zodat ?lang= overeenkomt met de hreflang-URL's.
     const url = new URL(window.location.href);
