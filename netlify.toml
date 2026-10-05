@@ -40,6 +40,7 @@
 
 # Netlify serveert /faq én /faq.html (beide 200): dubbele URL's voor Google.
 # Eén vaste versie (.html, ook de canonical); ?lang= blijft behouden.
+# Edge functions draaien vóór redirects: daarom staat page-lang alleen op de .html-paden.
 [[redirects]]
   from = "/faq"
   to = "/faq.html"
@@ -87,23 +88,11 @@
   function = "homepage-meta"
 
 [[edge_functions]]
-  path = "/faq"
-  function = "page-lang"
-
-[[edge_functions]]
   path = "/faq.html"
   function = "page-lang"
 
 [[edge_functions]]
-  path = "/import"
-  function = "page-lang"
-
-[[edge_functions]]
   path = "/import.html"
-  function = "page-lang"
-
-[[edge_functions]]
-  path = "/colofon"
   function = "page-lang"
 
 [[edge_functions]]
