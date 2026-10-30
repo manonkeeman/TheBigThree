@@ -74,6 +74,10 @@ export default async (request, context) => {
 
   return new Response(xml, {
     status: 200,
-    headers: { 'content-type': 'application/xml; charset=utf-8' },
+    headers: {
+      'content-type': 'application/xml; charset=utf-8',
+      // Sitemap blijft leesbaar voor Google, maar hoort zelf niet in de zoekresultaten.
+      'x-robots-tag': 'noindex',
+    },
   });
 };

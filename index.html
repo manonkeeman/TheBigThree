@@ -1144,6 +1144,8 @@
     font-style:normal;
     color:var(--rust);
   }
+  .footer-lang a{color:inherit;text-decoration:none}
+  .footer-lang a:hover{color:var(--rust)}
   .footer-bottom{
     border-top:1px solid var(--line);
     padding-top:24px;
@@ -1772,6 +1774,7 @@
   </div>
   <div class="footer-bottom">
     <span>© <span id="ftYear"></span> THE BIG THREE GARAGE · NUNSPEET</span>
+    <span class="footer-lang"><a href="/" hreflang="nl" data-lang="nl">Nederlands</a> · <a href="/?lang=en" hreflang="en" data-lang="en">English</a> · <a href="/?lang=de" hreflang="de" data-lang="de">Deutsch</a></span>
     <span data-i18n="ftr.by">Webdevelopment door <a href="https://www.manonit.com" target="_blank" rel="noopener" style="color:var(--rust);text-decoration:none">ManonIT</a></span>
   </div>
 </footer>
@@ -1998,6 +2001,13 @@
 
   document.querySelectorAll('.lang button').forEach(btn => {
     btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  });
+  // Echte links in de footer: Google kan de taalversies via knoppen niet volgen.
+  document.querySelectorAll('.footer-lang a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      applyLang(link.dataset.lang);
+    });
   });
 
   // ─── BOOKING FORM ───

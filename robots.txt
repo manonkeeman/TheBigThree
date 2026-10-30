@@ -2,6 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /backups/
-Disallow: /auto-detail.html
 
 Sitemap: https://thebigthree.nl/sitemap.xml
