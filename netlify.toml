@@ -1,6 +1,11 @@
 [build]
   publish = "."
 
+# Netlify Image CDN: voertuigfoto's uit Supabase Storage worden hier verkleind en gecachet,
+# zodat het Supabase-egressquotum (gratis plan) niet opraakt. Zie assets/vehicle-text.js.
+[images]
+  remote_images = ["^https://qjatfptkggabgdddqnkv\\.supabase\\.co/storage/v1/object/public/vehicle-images/.*"]
+
 # Alternatieve domeinen 301-doorverwijzen naar het hoofddomein
 [[redirects]]
   from = "https://bigthree.nl/*"

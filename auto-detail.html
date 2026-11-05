@@ -621,7 +621,13 @@ __HREFLANG__
     document.getElementById('sStatus').textContent = statusText;
 
     const img = document.getElementById('mainImg');
-    img.src = v.image_url || '/assets/hero-a.jpg';
+    if (v.image_url) {
+      const set = VT.imgSet(v.image_url, [800, 1400]);
+      if (set) { img.srcset = set; img.sizes = '(max-width: 1100px) 100vw, 1100px'; }
+      img.src = VT.img(v.image_url, 1400);
+    } else {
+      img.src = '/assets/hero-a.jpg';
+    }
     img.alt = VT.seoName(v, lang);
 
     const photos = (v.image_urls && v.image_urls.length) ? v.image_urls : (v.image_url ? [v.image_url] : []);
@@ -630,11 +636,13 @@ __HREFLANG__
       strip.hidden = false;
       strip.innerHTML = photos.map((url, i) => `
         <button type="button" class="${i === 0 ? 'active' : ''}" data-i="${i}">
-          <img src="${esc(url)}" alt="${esc(VT.seoName(v, lang))} ${c.photo} ${i + 1}">
+          <img src="${esc(VT.img(url, 240))}" loading="lazy" alt="${esc(VT.seoName(v, lang))} ${c.photo} ${i + 1}">
         </button>`).join('');
       strip.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('click', () => {
-          img.src = photos[parseInt(btn.dataset.i)];
+          const full = photos[parseInt(btn.dataset.i)];
+          img.srcset = VT.imgSet(full, [800, 1400]);
+          img.src = VT.img(full, 1400);
           strip.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
         });
       });
@@ -669,7 +677,7 @@ __HREFLANG__
     document.getElementById('relatedSection').hidden = false;
     document.getElementById('relatedGrid').innerHTML = others.map(v => `
       <a href="/voorraad/${encodeURIComponent(slugs[v.id])}" class="rel-card">
-        <div class="rel-card-img"><img src="${esc(v.image_url||'')}" alt="${esc(VT.seoName(v, currentLang()))}"></div>
+        <div class="rel-card-img"><img src="${esc(VT.img(v.image_url||'', 480))}" loading="lazy" alt="${esc(VT.seoName(v, currentLang()))}"></div>
         <div class="rel-card-body">
           <div class="rel-card-meta">${esc([v.year, v.make].filter(Boolean).join(' · '))}</div>
           <h3>${esc(VT.title(v, currentLang()))}</h3>

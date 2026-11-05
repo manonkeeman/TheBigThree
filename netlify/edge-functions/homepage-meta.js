@@ -157,7 +157,7 @@ function renderCard(v, dict, slug, VT, lang) {
     ? `<span class="card-mp-badge" title="${escHtml(mpText)} · Marktplaats"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" stroke="currentColor" stroke-width="1.6"/></svg><span data-i18n="card.mp">${escHtml(mpText)}</span></span>`
     : '';
   const imgHtml = v.image_url
-    ? `<img loading="lazy" src="${escHtml(v.image_url)}" alt="${escHtml(alt)}"${altAttrs}>`
+    ? `<img loading="lazy" src="${escHtml(VT ? VT.img(v.image_url, 800) : v.image_url)}"${VT && VT.imgSet(v.image_url, [400, 800]) ? ` srcset="${escHtml(VT.imgSet(v.image_url, [400, 800]))}" sizes="(max-width: 700px) 100vw, 420px"` : ''} alt="${escHtml(alt)}"${altAttrs}>`
     : `<div class="card-img-placeholder"><img loading="lazy" src="/assets/logo.png" alt="${escHtml(alt)}"${altAttrs}></div>`;
 
   return `<a href="${escHtml(href)}"${hrefAttrs} class="card" data-cat="${escHtml(v.category || 'camper')}">

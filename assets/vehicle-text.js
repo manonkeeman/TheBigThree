@@ -150,5 +150,22 @@ window.BTG_VEHICLE = (function () {
     });
   }
 
-  return { translate, niceCase, fullName, seoName, title, specs, description, alt, href, langAttrs, applyLang };
+  // Voertuigfoto's staan in Supabase Storage (gratis plan: 5 GB cached egress per maand).
+  // Via de Netlify Image CDN (remote_images in netlify.toml) haalt Netlify elke foto één keer
+  // op, verkleint hem naar webp en cachet hem, zodat bezoekers Supabase niet meer belasten.
+  // Andere URL's (en lege waarden) blijven ongewijzigd.
+  const SB_IMG = 'https://qjatfptkggabgdddqnkv.supabase.co/storage/v1/object/public/vehicle-images/';
+
+  function img(url, w) {
+    if (!url || String(url).indexOf(SB_IMG) !== 0) return url;
+    return '/.netlify/images?url=' + encodeURIComponent(url) + '&w=' + w + '&fm=webp&q=75';
+  }
+
+  // srcset-waarde voor dezelfde foto in meerdere breedtes; leeg als het geen Supabase-foto is.
+  function imgSet(url, widths) {
+    if (!url || String(url).indexOf(SB_IMG) !== 0) return '';
+    return widths.map(w => img(url, w) + ' ' + w + 'w').join(', ');
+  }
+
+  return { translate, niceCase, fullName, seoName, title, specs, description, alt, href, langAttrs, applyLang, img, imgSet };
 })();
