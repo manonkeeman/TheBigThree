@@ -100,18 +100,19 @@
 <link rel="preload" as="image" href="assets/hero-a-640.webp" type="image/webp" media="(max-width: 700px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/hero-a.webp" type="image/webp" media="(min-width: 701px)" fetchpriority="high">
 <link rel="preconnect" href="https://qjatfptkggabgdddqnkv.supabase.co" crossorigin>
-<!-- Lettertypen zelf gehost (sneller, geen verschuiving bij laden, geen IP-adressen naar Google) -->
+<!-- Lettertypen zelf gehost (sneller, geen IP-adressen naar Google). Koppen/menu: font-display:block + preload,
+     zodat de tekst niet verspringt als het lettertype binnenkomt (layout shift). -->
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/bebas-neue-latin-400-normal.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/barlow-condensed-latin-500-normal.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/barlow-condensed-latin-600-normal.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/barlow-latin-300-normal.woff2" crossorigin>
 <style>
-@font-face{font-family:'Bebas Neue';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/bebas-neue-latin-400-normal.woff2') format('woff2')}
-@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:300;font-display:swap;src:url('assets/fonts/barlow-condensed-latin-300-normal.woff2') format('woff2')}
-@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/barlow-condensed-latin-400-normal.woff2') format('woff2')}
-@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/barlow-condensed-latin-500-normal.woff2') format('woff2')}
-@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/barlow-condensed-latin-600-normal.woff2') format('woff2')}
-@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/barlow-condensed-latin-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Bebas Neue';font-style:normal;font-weight:400;font-display:block;src:url('assets/fonts/bebas-neue-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:300;font-display:block;src:url('assets/fonts/barlow-condensed-latin-300-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:400;font-display:block;src:url('assets/fonts/barlow-condensed-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:500;font-display:block;src:url('assets/fonts/barlow-condensed-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:block;src:url('assets/fonts/barlow-condensed-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:block;src:url('assets/fonts/barlow-condensed-latin-700-normal.woff2') format('woff2')}
 @font-face{font-family:'Barlow';font-style:normal;font-weight:300;font-display:swap;src:url('assets/fonts/barlow-latin-300-normal.woff2') format('woff2')}
 @font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/barlow-latin-400-normal.woff2') format('woff2')}
 @font-face{font-family:'Barlow';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/barlow-latin-500-normal.woff2') format('woff2')}
