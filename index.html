@@ -100,11 +100,24 @@
 <link rel="preload" as="image" href="assets/hero-a-640.webp" type="image/webp" media="(max-width: 700px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/hero-a.webp" type="image/webp" media="(min-width: 701px)" fetchpriority="high">
 <link rel="preconnect" href="https://qjatfptkggabgdddqnkv.supabase.co" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Lettertypen laden zonder de eerste weergave te blokkeren (display=swap toont eerst het systeemfont) -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
+<!-- Lettertypen zelf gehost (sneller, geen verschuiving bij laden, geen IP-adressen naar Google) -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/bebas-neue-latin-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/barlow-condensed-latin-500-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/barlow-condensed-latin-600-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/barlow-latin-300-normal.woff2" crossorigin>
+<style>
+@font-face{font-family:'Bebas Neue';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/bebas-neue-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:300;font-display:swap;src:url('assets/fonts/barlow-condensed-latin-300-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/barlow-condensed-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/barlow-condensed-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/barlow-condensed-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/barlow-condensed-latin-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:300;font-display:swap;src:url('assets/fonts/barlow-latin-300-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/barlow-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:500;font-display:swap;src:url('assets/fonts/barlow-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url('assets/fonts/barlow-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Special Elite';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/special-elite-latin-400-normal.woff2') format('woff2')}
+</style>
 <style>/* assets/style.css inline: scheelt een blokkerend verzoek */
 /* Shared base + components used by every page (index, auto-detail, faq,
    colofon, privacy, voorwaarden). Each page keeps its own page-specific
